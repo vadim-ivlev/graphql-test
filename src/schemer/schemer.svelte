@@ -1,12 +1,36 @@
 <script>
-    import {getSchema} from './schemer.js'
+  import { queryString } from "./schemer.js"
+  import JsonView from '../JsonView.svelte'
+
+  export let url = "http://localhost:7777/graphql"
+  export let schema = {}
+  let visible = false
+
+
+  async function getSchema(e, a, b, c) {
+    // schema =  await $.ajax({ url: url, type: "POST", data: { query:queryString, variables: '{}'},});
+    let resp = await fetch(url, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) })
+    schema = await resp.json()
+  }
+
 </script>
 
+<style>
+.self {
+    /* border: 1px solid silver; */
+    background-color: whitesmoke;
+}
+</style>
 
 
-<form>
-    <label for="inp0">GraphQL endpoint. </label>
-    <input id="inp0" type="text" name="inp0" value="http://localhost:7777/graphql">
-    <input id="btn0" type="button" value="refresh" on:click={getSchema}>
-    <div id="schema"></div>
-</form>
+<div class="self">
+  <form>
+    <label for="inp0">GraphQL url</label>
+    <input type="text" id="inp0" name="inp0" bind:value={url} />
+    <input type="button" value="refresh" on:click={getSchema} />
+    <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} schema</a>
+  </form>
+  {#if visible}
+        <JsonView json={schema} />
+  {/if}
+</div>

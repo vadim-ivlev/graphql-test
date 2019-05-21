@@ -1,6 +1,6 @@
 
-var schema = {};
-const queryString = `
+
+export const queryString = `
 query IntrospectionQuery {
     __schema {
       queryType {
@@ -105,18 +105,4 @@ query IntrospectionQuery {
 `
 
 
-export async function getSchema() {
-    var url0 = document.getElementById('inp0').value
-
-    // schema =  await $.ajax({ url: url0, type: "POST", data: { query:queryString, variables: '{}'},});   
-
-    var resp = await fetch(url0, { method: 'POST', body: JSON.stringify({ query: queryString, variables: '{}' }), })
-    schema = await resp.json()
-
-    $('#schema').jsonViewer(schema, { collapsed: true, rootCollapsable: false })
-    // $('#schema').text(JSON.stringify(schema, null,'  '));
-
-}
-
-// export { getSchema }; 
 
