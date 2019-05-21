@@ -7,7 +7,7 @@ query IntrospectionQuery {
         ...FullType
       }
       mutationType {
-        name
+        ...FullType
       }
       subscriptionType {
         name

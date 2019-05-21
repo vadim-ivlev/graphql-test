@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import { queryString } from "./schemer.js"
   import JsonView from '../JsonView.svelte'
 
@@ -7,11 +8,16 @@
   let visible = false
 
 
-  async function getSchema(e, a, b, c) {
+  async function getSchema() {
     // schema =  await $.ajax({ url: url, type: "POST", data: { query:queryString, variables: '{}'},});
     let resp = await fetch(url, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) })
     schema = await resp.json()
   }
+
+
+  	onMount(async () => {
+		getSchema()
+	})
 
 </script>
 
