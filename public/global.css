@@ -30,16 +30,14 @@ label {
     margin: 0.5em;
 }
 
-input, button, select, textarea {
+/* input, button, select, textarea {
 	font-family: inherit;
 	font-size: inherit;
-	padding: 0.4em;
-    /* margin: 0 0 0.5em 0; */
-    margin: 0.5em;
+    margin: 0.1em;
 	box-sizing: border-box;
 	border: 1px solid #ccc;
 	border-radius: 2px;
-}
+} */
 
 input:disabled {
 	color: #ccc;

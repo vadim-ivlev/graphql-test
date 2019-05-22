@@ -51,7 +51,9 @@ function compareTypes(t1, t2) {
 
 <h4>Mutations</h4>
 {#each mutations as e}
-     <div>{e.name}()</div>
+     <div>
+        <F node={e}/>
+     </div>
 {/each}
 
 <h4>User types</h4>
