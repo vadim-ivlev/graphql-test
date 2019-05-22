@@ -1,10 +1,12 @@
 <script>
-
+import F from './F.svelte'
 import T from './T.svelte'
+
 export let scheme 
 
 let mutations =[]
 let queries =[]
+let types=[]
 let usertypes=[]
 // let scalartypes =[]
 // let objecttypes =[]
@@ -18,7 +20,7 @@ $: try {
     mutations = scheme.data.__schema.mutationType.fields
     queries = scheme.data.__schema.queryType.fields
     console.log(queries)
-    // usertypes = scheme.data.__schema.types
+    types = scheme.data.__schema.types.sort(compareTypes)
     usertypes = scheme.data.__schema.types.filter(t => t.name[0]!='_' && t.kind == 'OBJECT' && t.name != 'Query' && t.name != 'Mutation').sort(compareTypes)
     console.log(usertypes)
     // scalartypes = scheme.data.__schema.types.filter(t => t.name[0]!='_' && t.kind != 'OBJECT' )
@@ -42,7 +44,9 @@ function compareTypes(t1, t2) {
 
 <h4>Queries</h4>
 {#each queries as e}
-     <div>{e.name}()</div>
+     <div>
+        <F node={e}/>
+     </div>
 {/each}
 
 <h4>Mutations</h4>
@@ -52,7 +56,17 @@ function compareTypes(t1, t2) {
 
 <h4>User types</h4>
 {#each usertypes as e}
-     <T node={e}/>
+     <div>
+        <T node={e}/>
+     </div>
+{/each}
+
+
+<h4>All types</h4>
+{#each types as e}
+     <div>
+        <T node={e}/>
+     </div>
 {/each}
 
 

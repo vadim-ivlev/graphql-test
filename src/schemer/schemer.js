@@ -71,27 +71,35 @@ query IntrospectionQuery {
   fragment TypeRef on __Type {
     kind
     name
+    description
     ofType {
       kind
       name
+      description
       ofType {
         kind
         name
+        description
         ofType {
           kind
           name
+          description
           ofType {
             kind
             name
+            description
             ofType {
               kind
               name
+              description
               ofType {
                 kind
                 name
+                description
                 ofType {
                   kind
                   name
+                  description
                 }
               }
             }
