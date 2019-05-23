@@ -16,7 +16,7 @@ let vis = false
         /* vertical-align: top; */
         border: 1px solid transparent;
         margin-top: 10px;
-        max-width: 400px;
+        /* max-width: 500px; */
     }
 
     .active {
@@ -30,8 +30,9 @@ let vis = false
         min-width: 200px;
     }
     .description {
-        /* display: inline-block; */
+        display: inline-block;
         color: green;
+        vertical-align: bottom;
         /* margin-left: 10px; */
         /* margin-bottom: 10px; */
         /* width: 80%; */

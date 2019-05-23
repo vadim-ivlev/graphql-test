@@ -10,20 +10,21 @@ export let node = {}
     }
 
     .description {
-        display: inline-block;
+        /* display: inline-block; */
         color: gray;
         font-size: 90%;
+        margin-left: 25px;
         /* margin-bottom: 10px; */
         /* width: 80%; */
         /* max-width: 400px; */
-        vertical-align: top;
+        /* vertical-align: top; */
 
     }
     .argname { 
         display: inline-block;
         min-width: 130px;
-        margin-left: 20px;
-        text-align: left;
+        /* margin-left: 10px; */
+        /* text-align: left; */
     }
     .input {
         width: 130px;
@@ -31,6 +32,8 @@ export let node = {}
     .oftype { 
         display: inline-block;
         min-width: 50px;
+        color: steelblue;
+        font-size: 90%;
 
     }
     input {
@@ -43,11 +46,11 @@ export let node = {}
 <!-- {@debug} -->
 <div class="field">  
     
-    <span class="description"><input type="checkbox"> {node.description}</span>
-    <br> 
+    <input type="checkbox"> 
+    <!-- <br>  -->
     <span class="argname">{node.name}</span>
     <input class="input">
-    <!-- <span class="kind">{node.type.kind}</span>  -->
     <span class="oftype">{node.type.name || node.type.ofType.name}{node.type.kind=='NON_NULL'?'!':''} </span> 
+    <div class="description">{node.description}</div>
 </div>
  
