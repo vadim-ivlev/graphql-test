@@ -1,7 +1,13 @@
 <script>
 import Js from './JsonView.svelte'
+
+
+// P R O P S
 // export let scheme = {}
 export let node = {}
+// export let checked = true
+// export let name 
+
 
 let vis = false
 

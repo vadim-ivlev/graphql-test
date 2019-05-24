@@ -1,6 +1,6 @@
 <script>
-import F from './F.svelte'
-import T from './T.svelte'
+import Func from './Func.svelte'
+import Type from './Type.svelte'
 
 export let scheme 
 
@@ -45,21 +45,21 @@ function compareTypes(t1, t2) {
 <h4>Queries</h4>
 {#each queries as e}
      <div>
-        <F node={e}/>
+        <Func node={e}/>
      </div>
 {/each}
 
 <h4>Mutations</h4>
 {#each mutations as e}
      <div>
-        <F node={e}/>
+        <Func node={e}/>
      </div>
 {/each}
 
 <h4>User types</h4>
 {#each usertypes as e}
      <div>
-        <T node={e}/>
+        <Type node={e}/>
      </div>
 {/each}
 
@@ -67,7 +67,7 @@ function compareTypes(t1, t2) {
 <h4>All types</h4>
 {#each types as e}
      <div>
-        <T node={e}/>
+        <Type node={e}/>
      </div>
 {/each}
 
