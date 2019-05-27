@@ -3,13 +3,21 @@ import { onMount } from 'svelte'
 
 // PROPS
 export let node = {}
-export let checked = true
-export let name = node.name 
-export let value = node.defaultValue
-export let graphqlType = node.type.name || node.type.ofType.name
+// export let checked = true
+// export let name = node.name 
+// export let value = node.defaultValue
+// export let graphqlType = node.type.name || node.type.ofType.name
+
+if (node.checked === undefined)     node.checked = true
+if (node.value === undefined)       node.value = node.defaultValue
+if (node.graphqlType === undefined) node.graphqlType = node.type.name || node.type.ofType.name
+
+
+
 
 let input
-let inputType = graphqlType=='Int'?'number':'text'
+let inputType = node.graphqlType=='Int'?'number':'text'
+
 
 onMount(async () => {
     input.setAttribute('type', inputType)
@@ -62,15 +70,16 @@ onMount(async () => {
 
 </style>
 
+<!-- <svelte:options accessors={true}/> -->
 
 <!-- {@debug} -->
-<div class="field" disabled={!checked}>  
+<div class="field" disabled={!node.checked}>  
     
-    <input type="checkbox" bind:checked={checked} disabled={node.type.kind=='NON_NULL'}> 
+    <input type="checkbox" bind:checked={node.checked} disabled={node.type.kind=='NON_NULL'}> 
     <!-- <br>  -->
-    <span class="argname {checked?'':'disabled'}">{name}</span>
-    <input class="input"  name={name} disabled={!checked} bind:value="{value}" bind:this={input}>
-    <span class="oftype {checked?'':'disabled'}">{graphqlType}{node.type.kind=='NON_NULL'?'!':''}</span> 
-    <div class="description {checked?'':'disabled'}">{node.description}</div>
+    <span class="argname {node.checked?'':'disabled'}">{node.name}</span>
+    <input class="input"  name={node.name} disabled={!node.checked} bind:value="{node.value}" bind:this={input} placeholder={node.value==''?'':null}>
+    <span class="oftype {node.checked?'':'disabled'}">{node.graphqlType}{node.type.kind=='NON_NULL'?'!':''}</span> 
+    <div class="description {node.checked?'':'disabled'}">{node.description}</div>
 </div>
  

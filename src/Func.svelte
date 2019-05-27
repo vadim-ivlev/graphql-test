@@ -1,17 +1,35 @@
+
 <script>
 import { onMount } from 'svelte'
 import Js from './JsonView.svelte'
-import Arg from './Argument.svelte'
+import Argument from './Argument.svelte'
 
 // P R O P S
 // export let scheme = {}
 export let node = {}
-
-let args = []
+export let operation = ""
+// let fieldlist 
 
 let vis = false
 
 // $: console.log("node=",node)
+
+function getQueryText() {
+    let checked = node.args.filter( n => n.checked && n.value != null )
+    let args = checked.map( n => {
+        let val = n.graphqlType == 'String'?`"${n.value.replace(/"/g,'\\"')}"`: n.value
+        return `  ${n.name}:${val}`
+    })
+    let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
+    let returnFields = '{\n}'
+    let text = `${operation} {\n${node.name}${argsText}${returnFields}\n}`
+    return text
+}
+
+function showRequest(e) {
+    console.log( getQueryText() )
+}
+
 
 
 let rootArea
@@ -37,7 +55,7 @@ onMount(async () => {
         /* display: inline-block; */
         /* vertical-align: top; */
         border: 1px solid transparent;
-        resize: both;
+        resize: horizontal;
         overflow:auto;
         min-width: 230px;
         /* max-width: 400px; */
@@ -103,7 +121,6 @@ onMount(async () => {
 
 </style>
 
-
 <div class="root " bind:this={rootArea}>
     <div class="form  {vis?'active':''}" bind:this={formArea}>
 
@@ -112,16 +129,16 @@ onMount(async () => {
         <span class="description">{node.description}</span><br>
             
             {#if node.args}
-            <div class="fieldlist">
+            <div class="fieldlist" >
                 {#each node.args as arg, index (arg.name)}
-                <Arg node={arg} />
+                <Argument node={arg} />
                 {/each}
             </div>
             {/if}
         
             
             <div class="buttons">
-                <input type="button" value="show request">
+                <input type="button" value="show request" on:click={showRequest}>
                 <input type="button" value="send">
             </div>
         {/if}

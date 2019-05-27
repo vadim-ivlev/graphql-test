@@ -4,7 +4,7 @@ import { onMount } from 'svelte'
 import { queryString } from "./schemer.js"
 import JsonView from '../JsonView.svelte'
 
-export let url = "http://localhost:7777/graphql"
+export let url = "http://localhost:7700/graphql"
 export let schema = {}
 let visible = false
 
