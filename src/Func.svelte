@@ -3,14 +3,17 @@
 import { onMount } from 'svelte'
 import Js from './JsonView.svelte'
 import Argument from './Argument.svelte'
+import Type from './Type.svelte'
 
 // P R O P S
-// export let scheme = {}
+export let scheme = {}
 export let node = {}
 export let operation = ""
 // let fieldlist 
 
 let vis = false
+let request =''
+let response
 
 // $: console.log("node=",node)
 
@@ -27,14 +30,16 @@ function getQueryText() {
 }
 
 function showRequest(e) {
-    console.log( getQueryText() )
+    request = getQueryText() 
+    console.log( request )
 }
 
 
 
 let rootArea
 let formArea
-let respArea
+let requestArea
+let responseArea
 
 onMount(async () => {
     
@@ -43,6 +48,16 @@ onMount(async () => {
 </script>
 
 <style>
+    .header {
+        /* font-variant: small-caps; */
+        font-family: 'Roboto Condensed';
+        font-weight: bold;
+        font-size: 90%;
+        letter-spacing: 0.1em;
+        /* color: gray; */
+        margin-top:1em;
+
+    }
 
     .root {
         /* margin-top: 20px; */
@@ -58,6 +73,7 @@ onMount(async () => {
         resize: horizontal;
         overflow:auto;
         min-width: 230px;
+        padding: 10px;
         /* max-width: 400px; */
     }
 
@@ -68,14 +84,14 @@ onMount(async () => {
     }
 
     .name { 
-        display: inline-block;
+        display: block;
         min-width: 200px;
     }
     .description {
         display: inline-block;
         color: green;
         vertical-align: bottom;
-        margin-left: 15px;
+        /* margin-left: 15px; */
         /* margin-bottom: 10px; */
         /* width: 80%; */
         /* max-width: 300px; */
@@ -105,6 +121,15 @@ onMount(async () => {
     }
     /* response ------------------------*/
 
+    .request {
+        /* background-color: bisque; */
+        border-right:1px dotted silver;
+        margin: 0 0 0 0;
+        padding: 0 10px 0 10px;
+        color:steelblue;
+        /* width: 100%; */
+    }
+
     .response {
         background-color: bisque;
         /* width: 100%; */
@@ -121,14 +146,15 @@ onMount(async () => {
 
 </style>
 
+<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...) </a>
+{#if vis}
 <div class="root " bind:this={rootArea}>
     <div class="form  {vis?'active':''}" bind:this={formArea}>
 
-        <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...) </a><br>
-        {#if vis}
         <span class="description">{node.description}</span><br>
             
             {#if node.args}
+            <div class="header">ARGUMENTS</div>
             <div class="fieldlist" >
                 {#each node.args as arg, index (arg.name)}
                 <Argument node={arg} />
@@ -137,12 +163,24 @@ onMount(async () => {
             {/if}
         
             
+            <div>
+                <div class="header">RETURN</div>
+                <!-- {node.type.name} -->
+                <Type typeName={node.type.name}  scheme={scheme}/>
+            </div>
+            <div>
+                <div class="header">VARIABLES</div>
+            </div>
+            <div>
+                <div class="header">FILE</div>
+            </div>
+        
             <div class="buttons">
                 <input type="button" value="show request" on:click={showRequest}>
                 <input type="button" value="send">
             </div>
-        {/if}
-        
     </div>
-    <div class="response " bind:this={respArea}></div>
+    <pre class="request " bind:this={requestArea}>{request}</pre>
+    <div class="response " bind:this={responseArea}></div>
 </div>
+{/if}

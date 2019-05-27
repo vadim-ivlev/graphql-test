@@ -45,29 +45,29 @@ function compareTypes(t1, t2) {
 <h4>Queries</h4>
 {#each queries as e}
      <div>
-        <Func node={e} operation="query"/>
+        <Func node={e} operation="query"  scheme={scheme}/>
      </div>
 {/each}
 
 <h4>Mutations</h4>
 {#each mutations as e}
      <div>
-        <Func node={e}  operation="mutation"/>
+        <Func node={e}  operation="mutation"  scheme={scheme}/>
      </div>
 {/each}
 
 <h4>User types</h4>
-{#each usertypes as e}
+{#each usertypes as t}
      <div>
-        <Type node={e}/>
+        <Type typeName={t.name} scheme={scheme}/>
      </div>
 {/each}
 
 
 <h4>All types</h4>
-{#each types as e}
+{#each types as t}
      <div>
-        <Type node={e}/>
+        <Type typeName={t.name}  scheme={scheme}/>
      </div>
 {/each}
 
