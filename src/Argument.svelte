@@ -35,7 +35,7 @@ onMount(async () => {
     .description {
         color: steelblue;
         font-size: 90%;
-        margin-left: 25px;
+        /* margin-left: 25px; */
     }
     .argname { 
         display: inline-block;
@@ -80,6 +80,6 @@ onMount(async () => {
     <span class="argname {node.checked?'':'disabled'}">{node.name}</span>
     <input class="input"  name={node.name} disabled={!node.checked} bind:value="{node.value}" bind:this={input} placeholder={node.value==''?'':null}>
     <span class="oftype {node.checked?'':'disabled'}">{node.graphqlType}{node.type.kind=='NON_NULL'?'!':''}</span> 
-    <div class="description {node.checked?'':'disabled'}">{node.description}</div>
+    <span class="description {node.checked?'':'disabled'}">{node.description}</span>
 </div>
  

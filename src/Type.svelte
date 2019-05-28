@@ -1,19 +1,24 @@
 <script>
+import { onMount } from 'svelte'
 import Js from './JsonView.svelte'
+import TypeField from './TypeField.svelte'
 
 
 // P R O P S
+export let parentid = ''
 export let scheme = {}
-// export let node = {}
-export let typeName = ""
-export let checked = true
-// export let name 
-
+export let typeName = ''
+export let tree = {}
+export let fieldList = ''
 
 
 let nodes 
 let node 
 let vis = false
+
+
+
+
 
 function recalculate(){
     if (scheme && scheme.data && scheme.data.__schema){
@@ -26,12 +31,38 @@ function recalculate(){
 
 recalculate()
 
+function getFields(n, level){
+    let a =[]
+    let p = '  '
+    for (let key in n) {
+        if (n[key].checked){
+            a.push( p.repeat(level+1)+ key + getFields(n[key], level+1) )
+        }
+    }
+    if (a.length > 0) {
+        return '{\n' +a.join('\n') + '\n'+p.repeat(level)+ '}'
+    }
+    return ''
+}
 
-// $: console.log("node=",node)
+// function showTree(e) {
+//     console.log(fieldList)
+// }
+
+function onFieldStateChange(e) {
+   fieldList = getFields(tree,0) 
+   console.log(e)
+   console.log(fieldList)
+}
+
+onMount(async () => {
+    fieldList = getFields(tree,0)
+})
 
 </script>
 
 <style>
+
     .self{ 
         display: inline;
         vertical-align: top;
@@ -42,22 +73,8 @@ recalculate()
         margin-bottom: 10px;
         font-size: 90%
     }
-    .field-name { 
-        display: inline-block;
-        min-width: 120px;
-    }
-    .field-description {
-        color: steelblue;
-        margin-left: 10px;
-        margin-bottom: 10px;
-        font-size: 90%
-    }
-
     .fieldlist {
         margin-bottom: 10px;
-    }
-    .field {
-        margin-left: 30px;
     }
     .opened {
         min-width: 65px;
@@ -108,38 +125,23 @@ recalculate()
 {#if node}
 <div class="self">
 
-
     {#if node.kind=="SCALAR"}
          <span class="scalar-type">{typeName}</span>
     {:else}
-        <a class={vis?'opened':'closed'} href on:click|preventDefault={ e => vis = !vis }>{typeName} </a>
-        {#if vis}
-            <div class="frame">
-            <span class="description">{node.description}</span>
-            {#if node.fields}
-            <div class="fieldlist">
-            {#each node.fields as f}
-                    <!-- {@debug} -->
-                <div class="field">  
-                    <!-- {#if f.name=="images"}
-                        {@debug f}
-                    {/if} -->
-
-                    <input type="checkbox" bind:checked={checked}>
-                    <span class="field-name">{f.name}</span>
-                    {#if f.type.kind == "LIST"}
-                         <svelte:self scheme={scheme} typeName={f.type.ofType.name} /> 
-                    {:else}
-                         <svelte:self scheme={scheme} typeName={f.type.name} /> 
-                    {/if}
-                    <span class="field-description">{f.description}</span> 
-                </div>
-            {/each}
+        <a class={vis?'opened':'closed'} href on:click|preventDefault={ e => vis = !vis }>{typeName}</a>
+        <!-- {#if vis} -->
+            <div class="frame" style="display:{vis?'block':'none'}">
+                <span class="description">{node.description}</span>
+                {#if node.fields}
+                    <div class="fieldlist">
+                    {#each node.fields as f}
+                        <TypeField scheme={scheme} node={f} tree={tree} parentid="{parentid}-{typeName}" on:change={onFieldStateChange} />
+                    {/each}
+                    </div>
+                {/if}
             </div>
-            {/if}
-            </div>
-        {/if}
-
+        <!-- {/if} -->
     {/if}
+    <!-- <input type="button" on:click={showTree} value="..."> -->
 </div>
 {/if}

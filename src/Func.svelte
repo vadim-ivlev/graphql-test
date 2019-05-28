@@ -6,10 +6,13 @@ import Argument from './Argument.svelte'
 import Type from './Type.svelte'
 
 // P R O P S
+export let parentid = ''
 export let scheme = {}
 export let node = {}
 export let operation = ""
-// let fieldlist 
+
+
+let fieldlist 
 
 let vis = false
 let request =''
@@ -165,8 +168,7 @@ onMount(async () => {
             
             <div>
                 <div class="header">RETURN</div>
-                <!-- {node.type.name} -->
-                <Type typeName={node.type.name}  scheme={scheme}/>
+                <Type typeName={node.type.name}  scheme={scheme} parentid="{parentid}-{node.name}" bind:fieldList={fieldlist}/>
             </div>
             <div>
                 <div class="header">VARIABLES</div>
@@ -180,7 +182,7 @@ onMount(async () => {
                 <input type="button" value="send">
             </div>
     </div>
-    <pre class="request " bind:this={requestArea}>{request}</pre>
+    <pre class="request " bind:this={requestArea}>{request} {fieldlist}</pre>
     <div class="response " bind:this={responseArea}></div>
 </div>
 {/if}
