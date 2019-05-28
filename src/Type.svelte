@@ -1,4 +1,6 @@
 <script>
+import { createEventDispatcher } from 'svelte'
+
 import { onMount } from 'svelte'
 import Js from './JsonView.svelte'
 import TypeField from './TypeField.svelte'
@@ -16,6 +18,11 @@ let nodes
 let node 
 let vis = false
 
+
+const dispatch = createEventDispatcher()
+function dispatchEvent(e) {
+	dispatch('change', { text: 'State changed!', target: e.target })
+}
 
 
 
@@ -51,8 +58,9 @@ function getFields(n, level){
 
 function onFieldStateChange(e) {
    fieldList = getFields(tree,0) 
-   console.log(e)
-   console.log(fieldList)
+   dispatchEvent(e)
+//    console.log(e)
+//    console.log(fieldList)
 }
 
 onMount(async () => {
@@ -112,10 +120,12 @@ onMount(async () => {
     }
 
     .frame {
-        border: 1px solid gray;
-        /* border-top: 1px solid gray; */
+        border: 1px solid rgba(0,0,0, 0.1);
+        /* border-left: 1px solid rgba(0,0,0, 0.1); */
+        /* border-top: 1px solid rgba(0,0,0, 0.1); */
         padding:5px;
         border-radius: 8px;
+        background-color: rgba(0,0,0, 0.04)
     }
 
 </style>

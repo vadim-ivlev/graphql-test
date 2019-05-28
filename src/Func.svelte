@@ -12,29 +12,28 @@ export let node = {}
 export let operation = ""
 
 
-let fieldlist 
 
 let vis = false
-let request =''
-let response
+let fieldlist = ''
+let arglist = ''
+let request = ''
+// let response
 
-// $: console.log("node=",node)
+$: request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
 
-function getQueryText() {
+function getArgsText() {
     let checked = node.args.filter( n => n.checked && n.value != null )
     let args = checked.map( n => {
         let val = n.graphqlType == 'String'?`"${n.value.replace(/"/g,'\\"')}"`: n.value
         return `  ${n.name}:${val}`
     })
     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
-    let returnFields = '{\n}'
-    let text = `${operation} {\n${node.name}${argsText}${returnFields}\n}`
-    return text
+    return argsText
 }
 
-function showRequest(e) {
-    request = getQueryText() 
-    console.log( request )
+function getArgsList() {
+    arglist = getArgsText() 
+    // console.log( request )
 }
 
 
@@ -45,7 +44,9 @@ let requestArea
 let responseArea
 
 onMount(async () => {
-    
+    getArgsList()
+    // window.$( formArea ).resizable();
+    // console.log('onMount:', formArea )
 })
 
 </script>
@@ -59,6 +60,7 @@ onMount(async () => {
         letter-spacing: 0.1em;
         /* color: gray; */
         margin-top:1em;
+        border-top: 1px solid silver;
 
     }
 
@@ -66,7 +68,7 @@ onMount(async () => {
         /* margin-top: 20px; */
         display: flex;
         /* flex-direction: row; */
-        width:100%;
+        /* width:100%; */
     }
 
     .form{ 
@@ -77,6 +79,7 @@ onMount(async () => {
         overflow:auto;
         min-width: 230px;
         padding: 10px;
+        /* width:400px; */
         /* max-width: 400px; */
     }
 
@@ -121,6 +124,8 @@ onMount(async () => {
 
     input[type="button"] {
         font-size: 18px !important;
+        padding: 20px !important;
+        border-radius: 0px;
     }
     /* response ------------------------*/
 
@@ -130,7 +135,16 @@ onMount(async () => {
         margin: 0 0 0 0;
         padding: 0 10px 0 10px;
         color:steelblue;
+        /* resize: both; */
+        overflow: auto;
         /* width: 100%; */
+
+        /* white-space: pre-wrap;       
+        white-space: -moz-pre-wrap;  
+        white-space: -pre-wrap;      
+        white-space: -o-pre-wrap;    
+        word-wrap: break-word;        */
+
     }
 
     .response {
@@ -150,39 +164,39 @@ onMount(async () => {
 </style>
 
 <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...) </a>
-{#if vis}
-<div class="root " bind:this={rootArea}>
-    <div class="form  {vis?'active':''}" bind:this={formArea}>
+<!-- {#if vis} -->
+<div class="root" style="display:{vis?'flex':'none'}"  bind:this={rootArea}>
+    <div class="form ui-widget-content {vis?'active':''}" bind:this={formArea}>
 
         <span class="description">{node.description}</span><br>
             
             {#if node.args}
-            <div class="header">ARGUMENTS</div>
+            <div class="header" >ARGUMENTS</div>
             <div class="fieldlist" >
                 {#each node.args as arg, index (arg.name)}
-                <Argument node={arg} />
+                <Argument node={arg} on:change={getArgsList}/>
                 {/each}
             </div>
             {/if}
         
             
             <div>
-                <div class="header">RETURN</div>
+                <div class="header" >RETURN</div>
                 <Type typeName={node.type.name}  scheme={scheme} parentid="{parentid}-{node.name}" bind:fieldList={fieldlist}/>
             </div>
             <div>
-                <div class="header">VARIABLES</div>
+                <div class="header" >VARIABLES</div>
             </div>
             <div>
                 <div class="header">FILE</div>
             </div>
         
             <div class="buttons">
-                <input type="button" value="show request" on:click={showRequest}>
+                <!-- <input type="button" value="show request" on:click={getArgsList}> -->
                 <input type="button" value="send">
             </div>
     </div>
-    <pre class="request " bind:this={requestArea}>{request} {fieldlist}</pre>
+    <pre class="request " bind:this={requestArea}>{request}</pre>
     <div class="response " bind:this={responseArea}></div>
 </div>
-{/if}
+<!-- {/if} -->

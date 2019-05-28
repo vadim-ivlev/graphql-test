@@ -9,8 +9,8 @@ export let node = {}
 // export let graphqlType = node.type.name || node.type.ofType.name
 
 if (node.checked === undefined)     node.checked = true
-if (node.value === undefined)       node.value = node.defaultValue
 if (node.graphqlType === undefined) node.graphqlType = node.type.name || node.type.ofType.name
+if (node.value === undefined)       node.value = node.defaultValue ||  (node.graphqlType=='Int'?0:'some text')
 
 
 
@@ -72,13 +72,10 @@ onMount(async () => {
 
 <!-- <svelte:options accessors={true}/> -->
 
-<!-- {@debug} -->
-<div class="field" disabled={!node.checked}>  
-    
-    <input type="checkbox" bind:checked={node.checked} disabled={node.type.kind=='NON_NULL'}> 
-    <!-- <br>  -->
+<div class="field" >  
+    <input type="checkbox" bind:checked={node.checked} disabled={node.type.kind=='NON_NULL'}  on:change> 
     <span class="argname {node.checked?'':'disabled'}">{node.name}</span>
-    <input class="input"  name={node.name} disabled={!node.checked} bind:value="{node.value}" bind:this={input} placeholder={node.value==''?'':null}>
+    <input class="input"  name={node.name} disabled={!node.checked} bind:value="{node.value}" bind:this={input} placeholder={node.value==''?'':null} on:change>
     <span class="oftype {node.checked?'':'disabled'}">{node.graphqlType}{node.type.kind=='NON_NULL'?'!':''}</span> 
     <span class="description {node.checked?'':'disabled'}">{node.description}</span>
 </div>
