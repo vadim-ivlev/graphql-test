@@ -17,9 +17,14 @@ let vis = false
 let fieldlist = ''
 let arglist = ''
 let request = ''
+let variables = ''
+// let returnType = ''
 // let response
 
 $: request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
+
+// $: returnType = node.graphqlType = node.type.name || node.type.ofType.name
+
 
 function getArgsText() {
     let checked = node.args.filter( n => n.checked && n.value != null )
@@ -33,11 +38,24 @@ function getArgsText() {
 
 function getArgsList() {
     arglist = getArgsText() 
-    // console.log( request )
 }
 
 
 
+function submitForm(event){
+    event.preventDefault()
+    console.log("submitForm")
+    window.$(form).ajaxSubmit({
+        url: "http://localhost:7700/graphql", 
+        type: 'POST',
+        //success: function(response) {$('#result').text(JSON.stringify(response, null,'  '));}
+        success: function(response) {window.$(responseArea).jsonViewer(response, {collapsed: true, rootCollapsable: false});}
+    })
+    return false
+}
+
+
+let form
 let rootArea
 let formArea
 let requestArea
@@ -119,13 +137,20 @@ onMount(async () => {
 
     .buttons {
         text-align: right;
-        padding: 10px;
+        /* padding: 10px; */
     }
 
-    input[type="button"] {
-        font-size: 18px !important;
-        padding: 20px !important;
-        border-radius: 0px;
+    input[type="submit"] {
+        font-family: 'Roboto Condensed';
+        /* font-variant: small-caps; */
+        font-weight: bold;
+        /* font-size: 90%; */
+        letter-spacing: 0.1em;
+        padding: 3px 15px 3px 15px;
+        border: 1px solid rgba(70,130,180,0.5);
+        border-radius: 2px;
+        background-color: transparent;
+        color: steelblue;
     }
     /* response ------------------------*/
 
@@ -148,7 +173,7 @@ onMount(async () => {
     }
 
     .response {
-        background-color: bisque;
+        /* background-color: bisque; */
         /* width: 100%; */
     }
 
@@ -159,14 +184,26 @@ onMount(async () => {
         background: red;
     } */
 
+    .query {
+        width: 100%;
+        height: 5em;
+        min-height: 1em;
+        resize: vertical;
+    }
 
+    .variables {
+        width: 100%;
+        height: 1em;
+        min-height: 1em;
+        resize: vertical;
+    }
 
 </style>
 
 <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...) </a>
 <!-- {#if vis} -->
 <div class="root" style="display:{vis?'flex':'none'}"  bind:this={rootArea}>
-    <div class="form ui-widget-content {vis?'active':''}" bind:this={formArea}>
+    <div class="form  {vis?'active':''}" bind:this={formArea}>
 
         <span class="description">{node.description}</span><br>
             
@@ -174,27 +211,34 @@ onMount(async () => {
             <div class="header" >ARGUMENTS</div>
             <div class="fieldlist" >
                 {#each node.args as arg, index (arg.name)}
-                <Argument node={arg} on:change={getArgsList}/>
+                <Argument node={arg} on:change={getArgsList} parentid="{parentid}-{node.name}-argument"/>
                 {/each}
             </div>
             {/if}
         
             
             <div>
-                <div class="header" >RETURN</div>
-                <Type typeName={node.type.name}  scheme={scheme} parentid="{parentid}-{node.name}" bind:fieldList={fieldlist}/>
+                <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}</div>
+                <Type typeName={node.graphqlType = node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}" bind:fieldList={fieldlist}/>
             </div>
-            <div>
-                <div class="header" >VARIABLES</div>
-            </div>
-            <div>
-                <div class="header">FILE</div>
-            </div>
-        
-            <div class="buttons">
-                <!-- <input type="button" value="show request" on:click={getArgsList}> -->
-                <input type="button" value="send">
-            </div>
+
+            <form bind:this={form} on:submit={submitForm}>
+                <div>
+                    <div class="header" >QUERY</div>
+                    <textarea id="{parentid}-{node.name}-query" name="query" class="query">{request}</textarea>
+                </div>
+                <div>
+                    <div class="header" >VARIABLES</div>
+                    <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables}></textarea>
+                </div>
+                <div>
+                    <div class="header">FILE</div>
+                    <input type="file" name="input-file">
+                </div>
+                <div class="buttons">
+                    <input type="submit"  value="TEST">
+                </div>
+            </form>
     </div>
     <pre class="request " bind:this={requestArea}>{request}</pre>
     <div class="response " bind:this={responseArea}></div>

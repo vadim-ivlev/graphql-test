@@ -131,10 +131,8 @@ onMount(async () => {
 </style>
 
 
-
 {#if node}
 <div class="self">
-
     {#if node.kind=="SCALAR"}
          <span class="scalar-type">{typeName}</span>
     {:else}

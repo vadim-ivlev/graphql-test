@@ -67,3 +67,36 @@ Then, from within your project folder:
 npm run build
 surge public
 ```
+
+
+```
+query:
+
+mutation update_post(
+  $id: Int!,
+  $id_parent: Int,
+  $text: String,    
+)
+
+{
+    update_post(
+    id:$id,
+    id_parent:$id_parent,
+    text:$text
+    )
+    {
+    id
+    id_broadcast
+    text
+    }
+}
+
+
+variables:
+{
+  "id":23937,
+  "id_parent":23936,
+  "text":"some text"
+}
+
+````

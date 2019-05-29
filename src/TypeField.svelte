@@ -61,8 +61,8 @@ $: {
 
 
 <div class="field" bind:this={root}>  
-    <input type="checkbox" id="{parentid}-{fieldName}" bind:checked={checked} on:change>
+    <input type="checkbox" id="{parentid}-{fieldName}" bind:checked={checked}  on:change>
     <span class="field-name">{fieldName}</span>
-    <Type scheme={scheme} typeName={typeName} tree={tree[fieldName]} on:change/> 
+    <Type scheme={scheme} typeName={typeName} tree={tree[fieldName]} parentid="{parentid}-{fieldName}-type" on:change/> 
     <span class="field-description">{node.description}</span> 
 </div>

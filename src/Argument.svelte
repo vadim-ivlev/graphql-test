@@ -1,7 +1,8 @@
 <script>
 import { onMount } from 'svelte'
 
-// PROPS
+// P R O P S
+export let parentid = ''
 export let node = {}
 // export let checked = true
 // export let name = node.name 
@@ -35,6 +36,7 @@ onMount(async () => {
     .description {
         color: steelblue;
         font-size: 90%;
+        /* font-family: 'Roboto Condensed'; */
         /* margin-left: 25px; */
     }
     .argname { 
@@ -73,9 +75,9 @@ onMount(async () => {
 <!-- <svelte:options accessors={true}/> -->
 
 <div class="field" >  
-    <input type="checkbox" bind:checked={node.checked} disabled={node.type.kind=='NON_NULL'}  on:change> 
+    <input id="{parentid}-{node.name}-checkbox" type="checkbox" bind:checked={node.checked} disabled={node.type.kind=='NON_NULL'}  on:change> 
     <span class="argname {node.checked?'':'disabled'}">{node.name}</span>
-    <input class="input"  name={node.name} disabled={!node.checked} bind:value="{node.value}" bind:this={input} placeholder={node.value==''?'':null} on:change>
+    <input id="{parentid}-{node.name}-input" class="input"  name={node.name} disabled={!node.checked} bind:value="{node.value}" bind:this={input} placeholder={node.value==''?'':null} on:change>
     <span class="oftype {node.checked?'':'disabled'}">{node.graphqlType}{node.type.kind=='NON_NULL'?'!':''}</span> 
     <span class="description {node.checked?'':'disabled'}">{node.description}</span>
 </div>
