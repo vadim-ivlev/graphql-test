@@ -3,6 +3,7 @@ import Func from './Func.svelte'
 import Type from './Type.svelte'
 
 export let scheme 
+export let url 
 
 let mutations =[]
 let queries =[]
@@ -37,23 +38,23 @@ function compareTypes(t1, t2) {
 <h4>Queries</h4>
 {#each queries as e}
      <div>
-        <Func node={e} operation="query"  scheme={scheme} parentid="query"/>
+        <Func url={url} node={e} operation="query"  scheme={scheme} parentid="query" on:change/>
      </div>
 {/each}
 
 <h4>Mutations</h4>
 {#each mutations as e}
      <div>
-        <Func node={e}  operation="mutation" scheme={scheme} parentid="mutation"/>
+        <Func url={url} node={e}  operation="mutation" scheme={scheme} parentid="mutation" on:change/>
      </div>
 {/each}
 
-<h4>User types</h4>
+<!-- <h4>User types</h4>
 {#each usertypes as t}
      <div>
         <Type typeName={t.name} scheme={scheme} parentid="usertypes"/>
      </div>
-{/each}
+{/each} -->
 
 <!-- 
 <h4>All types</h4>

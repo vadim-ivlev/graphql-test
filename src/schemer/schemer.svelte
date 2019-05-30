@@ -5,14 +5,14 @@ import { queryString } from "./schemer.js"
 import JsonView from '../JsonView.svelte'
 
 export let url = "http://localhost:7700/graphql"
-export let schema = {}
+export let scheme = {}
 let visible = false
 
 
 async function getSchema() {
-// schema =  await $.ajax({ url: url, type: "POST", data: { query:queryString, variables: '{}'},});
+// scheme =  await $.ajax({ url: url, type: "POST", data: { query:queryString, variables: '{}'},});
 let resp = await fetch(url, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) })
-schema = await resp.json()
+scheme = await resp.json()
 }
 
 
@@ -32,11 +32,11 @@ onMount(async () => {
 <div class="self">
   <form>
     <label for="inp0">GraphQL url</label>
-    <input type="text" id="inp0" name="inp0" bind:value={url} />
+    <input type="text" id="inp0" name="inp0" bind:value={url} on:change/>
     <input type="button" value="refresh" on:click={getSchema} />
-    <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} schema</a>
+    <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>
   </form>
   {#if visible}
-        <JsonView json={schema} />
+        <JsonView json={scheme} />
   {/if}
 </div>

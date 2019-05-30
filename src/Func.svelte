@@ -1,11 +1,14 @@
 
 <script>
+import { createEventDispatcher } from 'svelte'
+
 import { onMount } from 'svelte'
 import Js from './JsonView.svelte'
 import Argument from './Argument.svelte'
 import Type from './Type.svelte'
 
 // P R O P S
+export let url
 export let parentid = ''
 export let scheme = {}
 export let node = {}
@@ -21,9 +24,20 @@ let variables = ''
 // let returnType = ''
 // let response
 
-$: request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
+$: {
+    request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
+    dispatchEvent()
+}
 
 // $: returnType = node.graphqlType = node.type.name || node.type.ofType.name
+
+const dispatch = createEventDispatcher()
+function dispatchEvent() {
+	dispatch('change', { text: 'State changed!' })
+}
+
+
+
 
 
 function getArgsText() {
@@ -46,7 +60,7 @@ function submitForm(event){
     event.preventDefault()
     console.log("submitForm")
     window.$(form).ajaxSubmit({
-        url: "http://localhost:7700/graphql", 
+        url: url, 
         type: 'POST',
         //success: function(response) {$('#result').text(JSON.stringify(response, null,'  '));}
         success: function(response) {window.$(responseArea).jsonViewer(response, {collapsed: true, rootCollapsable: false});}
@@ -89,7 +103,7 @@ onMount(async () => {
         /* width:100%; */
     }
 
-    .form{ 
+    .form-area { 
         /* display: inline-block; */
         /* vertical-align: top; */
         border: 1px solid transparent;
@@ -97,7 +111,7 @@ onMount(async () => {
         overflow:auto;
         min-width: 230px;
         padding: 10px;
-        /* width:400px; */
+        width:380px;
         /* max-width: 400px; */
     }
 
@@ -156,12 +170,13 @@ onMount(async () => {
 
     .request {
         /* background-color: bisque; */
-        border-right:1px dotted silver;
+        border:1px solid silver;
+        border-left-width:0;
         margin: 0 0 0 0;
         padding: 0 10px 0 10px;
         color:steelblue;
         /* resize: both; */
-        overflow: auto;
+        /* overflow: auto; */
         /* width: 100%; */
 
         /* white-space: pre-wrap;       
@@ -173,8 +188,12 @@ onMount(async () => {
     }
 
     .response {
+        overflow:auto;
+        border: 1px solid silver;
+        border-left-width: 0;
         /* background-color: bisque; */
-        /* width: 100%; */
+        /* width: 500px; */
+        flex: 1 1 auto;
     }
 
     /* splitter */
@@ -200,10 +219,10 @@ onMount(async () => {
 
 </style>
 
-<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...) </a>
+<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)  </a>
 <!-- {#if vis} -->
 <div class="root" style="display:{vis?'flex':'none'}"  bind:this={rootArea}>
-    <div class="form  {vis?'active':''}" bind:this={formArea}>
+    <div class="form-area  {vis?'active':''}" bind:this={formArea}>
 
         <span class="description">{node.description}</span><br>
             
@@ -225,11 +244,11 @@ onMount(async () => {
             <form bind:this={form} on:submit={submitForm}>
                 <div>
                     <div class="header" >QUERY</div>
-                    <textarea id="{parentid}-{node.name}-query" name="query" class="query">{request}</textarea>
+                    <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change>{request}</textarea>
                 </div>
                 <div>
                     <div class="header" >VARIABLES</div>
-                    <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables}></textarea>
+                    <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables} on:change></textarea>
                 </div>
                 <div>
                     <div class="header">FILE</div>

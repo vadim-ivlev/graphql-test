@@ -26,12 +26,12 @@
     }
 
 
-    function saveFields(params) {
+    function saveFields() {
         controls = getControls()
         console.log(controls.length, controls.reduce( (sum, o) => sum + o.id.length  , 0) )
     }
 
-    function restoreFields(params) {
+    function restoreFields() {
         console.log(controls)
     }
 
@@ -42,7 +42,7 @@
     <input type="button" on:click={saveFields} value="save">
     <input type="button" on:click={restoreFields} value="restore">
 </div>
-<Schemer bind:url bind:schema={scheme} />
-<List {scheme} />
+<Schemer bind:url bind:scheme on:change={saveFields} />
+<List url={url} {scheme} on:change={saveFields}/>
 
 <!-- <JsonView json={scheme}/> -->
