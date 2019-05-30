@@ -76,10 +76,10 @@ onMount(async () => {
         vertical-align: top;
     }
     .description {
-        color: gray;
-        margin-left: 10px;
+        color: slategray;
+        /* margin-left: 10px; */
         margin-bottom: 10px;
-        font-size: 90%
+        /* font-size: 90% */
     }
     .fieldlist {
         margin-bottom: 10px;
@@ -109,7 +109,7 @@ onMount(async () => {
     .scalar-type {
         display: inline-block;
         margin-left:15px;
-        color:darkred;
+        color:steelblue;
         min-width: 50px;
     }
     .list-type {
@@ -120,12 +120,15 @@ onMount(async () => {
     }
 
     .frame {
-        border: 1px solid rgba(0,0,0, 0.1);
+        border: 1px dashed slategray;
+        /* border-bottom: 1px dashed slategray; */
+        /* rgba(0,0,0, 0.5);*/
         /* border-left: 1px solid rgba(0,0,0, 0.1); */
         /* border-top: 1px solid rgba(0,0,0, 0.1); */
         padding:5px;
-        border-radius: 8px;
-        background-color: rgba(0,0,0, 0.04)
+        padding-top:0.5em;
+        /* border-radius: 4px; */
+        /* background-color: rgba(0,0,0, 0.04) */
     }
 
 </style>

@@ -92,27 +92,30 @@ onMount(async () => {
         letter-spacing: 0.1em;
         /* color: gray; */
         margin-top:1em;
-        border-top: 1px solid silver;
+        /* border-top: 1px dashed slategray; */
 
     }
 
     .root {
-        /* margin-top: 20px; */
-        display: flex;
+        margin: 10px 0 10px 30px;
+        /* display: flex; */
         /* flex-direction: row; */
         /* width:100%; */
+
+        /* display: grid; */
+        grid-template-columns: 380px 1fr 3fr;
+        /* grid-template-rows: 400px; */
     }
 
     .form-area { 
         /* display: inline-block; */
         /* vertical-align: top; */
         border: 1px solid transparent;
-        resize: horizontal;
+        /* resize: horizontal; */
         overflow:auto;
         min-width: 230px;
         padding: 10px;
-        width:380px;
-        /* max-width: 400px; */
+        /* width:380px; */
     }
 
     .active {
@@ -122,12 +125,12 @@ onMount(async () => {
     }
 
     .name { 
-        display: block;
+        display: inline-block;
         min-width: 200px;
     }
     .description {
         display: inline-block;
-        color: green;
+        color: slategray;
         vertical-align: bottom;
         /* margin-left: 15px; */
         /* margin-bottom: 10px; */
@@ -135,16 +138,22 @@ onMount(async () => {
         /* max-width: 300px; */
     }
 
+    .fieldlist {
+        border-top:1px dashed slategray;
+        border-bottom:1px dashed slategray;
+        padding-bottom: 10px;
+    }
+
     .closed::before {
         content: '\25B6';
-        font-size: 70%;
+        font-size: 90%;
         width:15px;
         display: inline-block;
     }
 
     .opened::before {
         content: '\25BC';
-        font-size: 70%;
+        font-size: 90%;
         width:15px;
         display: inline-block;
     }
@@ -166,65 +175,52 @@ onMount(async () => {
         background-color: transparent;
         color: steelblue;
     }
-    /* response ------------------------*/
 
     .request {
-        /* background-color: bisque; */
         border:1px solid silver;
-        border-left-width:0;
+        /* border-left-width:0; */
         margin: 0 0 0 0;
         padding: 0 10px 0 10px;
         color:steelblue;
-        /* resize: both; */
-        /* overflow: auto; */
+        resize: both;
+        overflow: auto;
         /* width: 100%; */
-
-        /* white-space: pre-wrap;       
-        white-space: -moz-pre-wrap;  
-        white-space: -pre-wrap;      
-        white-space: -o-pre-wrap;    
-        word-wrap: break-word;        */
-
     }
 
     .response {
         overflow:auto;
         border: 1px solid silver;
-        border-left-width: 0;
+        /* border-left-width: 0; */
         /* background-color: bisque; */
         /* width: 500px; */
-        flex: 1 1 auto;
+
+        /* flex: 1 1 auto; */
     }
 
-    /* splitter */
-
-    /* ::-webkit-resizer {
-        border: 1px solid black;
-        background: red;
-    } */
-
     .query {
-        width: 100%;
-        height: 5em;
+        width: calc(100% - 6px);
+        height: 8em;
         min-height: 1em;
         resize: vertical;
     }
 
     .variables {
-        width: 100%;
-        height: 1em;
+        margin-left:0px;
+        width: calc(100% - 6px);
+        height: 3em;
         min-height: 1em;
         resize: vertical;
     }
 
+ 
 </style>
 
-<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)  </a>
+<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)  </a> 
+<span class="description">{node.description}</span><br>
 <!-- {#if vis} -->
-<div class="root" style="display:{vis?'flex':'none'}"  bind:this={rootArea}>
+<div class="root" style="display:{vis?'grid':'none'}"  bind:this={rootArea}>
     <div class="form-area  {vis?'active':''}" bind:this={formArea}>
 
-        <span class="description">{node.description}</span><br>
             
             {#if node.args}
             <div class="header" >ARGUMENTS</div>

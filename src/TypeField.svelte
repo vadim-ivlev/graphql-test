@@ -46,10 +46,10 @@ $: {
     }
 
     .field-description {
-        color: steelblue;
-        margin-left: 10px;
+        color: slategray;
+        /* margin-left: 10px; */
         margin-bottom: 10px;
-        font-size: 90%
+        font-size: 80%
     }
 
     .field {
@@ -64,5 +64,5 @@ $: {
     <input type="checkbox" id="{parentid}-{fieldName}" bind:checked={checked}  on:change>
     <span class="field-name">{fieldName}</span>
     <Type scheme={scheme} typeName={typeName} tree={tree[fieldName]} parentid="{parentid}-{fieldName}-type" on:change/> 
-    <span class="field-description">{node.description}</span> 
+    <br><span class="field-description">{node.description}</span> 
 </div>

@@ -1,2 +1,7 @@
-save/restore controls (url, store)
-resize panes
+- (done) save/restore controls (url, store)
+
+- css grid
+
+- gitlab pages
+
+- resize panes

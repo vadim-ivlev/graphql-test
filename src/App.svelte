@@ -1,39 +1,119 @@
 <script>
-    import Schemer from "./schemer/schemer.svelte";
-    import JsonView from "./JsonView.svelte"
-    import List from "./List.svelte"
+import { onMount } from 'svelte'
 
-    let url
-    let scheme = {}
-    let controls = []
+import Schemer from "./schemer/schemer.svelte";
+import JsonView from "./JsonView.svelte"
+import List from "./List.svelte"
 
-  
-    function getControls() {
-        var a =[]
-        var inps=document.getElementsByTagName("input")  
-        for (let n of inps) {
-            let id = n.getAttribute("id")
-            let type = n.getAttribute("type")
-            let value = n.value
-            let checked = n.checked
-            if (id !== null) {
-                if (id[0]=='-') console.log(id)
-                // if (checked !== null ) console.log("not null:", checked, id)
-                a.push({ id: id, type:type, checked:checked, value:value })
-            }
+let url
+let scheme = {}
+let controls = []
+let ignoreChanges = true
+
+// https://stackoverflow.com/questions/2856513/how-can-i-trigger-an-onchange-event-manually
+function dispatchChangeEvent(element) {
+    var event = new Event('change',{
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        target: element
+    });
+
+    element.dispatchEvent(event);
+
+    // if ("createEvent" in document) {
+    //     var evt = document.createEvent("HTMLEvents");
+    //     evt.initEvent("change", false, true);
+    //     element.dispatchEvent(evt);
+    // }
+    // else
+    //     element.fireEvent("onchange");
+}
+
+function getControls() {
+    let a =[]
+    let inps=document.getElementsByTagName("input")  
+    for (let inp of inps) {
+        let id = inp.getAttribute("id")
+        if (!id) continue
+        // if (id[0]=='-') console.log(id)
+
+        let type = inp.getAttribute("type")
+        let value = inp.value
+        let checked = inp.checked
+        a.push({ id: id, type:type, checked:checked, value:value })
+    }
+
+    inps=document.getElementsByTagName("textarea")  
+    for (let inp of inps) {
+        let id = inp.getAttribute("id")
+        if (!id) continue
+        // if (id[0]=='-') console.log(id)
+
+        let type = "textarea"
+        let value = inp.value
+        let checked = false
+        a.push({ id: id, type:type, checked:checked, value:value })
+    }
+
+    return a
+}
+
+function restoreFieldsWithEvents( withEvents = false) {
+    for (let c of controls) {
+        let inp = document.getElementById(c.id)
+        if (!inp) continue
+        if (c.type == 'checkbox') {
+            inp.checked = c.checked
+        } else {
+            inp.value = c.value
         }
-        return a
+        // inp.checked = c.checked
+        // inp.value = c.value
+        if (withEvents) dispatchChangeEvent(inp)
     }
+}
 
 
-    function saveFields() {
-        controls = getControls()
-        console.log(controls.length, controls.reduce( (sum, o) => sum + o.id.length  , 0) )
-    }
+function saveFields() {
+    controls = getControls()
+    let key = `${window.location.href}|${url}`
+    let controlsStr = JSON.stringify(controls)
+    localStorage.setItem(key, JSON.stringify(controls));
+    console.log("saved: ", key, controlsStr.length )
+}
 
-    function restoreFields() {
-        console.log(controls)
-    }
+
+function restoreFields() {
+    let key = `${window.location.href}|${url}`
+    let controlsStr = localStorage.getItem(key)
+    controls = JSON.parse(controlsStr)
+
+
+    ignoreChanges = true
+    restoreFieldsWithEvents(true)
+    setTimeout(() => {
+        ignoreChanges = true
+        restoreFieldsWithEvents(false)
+        console.log("restored", key, controlsStr.length )
+        ignoreChanges = false
+    }, 100);
+}
+
+
+
+function changeHandler(){
+    if (ignoreChanges) return
+    // saveFields()
+    // console.log('changeHandler')
+}
+
+
+
+onMount(async () => {
+    // restoreFields()
+})
+
 
 
 </script>
@@ -42,7 +122,7 @@
     <input type="button" on:click={saveFields} value="save">
     <input type="button" on:click={restoreFields} value="restore">
 </div>
-<Schemer bind:url bind:scheme on:change={saveFields} />
-<List url={url} {scheme} on:change={saveFields}/>
+<Schemer bind:url bind:scheme on:change={changeHandler} />
+<List url={url} {scheme} on:change={changeHandler}/>
 
 <!-- <JsonView json={scheme}/> -->

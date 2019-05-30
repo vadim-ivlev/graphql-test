@@ -34,7 +34,7 @@ onMount(async () => {
     }
 
     .description {
-        color: steelblue;
+        color: slategray;
         font-size: 90%;
         /* font-family: 'Roboto Condensed'; */
         /* margin-left: 25px; */
@@ -56,6 +56,12 @@ onMount(async () => {
     .disabled {
         color: silver;
     }
+
+    .exclamation {
+        font-weight: bold;
+        color: red;
+    }
+
     input {
         font-size: inherit;
         border: 1px solid slategray;
@@ -78,7 +84,10 @@ onMount(async () => {
     <input id="{parentid}-{node.name}-checkbox" type="checkbox" bind:checked={node.checked} disabled={node.type.kind=='NON_NULL'}  on:change> 
     <span class="argname {node.checked?'':'disabled'}">{node.name}</span>
     <input id="{parentid}-{node.name}-input" class="input"  name={node.name} disabled={!node.checked} bind:value="{node.value}" bind:this={input} placeholder={node.value==''?'':null} on:change>
-    <span class="oftype {node.checked?'':'disabled'}">{node.graphqlType}{node.type.kind=='NON_NULL'?'!':''}</span> 
-    <span class="description {node.checked?'':'disabled'}">{node.description}</span>
+    <span class="oftype {node.checked?'':'disabled'}">{node.graphqlType}
+    <span class="exclamation">{node.type.kind=='NON_NULL'?' !':''}</span>
+    </span> 
+    
+    <br><span class="description {node.checked?'':'disabled'}">{node.description}</span>
 </div>
  
