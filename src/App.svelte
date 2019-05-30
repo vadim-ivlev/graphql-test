@@ -118,11 +118,35 @@ onMount(async () => {
 
 </script>
 
-<div class="">
-    <input type="button" on:click={saveFields} value="save">
-    <input type="button" on:click={restoreFields} value="restore">
+<style>
+.root {
+    display: grid;
+    grid-template-columns: 5fr max-content;
+    grid-template-areas:  
+    "h b" 
+    "m m";
+}
+.main {
+    grid-area: m;
+}
+
+input {
+    font-size: 100%;
+}
+
+</style>
+
+
+<div class="root">
+    <Schemer bind:url bind:scheme on:change={changeHandler} />
+    <div>
+        <input type="button" on:click={saveFields} value="save">
+        <input type="button" on:click={restoreFields} value="restore">
+    </div>
+    <div class="main">
+        <List url={url} {scheme} on:change={changeHandler}/>
+    </div>
+
 </div>
-<Schemer bind:url bind:scheme on:change={changeHandler} />
-<List url={url} {scheme} on:change={changeHandler}/>
 
 <!-- <JsonView json={scheme}/> -->

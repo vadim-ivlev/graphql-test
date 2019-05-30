@@ -77,8 +77,8 @@ let responseArea
 
 onMount(async () => {
     getArgsList()
-    // window.$( formArea ).resizable();
-    // console.log('onMount:', formArea )
+    // window.$(requestArea).resizable();
+    window.$(formArea).resizable({ handles: "e" });
 })
 
 </script>
@@ -98,31 +98,18 @@ onMount(async () => {
 
     .root {
         margin: 10px 0 10px 30px;
-        /* display: flex; */
-        /* flex-direction: row; */
-        /* width:100%; */
-
-        /* display: grid; */
-        grid-template-columns: 380px 1fr 3fr;
+        display: grid;
+        grid-template-columns: 1fr max-content 4fr;
         /* grid-template-rows: 400px; */
     }
 
     .form-area { 
-        /* display: inline-block; */
-        /* vertical-align: top; */
-        border: 1px solid transparent;
-        /* resize: horizontal; */
-        overflow:auto;
-        min-width: 230px;
+        border: 1px solid silver;
         padding: 10px;
-        /* width:380px; */
+        min-width:380px;
+        background-color: whitesmoke;
     }
 
-    .active {
-        background-color: whitesmoke;
-        /* padding: 10px; */
-        border: 1px solid silver;
-    }
 
     .name { 
         display: inline-block;
@@ -132,10 +119,6 @@ onMount(async () => {
         display: inline-block;
         color: slategray;
         vertical-align: bottom;
-        /* margin-left: 15px; */
-        /* margin-bottom: 10px; */
-        /* width: 80%; */
-        /* max-width: 300px; */
     }
 
     .fieldlist {
@@ -160,7 +143,6 @@ onMount(async () => {
 
     .buttons {
         text-align: right;
-        /* padding: 10px; */
     }
 
     input[type="submit"] {
@@ -178,23 +160,18 @@ onMount(async () => {
 
     .request {
         border:1px solid silver;
-        /* border-left-width:0; */
+        border-left-width:0;
         margin: 0 0 0 0;
         padding: 0 10px 0 10px;
         color:steelblue;
-        resize: both;
-        overflow: auto;
-        /* width: 100%; */
+        /* resize: both; */
+        /* overflow: auto; */
     }
 
     .response {
         overflow:auto;
         border: 1px solid silver;
-        /* border-left-width: 0; */
-        /* background-color: bisque; */
-        /* width: 500px; */
-
-        /* flex: 1 1 auto; */
+        border-left-width: 0;
     }
 
     .query {
@@ -219,9 +196,8 @@ onMount(async () => {
 <span class="description">{node.description}</span><br>
 <!-- {#if vis} -->
 <div class="root" style="display:{vis?'grid':'none'}"  bind:this={rootArea}>
-    <div class="form-area  {vis?'active':''}" bind:this={formArea}>
+    <div class="form-area" bind:this={formArea}>
 
-            
             {#if node.args}
             <div class="header" >ARGUMENTS</div>
             <div class="fieldlist" >
@@ -253,7 +229,7 @@ onMount(async () => {
                 <div class="buttons">
                     <input type="submit"  value="TEST">
                 </div>
-            </form>
+            </form> 
     </div>
     <pre class="request " bind:this={requestArea}>{request}</pre>
     <div class="response " bind:this={responseArea}></div>

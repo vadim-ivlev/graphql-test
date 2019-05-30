@@ -34,33 +34,34 @@ function compareTypes(t1, t2) {
 
 </script>
 
+<div>
+     <h4>Queries</h4>
+     {#each queries as e}
+          <div>
+          <Func url={url} node={e} operation="query"  scheme={scheme} parentid="query" on:change/>
+          </div>
+     {/each}
 
-<h4>Queries</h4>
-{#each queries as e}
-     <div>
-        <Func url={url} node={e} operation="query"  scheme={scheme} parentid="query" on:change/>
-     </div>
-{/each}
+     <h4>Mutations</h4>
+     {#each mutations as e}
+          <div>
+          <Func url={url} node={e}  operation="mutation" scheme={scheme} parentid="mutation" on:change/>
+          </div>
+     {/each}
 
-<h4>Mutations</h4>
-{#each mutations as e}
-     <div>
-        <Func url={url} node={e}  operation="mutation" scheme={scheme} parentid="mutation" on:change/>
-     </div>
-{/each}
+     <!-- <h4>User types</h4>
+     {#each usertypes as t}
+          <div>
+          <Type typeName={t.name} scheme={scheme} parentid="usertypes"/>
+          </div>
+     {/each} -->
 
-<!-- <h4>User types</h4>
-{#each usertypes as t}
-     <div>
-        <Type typeName={t.name} scheme={scheme} parentid="usertypes"/>
-     </div>
-{/each} -->
-
-<!-- 
-<h4>All types</h4>
-{#each types as t}
-     <div>
-        <Type typeName={t.name}  scheme={scheme}/>
-     </div>
-{/each}
- -->
+     <!-- 
+     <h4>All types</h4>
+     {#each types as t}
+          <div>
+          <Type typeName={t.name}  scheme={scheme}/>
+          </div>
+     {/each}
+     -->
+</div>

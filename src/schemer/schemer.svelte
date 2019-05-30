@@ -24,15 +24,23 @@ onMount(async () => {
 
 <style>
     .self {
-        background-color: whitesmoke;
+        /* background-color: whitesmoke; */
     }
+
+    .text {
+      width: 300px;
+      /* border: 1px solid red; */
+      font-size: 100%
+    }
+
+    input {font-size: 100%;}
 </style>
 
 
 <div class="self">
   <form>
     <label for="inp0">GraphQL url</label>
-    <input type="text" id="inp0" name="inp0" bind:value={url} on:change/>
+    <input class="text" type="text" id="inp0" name="inp0" bind:value={url} on:change/>
     <input type="button" value="refresh" on:click={getSchema} />
     <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>
   </form>
