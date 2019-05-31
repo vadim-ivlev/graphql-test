@@ -1,2 +1,3493 @@
-var app=function(){"use strict";function e(){}function n(e){return e()}function t(){return Object.create(null)}function i(e){e.forEach(n)}function r(e){return"function"==typeof e}function a(e,n){return e!=e?n==n:e!==n||e&&"object"==typeof e||"function"==typeof e}function o(e,n){e.appendChild(n)}function l(e,n,t){e.insertBefore(n,t||null)}function d(e){e.parentNode.removeChild(e)}function s(e,n){for(let t=0;t<e.length;t+=1)e[t]&&e[t].d(n)}function c(e){return document.createElement(e)}function u(e){return document.createTextNode(e)}function p(){return u(" ")}function m(){return u("")}function f(e,n,t,i){return e.addEventListener(n,t,i),()=>e.removeEventListener(n,t,i)}function h(e){return function(n){return n.preventDefault(),e.call(this,n)}}function g(e,n,t){null==t?e.removeAttribute(n):e.setAttribute(n,t)}function v(e,n){n=""+n,e.data!==n&&(e.data=n)}function y(e,n,t){e.style.setProperty(n,t)}let $;function b(e){$=e}function _(e){(function(){if(!$)throw new Error("Function called outside component initialization");return $})().$$.on_mount.push(e)}function N(){const e=$;return(n,t)=>{const i=e.$$.callbacks[n];if(i){const r=function(e,n){const t=document.createEvent("CustomEvent");return t.initCustomEvent(e,!1,!1,n),t}(n,t);i.slice().forEach(n=>{n.call(e,r)})}}}function k(e,n){const t=e.$$.callbacks[n.type];t&&t.slice().forEach(e=>e(n))}const x=[],T=Promise.resolve();let w=!1;const q=[],L=[],S=[];function j(e){q.push(e)}function E(e){L.push(e)}function A(e){S.push(e)}function C(){const e=new Set;do{for(;x.length;){const e=x.shift();b(e),F(e.$$)}for(;q.length;)q.shift()();for(;L.length;){const n=L.pop();e.has(n)||(n(),e.add(n))}}while(x.length);for(;S.length;)S.pop()();w=!1}function F(e){e.fragment&&(e.update(e.dirty),i(e.before_render),e.fragment.p(e.dirty,e.ctx),e.dirty=null,e.after_render.forEach(E))}let O;function I(){O={remaining:0,callbacks:[]}}function R(){O.remaining||i(O.callbacks)}function z(e){O.callbacks.push(e)}function V(e,n){z(()=>{!function(e,n){e.d(1),n.delete(e.key)}(e,n)}),e.o(1)}function M(e,n,t){-1!==e.$$.props.indexOf(n)&&(e.$$.bound[n]=t,t(e.$$.ctx[n]))}function B(e,t,a){const{fragment:o,on_mount:l,on_destroy:d,after_render:s}=e.$$;o.m(t,a),E(()=>{const t=l.map(n).filter(r);d?d.push(...t):i(t),e.$$.on_mount=[]}),s.forEach(E)}function H(e,n){e.$$.dirty||(x.push(e),w||(w=!0,T.then(C)),e.$$.dirty=t()),e.$$.dirty[n]=!0}function U(n,r,a,o,l,d){const s=$;b(n);const c=r.props||{},u=n.$$={fragment:null,ctx:null,props:d,update:e,not_equal:l,bound:t(),on_mount:[],on_destroy:[],before_render:[],after_render:[],context:new Map(s?s.$$.context:[]),callbacks:t(),dirty:null};let p=!1;var m;u.ctx=a?a(n,c,(e,t)=>{u.ctx&&l(u.ctx[e],u.ctx[e]=t)&&(u.bound[e]&&u.bound[e](t),p&&H(n,e))}):c,u.update(),p=!0,i(u.before_render),u.fragment=o(u.ctx),r.target&&(r.hydrate?u.fragment.l((m=r.target,Array.from(m.childNodes))):u.fragment.c(),r.intro&&n.$$.fragment.i&&n.$$.fragment.i(),B(n,r.target,r.anchor),C()),b(s)}class D{$destroy(){var n,t;t=!0,(n=this).$$&&(i(n.$$.on_destroy),n.$$.fragment.d(t),n.$$.on_destroy=n.$$.fragment=null,n.$$.ctx={}),this.$destroy=e}$on(e,n){const t=this.$$.callbacks[e]||(this.$$.callbacks[e]=[]);return t.push(n),()=>{const e=t.indexOf(n);-1!==e&&t.splice(e,1)}}$set(){}}const J="\nquery IntrospectionQuery {\n    __schema {\n      queryType {\n        ...FullType\n      }\n      mutationType {\n        ...FullType\n      }\n      subscriptionType {\n        name\n      }\n      types {\n        ...FullType\n      }\n      directives {\n        name\n        description\n        locations\n        args {\n          ...InputValue\n        }\n      }\n    }\n  }\n  \n  fragment FullType on __Type {\n    kind\n    name\n    description\n    fields(includeDeprecated: true) {\n      name\n      description\n      args {\n        ...InputValue\n      }\n      type {\n        ...TypeRef\n      }\n      isDeprecated\n      deprecationReason\n    }\n    inputFields {\n      ...InputValue\n    }\n    interfaces {\n      ...TypeRef\n    }\n    enumValues(includeDeprecated: true) {\n      name\n      description\n      isDeprecated\n      deprecationReason\n    }\n    possibleTypes {\n      ...TypeRef\n    }\n  }\n  \n  fragment InputValue on __InputValue {\n    name\n    description\n    type {\n      ...TypeRef\n    }\n    defaultValue\n  }\n  \n  fragment TypeRef on __Type {\n    kind\n    name\n    description\n    ofType {\n      kind\n      name\n      description\n      ofType {\n        kind\n        name\n        description\n        ofType {\n          kind\n          name\n          description\n          ofType {\n            kind\n            name\n            description\n            ofType {\n              kind\n              name\n              description\n              ofType {\n                kind\n                name\n                description\n                ofType {\n                  kind\n                  name\n                  description\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n  \n\n";function Q(n){var t;return{c(){(t=c("div")).className="self svelte-1rj0q3e"},m(e,i){l(e,t,i),j(()=>n.div_binding(t,null))},p(e,n){e.items&&(n.div_binding(null,t),n.div_binding(t,null))},i:e,o:e,d(e){e&&d(t),n.div_binding(null,t)}}}function P(e,n,t){let i,{json:r}=n;return e.$set=(e=>{"json"in e&&t("json",r=e.json)}),e.$$.update=((e={elem:1,json:1})=>{if(e.elem||e.json)try{window.$(i).jsonViewer(r,{collapsed:!0,rootCollapsable:!1})}catch(e){}}),{json:r,elem:i,div_binding:function(e,n){t("elem",i=e)}}}class G extends D{constructor(e){super(),U(this,e,P,Q,a,["json"])}}function Y(e){var n,t=new G({props:{json:e.scheme}});return{c(){t.$$.fragment.c()},m(e,i){B(t,e,i),n=!0},p(e,n){var i={};e.scheme&&(i.json=n.scheme),t.$set(i)},i(e){n||(t.$$.fragment.i(e),n=!0)},o(e){t.$$.fragment.o(e),n=!1},d(e){t.$destroy(e)}}}function K(e){var n,t,r,a,s,m,y,$,b,_,N,k,x,T,w=e.visible?"Hide":"Show",q=e.visible&&Y(e);return{c(){n=c("div"),t=c("form"),(r=c("label")).textContent="GraphQL url",a=p(),s=c("input"),m=p(),y=c("input"),$=p(),b=c("a"),_=u(w),N=u(" scheme"),k=p(),q&&q.c(),r.htmlFor="inp0",s.className="text svelte-1pdhvrm",g(s,"type","text"),s.id="inp0",s.name="inp0",g(y,"type","button"),y.value="refresh",y.className="svelte-1pdhvrm",b.href=!0,n.className="self svelte-1pdhvrm",T=[f(s,"input",e.input0_input_handler),f(s,"change",e.change_handler),f(y,"click",e.getSchema),f(b,"click",h(e.click_handler))]},m(i,d){l(i,n,d),o(n,t),o(t,r),o(t,a),o(t,s),s.value=e.url,o(t,m),o(t,y),o(t,$),o(t,b),o(b,_),o(b,N),o(n,k),q&&q.m(n,null),x=!0},p(e,t){e.url&&s.value!==t.url&&(s.value=t.url),x&&!e.visible||w===(w=t.visible?"Hide":"Show")||v(_,w),t.visible?q?(q.p(e,t),q.i(1)):((q=Y(t)).c(),q.i(1),q.m(n,null)):q&&(I(),z(()=>{q.d(1),q=null}),q.o(1),R())},i(e){x||(q&&q.i(),x=!0)},o(e){q&&q.o(),x=!1},d(e){e&&d(n),q&&q.d(),i(T)}}}function W(e,n,t){let{url:i="http://localhost:7700/graphql",scheme:r={}}=n,a=!1;async function o(){let e=await fetch(i,{method:"POST",body:JSON.stringify({query:J,variables:"{}"})});t("scheme",r=await e.json())}return _(async()=>{o()}),e.$set=(e=>{"url"in e&&t("url",i=e.url),"scheme"in e&&t("scheme",r=e.scheme)}),{url:i,scheme:r,visible:a,getSchema:o,change_handler:function(n){k(e,n)},input0_input_handler:function(){i=this.value,t("url",i)},click_handler:function(e){t("visible",a=!a)}}}class X extends D{constructor(e){super(),U(this,e,W,K,a,["url","scheme"])}}function Z(n){var t,r,a,s,m,h,y,$,b,_,N,k,x,T,w,q,L,S,E,A,C,F,O,I,R,z,V,M=n.node.name,B=n.node.graphqlType,H="NON_NULL"==n.node.type.kind?" !":"",U=n.node.description;return{c(){t=c("div"),r=c("input"),m=p(),h=c("span"),y=u(M),b=p(),_=c("input"),w=p(),q=c("span"),L=u(B),S=p(),E=c("span"),A=u(H),F=p(),O=c("br"),I=c("span"),R=u(U),r.id=a=n.parentid+"-"+n.node.name+"-checkbox",g(r,"type","checkbox"),r.disabled=s="NON_NULL"==n.node.type.kind,r.className="svelte-19wistz",h.className=$="argname "+(n.node.checked?"":"disabled")+" svelte-19wistz",_.id=N=n.parentid+"-"+n.node.name+"-input",_.className="input svelte-19wistz",_.name=k=n.node.name,_.disabled=x=!n.node.checked,_.placeholder=T=""==n.node.value?"":null,E.className="exclamation svelte-19wistz",q.className=C="oftype "+(n.node.checked?"":"disabled")+" svelte-19wistz",I.className=z="description "+(n.node.checked?"":"disabled")+" svelte-19wistz",t.className="field svelte-19wistz",V=[f(r,"change",n.input0_change_handler),f(r,"change",n.change_handler),f(_,"input",n.input1_input_handler),f(_,"change",n.change_handler_1)]},m(e,i){l(e,t,i),o(t,r),r.checked=n.node.checked,o(t,m),o(t,h),o(h,y),o(t,b),o(t,_),_.value=n.node.value,j(()=>n.input1_binding(_,null)),o(t,w),o(t,q),o(q,L),o(q,S),o(q,E),o(E,A),o(t,F),o(t,O),o(t,I),o(I,R)},p(e,n){e.node&&(r.checked=n.node.checked),(e.parentid||e.node)&&a!==(a=n.parentid+"-"+n.node.name+"-checkbox")&&(r.id=a),e.node&&s!==(s="NON_NULL"==n.node.type.kind)&&(r.disabled=s),e.node&&M!==(M=n.node.name)&&v(y,M),e.node&&$!==($="argname "+(n.node.checked?"":"disabled")+" svelte-19wistz")&&(h.className=$),e.node&&_.value!==n.node.value&&(_.value=n.node.value),e.items&&(n.input1_binding(null,_),n.input1_binding(_,null)),(e.parentid||e.node)&&N!==(N=n.parentid+"-"+n.node.name+"-input")&&(_.id=N),e.node&&k!==(k=n.node.name)&&(_.name=k),e.node&&x!==(x=!n.node.checked)&&(_.disabled=x),e.node&&T!==(T=""==n.node.value?"":null)&&(_.placeholder=T),e.node&&B!==(B=n.node.graphqlType)&&v(L,B),e.node&&H!==(H="NON_NULL"==n.node.type.kind?" !":"")&&v(A,H),e.node&&C!==(C="oftype "+(n.node.checked?"":"disabled")+" svelte-19wistz")&&(q.className=C),e.node&&U!==(U=n.node.description)&&v(R,U),e.node&&z!==(z="description "+(n.node.checked?"":"disabled")+" svelte-19wistz")&&(I.className=z)},i:e,o:e,d(e){e&&d(t),n.input1_binding(null,_),i(V)}}}function ee(e,n,t){let i,{parentid:r="",node:a={}}=n;void 0===a.checked&&(a.checked=!0,t("node",a)),void 0===a.graphqlType&&(a.graphqlType=a.type.name||a.type.ofType.name,t("node",a)),void 0===a.value&&(a.value=a.defaultValue||("Int"==a.graphqlType?0:"some text"),t("node",a));let o="Int"==a.graphqlType?"number":"text";return _(async()=>{i.setAttribute("type",o)}),e.$set=(e=>{"parentid"in e&&t("parentid",r=e.parentid),"node"in e&&t("node",a=e.node)}),{parentid:r,node:a,input:i,change_handler:function(n){k(e,n)},change_handler_1:function(n){k(e,n)},input0_change_handler:function(){a.checked=this.checked,t("node",a)},input1_input_handler:function(){a.value=this.value,t("node",a)},input1_binding:function(e,n){t("input",i=e)}}}class ne extends D{constructor(e){super(),U(this,e,ee,Z,a,["parentid","node"])}}function te(e){var n,t,r,a,s,m,h,y,$,b,_,N,k,x=e.node.description,T=new fe({props:{scheme:e.scheme,typeName:e.typeName,tree:e.tree[e.fieldName],parentid:e.parentid+"-"+e.fieldName+"-type"}});return T.$on("change",e.change_handler_1),{c(){n=c("div"),t=c("input"),a=p(),s=c("span"),m=u(e.fieldName),h=p(),T.$$.fragment.c(),y=p(),$=c("br"),b=c("span"),_=u(x),g(t,"type","checkbox"),t.id=r=e.parentid+"-"+e.fieldName,t.className="svelte-x6f70e",s.className="field-name svelte-x6f70e",$.className="svelte-x6f70e",b.className="field-description svelte-x6f70e",n.className="field svelte-x6f70e",k=[f(t,"change",e.input_change_handler),f(t,"change",e.change_handler)]},m(i,r){l(i,n,r),o(n,t),t.checked=e.checked,o(n,a),o(n,s),o(s,m),o(n,h),B(T,n,null),o(n,y),o(n,$),o(n,b),o(b,_),j(()=>e.div_binding(n,null)),N=!0},p(e,i){e.checked&&(t.checked=i.checked),N&&!e.parentid||r===(r=i.parentid+"-"+i.fieldName)||(t.id=r);var a={};e.scheme&&(a.scheme=i.scheme),e.typeName&&(a.typeName=i.typeName),(e.tree||e.fieldName)&&(a.tree=i.tree[i.fieldName]),(e.parentid||e.fieldName)&&(a.parentid=i.parentid+"-"+i.fieldName+"-type"),T.$set(a),N&&!e.node||x===(x=i.node.description)||v(_,x),e.items&&(i.div_binding(null,n),i.div_binding(n,null))},i(e){N||(T.$$.fragment.i(e),N=!0)},o(e){T.$$.fragment.o(e),N=!1},d(t){t&&d(n),T.$destroy(),e.div_binding(null,n),i(k)}}}function ie(e,n,t){let i,r,{parentid:a="",scheme:o,node:l,tree:d={}}=n,s=!0,c=l.name,u="LIST"==l.type.kind?l.type.ofType.name:l.type.name;return e.$set=(e=>{"parentid"in e&&t("parentid",a=e.parentid),"scheme"in e&&t("scheme",o=e.scheme),"node"in e&&t("node",l=e.node),"tree"in e&&t("tree",d=e.tree)}),e.$$.update=((e={node:1,tree:1,fieldName:1,checked:1,typeName:1})=>{(e.node||e.tree||e.fieldName||e.checked||e.typeName)&&l&&(d[c]||(d[c]={},t("tree",d),t("node",l),t("fieldName",c),t("checked",s),t("typeName",u)),d[c].checked=s,t("tree",d),t("node",l),t("fieldName",c),t("checked",s),t("typeName",u),d[c].typeName=u,t("tree",d),t("node",l),t("fieldName",c),t("checked",s),t("typeName",u),t("treeNode",r=d[c]))}),{parentid:a,scheme:o,node:l,tree:d,root:i,checked:s,fieldName:c,typeName:u,change_handler:function(n){k(e,n)},change_handler_1:function(n){k(e,n)},input_change_handler:function(){s=this.checked,t("checked",s)},div_binding:function(e,n){t("root",i=e)}}}class re extends D{constructor(e){super(),U(this,e,ie,te,a,["parentid","scheme","node","tree"])}}function ae(e,n,t){const i=Object.create(e);return i.f=n[t],i}function oe(e){var n,t,i,r,a=[de,le],o=[];function s(e){return"SCALAR"==e.node.kind?0:1}return t=s(e),i=o[t]=a[t](e),{c(){n=c("div"),i.c(),n.className="self svelte-1680n0b"},m(e,i){l(e,n,i),o[t].m(n,null),r=!0},p(e,r){var l=t;(t=s(r))===l?o[t].p(e,r):(I(),z(()=>{o[l].d(1),o[l]=null}),i.o(1),R(),(i=o[t])||(i=o[t]=a[t](r)).c(),i.i(1),i.m(n,null))},i(e){r||(i&&i.i(),r=!0)},o(e){i&&i.o(),r=!1},d(e){e&&d(n),o[t].d()}}}function le(e){var n,t,i,r,a,s,m,g,$,b,_=e.node.description,N=e.node.fields&&se(e);return{c(){n=c("a"),t=u(e.typeName),r=p(),a=c("div"),s=c("span"),m=u(_),g=p(),N&&N.c(),n.className=i=(e.vis?"opened":"closed")+" svelte-1680n0b",n.href=!0,s.className="description svelte-1680n0b",a.className="frame svelte-1680n0b",y(a,"display",e.vis?"block":"none"),b=f(n,"click",h(e.click_handler))},m(e,i){l(e,n,i),o(n,t),l(e,r,i),l(e,a,i),o(a,s),o(s,m),o(a,g),N&&N.m(a,null),$=!0},p(e,r){$&&!e.typeName||v(t,r.typeName),$&&!e.vis||i===(i=(r.vis?"opened":"closed")+" svelte-1680n0b")||(n.className=i),$&&!e.node||_===(_=r.node.description)||v(m,_),r.node.fields?N?(N.p(e,r),N.i(1)):((N=se(r)).c(),N.i(1),N.m(a,null)):N&&(I(),z(()=>{N.d(1),N=null}),N.o(1),R()),$&&!e.vis||y(a,"display",r.vis?"block":"none")},i(e){$||(N&&N.i(),$=!0)},o(e){N&&N.o(),$=!1},d(e){e&&(d(n),d(r),d(a)),N&&N.d(),b()}}}function de(n){var t,i;return{c(){t=c("span"),i=u(n.typeName),t.className="scalar-type svelte-1680n0b"},m(e,n){l(e,t,n),o(t,i)},p(e,n){e.typeName&&v(i,n.typeName)},i:e,o:e,d(e){e&&d(t)}}}function se(e){for(var n,t,i=e.node.fields,r=[],a=0;a<i.length;a+=1)r[a]=ce(ae(e,i,a));function o(e,n,t){r[e]&&(n&&z(()=>{r[e].d(n),r[e]=null}),r[e].o(t))}return{c(){n=c("div");for(var e=0;e<r.length;e+=1)r[e].c();n.className="fieldlist svelte-1680n0b"},m(e,i){l(e,n,i);for(var a=0;a<r.length;a+=1)r[a].m(n,null);t=!0},p(e,t){if(e.scheme||e.node||e.tree||e.parentid||e.typeName||e.onFieldStateChange){i=t.node.fields;for(var a=0;a<i.length;a+=1){const o=ae(t,i,a);r[a]?(r[a].p(e,o),r[a].i(1)):(r[a]=ce(o),r[a].c(),r[a].i(1),r[a].m(n,null))}for(I();a<r.length;a+=1)o(a,1,1);R()}},i(e){if(!t){for(var n=0;n<i.length;n+=1)r[n].i();t=!0}},o(e){r=r.filter(Boolean);for(let e=0;e<r.length;e+=1)o(e,0);t=!1},d(e){e&&d(n),s(r,e)}}}function ce(e){var n,t=new re({props:{scheme:e.scheme,node:e.f,tree:e.tree,parentid:e.parentid+"-"+e.typeName}});return t.$on("change",e.onFieldStateChange),{c(){t.$$.fragment.c()},m(e,i){B(t,e,i),n=!0},p(e,n){var i={};e.scheme&&(i.scheme=n.scheme),e.node&&(i.node=n.f),e.tree&&(i.tree=n.tree),(e.parentid||e.typeName)&&(i.parentid=n.parentid+"-"+n.typeName),t.$set(i)},i(e){n||(t.$$.fragment.i(e),n=!0)},o(e){t.$$.fragment.o(e),n=!1},d(e){t.$destroy(e)}}}function ue(e){var n,t,i=e.node&&oe(e);return{c(){i&&i.c(),n=m()},m(e,r){i&&i.m(e,r),l(e,n,r),t=!0},p(e,t){t.node?i?(i.p(e,t),i.i(1)):((i=oe(t)).c(),i.i(1),i.m(n.parentNode,n)):i&&(I(),z(()=>{i.d(1),i=null}),i.o(1),R())},i(e){t||(i&&i.i(),t=!0)},o(e){i&&i.o(),t=!1},d(e){i&&i.d(e),e&&d(n)}}}function pe(e,n){let t=[];for(let i in e)e[i].checked&&t.push("  ".repeat(n+1)+i+pe(e[i],n+1));return t.length>0?"{\n"+t.join("\n")+"\n"+"  ".repeat(n)+"}":""}function me(e,n,t){let i,r,{parentid:a="",scheme:o={},typeName:l="",tree:d={},fieldList:s=""}=n,c=!1;const u=N();return o&&o.data&&o.data.__schema&&(t("nodes",i=o.data.__schema.types.filter(e=>e.name==l)),i.length>0&&t("node",r=i[0])),_(async()=>{t("fieldList",s=pe(d,0))}),e.$set=(e=>{"parentid"in e&&t("parentid",a=e.parentid),"scheme"in e&&t("scheme",o=e.scheme),"typeName"in e&&t("typeName",l=e.typeName),"tree"in e&&t("tree",d=e.tree),"fieldList"in e&&t("fieldList",s=e.fieldList)}),{parentid:a,scheme:o,typeName:l,tree:d,fieldList:s,node:r,vis:c,onFieldStateChange:function(e){t("fieldList",s=pe(d,0)),function(e){u("change",{text:"State changed!",target:e.target})}(e)},click_handler:function(e){const n=c=!c;return t("vis",c),n}}}class fe extends D{constructor(e){super(),U(this,e,me,ue,a,["parentid","scheme","typeName","tree","fieldList"])}}function he(e,n,t){const i=Object.create(e);return i.arg=n[t],i.index=t,i}function ge(e){var n,t,i,r,a=[],o=new Map,s=e.node.args;const u=e=>e.arg.name;for(var m=0;m<s.length;m+=1){let n=he(e,s,m),t=u(n);o.set(t,a[m]=ve(t,n))}return{c(){for((n=c("div")).textContent="ARGUMENTS",t=p(),i=c("div"),m=0;m<a.length;m+=1)a[m].c();n.className="header svelte-1ub66rd",i.className="fieldlist svelte-1ub66rd"},m(e,o){for(l(e,n,o),l(e,t,o),l(e,i,o),m=0;m<a.length;m+=1)a[m].m(i,null);r=!0},p(e,n){const t=n.node.args;I(),a=function(e,n,t,i,r,a,o,l,d,s,c,u){let p=e.length,m=a.length,f=p;const h={};for(;f--;)h[e[f].key]=f;const g=[],v=new Map,y=new Map;for(f=m;f--;){const e=u(r,a,f),l=t(e);let d=o.get(l);d?i&&d.p(n,e):(d=s(l,e)).c(),v.set(l,g[f]=d),l in h&&y.set(l,Math.abs(f-h[l]))}const $=new Set,b=new Set;function _(e){e.i&&e.i(1),e.m(l,c),o.set(e.key,e),c=e.first,m--}for(;p&&m;){const n=g[m-1],t=e[p-1],i=n.key,r=t.key;n===t?(c=n.first,p--,m--):v.has(r)?!o.has(i)||$.has(i)?_(n):b.has(r)?p--:y.get(i)>y.get(r)?(b.add(i),_(n)):($.add(r),p--):(d(t,o),p--)}for(;p--;){const n=e[p];v.has(n.key)||d(n,o)}for(;m;)_(g[m-1]);return g}(a,e,u,1,n,t,o,i,V,ve,null,he),R()},i(e){if(!r){for(var n=0;n<s.length;n+=1)a[n].i();r=!0}},o(e){for(m=0;m<a.length;m+=1)a[m].o();r=!1},d(e){for(e&&(d(n),d(t),d(i)),m=0;m<a.length;m+=1)a[m].d()}}}function ve(e,n){var t,i,r=new ne({props:{node:n.arg,parentid:n.parentid+"-"+n.node.name+"-argument"}});return r.$on("change",n.getArgsList),{key:e,first:null,c(){t=m(),r.$$.fragment.c(),this.first=t},m(e,n){l(e,t,n),B(r,e,n),i=!0},p(e,n){var t={};e.node&&(t.node=n.arg),(e.parentid||e.node)&&(t.parentid=n.parentid+"-"+n.node.name+"-argument"),r.$set(t)},i(e){i||(r.$$.fragment.i(e),i=!0)},o(e){r.$$.fragment.o(e),i=!1},d(e){e&&d(t),r.$destroy(e)}}}function ye(e){var n,t,r,a,s,m,g,$,b,_,N,k,x,T,w,q,L,S,E,C,F,O,V,H,U,D,J,Q,P,G,Y,K,W,X,Z,ee,ne,te,ie,re,ae,oe,le=e.node.name,de=e.node.description,se="LIST"==e.node.type.kind?"[...]":"",ce=e.node.args&&ge(e);function ue(n){e.type_fieldList_binding.call(null,n),S=!0,A(()=>S=!1)}let pe={typeName:e.node.graphqlType=e.node.type.name||e.node.type.ofType.name,scheme:e.scheme,parentid:e.parentid+"-"+e.node.name};void 0!==e.fieldlist&&(pe.fieldList=e.fieldlist);var me=new fe({props:pe});return j(()=>M(me,"fieldList",ue)),{c(){n=c("a"),t=u(le),r=u("(...)"),s=p(),m=c("span"),g=u(de),$=c("br"),b=p(),_=c("div"),N=c("div"),ce&&ce.c(),k=p(),x=c("div"),T=c("div"),w=u("RETURNS "),q=u(se),L=p(),me.$$.fragment.c(),E=p(),C=c("form"),F=c("div"),(O=c("div")).textContent="QUERY",V=p(),H=c("textarea"),D=p(),J=c("div"),(Q=c("div")).textContent="VARIABLES",P=p(),G=c("textarea"),K=p(),(W=c("div")).innerHTML='<div class="header svelte-1ub66rd">FILE</div>\n\t\t\t                    <input type="file" name="input-file">',X=p(),(Z=c("div")).innerHTML='<input type="submit" value="TEST" class="svelte-1ub66rd">',ee=p(),ne=c("pre"),te=u(e.request),ie=p(),re=c("div"),n.className=a="name "+(e.vis?"opened":"closed")+" svelte-1ub66rd",n.href=!0,m.className="description svelte-1ub66rd",T.className="header svelte-1ub66rd",O.className="header svelte-1ub66rd",H.id=U=e.parentid+"-"+e.node.name+"-query",H.name="query",H.className="query svelte-1ub66rd",H.value=e.request,Q.className="header svelte-1ub66rd",G.id=Y=e.parentid+"-"+e.node.name+"-variables",G.name="variables",G.className="variables svelte-1ub66rd",Z.className="buttons svelte-1ub66rd",N.className="form-area svelte-1ub66rd",ne.className="request  svelte-1ub66rd",re.className="response  svelte-1ub66rd",_.className="root svelte-1ub66rd",y(_,"display",e.vis?"grid":"none"),oe=[f(n,"click",h(e.click_handler)),f(H,"change",e.change_handler),f(G,"input",e.textarea1_input_handler),f(G,"change",e.change_handler_1),f(C,"submit",e.submitForm)]},m(i,a){l(i,n,a),o(n,t),o(n,r),l(i,s,a),l(i,m,a),o(m,g),l(i,$,a),l(i,b,a),l(i,_,a),o(_,N),ce&&ce.m(N,null),o(N,k),o(N,x),o(x,T),o(T,w),o(T,q),o(x,L),B(me,x,null),o(N,E),o(N,C),o(C,F),o(F,O),o(F,V),o(F,H),o(C,D),o(C,J),o(J,Q),o(J,P),o(J,G),G.value=e.variables,o(C,K),o(C,W),o(C,X),o(C,Z),j(()=>e.form_1_binding(C,null)),j(()=>e.div9_binding(N,null)),o(_,ee),o(_,ne),o(ne,te),j(()=>e.pre_binding(ne,null)),o(_,ie),o(_,re),j(()=>e.div10_binding(re,null)),j(()=>e.div11_binding(_,null)),ae=!0},p(e,i){ae&&!e.node||le===(le=i.node.name)||v(t,le),ae&&!e.vis||a===(a="name "+(i.vis?"opened":"closed")+" svelte-1ub66rd")||(n.className=a),ae&&!e.node||de===(de=i.node.description)||v(g,de),i.node.args?ce?(ce.p(e,i),ce.i(1)):((ce=ge(i)).c(),ce.i(1),ce.m(N,k)):ce&&(I(),z(()=>{ce.d(1),ce=null}),ce.o(1),R()),ae&&!e.node||se===(se="LIST"==i.node.type.kind?"[...]":"")||v(q,se);var r={};e.node&&(r.typeName=i.node.graphqlType=i.node.type.name||i.node.type.ofType.name),e.scheme&&(r.scheme=i.scheme),(e.parentid||e.node)&&(r.parentid=i.parentid+"-"+i.node.name),!S&&e.fieldlist&&(r.fieldList=i.fieldlist),me.$set(r),ae&&!e.parentid&&!e.node||U===(U=i.parentid+"-"+i.node.name+"-query")||(H.id=U),ae&&!e.request||(H.value=i.request),e.variables&&(G.value=i.variables),ae&&!e.parentid&&!e.node||Y===(Y=i.parentid+"-"+i.node.name+"-variables")||(G.id=Y),e.items&&(i.form_1_binding(null,C),i.form_1_binding(C,null)),e.items&&(i.div9_binding(null,N),i.div9_binding(N,null)),ae&&!e.request||v(te,i.request),e.items&&(i.pre_binding(null,ne),i.pre_binding(ne,null)),e.items&&(i.div10_binding(null,re),i.div10_binding(re,null)),e.items&&(i.div11_binding(null,_),i.div11_binding(_,null)),ae&&!e.vis||y(_,"display",i.vis?"grid":"none")},i(e){ae||(ce&&ce.i(),me.$$.fragment.i(e),ae=!0)},o(e){ce&&ce.o(),me.$$.fragment.o(e),ae=!1},d(t){t&&(d(n),d(s),d(m),d($),d(b),d(_)),ce&&ce.d(),me.$destroy(),e.form_1_binding(null,C),e.div9_binding(null,N),e.pre_binding(null,ne),e.div10_binding(null,re),e.div11_binding(null,_),i(oe)}}}function $e(e,n,t){let{url:i,parentid:r="",scheme:a={},node:o={},operation:l=""}=n,d=!1,s="",c="",u="",p="";const m=N();function f(){t("arglist",c=function(){let e=o.args.filter(e=>e.checked&&null!=e.value).map(e=>{let n="String"==e.graphqlType?`"${e.value.replace(/"/g,'\\"')}"`:e.value;return`  ${e.name}:${n}`});return 0==e.length?"":`(\n${e.join(",\n")}\n)`}())}let h,g,v,y,$;return _(async()=>{f(),window.$(v).resizable({handles:"e"})}),e.$set=(e=>{"url"in e&&t("url",i=e.url),"parentid"in e&&t("parentid",r=e.parentid),"scheme"in e&&t("scheme",a=e.scheme),"node"in e&&t("node",o=e.node),"operation"in e&&t("operation",l=e.operation)}),e.$$.update=((e={operation:1,node:1,arglist:1,fieldlist:1})=>{(e.operation||e.node||e.arglist||e.fieldlist)&&(t("request",u=`${l} {\n${o.name}${c}\n${s}\n}`),m("change",{text:"State changed!"}))}),{url:i,parentid:r,scheme:a,node:o,operation:l,vis:d,fieldlist:s,request:u,variables:p,getArgsList:f,submitForm:function(e){return e.preventDefault(),console.log("submitForm"),window.$(h).ajaxSubmit({url:i,type:"POST",success:function(e){window.$($).jsonViewer(e,{collapsed:!0,rootCollapsable:!1})}}),!1},form:h,rootArea:g,formArea:v,requestArea:y,responseArea:$,change_handler:function(n){k(e,n)},change_handler_1:function(n){k(e,n)},click_handler:function(e){const n=d=!d;return t("vis",d),n},type_fieldList_binding:function(e){t("fieldlist",s=e)},textarea1_input_handler:function(){p=this.value,t("variables",p)},form_1_binding:function(e,n){t("form",h=e)},div9_binding:function(e,n){t("formArea",v=e)},pre_binding:function(e,n){t("requestArea",y=e)},div10_binding:function(e,n){t("responseArea",$=e)},div11_binding:function(e,n){t("rootArea",g=e)}}}class be extends D{constructor(e){super(),U(this,e,$e,ye,a,["url","parentid","scheme","node","operation"])}}function _e(e,n,t){const i=Object.create(e);return i.e=n[t],i}function Ne(e,n,t){const i=Object.create(e);return i.e=n[t],i}function ke(e){var n,t,i=new be({props:{url:e.url,node:e.e,operation:"query",scheme:e.scheme,parentid:"query"}});return i.$on("change",e.change_handler),{c(){n=c("div"),i.$$.fragment.c()},m(e,r){l(e,n,r),B(i,n,null),t=!0},p(e,n){var t={};e.url&&(t.url=n.url),e.queries&&(t.node=n.e),e.scheme&&(t.scheme=n.scheme),i.$set(t)},i(e){t||(i.$$.fragment.i(e),t=!0)},o(e){i.$$.fragment.o(e),t=!1},d(e){e&&d(n),i.$destroy()}}}function xe(e){var n,t,i,r=new be({props:{url:e.url,node:e.e,operation:"mutation",scheme:e.scheme,parentid:"mutation"}});return r.$on("change",e.change_handler_1),{c(){n=c("div"),r.$$.fragment.c(),t=p()},m(e,a){l(e,n,a),B(r,n,null),o(n,t),i=!0},p(e,n){var t={};e.url&&(t.url=n.url),e.mutations&&(t.node=n.e),e.scheme&&(t.scheme=n.scheme),r.$set(t)},i(e){i||(r.$$.fragment.i(e),i=!0)},o(e){r.$$.fragment.o(e),i=!1},d(e){e&&d(n),r.$destroy()}}}function Te(e){for(var n,t,i,r,a,u,m,f=e.queries,h=[],g=0;g<f.length;g+=1)h[g]=ke(Ne(e,f,g));function v(e,n,t){h[e]&&(n&&z(()=>{h[e].d(n),h[e]=null}),h[e].o(t))}var y=e.mutations,$=[];for(g=0;g<y.length;g+=1)$[g]=xe(_e(e,y,g));function b(e,n,t){$[e]&&(n&&z(()=>{$[e].d(n),$[e]=null}),$[e].o(t))}return{c(){n=c("div"),(t=c("h4")).textContent="Queries",i=p();for(var e=0;e<h.length;e+=1)h[e].c();r=p(),(a=c("h4")).textContent="Mutations",u=p();for(e=0;e<$.length;e+=1)$[e].c()},m(e,d){l(e,n,d),o(n,t),o(n,i);for(var s=0;s<h.length;s+=1)h[s].m(n,null);o(n,r),o(n,a),o(n,u);for(s=0;s<$.length;s+=1)$[s].m(n,null);m=!0},p(e,t){if(e.url||e.queries||e.scheme){f=t.queries;for(var i=0;i<f.length;i+=1){const a=Ne(t,f,i);h[i]?(h[i].p(e,a),h[i].i(1)):(h[i]=ke(a),h[i].c(),h[i].i(1),h[i].m(n,r))}for(I();i<h.length;i+=1)v(i,1,1);R()}if(e.url||e.mutations||e.scheme){y=t.mutations;for(i=0;i<y.length;i+=1){const r=_e(t,y,i);$[i]?($[i].p(e,r),$[i].i(1)):($[i]=xe(r),$[i].c(),$[i].i(1),$[i].m(n,null))}for(I();i<$.length;i+=1)b(i,1,1);R()}},i(e){if(!m){for(var n=0;n<f.length;n+=1)h[n].i();for(n=0;n<y.length;n+=1)$[n].i();m=!0}},o(e){h=h.filter(Boolean);for(let e=0;e<h.length;e+=1)v(e,0);$=$.filter(Boolean);for(let e=0;e<$.length;e+=1)b(e,0);m=!1},d(e){e&&d(n),s(h,e),s($,e)}}}function we(e,n){return e.name>n.name?1:e.name<n.name?-1:0}function qe(e,n,t){let{scheme:i,url:r}=n,a=[],o=[],l=[],d=[];return e.$set=(e=>{"scheme"in e&&t("scheme",i=e.scheme),"url"in e&&t("url",r=e.url)}),e.$$.update=((e={scheme:1})=>{if(e.scheme)try{t("mutations",a=i.data.__schema.mutationType.fields),t("queries",o=i.data.__schema.queryType.fields),t("types",l=i.data.__schema.types.sort(we)),t("usertypes",d=i.data.__schema.types.filter(e=>"_"!=e.name[0]&&"OBJECT"==e.kind&&"Query"!=e.name&&"Mutation"!=e.name).sort(we))}catch(e){}}),{scheme:i,url:r,mutations:a,queries:o,change_handler:function(n){k(e,n)},change_handler_1:function(n){k(e,n)}}}class Le extends D{constructor(e){super(),U(this,e,qe,Te,a,["scheme","url"])}}function Se(e){var n,t,r,a,s,u,m,h,v,y,$,b;function _(n){e.schemer_url_binding.call(null,n),t=!0,A(()=>t=!1)}function N(n){e.schemer_scheme_binding.call(null,n),r=!0,A(()=>r=!1)}let k={};void 0!==e.url&&(k.url=e.url),void 0!==e.scheme&&(k.scheme=e.scheme);var x=new X({props:k});j(()=>M(x,"url",_)),j(()=>M(x,"scheme",N)),x.$on("change",e.changeHandler);var T=new Le({props:{url:e.url,scheme:e.scheme}});return T.$on("change",e.changeHandler),{c(){n=c("div"),x.$$.fragment.c(),a=p(),s=c("div"),u=c("input"),m=p(),h=c("input"),v=p(),y=c("div"),T.$$.fragment.c(),g(u,"type","button"),u.value="save",u.className="svelte-o5nj5n",g(h,"type","button"),h.value="restore",h.className="svelte-o5nj5n",y.className="main svelte-o5nj5n",n.className="root svelte-o5nj5n",b=[f(u,"click",e.saveFields),f(h,"click",e.restoreFields)]},m(e,t){l(e,n,t),B(x,n,null),o(n,a),o(n,s),o(s,u),o(s,m),o(s,h),o(n,v),o(n,y),B(T,y,null),$=!0},p(e,n){var i={};!t&&e.url&&(i.url=n.url),!r&&e.scheme&&(i.scheme=n.scheme),x.$set(i);var a={};e.url&&(a.url=n.url),e.scheme&&(a.scheme=n.scheme),T.$set(a)},i(e){$||(x.$$.fragment.i(e),T.$$.fragment.i(e),$=!0)},o(e){x.$$.fragment.o(e),T.$$.fragment.o(e),$=!1},d(e){e&&d(n),x.$destroy(),T.$destroy(),i(b)}}}function je(e,n,t){let i,r={},a=[],o=!0;function l(e=!1){for(let i of a){let r=document.getElementById(i.id);r&&("checkbox"==i.type?r.checked=i.checked:r.value=i.value,e&&(n=r,t=void 0,t=new Event("change",{view:window,bubbles:!0,cancelable:!0,target:n}),n.dispatchEvent(t)))}var n,t}return _(async()=>{}),{url:i,scheme:r,saveFields:function(){t("controls",a=function(){let e=[],n=document.getElementsByTagName("input");for(let t of n){let n=t.getAttribute("id");if(!n)continue;let i=t.getAttribute("type"),r=t.value,a=t.checked;e.push({id:n,type:i,checked:a,value:r})}n=document.getElementsByTagName("textarea");for(let t of n){let n=t.getAttribute("id");if(!n)continue;let i="textarea",r=t.value,a=!1;e.push({id:n,type:i,checked:a,value:r})}return e}());let e=`${window.location.href}|${i}`,n=JSON.stringify(a);localStorage.setItem(e,JSON.stringify(a)),console.log("saved: ",e,n.length)},restoreFields:function(){let e=`${window.location.href}|${i}`,n=localStorage.getItem(e);t("controls",a=JSON.parse(n)),t("ignoreChanges",o=!0),l(!0),setTimeout(()=>{t("ignoreChanges",o=!0),l(!1),console.log("restored",e,n.length),t("ignoreChanges",o=!1)},100)},changeHandler:function(){},schemer_url_binding:function(e){t("url",i=e)},schemer_scheme_binding:function(e){t("scheme",r=e)}}}return new class extends D{constructor(e){super(),U(this,e,je,Se,a,[])}}({target:document.body})}();
+
+(function(l, i, v, e) { v = l.createElement(i); v.async = 1; v.src = '//' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; e = l.getElementsByTagName(i)[0]; e.parentNode.insertBefore(v, e)})(document, 'script');
+var app = (function () {
+	'use strict';
+
+	function noop() {}
+
+	function add_location(element, file, line, column, char) {
+		element.__svelte_meta = {
+			loc: { file, line, column, char }
+		};
+	}
+
+	function run(fn) {
+		return fn();
+	}
+
+	function blank_object() {
+		return Object.create(null);
+	}
+
+	function run_all(fns) {
+		fns.forEach(run);
+	}
+
+	function is_function(thing) {
+		return typeof thing === 'function';
+	}
+
+	function safe_not_equal(a, b) {
+		return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+	}
+
+	function append(target, node) {
+		target.appendChild(node);
+	}
+
+	function insert(target, node, anchor) {
+		target.insertBefore(node, anchor || null);
+	}
+
+	function detach(node) {
+		node.parentNode.removeChild(node);
+	}
+
+	function destroy_each(iterations, detaching) {
+		for (let i = 0; i < iterations.length; i += 1) {
+			if (iterations[i]) iterations[i].d(detaching);
+		}
+	}
+
+	function element(name) {
+		return document.createElement(name);
+	}
+
+	function text(data) {
+		return document.createTextNode(data);
+	}
+
+	function space() {
+		return text(' ');
+	}
+
+	function empty() {
+		return text('');
+	}
+
+	function listen(node, event, handler, options) {
+		node.addEventListener(event, handler, options);
+		return () => node.removeEventListener(event, handler, options);
+	}
+
+	function prevent_default(fn) {
+		return function(event) {
+			event.preventDefault();
+			return fn.call(this, event);
+		};
+	}
+
+	function attr(node, attribute, value) {
+		if (value == null) node.removeAttribute(attribute);
+		else node.setAttribute(attribute, value);
+	}
+
+	function children(element) {
+		return Array.from(element.childNodes);
+	}
+
+	function set_data(text, data) {
+		data = '' + data;
+		if (text.data !== data) text.data = data;
+	}
+
+	function set_style(node, key, value) {
+		node.style.setProperty(key, value);
+	}
+
+	function custom_event(type, detail) {
+		const e = document.createEvent('CustomEvent');
+		e.initCustomEvent(type, false, false, detail);
+		return e;
+	}
+
+	let current_component;
+
+	function set_current_component(component) {
+		current_component = component;
+	}
+
+	function get_current_component() {
+		if (!current_component) throw new Error(`Function called outside component initialization`);
+		return current_component;
+	}
+
+	function onMount(fn) {
+		get_current_component().$$.on_mount.push(fn);
+	}
+
+	function createEventDispatcher() {
+		const component = current_component;
+
+		return (type, detail) => {
+			const callbacks = component.$$.callbacks[type];
+
+			if (callbacks) {
+				// TODO are there situations where events could be dispatched
+				// in a server (non-DOM) environment?
+				const event = custom_event(type, detail);
+				callbacks.slice().forEach(fn => {
+					fn.call(component, event);
+				});
+			}
+		};
+	}
+
+	// TODO figure out if we still want to support
+	// shorthand events, or if we want to implement
+	// a real bubbling mechanism
+	function bubble(component, event) {
+		const callbacks = component.$$.callbacks[event.type];
+
+		if (callbacks) {
+			callbacks.slice().forEach(fn => fn(event));
+		}
+	}
+
+	const dirty_components = [];
+
+	const resolved_promise = Promise.resolve();
+	let update_scheduled = false;
+	const binding_callbacks = [];
+	const render_callbacks = [];
+	const flush_callbacks = [];
+
+	function schedule_update() {
+		if (!update_scheduled) {
+			update_scheduled = true;
+			resolved_promise.then(flush);
+		}
+	}
+
+	function add_binding_callback(fn) {
+		binding_callbacks.push(fn);
+	}
+
+	function add_render_callback(fn) {
+		render_callbacks.push(fn);
+	}
+
+	function add_flush_callback(fn) {
+		flush_callbacks.push(fn);
+	}
+
+	function flush() {
+		const seen_callbacks = new Set();
+
+		do {
+			// first, call beforeUpdate functions
+			// and update components
+			while (dirty_components.length) {
+				const component = dirty_components.shift();
+				set_current_component(component);
+				update(component.$$);
+			}
+
+			while (binding_callbacks.length) binding_callbacks.shift()();
+
+			// then, once components are updated, call
+			// afterUpdate functions. This may cause
+			// subsequent updates...
+			while (render_callbacks.length) {
+				const callback = render_callbacks.pop();
+				if (!seen_callbacks.has(callback)) {
+					callback();
+
+					// ...so guard against infinite loops
+					seen_callbacks.add(callback);
+				}
+			}
+		} while (dirty_components.length);
+
+		while (flush_callbacks.length) {
+			flush_callbacks.pop()();
+		}
+
+		update_scheduled = false;
+	}
+
+	function update($$) {
+		if ($$.fragment) {
+			$$.update($$.dirty);
+			run_all($$.before_render);
+			$$.fragment.p($$.dirty, $$.ctx);
+			$$.dirty = null;
+
+			$$.after_render.forEach(add_render_callback);
+		}
+	}
+
+	let outros;
+
+	function group_outros() {
+		outros = {
+			remaining: 0,
+			callbacks: []
+		};
+	}
+
+	function check_outros() {
+		if (!outros.remaining) {
+			run_all(outros.callbacks);
+		}
+	}
+
+	function on_outro(callback) {
+		outros.callbacks.push(callback);
+	}
+
+	function destroy_block(block, lookup) {
+		block.d(1);
+		lookup.delete(block.key);
+	}
+
+	function outro_and_destroy_block(block, lookup) {
+		on_outro(() => {
+			destroy_block(block, lookup);
+		});
+
+		block.o(1);
+	}
+
+	function update_keyed_each(old_blocks, changed, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
+		let o = old_blocks.length;
+		let n = list.length;
+
+		let i = o;
+		const old_indexes = {};
+		while (i--) old_indexes[old_blocks[i].key] = i;
+
+		const new_blocks = [];
+		const new_lookup = new Map();
+		const deltas = new Map();
+
+		i = n;
+		while (i--) {
+			const child_ctx = get_context(ctx, list, i);
+			const key = get_key(child_ctx);
+			let block = lookup.get(key);
+
+			if (!block) {
+				block = create_each_block(key, child_ctx);
+				block.c();
+			} else if (dynamic) {
+				block.p(changed, child_ctx);
+			}
+
+			new_lookup.set(key, new_blocks[i] = block);
+
+			if (key in old_indexes) deltas.set(key, Math.abs(i - old_indexes[key]));
+		}
+
+		const will_move = new Set();
+		const did_move = new Set();
+
+		function insert(block) {
+			if (block.i) block.i(1);
+			block.m(node, next);
+			lookup.set(block.key, block);
+			next = block.first;
+			n--;
+		}
+
+		while (o && n) {
+			const new_block = new_blocks[n - 1];
+			const old_block = old_blocks[o - 1];
+			const new_key = new_block.key;
+			const old_key = old_block.key;
+
+			if (new_block === old_block) {
+				// do nothing
+				next = new_block.first;
+				o--;
+				n--;
+			}
+
+			else if (!new_lookup.has(old_key)) {
+				// remove old block
+				destroy(old_block, lookup);
+				o--;
+			}
+
+			else if (!lookup.has(new_key) || will_move.has(new_key)) {
+				insert(new_block);
+			}
+
+			else if (did_move.has(old_key)) {
+				o--;
+
+			} else if (deltas.get(new_key) > deltas.get(old_key)) {
+				did_move.add(new_key);
+				insert(new_block);
+
+			} else {
+				will_move.add(old_key);
+				o--;
+			}
+		}
+
+		while (o--) {
+			const old_block = old_blocks[o];
+			if (!new_lookup.has(old_block.key)) destroy(old_block, lookup);
+		}
+
+		while (n) insert(new_blocks[n - 1]);
+
+		return new_blocks;
+	}
+
+	function bind(component, name, callback) {
+		if (component.$$.props.indexOf(name) === -1) return;
+		component.$$.bound[name] = callback;
+		callback(component.$$.ctx[name]);
+	}
+
+	function mount_component(component, target, anchor) {
+		const { fragment, on_mount, on_destroy, after_render } = component.$$;
+
+		fragment.m(target, anchor);
+
+		// onMount happens after the initial afterUpdate. Because
+		// afterUpdate callbacks happen in reverse order (inner first)
+		// we schedule onMount callbacks before afterUpdate callbacks
+		add_render_callback(() => {
+			const new_on_destroy = on_mount.map(run).filter(is_function);
+			if (on_destroy) {
+				on_destroy.push(...new_on_destroy);
+			} else {
+				// Edge case - component was destroyed immediately,
+				// most likely as a result of a binding initialising
+				run_all(new_on_destroy);
+			}
+			component.$$.on_mount = [];
+		});
+
+		after_render.forEach(add_render_callback);
+	}
+
+	function destroy(component, detaching) {
+		if (component.$$) {
+			run_all(component.$$.on_destroy);
+			component.$$.fragment.d(detaching);
+
+			// TODO null out other refs, including component.$$ (but need to
+			// preserve final state?)
+			component.$$.on_destroy = component.$$.fragment = null;
+			component.$$.ctx = {};
+		}
+	}
+
+	function make_dirty(component, key) {
+		if (!component.$$.dirty) {
+			dirty_components.push(component);
+			schedule_update();
+			component.$$.dirty = blank_object();
+		}
+		component.$$.dirty[key] = true;
+	}
+
+	function init(component, options, instance, create_fragment, not_equal$$1, prop_names) {
+		const parent_component = current_component;
+		set_current_component(component);
+
+		const props = options.props || {};
+
+		const $$ = component.$$ = {
+			fragment: null,
+			ctx: null,
+
+			// state
+			props: prop_names,
+			update: noop,
+			not_equal: not_equal$$1,
+			bound: blank_object(),
+
+			// lifecycle
+			on_mount: [],
+			on_destroy: [],
+			before_render: [],
+			after_render: [],
+			context: new Map(parent_component ? parent_component.$$.context : []),
+
+			// everything else
+			callbacks: blank_object(),
+			dirty: null
+		};
+
+		let ready = false;
+
+		$$.ctx = instance
+			? instance(component, props, (key, value) => {
+				if ($$.ctx && not_equal$$1($$.ctx[key], $$.ctx[key] = value)) {
+					if ($$.bound[key]) $$.bound[key](value);
+					if (ready) make_dirty(component, key);
+				}
+			})
+			: props;
+
+		$$.update();
+		ready = true;
+		run_all($$.before_render);
+		$$.fragment = create_fragment($$.ctx);
+
+		if (options.target) {
+			if (options.hydrate) {
+				$$.fragment.l(children(options.target));
+			} else {
+				$$.fragment.c();
+			}
+
+			if (options.intro && component.$$.fragment.i) component.$$.fragment.i();
+			mount_component(component, options.target, options.anchor);
+			flush();
+		}
+
+		set_current_component(parent_component);
+	}
+
+	class SvelteComponent {
+		$destroy() {
+			destroy(this, true);
+			this.$destroy = noop;
+		}
+
+		$on(type, callback) {
+			const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+			callbacks.push(callback);
+
+			return () => {
+				const index = callbacks.indexOf(callback);
+				if (index !== -1) callbacks.splice(index, 1);
+			};
+		}
+
+		$set() {
+			// overridden by instance, if it has props
+		}
+	}
+
+	class SvelteComponentDev extends SvelteComponent {
+		constructor(options) {
+			if (!options || (!options.target && !options.$$inline)) {
+				throw new Error(`'target' is a required option`);
+			}
+
+			super();
+		}
+
+		$destroy() {
+			super.$destroy();
+			this.$destroy = () => {
+				console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+			};
+		}
+	}
+
+	const queryString = `
+query IntrospectionQuery {
+    __schema {
+      queryType {
+        ...FullType
+      }
+      mutationType {
+        ...FullType
+      }
+      subscriptionType {
+        name
+      }
+      types {
+        ...FullType
+      }
+      directives {
+        name
+        description
+        locations
+        args {
+          ...InputValue
+        }
+      }
+    }
+  }
+  
+  fragment FullType on __Type {
+    kind
+    name
+    description
+    fields(includeDeprecated: true) {
+      name
+      description
+      args {
+        ...InputValue
+      }
+      type {
+        ...TypeRef
+      }
+      isDeprecated
+      deprecationReason
+    }
+    inputFields {
+      ...InputValue
+    }
+    interfaces {
+      ...TypeRef
+    }
+    enumValues(includeDeprecated: true) {
+      name
+      description
+      isDeprecated
+      deprecationReason
+    }
+    possibleTypes {
+      ...TypeRef
+    }
+  }
+  
+  fragment InputValue on __InputValue {
+    name
+    description
+    type {
+      ...TypeRef
+    }
+    defaultValue
+  }
+  
+  fragment TypeRef on __Type {
+    kind
+    name
+    description
+    ofType {
+      kind
+      name
+      description
+      ofType {
+        kind
+        name
+        description
+        ofType {
+          kind
+          name
+          description
+          ofType {
+            kind
+            name
+            description
+            ofType {
+              kind
+              name
+              description
+              ofType {
+                kind
+                name
+                description
+                ofType {
+                  kind
+                  name
+                  description
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+
+`;
+
+	/* src/JsonView.svelte generated by Svelte v3.4.0 */
+
+	const file = "src/JsonView.svelte";
+
+	function create_fragment(ctx) {
+		var div;
+
+		return {
+			c: function create() {
+				div = element("div");
+				div.className = "self svelte-1rj0q3e";
+				add_location(div, file, 23, 0, 262);
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				add_binding_callback(() => ctx.div_binding(div, null));
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.items) {
+					ctx.div_binding(null, div);
+					ctx.div_binding(div, null);
+				}
+			},
+
+			i: noop,
+			o: noop,
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				ctx.div_binding(null, div);
+			}
+		};
+	}
+
+	function instance($$self, $$props, $$invalidate) {
+		let { json } = $$props;
+
+	let elem;
+
+		function div_binding($$node, check) {
+			elem = $$node;
+			$$invalidate('elem', elem);
+		}
+
+		$$self.$set = $$props => {
+			if ('json' in $$props) $$invalidate('json', json = $$props.json);
+		};
+
+		$$self.$$.update = ($$dirty = { elem: 1, json: 1 }) => {
+			if ($$dirty.elem || $$dirty.json) { try {
+	                window.$(elem).jsonViewer(json, { collapsed: true, rootCollapsable: false });
+	            } catch (error) {} }
+		};
+
+		return { json, elem, div_binding };
+	}
+
+	class JsonView extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance, create_fragment, safe_not_equal, ["json"]);
+
+			const { ctx } = this.$$;
+			const props = options.props || {};
+			if (ctx.json === undefined && !('json' in props)) {
+				console.warn("<JsonView> was created without expected prop 'json'");
+			}
+		}
+
+		get json() {
+			throw new Error("<JsonView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set json(value) {
+			throw new Error("<JsonView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/schemer/schemer.svelte generated by Svelte v3.4.0 */
+
+	const file$1 = "src/schemer/schemer.svelte";
+
+	// (47:2) {#if visible}
+	function create_if_block(ctx) {
+		var current;
+
+		var jsonview = new JsonView({
+			props: { json: ctx.scheme },
+			$$inline: true
+		});
+
+		return {
+			c: function create() {
+				jsonview.$$.fragment.c();
+			},
+
+			m: function mount(target, anchor) {
+				mount_component(jsonview, target, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var jsonview_changes = {};
+				if (changed.scheme) jsonview_changes.json = ctx.scheme;
+				jsonview.$set(jsonview_changes);
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				jsonview.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				jsonview.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				jsonview.$destroy(detaching);
+			}
+		};
+	}
+
+	function create_fragment$1(ctx) {
+		var div, form, label, t1, input0, t2, input1, t3, a, t4_value = ctx.visible?'Hide':'Show', t4, t5, t6, current, dispose;
+
+		var if_block = (ctx.visible) && create_if_block(ctx);
+
+		return {
+			c: function create() {
+				div = element("div");
+				form = element("form");
+				label = element("label");
+				label.textContent = "GraphQL url";
+				t1 = space();
+				input0 = element("input");
+				t2 = space();
+				input1 = element("input");
+				t3 = space();
+				a = element("a");
+				t4 = text(t4_value);
+				t5 = text(" scheme");
+				t6 = space();
+				if (if_block) if_block.c();
+				label.htmlFor = "inp0";
+				add_location(label, file$1, 41, 4, 786);
+				input0.className = "text svelte-1pdhvrm";
+				attr(input0, "type", "text");
+				input0.id = "inp0";
+				input0.name = "inp0";
+				add_location(input0, file$1, 42, 4, 828);
+				attr(input1, "type", "button");
+				input1.value = "refresh";
+				input1.className = "svelte-1pdhvrm";
+				add_location(input1, file$1, 43, 4, 915);
+				a.href = true;
+				add_location(a, file$1, 44, 4, 980);
+				add_location(form, file$1, 40, 2, 775);
+				div.className = "self svelte-1pdhvrm";
+				add_location(div, file$1, 39, 0, 754);
+
+				dispose = [
+					listen(input0, "input", ctx.input0_input_handler),
+					listen(input0, "change", ctx.change_handler),
+					listen(input1, "click", ctx.getSchema),
+					listen(a, "click", prevent_default(ctx.click_handler))
+				];
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, form);
+				append(form, label);
+				append(form, t1);
+				append(form, input0);
+
+				input0.value = ctx.url;
+
+				append(form, t2);
+				append(form, input1);
+				append(form, t3);
+				append(form, a);
+				append(a, t4);
+				append(a, t5);
+				append(div, t6);
+				if (if_block) if_block.m(div, null);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.url && (input0.value !== ctx.url)) input0.value = ctx.url;
+
+				if ((!current || changed.visible) && t4_value !== (t4_value = ctx.visible?'Hide':'Show')) {
+					set_data(t4, t4_value);
+				}
+
+				if (ctx.visible) {
+					if (if_block) {
+						if_block.p(changed, ctx);
+						if_block.i(1);
+					} else {
+						if_block = create_if_block(ctx);
+						if_block.c();
+						if_block.i(1);
+						if_block.m(div, null);
+					}
+				} else if (if_block) {
+					group_outros();
+					on_outro(() => {
+						if_block.d(1);
+						if_block = null;
+					});
+
+					if_block.o(1);
+					check_outros();
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				if (if_block) if_block.i();
+				current = true;
+			},
+
+			o: function outro(local) {
+				if (if_block) if_block.o();
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				if (if_block) if_block.d();
+				run_all(dispose);
+			}
+		};
+	}
+
+	function instance$1($$self, $$props, $$invalidate) {
+		
+
+	let { url = "http://localhost:7700/graphql", scheme = {} } = $$props;
+	let visible = false;
+
+
+	async function getSchema() {
+	// scheme =  await $.ajax({ url: url, type: "POST", data: { query:queryString, variables: '{}'},});
+	let resp = await fetch(url, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) });
+	$$invalidate('scheme', scheme = await resp.json());
+	}
+
+
+	onMount(async () => {
+	    getSchema();
+	});
+
+		function change_handler(event) {
+			bubble($$self, event);
+		}
+
+		function input0_input_handler() {
+			url = this.value;
+			$$invalidate('url', url);
+		}
+
+		function click_handler(e) {visible = ! visible; $$invalidate('visible', visible);}
+
+		$$self.$set = $$props => {
+			if ('url' in $$props) $$invalidate('url', url = $$props.url);
+			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
+		};
+
+		return {
+			url,
+			scheme,
+			visible,
+			getSchema,
+			change_handler,
+			input0_input_handler,
+			click_handler
+		};
+	}
+
+	class Schemer extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$1, create_fragment$1, safe_not_equal, ["url", "scheme"]);
+		}
+
+		get url() {
+			throw new Error("<Schemer>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set url(value) {
+			throw new Error("<Schemer>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get scheme() {
+			throw new Error("<Schemer>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set scheme(value) {
+			throw new Error("<Schemer>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/Argument.svelte generated by Svelte v3.4.0 */
+
+	const file$2 = "src/Argument.svelte";
+
+	function create_fragment$2(ctx) {
+		var div, input0, input0_id_value, input0_disabled_value, t0, span0, t1_value = ctx.node.name, t1, span0_class_value, t2, input1, input1_id_value, input1_name_value, input1_disabled_value, input1_placeholder_value, t3, span2, t4_value = ctx.node.graphqlType, t4, t5, span1, t6_value = ctx.node.type.kind=='NON_NULL'?' !':'', t6, span2_class_value, t7, br, span3, t8_value = ctx.node.description, t8, span3_class_value, dispose;
+
+		return {
+			c: function create() {
+				div = element("div");
+				input0 = element("input");
+				t0 = space();
+				span0 = element("span");
+				t1 = text(t1_value);
+				t2 = space();
+				input1 = element("input");
+				t3 = space();
+				span2 = element("span");
+				t4 = text(t4_value);
+				t5 = space();
+				span1 = element("span");
+				t6 = text(t6_value);
+				t7 = space();
+				br = element("br");
+				span3 = element("span");
+				t8 = text(t8_value);
+				input0.id = input0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-checkbox";
+				attr(input0, "type", "checkbox");
+				input0.disabled = input0_disabled_value = ctx.node.type.kind=='NON_NULL';
+				input0.className = "svelte-19wistz";
+				add_location(input0, file$2, 83, 4, 1566);
+				span0.className = span0_class_value = "argname " + (ctx.node.checked?'':'disabled') + " svelte-19wistz";
+				add_location(span0, file$2, 84, 4, 1709);
+				input1.id = input1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-input";
+				input1.className = "input svelte-19wistz";
+				input1.name = input1_name_value = ctx.node.name;
+				input1.disabled = input1_disabled_value = !ctx.node.checked;
+				input1.placeholder = input1_placeholder_value = ctx.node.value==''?'':null;
+				add_location(input1, file$2, 85, 4, 1783);
+				span1.className = "exclamation svelte-19wistz";
+				add_location(span1, file$2, 87, 4, 2050);
+				span2.className = span2_class_value = "oftype " + (ctx.node.checked?'':'disabled') + " svelte-19wistz";
+				add_location(span2, file$2, 86, 4, 1977);
+				add_location(br, file$2, 90, 4, 2142);
+				span3.className = span3_class_value = "description " + (ctx.node.checked?'':'disabled') + " svelte-19wistz";
+				add_location(span3, file$2, 90, 8, 2146);
+				div.className = "field svelte-19wistz";
+				add_location(div, file$2, 82, 0, 1539);
+
+				dispose = [
+					listen(input0, "change", ctx.input0_change_handler),
+					listen(input0, "change", ctx.change_handler),
+					listen(input1, "input", ctx.input1_input_handler),
+					listen(input1, "change", ctx.change_handler_1)
+				];
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, input0);
+
+				input0.checked = ctx.node.checked;
+
+				append(div, t0);
+				append(div, span0);
+				append(span0, t1);
+				append(div, t2);
+				append(div, input1);
+
+				input1.value = ctx.node.value;
+
+				add_binding_callback(() => ctx.input1_binding(input1, null));
+				append(div, t3);
+				append(div, span2);
+				append(span2, t4);
+				append(span2, t5);
+				append(span2, span1);
+				append(span1, t6);
+				append(div, t7);
+				append(div, br);
+				append(div, span3);
+				append(span3, t8);
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.node) input0.checked = ctx.node.checked;
+
+				if ((changed.parentid || changed.node) && input0_id_value !== (input0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-checkbox")) {
+					input0.id = input0_id_value;
+				}
+
+				if ((changed.node) && input0_disabled_value !== (input0_disabled_value = ctx.node.type.kind=='NON_NULL')) {
+					input0.disabled = input0_disabled_value;
+				}
+
+				if ((changed.node) && t1_value !== (t1_value = ctx.node.name)) {
+					set_data(t1, t1_value);
+				}
+
+				if ((changed.node) && span0_class_value !== (span0_class_value = "argname " + (ctx.node.checked?'':'disabled') + " svelte-19wistz")) {
+					span0.className = span0_class_value;
+				}
+
+				if (changed.node && (input1.value !== ctx.node.value)) input1.value = ctx.node.value;
+				if (changed.items) {
+					ctx.input1_binding(null, input1);
+					ctx.input1_binding(input1, null);
+				}
+
+				if ((changed.parentid || changed.node) && input1_id_value !== (input1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-input")) {
+					input1.id = input1_id_value;
+				}
+
+				if ((changed.node) && input1_name_value !== (input1_name_value = ctx.node.name)) {
+					input1.name = input1_name_value;
+				}
+
+				if ((changed.node) && input1_disabled_value !== (input1_disabled_value = !ctx.node.checked)) {
+					input1.disabled = input1_disabled_value;
+				}
+
+				if ((changed.node) && input1_placeholder_value !== (input1_placeholder_value = ctx.node.value==''?'':null)) {
+					input1.placeholder = input1_placeholder_value;
+				}
+
+				if ((changed.node) && t4_value !== (t4_value = ctx.node.graphqlType)) {
+					set_data(t4, t4_value);
+				}
+
+				if ((changed.node) && t6_value !== (t6_value = ctx.node.type.kind=='NON_NULL'?' !':'')) {
+					set_data(t6, t6_value);
+				}
+
+				if ((changed.node) && span2_class_value !== (span2_class_value = "oftype " + (ctx.node.checked?'':'disabled') + " svelte-19wistz")) {
+					span2.className = span2_class_value;
+				}
+
+				if ((changed.node) && t8_value !== (t8_value = ctx.node.description)) {
+					set_data(t8, t8_value);
+				}
+
+				if ((changed.node) && span3_class_value !== (span3_class_value = "description " + (ctx.node.checked?'':'disabled') + " svelte-19wistz")) {
+					span3.className = span3_class_value;
+				}
+			},
+
+			i: noop,
+			o: noop,
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				ctx.input1_binding(null, input1);
+				run_all(dispose);
+			}
+		};
+	}
+
+	function instance$2($$self, $$props, $$invalidate) {
+		// P R O P S
+	let { parentid = '', node = {} } = $$props;
+	// export let checked = true
+	// export let name = node.name 
+	// export let value = node.defaultValue
+	// export let graphqlType = node.type.name || node.type.ofType.name
+
+	if (node.checked === undefined)     { node.checked = true; $$invalidate('node', node); }
+	if (node.graphqlType === undefined) { node.graphqlType = node.type.name || node.type.ofType.name; $$invalidate('node', node); }
+	if (node.value === undefined)       { node.value = node.defaultValue ||  (node.graphqlType=='Int'?0:'some text'); $$invalidate('node', node); }
+
+
+
+
+	let input;
+	let inputType = node.graphqlType=='Int'?'number':'text';
+
+
+	onMount(async () => {
+	    input.setAttribute('type', inputType);
+	});
+
+		function change_handler(event) {
+			bubble($$self, event);
+		}
+
+		function change_handler_1(event) {
+			bubble($$self, event);
+		}
+
+		function input0_change_handler() {
+			node.checked = this.checked;
+			$$invalidate('node', node);
+		}
+
+		function input1_input_handler() {
+			node.value = this.value;
+			$$invalidate('node', node);
+		}
+
+		function input1_binding($$node, check) {
+			input = $$node;
+			$$invalidate('input', input);
+		}
+
+		$$self.$set = $$props => {
+			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
+			if ('node' in $$props) $$invalidate('node', node = $$props.node);
+		};
+
+		return {
+			parentid,
+			node,
+			input,
+			change_handler,
+			change_handler_1,
+			input0_change_handler,
+			input1_input_handler,
+			input1_binding
+		};
+	}
+
+	class Argument extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$2, create_fragment$2, safe_not_equal, ["parentid", "node"]);
+		}
+
+		get parentid() {
+			throw new Error("<Argument>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set parentid(value) {
+			throw new Error("<Argument>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get node() {
+			throw new Error("<Argument>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set node(value) {
+			throw new Error("<Argument>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/TypeField.svelte generated by Svelte v3.4.0 */
+
+	const file$3 = "src/TypeField.svelte";
+
+	function create_fragment$3(ctx) {
+		var div, input, input_id_value, t0, span0, t1, t2, t3, br, span1, t4_value = ctx.node.description, t4, current, dispose;
+
+		var type = new Type({
+			props: {
+			scheme: ctx.scheme,
+			typeName: ctx.typeName,
+			tree: ctx.tree[ctx.fieldName],
+			parentid: "" + ctx.parentid + "-" + ctx.fieldName + "-type"
+		},
+			$$inline: true
+		});
+		type.$on("change", ctx.change_handler_1);
+
+		return {
+			c: function create() {
+				div = element("div");
+				input = element("input");
+				t0 = space();
+				span0 = element("span");
+				t1 = text(ctx.fieldName);
+				t2 = space();
+				type.$$.fragment.c();
+				t3 = space();
+				br = element("br");
+				span1 = element("span");
+				t4 = text(t4_value);
+				attr(input, "type", "checkbox");
+				input.id = input_id_value = "" + ctx.parentid + "-" + ctx.fieldName;
+				input.className = "svelte-x6f70e";
+				add_location(input, file$3, 63, 4, 1118);
+				span0.className = "field-name svelte-x6f70e";
+				add_location(span0, file$3, 64, 4, 1208);
+				br.className = "svelte-x6f70e";
+				add_location(br, file$3, 66, 4, 1377);
+				span1.className = "field-description svelte-x6f70e";
+				add_location(span1, file$3, 66, 8, 1381);
+				div.className = "field svelte-x6f70e";
+				add_location(div, file$3, 62, 0, 1075);
+
+				dispose = [
+					listen(input, "change", ctx.input_change_handler),
+					listen(input, "change", ctx.change_handler)
+				];
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, input);
+
+				input.checked = ctx.checked;
+
+				append(div, t0);
+				append(div, span0);
+				append(span0, t1);
+				append(div, t2);
+				mount_component(type, div, null);
+				append(div, t3);
+				append(div, br);
+				append(div, span1);
+				append(span1, t4);
+				add_binding_callback(() => ctx.div_binding(div, null));
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.checked) input.checked = ctx.checked;
+
+				if ((!current || changed.parentid) && input_id_value !== (input_id_value = "" + ctx.parentid + "-" + ctx.fieldName)) {
+					input.id = input_id_value;
+				}
+
+				var type_changes = {};
+				if (changed.scheme) type_changes.scheme = ctx.scheme;
+				if (changed.typeName) type_changes.typeName = ctx.typeName;
+				if (changed.tree || changed.fieldName) type_changes.tree = ctx.tree[ctx.fieldName];
+				if (changed.parentid || changed.fieldName) type_changes.parentid = "" + ctx.parentid + "-" + ctx.fieldName + "-type";
+				type.$set(type_changes);
+
+				if ((!current || changed.node) && t4_value !== (t4_value = ctx.node.description)) {
+					set_data(t4, t4_value);
+				}
+
+				if (changed.items) {
+					ctx.div_binding(null, div);
+					ctx.div_binding(div, null);
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				type.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				type.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				type.$destroy();
+
+				ctx.div_binding(null, div);
+				run_all(dispose);
+			}
+		};
+	}
+
+	function instance$3($$self, $$props, $$invalidate) {
+		let { parentid = '', scheme, node, tree = {} } = $$props;
+
+	// const dispatch = createEventDispatcher()
+	// function dispatchEvent(e) {
+	// 	dispatch('statechange', { text: 'State changed!', target: e.target })
+	// }
+
+
+
+	let root;
+	let checked = true;
+	let fieldName = node.name;
+	let typeName = node.type.kind == "LIST" ? node.type.ofType.name : node.type.name;
+	let treeNode;
+
+		function change_handler(event) {
+			bubble($$self, event);
+		}
+
+		function change_handler_1(event) {
+			bubble($$self, event);
+		}
+
+		function input_change_handler() {
+			checked = this.checked;
+			$$invalidate('checked', checked);
+		}
+
+		function div_binding($$node, check) {
+			root = $$node;
+			$$invalidate('root', root);
+		}
+
+		$$self.$set = $$props => {
+			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
+			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
+			if ('node' in $$props) $$invalidate('node', node = $$props.node);
+			if ('tree' in $$props) $$invalidate('tree', tree = $$props.tree);
+		};
+
+		$$self.$$.update = ($$dirty = { node: 1, tree: 1, fieldName: 1, checked: 1, typeName: 1 }) => {
+			if ($$dirty.node || $$dirty.tree || $$dirty.fieldName || $$dirty.checked || $$dirty.typeName) { {
+	            if (node) {
+	                if (!tree[fieldName]) { tree[fieldName]={}; $$invalidate('tree', tree), $$invalidate('node', node), $$invalidate('fieldName', fieldName), $$invalidate('checked', checked), $$invalidate('typeName', typeName); }
+	                tree[fieldName].checked = checked; $$invalidate('tree', tree), $$invalidate('node', node), $$invalidate('fieldName', fieldName), $$invalidate('checked', checked), $$invalidate('typeName', typeName);
+	                tree[fieldName].typeName = typeName; $$invalidate('tree', tree), $$invalidate('node', node), $$invalidate('fieldName', fieldName), $$invalidate('checked', checked), $$invalidate('typeName', typeName);
+	                $$invalidate('treeNode', treeNode=tree[fieldName]);
+	            }
+	        } }
+		};
+
+		return {
+			parentid,
+			scheme,
+			node,
+			tree,
+			root,
+			checked,
+			fieldName,
+			typeName,
+			change_handler,
+			change_handler_1,
+			input_change_handler,
+			div_binding
+		};
+	}
+
+	class TypeField extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$3, create_fragment$3, safe_not_equal, ["parentid", "scheme", "node", "tree"]);
+
+			const { ctx } = this.$$;
+			const props = options.props || {};
+			if (ctx.scheme === undefined && !('scheme' in props)) {
+				console.warn("<TypeField> was created without expected prop 'scheme'");
+			}
+			if (ctx.node === undefined && !('node' in props)) {
+				console.warn("<TypeField> was created without expected prop 'node'");
+			}
+		}
+
+		get parentid() {
+			throw new Error("<TypeField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set parentid(value) {
+			throw new Error("<TypeField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get scheme() {
+			throw new Error("<TypeField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set scheme(value) {
+			throw new Error("<TypeField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get node() {
+			throw new Error("<TypeField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set node(value) {
+			throw new Error("<TypeField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get tree() {
+			throw new Error("<TypeField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set tree(value) {
+			throw new Error("<TypeField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/Type.svelte generated by Svelte v3.4.0 */
+
+	const file$4 = "src/Type.svelte";
+
+	function get_each_context(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.f = list[i];
+		return child_ctx;
+	}
+
+	// (137:0) {#if node}
+	function create_if_block$1(ctx) {
+		var div, current_block_type_index, if_block, current;
+
+		var if_block_creators = [
+			create_if_block_1,
+			create_else_block
+		];
+
+		var if_blocks = [];
+
+		function select_block_type(ctx) {
+			if (ctx.node.kind=="SCALAR") return 0;
+			return 1;
+		}
+
+		current_block_type_index = select_block_type(ctx);
+		if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+
+		return {
+			c: function create() {
+				div = element("div");
+				if_block.c();
+				div.className = "self svelte-1680n0b";
+				add_location(div, file$4, 137, 0, 2673);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				if_blocks[current_block_type_index].m(div, null);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var previous_block_index = current_block_type_index;
+				current_block_type_index = select_block_type(ctx);
+				if (current_block_type_index === previous_block_index) {
+					if_blocks[current_block_type_index].p(changed, ctx);
+				} else {
+					group_outros();
+					on_outro(() => {
+						if_blocks[previous_block_index].d(1);
+						if_blocks[previous_block_index] = null;
+					});
+					if_block.o(1);
+					check_outros();
+
+					if_block = if_blocks[current_block_type_index];
+					if (!if_block) {
+						if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+						if_block.c();
+					}
+					if_block.i(1);
+					if_block.m(div, null);
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				if (if_block) if_block.i();
+				current = true;
+			},
+
+			o: function outro(local) {
+				if (if_block) if_block.o();
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				if_blocks[current_block_type_index].d();
+			}
+		};
+	}
+
+	// (141:4) {:else}
+	function create_else_block(ctx) {
+		var a, t0, a_class_value, t1, div, span, t2_value = ctx.node.description, t2, t3, current, dispose;
+
+		var if_block = (ctx.node.fields) && create_if_block_2(ctx);
+
+		return {
+			c: function create() {
+				a = element("a");
+				t0 = text(ctx.typeName);
+				t1 = space();
+				div = element("div");
+				span = element("span");
+				t2 = text(t2_value);
+				t3 = space();
+				if (if_block) if_block.c();
+				a.className = a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-1680n0b";
+				a.href = true;
+				add_location(a, file$4, 141, 8, 2795);
+				span.className = "description svelte-1680n0b";
+				add_location(span, file$4, 144, 16, 3004);
+				div.className = "frame svelte-1680n0b";
+				set_style(div, "display", (ctx.vis?'block':'none'));
+				add_location(div, file$4, 143, 12, 2931);
+				dispose = listen(a, "click", prevent_default(ctx.click_handler));
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, a, anchor);
+				append(a, t0);
+				insert(target, t1, anchor);
+				insert(target, div, anchor);
+				append(div, span);
+				append(span, t2);
+				append(div, t3);
+				if (if_block) if_block.m(div, null);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (!current || changed.typeName) {
+					set_data(t0, ctx.typeName);
+				}
+
+				if ((!current || changed.vis) && a_class_value !== (a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-1680n0b")) {
+					a.className = a_class_value;
+				}
+
+				if ((!current || changed.node) && t2_value !== (t2_value = ctx.node.description)) {
+					set_data(t2, t2_value);
+				}
+
+				if (ctx.node.fields) {
+					if (if_block) {
+						if_block.p(changed, ctx);
+						if_block.i(1);
+					} else {
+						if_block = create_if_block_2(ctx);
+						if_block.c();
+						if_block.i(1);
+						if_block.m(div, null);
+					}
+				} else if (if_block) {
+					group_outros();
+					on_outro(() => {
+						if_block.d(1);
+						if_block = null;
+					});
+
+					if_block.o(1);
+					check_outros();
+				}
+
+				if (!current || changed.vis) {
+					set_style(div, "display", (ctx.vis?'block':'none'));
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				if (if_block) if_block.i();
+				current = true;
+			},
+
+			o: function outro(local) {
+				if (if_block) if_block.o();
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(a);
+					detach(t1);
+					detach(div);
+				}
+
+				if (if_block) if_block.d();
+				dispose();
+			}
+		};
+	}
+
+	// (139:4) {#if node.kind=="SCALAR"}
+	function create_if_block_1(ctx) {
+		var span, t;
+
+		return {
+			c: function create() {
+				span = element("span");
+				t = text(ctx.typeName);
+				span.className = "scalar-type svelte-1680n0b";
+				add_location(span, file$4, 139, 9, 2731);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, span, anchor);
+				append(span, t);
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.typeName) {
+					set_data(t, ctx.typeName);
+				}
+			},
+
+			i: noop,
+			o: noop,
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(span);
+				}
+			}
+		};
+	}
+
+	// (146:16) {#if node.fields}
+	function create_if_block_2(ctx) {
+		var div, current;
+
+		var each_value = ctx.node.fields;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+		}
+
+		function outro_block(i, detaching, local) {
+			if (each_blocks[i]) {
+				if (detaching) {
+					on_outro(() => {
+						each_blocks[i].d(detaching);
+						each_blocks[i] = null;
+					});
+				}
+
+				each_blocks[i].o(local);
+			}
+		}
+
+		return {
+			c: function create() {
+				div = element("div");
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+				div.className = "fieldlist svelte-1680n0b";
+				add_location(div, file$4, 146, 20, 3110);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].m(div, null);
+				}
+
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.scheme || changed.node || changed.tree || changed.parentid || changed.typeName || changed.onFieldStateChange) {
+					each_value = ctx.node.fields;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+							each_blocks[i].i(1);
+						} else {
+							each_blocks[i] = create_each_block(child_ctx);
+							each_blocks[i].c();
+							each_blocks[i].i(1);
+							each_blocks[i].m(div, null);
+						}
+					}
+
+					group_outros();
+					for (; i < each_blocks.length; i += 1) outro_block(i, 1, 1);
+					check_outros();
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				for (var i = 0; i < each_value.length; i += 1) each_blocks[i].i();
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				each_blocks = each_blocks.filter(Boolean);
+				for (let i = 0; i < each_blocks.length; i += 1) outro_block(i, 0);
+
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				destroy_each(each_blocks, detaching);
+			}
+		};
+	}
+
+	// (148:20) {#each node.fields as f}
+	function create_each_block(ctx) {
+		var current;
+
+		var typefield = new TypeField({
+			props: {
+			scheme: ctx.scheme,
+			node: ctx.f,
+			tree: ctx.tree,
+			parentid: "" + ctx.parentid + "-" + ctx.typeName
+		},
+			$$inline: true
+		});
+		typefield.$on("change", ctx.onFieldStateChange);
+
+		return {
+			c: function create() {
+				typefield.$$.fragment.c();
+			},
+
+			m: function mount(target, anchor) {
+				mount_component(typefield, target, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var typefield_changes = {};
+				if (changed.scheme) typefield_changes.scheme = ctx.scheme;
+				if (changed.node) typefield_changes.node = ctx.f;
+				if (changed.tree) typefield_changes.tree = ctx.tree;
+				if (changed.parentid || changed.typeName) typefield_changes.parentid = "" + ctx.parentid + "-" + ctx.typeName;
+				typefield.$set(typefield_changes);
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				typefield.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				typefield.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				typefield.$destroy(detaching);
+			}
+		};
+	}
+
+	function create_fragment$4(ctx) {
+		var if_block_anchor, current;
+
+		var if_block = (ctx.node) && create_if_block$1(ctx);
+
+		return {
+			c: function create() {
+				if (if_block) if_block.c();
+				if_block_anchor = empty();
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				if (if_block) if_block.m(target, anchor);
+				insert(target, if_block_anchor, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (ctx.node) {
+					if (if_block) {
+						if_block.p(changed, ctx);
+						if_block.i(1);
+					} else {
+						if_block = create_if_block$1(ctx);
+						if_block.c();
+						if_block.i(1);
+						if_block.m(if_block_anchor.parentNode, if_block_anchor);
+					}
+				} else if (if_block) {
+					group_outros();
+					on_outro(() => {
+						if_block.d(1);
+						if_block = null;
+					});
+
+					if_block.o(1);
+					check_outros();
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				if (if_block) if_block.i();
+				current = true;
+			},
+
+			o: function outro(local) {
+				if (if_block) if_block.o();
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (if_block) if_block.d(detaching);
+
+				if (detaching) {
+					detach(if_block_anchor);
+				}
+			}
+		};
+	}
+
+	function getFields(n, level){
+	 let a =[];
+	 let p = '  ';
+	 for (let key in n) {
+	     if (n[key].checked){
+	         a.push( p.repeat(level+1)+ key + getFields(n[key], level+1) );
+	     }
+	 }
+	 if (a.length > 0) {
+	     return '{\n' +a.join('\n') + '\n'+p.repeat(level)+ '}'
+	 }
+	 return ''
+	}
+
+	function instance$4($$self, $$props, $$invalidate) {
+		
+
+
+	// P R O P S
+	let { parentid = '', scheme = {}, typeName = '', tree = {}, fieldList = '' } = $$props;
+
+
+	let nodes; 
+	let node; 
+	let vis = false;
+
+
+	const dispatch = createEventDispatcher();
+	function dispatchEvent(e) {
+		dispatch('change', { text: 'State changed!', target: e.target });
+	}
+
+
+
+
+	function recalculate(){
+	    if (scheme && scheme.data && scheme.data.__schema){
+	        $$invalidate('nodes', nodes = scheme.data.__schema.types.filter(t =>  t.name == typeName ));
+	        if (nodes.length > 0) {
+	            $$invalidate('node', node = nodes[0]);
+	        }
+	    } 
+	}
+
+	recalculate();
+
+	// function showTree(e) {
+	//     console.log(fieldList)
+	// }
+
+	function onFieldStateChange(e) {
+	   $$invalidate('fieldList', fieldList = getFields(tree,0)); 
+	   dispatchEvent(e);
+	//    console.log(e)
+	//    console.log(fieldList)
+	}
+
+	onMount(async () => {
+	    $$invalidate('fieldList', fieldList = getFields(tree,0));
+	});
+
+		function click_handler(e) {
+			const $$result = vis = !vis;
+			$$invalidate('vis', vis);
+			return $$result;
+		}
+
+		$$self.$set = $$props => {
+			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
+			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
+			if ('typeName' in $$props) $$invalidate('typeName', typeName = $$props.typeName);
+			if ('tree' in $$props) $$invalidate('tree', tree = $$props.tree);
+			if ('fieldList' in $$props) $$invalidate('fieldList', fieldList = $$props.fieldList);
+		};
+
+		return {
+			parentid,
+			scheme,
+			typeName,
+			tree,
+			fieldList,
+			node,
+			vis,
+			onFieldStateChange,
+			click_handler
+		};
+	}
+
+	class Type extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$4, create_fragment$4, safe_not_equal, ["parentid", "scheme", "typeName", "tree", "fieldList"]);
+		}
+
+		get parentid() {
+			throw new Error("<Type>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set parentid(value) {
+			throw new Error("<Type>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get scheme() {
+			throw new Error("<Type>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set scheme(value) {
+			throw new Error("<Type>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get typeName() {
+			throw new Error("<Type>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set typeName(value) {
+			throw new Error("<Type>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get tree() {
+			throw new Error("<Type>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set tree(value) {
+			throw new Error("<Type>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get fieldList() {
+			throw new Error("<Type>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set fieldList(value) {
+			throw new Error("<Type>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/Func.svelte generated by Svelte v3.4.0 */
+
+	const file$5 = "src/Func.svelte";
+
+	function get_each_context$1(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.arg = list[i];
+		child_ctx.index = i;
+		return child_ctx;
+	}
+
+	// (284:12) {#if node.args}
+	function create_if_block$2(ctx) {
+		var div0, t_1, div1, each_blocks = [], each_1_lookup = new Map(), current;
+
+		var each_value = ctx.node.args;
+
+		const get_key = ctx => ctx.arg.name;
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			let child_ctx = get_each_context$1(ctx, each_value, i);
+			let key = get_key(child_ctx);
+			each_1_lookup.set(key, each_blocks[i] = create_each_block$1(key, child_ctx));
+		}
+
+		return {
+			c: function create() {
+				div0 = element("div");
+				div0.textContent = "ARGUMENTS";
+				t_1 = space();
+				div1 = element("div");
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
+				div0.className = "header svelte-13xgfvm";
+				add_location(div0, file$5, 284, 12, 6154);
+				div1.className = "fieldlist svelte-13xgfvm";
+				add_location(div1, file$5, 285, 12, 6203);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div0, anchor);
+				insert(target, t_1, anchor);
+				insert(target, div1, anchor);
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].m(div1, null);
+
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				const each_value = ctx.node.args;
+
+				group_outros();
+				each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div1, outro_and_destroy_block, create_each_block$1, null, get_each_context$1);
+				check_outros();
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				for (var i = 0; i < each_value.length; i += 1) each_blocks[i].i();
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].o();
+
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div0);
+					detach(t_1);
+					detach(div1);
+				}
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].d();
+			}
+		};
+	}
+
+	// (287:16) {#each node.args as arg, index (arg.name)}
+	function create_each_block$1(key_1, ctx) {
+		var first, current;
+
+		var argument = new Argument({
+			props: {
+			node: ctx.arg,
+			parentid: "" + ctx.parentid + "-" + ctx.node.name + "-argument"
+		},
+			$$inline: true
+		});
+		argument.$on("change", ctx.getArgsList);
+
+		return {
+			key: key_1,
+
+			first: null,
+
+			c: function create() {
+				first = empty();
+				argument.$$.fragment.c();
+				this.first = first;
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, first, anchor);
+				mount_component(argument, target, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var argument_changes = {};
+				if (changed.node) argument_changes.node = ctx.arg;
+				if (changed.parentid || changed.node) argument_changes.parentid = "" + ctx.parentid + "-" + ctx.node.name + "-argument";
+				argument.$set(argument_changes);
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				argument.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				argument.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(first);
+				}
+
+				argument.$destroy(detaching);
+			}
+		};
+	}
+
+	function create_fragment$5(ctx) {
+		var a, t0_value = ctx.node.name, t0, t1, a_class_value, t2, span0, t3, t4, span1, t5_value = ctx.node.description, t5, t6, div15, div9, t7, div1, div0, t8, t9_value = ctx.node.type.kind == "LIST" ? '[...]': '', t9, t10, updating_fieldList, t11, form_1, div3, div2, t13, textarea0, textarea0_id_value, t14, div5, div4, t16, textarea1, textarea1_id_value, t17, div7, div6, t19, input0, t20, div8, input1, t21, pre, t22, t23, div14, div12, div10, t25, div11, t26, div13, span2, t28, textarea2, textarea2_id_value, t29, input2, t30, span3, t31, t32, span4, current, dispose;
+
+		var if_block = (ctx.node.args) && create_if_block$2(ctx);
+
+		function type_fieldList_binding(value) {
+			ctx.type_fieldList_binding.call(null, value);
+			updating_fieldList = true;
+			add_flush_callback(() => updating_fieldList = false);
+		}
+
+		let type_props = {
+			typeName: ctx.node.graphqlType = ctx.node.type.name || ctx.node.type.ofType.name,
+			scheme: ctx.scheme,
+			parentid: "" + ctx.parentid + "-" + ctx.node.name
+		};
+		if (ctx.fieldlist !== void 0) {
+			type_props.fieldList = ctx.fieldlist;
+		}
+		var type = new Type({ props: type_props, $$inline: true });
+
+		add_binding_callback(() => bind(type, 'fieldList', type_fieldList_binding));
+
+		return {
+			c: function create() {
+				a = element("a");
+				t0 = text(t0_value);
+				t1 = text("(...)");
+				t2 = space();
+				span0 = element("span");
+				t3 = text(ctx.testResult);
+				t4 = space();
+				span1 = element("span");
+				t5 = text(t5_value);
+				t6 = space();
+				div15 = element("div");
+				div9 = element("div");
+				if (if_block) if_block.c();
+				t7 = space();
+				div1 = element("div");
+				div0 = element("div");
+				t8 = text("RETURNS ");
+				t9 = text(t9_value);
+				t10 = space();
+				type.$$.fragment.c();
+				t11 = space();
+				form_1 = element("form");
+				div3 = element("div");
+				div2 = element("div");
+				div2.textContent = "QUERY";
+				t13 = space();
+				textarea0 = element("textarea");
+				t14 = space();
+				div5 = element("div");
+				div4 = element("div");
+				div4.textContent = "VARIABLES";
+				t16 = space();
+				textarea1 = element("textarea");
+				t17 = space();
+				div7 = element("div");
+				div6 = element("div");
+				div6.textContent = "FILE";
+				t19 = space();
+				input0 = element("input");
+				t20 = space();
+				div8 = element("div");
+				input1 = element("input");
+				t21 = space();
+				pre = element("pre");
+				t22 = text(ctx.request);
+				t23 = space();
+				div14 = element("div");
+				div12 = element("div");
+				div10 = element("div");
+				div10.textContent = "RESPONSE";
+				t25 = space();
+				div11 = element("div");
+				t26 = space();
+				div13 = element("div");
+				span2 = element("span");
+				span2.textContent = "TEST";
+				t28 = space();
+				textarea2 = element("textarea");
+				t29 = space();
+				input2 = element("input");
+				t30 = space();
+				span3 = element("span");
+				t31 = text(ctx.testResult);
+				t32 = space();
+				span4 = element("span");
+				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-13xgfvm";
+				a.href = true;
+				add_location(a, file$5, 276, 0, 5759);
+				span0.className = "test-result svelte-13xgfvm";
+				add_location(span0, file$5, 277, 0, 5869);
+				span1.className = "description svelte-13xgfvm";
+				add_location(span1, file$5, 278, 0, 5916);
+				div0.className = "header svelte-13xgfvm";
+				add_location(div0, file$5, 294, 16, 6510);
+				add_location(div1, file$5, 293, 12, 6488);
+				div2.className = "header svelte-13xgfvm";
+				add_location(div2, file$5, 300, 20, 6878);
+				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
+				textarea0.name = "query";
+				textarea0.className = "query svelte-13xgfvm";
+				textarea0.value = ctx.request;
+				add_location(textarea0, file$5, 301, 20, 6931);
+				add_location(div3, file$5, 299, 16, 6852);
+				div4.className = "header svelte-13xgfvm";
+				add_location(div4, file$5, 304, 20, 7098);
+				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
+				textarea1.name = "variables";
+				textarea1.className = "variables svelte-13xgfvm";
+				add_location(textarea1, file$5, 305, 20, 7155);
+				add_location(div5, file$5, 303, 16, 7072);
+				div6.className = "header svelte-13xgfvm";
+				add_location(div6, file$5, 308, 20, 7348);
+				attr(input0, "type", "file");
+				input0.name = "input-file";
+				add_location(input0, file$5, 309, 20, 7399);
+				add_location(div7, file$5, 307, 16, 7322);
+				attr(input1, "type", "submit");
+				input1.value = "TEST";
+				input1.className = "svelte-13xgfvm";
+				add_location(input1, file$5, 312, 20, 7518);
+				div8.className = "buttons svelte-13xgfvm";
+				add_location(div8, file$5, 311, 16, 7476);
+				add_location(form_1, file$5, 298, 12, 6789);
+				div9.className = "form-area svelte-13xgfvm";
+				add_location(div9, file$5, 281, 4, 6068);
+				pre.className = "request  svelte-13xgfvm";
+				add_location(pre, file$5, 316, 4, 7613);
+				div10.className = "header svelte-13xgfvm";
+				add_location(div10, file$5, 319, 12, 7754);
+				div11.className = "response  svelte-13xgfvm";
+				add_location(div11, file$5, 320, 12, 7801);
+				div12.className = "response-area svelte-13xgfvm";
+				add_location(div12, file$5, 318, 8, 7714);
+				span2.className = "header svelte-13xgfvm";
+				add_location(span2, file$5, 323, 12, 7915);
+				textarea2.rows = "3";
+				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
+				textarea2.className = "eval-text svelte-13xgfvm";
+				textarea2.value = "response != null";
+				add_location(textarea2, file$5, 324, 12, 7960);
+				attr(input2, "type", "button");
+				input2.className = "try-button svelte-13xgfvm";
+				input2.value = "TRY THE CODE";
+				add_location(input2, file$5, 325, 12, 8102);
+				span3.className = "eval-result svelte-13xgfvm";
+				add_location(span3, file$5, 326, 12, 8196);
+				span4.className = "eval-errors svelte-13xgfvm";
+				add_location(span4, file$5, 327, 12, 8254);
+				div13.className = "eval-area svelte-13xgfvm";
+				add_location(div13, file$5, 322, 8, 7879);
+				div14.className = "result-panel svelte-13xgfvm";
+				add_location(div14, file$5, 317, 4, 7679);
+				div15.className = "root svelte-13xgfvm";
+				set_style(div15, "display", (ctx.vis?'grid':'none'));
+				add_location(div15, file$5, 280, 0, 5987);
+
+				dispose = [
+					listen(a, "click", prevent_default(ctx.click_handler)),
+					listen(textarea0, "change", ctx.change_handler),
+					listen(textarea1, "input", ctx.textarea1_input_handler),
+					listen(textarea1, "change", ctx.change_handler_1),
+					listen(form_1, "submit", ctx.submitForm),
+					listen(input2, "click", ctx.evaluate)
+				];
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, a, anchor);
+				append(a, t0);
+				append(a, t1);
+				insert(target, t2, anchor);
+				insert(target, span0, anchor);
+				append(span0, t3);
+				insert(target, t4, anchor);
+				insert(target, span1, anchor);
+				append(span1, t5);
+				insert(target, t6, anchor);
+				insert(target, div15, anchor);
+				append(div15, div9);
+				if (if_block) if_block.m(div9, null);
+				append(div9, t7);
+				append(div9, div1);
+				append(div1, div0);
+				append(div0, t8);
+				append(div0, t9);
+				append(div1, t10);
+				mount_component(type, div1, null);
+				append(div9, t11);
+				append(div9, form_1);
+				append(form_1, div3);
+				append(div3, div2);
+				append(div3, t13);
+				append(div3, textarea0);
+				append(form_1, t14);
+				append(form_1, div5);
+				append(div5, div4);
+				append(div5, t16);
+				append(div5, textarea1);
+
+				textarea1.value = ctx.variables;
+
+				append(form_1, t17);
+				append(form_1, div7);
+				append(div7, div6);
+				append(div7, t19);
+				append(div7, input0);
+				append(form_1, t20);
+				append(form_1, div8);
+				append(div8, input1);
+				add_binding_callback(() => ctx.form_1_binding(form_1, null));
+				add_binding_callback(() => ctx.div9_binding(div9, null));
+				append(div15, t21);
+				append(div15, pre);
+				append(pre, t22);
+				add_binding_callback(() => ctx.pre_binding(pre, null));
+				append(div15, t23);
+				append(div15, div14);
+				append(div14, div12);
+				append(div12, div10);
+				append(div12, t25);
+				append(div12, div11);
+				add_binding_callback(() => ctx.div11_binding(div11, null));
+				append(div14, t26);
+				append(div14, div13);
+				append(div13, span2);
+				append(div13, t28);
+				append(div13, textarea2);
+				add_binding_callback(() => ctx.textarea2_binding(textarea2, null));
+				append(div13, t29);
+				append(div13, input2);
+				append(div13, t30);
+				append(div13, span3);
+				append(span3, t31);
+				append(div13, t32);
+				append(div13, span4);
+				span4.innerHTML = ctx.evalErrors;
+				add_binding_callback(() => ctx.div15_binding(div15, null));
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if ((!current || changed.node) && t0_value !== (t0_value = ctx.node.name)) {
+					set_data(t0, t0_value);
+				}
+
+				if ((!current || changed.vis) && a_class_value !== (a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-13xgfvm")) {
+					a.className = a_class_value;
+				}
+
+				if (!current || changed.testResult) {
+					set_data(t3, ctx.testResult);
+				}
+
+				if ((!current || changed.node) && t5_value !== (t5_value = ctx.node.description)) {
+					set_data(t5, t5_value);
+				}
+
+				if (ctx.node.args) {
+					if (if_block) {
+						if_block.p(changed, ctx);
+						if_block.i(1);
+					} else {
+						if_block = create_if_block$2(ctx);
+						if_block.c();
+						if_block.i(1);
+						if_block.m(div9, t7);
+					}
+				} else if (if_block) {
+					group_outros();
+					on_outro(() => {
+						if_block.d(1);
+						if_block = null;
+					});
+
+					if_block.o(1);
+					check_outros();
+				}
+
+				if ((!current || changed.node) && t9_value !== (t9_value = ctx.node.type.kind == "LIST" ? '[...]': '')) {
+					set_data(t9, t9_value);
+				}
+
+				var type_changes = {};
+				if (changed.node) type_changes.typeName = ctx.node.graphqlType = ctx.node.type.name || ctx.node.type.ofType.name;
+				if (changed.scheme) type_changes.scheme = ctx.scheme;
+				if (changed.parentid || changed.node) type_changes.parentid = "" + ctx.parentid + "-" + ctx.node.name;
+				if (!updating_fieldList && changed.fieldlist) {
+					type_changes.fieldList = ctx.fieldlist;
+				}
+				type.$set(type_changes);
+
+				if ((!current || changed.parentid || changed.node) && textarea0_id_value !== (textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query")) {
+					textarea0.id = textarea0_id_value;
+				}
+
+				if (!current || changed.request) {
+					textarea0.value = ctx.request;
+				}
+
+				if (changed.variables) textarea1.value = ctx.variables;
+
+				if ((!current || changed.parentid || changed.node) && textarea1_id_value !== (textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables")) {
+					textarea1.id = textarea1_id_value;
+				}
+
+				if (changed.items) {
+					ctx.form_1_binding(null, form_1);
+					ctx.form_1_binding(form_1, null);
+				}
+				if (changed.items) {
+					ctx.div9_binding(null, div9);
+					ctx.div9_binding(div9, null);
+				}
+
+				if (!current || changed.request) {
+					set_data(t22, ctx.request);
+				}
+
+				if (changed.items) {
+					ctx.pre_binding(null, pre);
+					ctx.pre_binding(pre, null);
+				}
+				if (changed.items) {
+					ctx.div11_binding(null, div11);
+					ctx.div11_binding(div11, null);
+				}
+				if (changed.items) {
+					ctx.textarea2_binding(null, textarea2);
+					ctx.textarea2_binding(textarea2, null);
+				}
+
+				if ((!current || changed.parentid || changed.node) && textarea2_id_value !== (textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text")) {
+					textarea2.id = textarea2_id_value;
+				}
+
+				if (!current || changed.testResult) {
+					set_data(t31, ctx.testResult);
+				}
+
+				if (!current || changed.evalErrors) {
+					span4.innerHTML = ctx.evalErrors;
+				}
+
+				if (changed.items) {
+					ctx.div15_binding(null, div15);
+					ctx.div15_binding(div15, null);
+				}
+
+				if (!current || changed.vis) {
+					set_style(div15, "display", (ctx.vis?'grid':'none'));
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				if (if_block) if_block.i();
+
+				type.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				if (if_block) if_block.o();
+				type.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(a);
+					detach(t2);
+					detach(span0);
+					detach(t4);
+					detach(span1);
+					detach(t6);
+					detach(div15);
+				}
+
+				if (if_block) if_block.d();
+
+				type.$destroy();
+
+				ctx.form_1_binding(null, form_1);
+				ctx.div9_binding(null, div9);
+				ctx.pre_binding(null, pre);
+				ctx.div11_binding(null, div11);
+				ctx.textarea2_binding(null, textarea2);
+				ctx.div15_binding(null, div15);
+				run_all(dispose);
+			}
+		};
+	}
+
+	function instance$5($$self, $$props, $$invalidate) {
+		
+
+	// P R O P S
+	let { url, parentid = '', scheme = {}, node = {}, operation = "", test = submitForm } = $$props;
+
+	let testResult ='';
+	let evalErrors ='';
+	let vis = false;
+	let fieldlist = '';
+	let arglist = '';
+	let request = '';
+	let variables = '';
+	let response;
+
+	// $: returnType = node.graphqlType = node.type.name || node.type.ofType.name
+
+	const dispatch = createEventDispatcher();
+	function dispatchEvent() {
+		dispatch('change', { text: 'State changed!' });
+	}
+
+
+
+	function getArgsText() {
+	    let checked = node.args.filter( n => n.checked && n.value != null );
+	    let args = checked.map( n => {
+	        let val = n.graphqlType == 'String'?`"${n.value.replace(/"/g,'\\"')}"`: n.value;
+	        return `  ${n.name}:${val}`
+	    });
+	    let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`;
+	    return argsText
+	}
+
+	function getArgsList() {
+	    $$invalidate('arglist', arglist = getArgsText()); 
+	}
+
+
+
+	function submitForm(event){
+	    if (event) event.preventDefault();
+	    console.log("submitForm");
+	    window.$(form).ajaxSubmit({
+	        url: url, 
+	        type: 'POST',
+	        //success: function(res) {$('#result').text(JSON.stringify(res, null,'  '));}
+	        success: function(res) {
+	            $$invalidate('response', response = res);
+	            window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false});
+	            // testResult = "passed" +JSON.stringify(res, null,'  ').length
+	            evaluate();
+	            }
+	    });
+	    return false
+	}
+
+	function evaluate(){
+	    $$invalidate('testResult', testResult = "");
+	    $$invalidate('evalErrors', evalErrors = "");
+	    let code = evalTextarea.value;
+	    code = code.trimStart();
+	    code = code.trimEnd();
+	    if (code == "") {
+	        $$invalidate('evalErrors', evalErrors = `<br>// Write some code to evaluate server response.<br>// For example:<br>response.errors == null`);
+	        return
+	    }
+
+	    try {
+	        let result = eval(code);
+	        $$invalidate('testResult', testResult = result);        
+	    } catch (error) {
+	        console.log(error);
+	        $$invalidate('evalErrors', evalErrors = error);
+	    }
+
+
+	}
+
+
+	let form;
+	let rootArea;
+	let formArea;
+	let requestArea;
+	let responseArea;
+	let evalTextarea;
+
+	onMount(async () => {
+	    getArgsList();
+	    // window.$(requestArea).resizable();
+	    window.$(formArea).resizable({ handles: "e" });
+	});
+
+		function change_handler(event) {
+			bubble($$self, event);
+		}
+
+		function change_handler_1(event) {
+			bubble($$self, event);
+		}
+
+		function click_handler(e) {
+			const $$result = vis = !vis;
+			$$invalidate('vis', vis);
+			return $$result;
+		}
+
+		function type_fieldList_binding(value) {
+			fieldlist = value;
+			$$invalidate('fieldlist', fieldlist);
+		}
+
+		function textarea1_input_handler() {
+			variables = this.value;
+			$$invalidate('variables', variables);
+		}
+
+		function form_1_binding($$node, check) {
+			form = $$node;
+			$$invalidate('form', form);
+		}
+
+		function div9_binding($$node, check) {
+			formArea = $$node;
+			$$invalidate('formArea', formArea);
+		}
+
+		function pre_binding($$node, check) {
+			requestArea = $$node;
+			$$invalidate('requestArea', requestArea);
+		}
+
+		function div11_binding($$node, check) {
+			responseArea = $$node;
+			$$invalidate('responseArea', responseArea);
+		}
+
+		function textarea2_binding($$node, check) {
+			evalTextarea = $$node;
+			$$invalidate('evalTextarea', evalTextarea);
+		}
+
+		function div15_binding($$node, check) {
+			rootArea = $$node;
+			$$invalidate('rootArea', rootArea);
+		}
+
+		$$self.$set = $$props => {
+			if ('url' in $$props) $$invalidate('url', url = $$props.url);
+			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
+			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
+			if ('node' in $$props) $$invalidate('node', node = $$props.node);
+			if ('operation' in $$props) $$invalidate('operation', operation = $$props.operation);
+			if ('test' in $$props) $$invalidate('test', test = $$props.test);
+		};
+
+		$$self.$$.update = ($$dirty = { operation: 1, node: 1, arglist: 1, fieldlist: 1 }) => {
+			if ($$dirty.operation || $$dirty.node || $$dirty.arglist || $$dirty.fieldlist) { {
+	            $$invalidate('request', request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`);
+	            dispatchEvent();
+	        } }
+		};
+
+		return {
+			url,
+			parentid,
+			scheme,
+			node,
+			operation,
+			test,
+			testResult,
+			evalErrors,
+			vis,
+			fieldlist,
+			request,
+			variables,
+			getArgsList,
+			submitForm,
+			evaluate,
+			form,
+			rootArea,
+			formArea,
+			requestArea,
+			responseArea,
+			evalTextarea,
+			change_handler,
+			change_handler_1,
+			click_handler,
+			type_fieldList_binding,
+			textarea1_input_handler,
+			form_1_binding,
+			div9_binding,
+			pre_binding,
+			div11_binding,
+			textarea2_binding,
+			div15_binding
+		};
+	}
+
+	class Func extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$5, create_fragment$5, safe_not_equal, ["url", "parentid", "scheme", "node", "operation", "test"]);
+
+			const { ctx } = this.$$;
+			const props = options.props || {};
+			if (ctx.url === undefined && !('url' in props)) {
+				console.warn("<Func> was created without expected prop 'url'");
+			}
+		}
+
+		get url() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set url(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get parentid() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set parentid(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get scheme() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set scheme(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get node() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set node(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get operation() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set operation(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get test() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set test(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/List.svelte generated by Svelte v3.4.0 */
+
+	const file$6 = "src/List.svelte";
+
+	function get_each_context$2(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.e = list[i];
+		return child_ctx;
+	}
+
+	function get_each_context_1(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.e = list[i];
+		child_ctx.each_value_1 = list;
+		child_ctx.e_index_1 = i;
+		return child_ctx;
+	}
+
+	// (45:5) {#each queries as e}
+	function create_each_block_1(ctx) {
+		var div, updating_test, current;
+
+		function func_test_binding(value) {
+			ctx.func_test_binding.call(null, value, ctx);
+			updating_test = true;
+			add_flush_callback(() => updating_test = false);
+		}
+
+		let func_props = {
+			url: ctx.url,
+			node: ctx.e,
+			operation: "query",
+			scheme: ctx.scheme,
+			parentid: "query"
+		};
+		if (ctx.e.test !== void 0) {
+			func_props.test = ctx.e.test;
+		}
+		var func = new Func({ props: func_props, $$inline: true });
+
+		add_binding_callback(() => bind(func, 'test', func_test_binding));
+		func.$on("change", ctx.change_handler);
+
+		return {
+			c: function create() {
+				div = element("div");
+				func.$$.fragment.c();
+				add_location(div, file$6, 45, 10, 937);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				mount_component(func, div, null);
+				current = true;
+			},
+
+			p: function update(changed, new_ctx) {
+				ctx = new_ctx;
+				var func_changes = {};
+				if (changed.url) func_changes.url = ctx.url;
+				if (changed.queries) func_changes.node = ctx.e;
+				if (changed.scheme) func_changes.scheme = ctx.scheme;
+				if (!updating_test && changed.queries) {
+					func_changes.test = ctx.e.test;
+				}
+				func.$set(func_changes);
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				func.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				func.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				func.$destroy();
+			}
+		};
+	}
+
+	// (52:5) {#each mutations as e}
+	function create_each_block$2(ctx) {
+		var div, t, current;
+
+		var func = new Func({
+			props: {
+			url: ctx.url,
+			node: ctx.e,
+			operation: "mutation",
+			scheme: ctx.scheme,
+			parentid: "mutation"
+		},
+			$$inline: true
+		});
+		func.$on("change", ctx.change_handler_1);
+
+		return {
+			c: function create() {
+				div = element("div");
+				func.$$.fragment.c();
+				t = space();
+				add_location(div, file$6, 52, 10, 1154);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				mount_component(func, div, null);
+				append(div, t);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var func_changes = {};
+				if (changed.url) func_changes.url = ctx.url;
+				if (changed.mutations) func_changes.node = ctx.e;
+				if (changed.scheme) func_changes.scheme = ctx.scheme;
+				func.$set(func_changes);
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				func.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				func.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				func.$destroy();
+			}
+		};
+	}
+
+	function create_fragment$6(ctx) {
+		var div, input, t0, h40, t2, t3, h41, t5, current, dispose;
+
+		var each_value_1 = ctx.queries;
+
+		var each_blocks_1 = [];
+
+		for (var i = 0; i < each_value_1.length; i += 1) {
+			each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+		}
+
+		function outro_block(i, detaching, local) {
+			if (each_blocks_1[i]) {
+				if (detaching) {
+					on_outro(() => {
+						each_blocks_1[i].d(detaching);
+						each_blocks_1[i] = null;
+					});
+				}
+
+				each_blocks_1[i].o(local);
+			}
+		}
+
+		var each_value = ctx.mutations;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+		}
+
+		function outro_block_1(i, detaching, local) {
+			if (each_blocks[i]) {
+				if (detaching) {
+					on_outro(() => {
+						each_blocks[i].d(detaching);
+						each_blocks[i] = null;
+					});
+				}
+
+				each_blocks[i].o(local);
+			}
+		}
+
+		return {
+			c: function create() {
+				div = element("div");
+				input = element("input");
+				t0 = space();
+				h40 = element("h4");
+				h40.textContent = "Queries";
+				t2 = space();
+
+				for (var i = 0; i < each_blocks_1.length; i += 1) {
+					each_blocks_1[i].c();
+				}
+
+				t3 = space();
+				h41 = element("h4");
+				h41.textContent = "Mutations";
+				t5 = space();
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+				attr(input, "type", "button");
+				input.value = "test";
+				add_location(input, file$6, 42, 5, 825);
+				add_location(h40, file$6, 43, 5, 884);
+				add_location(h41, file$6, 50, 5, 1097);
+				add_location(div, file$6, 41, 0, 814);
+				dispose = listen(input, "click", ctx.doTests);
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, input);
+				append(div, t0);
+				append(div, h40);
+				append(div, t2);
+
+				for (var i = 0; i < each_blocks_1.length; i += 1) {
+					each_blocks_1[i].m(div, null);
+				}
+
+				append(div, t3);
+				append(div, h41);
+				append(div, t5);
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].m(div, null);
+				}
+
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.url || changed.queries || changed.scheme) {
+					each_value_1 = ctx.queries;
+
+					for (var i = 0; i < each_value_1.length; i += 1) {
+						const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+						if (each_blocks_1[i]) {
+							each_blocks_1[i].p(changed, child_ctx);
+							each_blocks_1[i].i(1);
+						} else {
+							each_blocks_1[i] = create_each_block_1(child_ctx);
+							each_blocks_1[i].c();
+							each_blocks_1[i].i(1);
+							each_blocks_1[i].m(div, t3);
+						}
+					}
+
+					group_outros();
+					for (; i < each_blocks_1.length; i += 1) outro_block(i, 1, 1);
+					check_outros();
+				}
+
+				if (changed.url || changed.mutations || changed.scheme) {
+					each_value = ctx.mutations;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context$2(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+							each_blocks[i].i(1);
+						} else {
+							each_blocks[i] = create_each_block$2(child_ctx);
+							each_blocks[i].c();
+							each_blocks[i].i(1);
+							each_blocks[i].m(div, null);
+						}
+					}
+
+					group_outros();
+					for (; i < each_blocks.length; i += 1) outro_block_1(i, 1, 1);
+					check_outros();
+				}
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				for (var i = 0; i < each_value_1.length; i += 1) each_blocks_1[i].i();
+
+				for (var i = 0; i < each_value.length; i += 1) each_blocks[i].i();
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				each_blocks_1 = each_blocks_1.filter(Boolean);
+				for (let i = 0; i < each_blocks_1.length; i += 1) outro_block(i, 0);
+
+				each_blocks = each_blocks.filter(Boolean);
+				for (let i = 0; i < each_blocks.length; i += 1) outro_block_1(i, 0);
+
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				destroy_each(each_blocks_1, detaching);
+
+				destroy_each(each_blocks, detaching);
+
+				dispose();
+			}
+		};
+	}
+
+	function compareTypes(t1, t2) {     
+	 if (t1.name > t2.name ){
+	      return 1
+	 } else if (t1.name < t2.name) {
+	      return -1
+	 } 
+	 return 0
+	}
+
+	function instance$6($$self, $$props, $$invalidate) {
+		
+
+	let { scheme, url } = $$props; 
+
+	let mutations =[];
+	let queries =[];
+	let types=[];
+	let usertypes=[];
+
+	function doTests(){
+	    for (let o of queries) {
+	        o.test();
+	    }
+	    // console.log(queries)
+	}
+
+		function change_handler(event) {
+			bubble($$self, event);
+		}
+
+		function change_handler_1(event) {
+			bubble($$self, event);
+		}
+
+		function func_test_binding(value, { e }) {
+			e.test = value;
+			$$invalidate('queries', queries), $$invalidate('scheme', scheme);
+		}
+
+		$$self.$set = $$props => {
+			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
+			if ('url' in $$props) $$invalidate('url', url = $$props.url);
+		};
+
+		$$self.$$.update = ($$dirty = { scheme: 1 }) => {
+			if ($$dirty.scheme) { try {
+	            $$invalidate('mutations', mutations = scheme.data.__schema.mutationType.fields);
+	            $$invalidate('queries', queries = scheme.data.__schema.queryType.fields);
+	            $$invalidate('types', types = scheme.data.__schema.types.sort(compareTypes));
+	            $$invalidate('usertypes', usertypes = scheme.data.__schema.types.filter(t => t.name[0]!='_' && t.kind == 'OBJECT' && t.name != 'Query' && t.name != 'Mutation').sort(compareTypes));
+	            } catch(e){} }
+		};
+
+		return {
+			scheme,
+			url,
+			mutations,
+			queries,
+			doTests,
+			change_handler,
+			change_handler_1,
+			func_test_binding
+		};
+	}
+
+	class List extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$6, create_fragment$6, safe_not_equal, ["scheme", "url"]);
+
+			const { ctx } = this.$$;
+			const props = options.props || {};
+			if (ctx.scheme === undefined && !('scheme' in props)) {
+				console.warn("<List> was created without expected prop 'scheme'");
+			}
+			if (ctx.url === undefined && !('url' in props)) {
+				console.warn("<List> was created without expected prop 'url'");
+			}
+		}
+
+		get scheme() {
+			throw new Error("<List>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set scheme(value) {
+			throw new Error("<List>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get url() {
+			throw new Error("<List>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set url(value) {
+			throw new Error("<List>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/App.svelte generated by Svelte v3.4.0 */
+
+	const file$7 = "src/App.svelte";
+
+	function create_fragment$7(ctx) {
+		var div2, updating_url, updating_scheme, t0, div0, input0, t1, input1, t2, div1, current, dispose;
+
+		function schemer_url_binding(value) {
+			ctx.schemer_url_binding.call(null, value);
+			updating_url = true;
+			add_flush_callback(() => updating_url = false);
+		}
+
+		function schemer_scheme_binding(value_1) {
+			ctx.schemer_scheme_binding.call(null, value_1);
+			updating_scheme = true;
+			add_flush_callback(() => updating_scheme = false);
+		}
+
+		let schemer_props = {};
+		if (ctx.url !== void 0) {
+			schemer_props.url = ctx.url;
+		}
+		if (ctx.scheme !== void 0) {
+			schemer_props.scheme = ctx.scheme;
+		}
+		var schemer = new Schemer({ props: schemer_props, $$inline: true });
+
+		add_binding_callback(() => bind(schemer, 'url', schemer_url_binding));
+		add_binding_callback(() => bind(schemer, 'scheme', schemer_scheme_binding));
+		schemer.$on("change", ctx.changeHandler);
+
+		var list = new List({
+			props: {
+			url: ctx.url,
+			scheme: ctx.scheme
+		},
+			$$inline: true
+		});
+		list.$on("change", ctx.changeHandler);
+
+		return {
+			c: function create() {
+				div2 = element("div");
+				schemer.$$.fragment.c();
+				t0 = space();
+				div0 = element("div");
+				input0 = element("input");
+				t1 = space();
+				input1 = element("input");
+				t2 = space();
+				div1 = element("div");
+				list.$$.fragment.c();
+				attr(input0, "type", "button");
+				input0.value = "save";
+				input0.className = "svelte-o5nj5n";
+				add_location(input0, file$7, 142, 8, 3155);
+				attr(input1, "type", "button");
+				input1.value = "restore";
+				input1.className = "svelte-o5nj5n";
+				add_location(input1, file$7, 143, 8, 3220);
+				add_location(div0, file$7, 141, 4, 3141);
+				div1.className = "main svelte-o5nj5n";
+				add_location(div1, file$7, 145, 4, 3298);
+				div2.className = "root svelte-o5nj5n";
+				add_location(div2, file$7, 139, 0, 3055);
+
+				dispose = [
+					listen(input0, "click", ctx.saveFields),
+					listen(input1, "click", ctx.restoreFields)
+				];
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div2, anchor);
+				mount_component(schemer, div2, null);
+				append(div2, t0);
+				append(div2, div0);
+				append(div0, input0);
+				append(div0, t1);
+				append(div0, input1);
+				append(div2, t2);
+				append(div2, div1);
+				mount_component(list, div1, null);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var schemer_changes = {};
+				if (!updating_url && changed.url) {
+					schemer_changes.url = ctx.url;
+				}
+				if (!updating_scheme && changed.scheme) {
+					schemer_changes.scheme = ctx.scheme;
+				}
+				schemer.$set(schemer_changes);
+
+				var list_changes = {};
+				if (changed.url) list_changes.url = ctx.url;
+				if (changed.scheme) list_changes.scheme = ctx.scheme;
+				list.$set(list_changes);
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				schemer.$$.fragment.i(local);
+
+				list.$$.fragment.i(local);
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				schemer.$$.fragment.o(local);
+				list.$$.fragment.o(local);
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div2);
+				}
+
+				schemer.$destroy();
+
+				list.$destroy();
+
+				run_all(dispose);
+			}
+		};
+	}
+
+	function dispatchChangeEvent(element) {
+	var event = new Event('change',{
+	    view: window,
+	    bubbles: true,
+	    cancelable: true,
+	    target: element
+	});
+
+	element.dispatchEvent(event);
+
+	// if ("createEvent" in document) {
+	//     var evt = document.createEvent("HTMLEvents");
+	//     evt.initEvent("change", false, true);
+	//     element.dispatchEvent(evt);
+	// }
+	// else
+	//     element.fireEvent("onchange");
+	}
+
+	function getControls() {
+	let a =[];
+	let inps=document.getElementsByTagName("input");  
+	for (let inp of inps) {
+	    let id = inp.getAttribute("id");
+	    if (!id) continue
+	    // if (id[0]=='-') console.log(id)
+
+	    let type = inp.getAttribute("type");
+	    let value = inp.value;
+	    let checked = inp.checked;
+	    a.push({ id: id, type:type, checked:checked, value:value });
+	}
+
+	inps=document.getElementsByTagName("textarea");  
+	for (let inp of inps) {
+	    let id = inp.getAttribute("id");
+	    if (!id) continue
+	    // if (id[0]=='-') console.log(id)
+
+	    let type = "textarea";
+	    let value = inp.value;
+	    let checked = false;
+	    a.push({ id: id, type:type, checked:checked, value:value });
+	}
+
+	return a
+	}
+
+	function instance$7($$self, $$props, $$invalidate) {
+		
+
+	let url;
+	let scheme = {};
+	let controls = [];
+	let ignoreChanges = true;
+
+	function restoreFieldsWithEvents( withEvents = false) {
+	    for (let c of controls) {
+	        let inp = document.getElementById(c.id);
+	        if (!inp) continue
+	        if (c.type == 'checkbox') {
+	            inp.checked = c.checked;
+	        } else {
+	            inp.value = c.value;
+	        }
+	        // inp.checked = c.checked
+	        // inp.value = c.value
+	        if (withEvents) dispatchChangeEvent(inp);
+	    }
+	}
+
+
+	function saveFields() {
+	    $$invalidate('controls', controls = getControls());
+	    let key = `${window.location.href}|${url}`;
+	    let controlsStr = JSON.stringify(controls);
+	    localStorage.setItem(key, JSON.stringify(controls));
+	    console.log("saved: ", key, controlsStr.length );
+	}
+
+
+	function restoreFields() {
+	    let key = `${window.location.href}|${url}`;
+	    let controlsStr = localStorage.getItem(key);
+	    $$invalidate('controls', controls = JSON.parse(controlsStr));
+
+
+	    $$invalidate('ignoreChanges', ignoreChanges = true);
+	    restoreFieldsWithEvents(true);
+	    setTimeout(() => {
+	        $$invalidate('ignoreChanges', ignoreChanges = true);
+	        restoreFieldsWithEvents(false);
+	        console.log("restored", key, controlsStr.length );
+	        $$invalidate('ignoreChanges', ignoreChanges = false);
+	    }, 100);
+	}
+
+
+
+	function changeHandler(){
+	    if (ignoreChanges) return
+	    // saveFields()
+	    // console.log('changeHandler')
+	}
+
+
+
+	onMount(async () => {
+	    // restoreFields()
+	});
+
+		function schemer_url_binding(value) {
+			url = value;
+			$$invalidate('url', url);
+		}
+
+		function schemer_scheme_binding(value_1) {
+			scheme = value_1;
+			$$invalidate('scheme', scheme);
+		}
+
+		return {
+			url,
+			scheme,
+			saveFields,
+			restoreFields,
+			changeHandler,
+			schemer_url_binding,
+			schemer_scheme_binding
+		};
+	}
+
+	class App extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$7, create_fragment$7, safe_not_equal, []);
+		}
+	}
+
+	var app = new App({
+		target: document.body
+	});
+
+	return app;
+
+}());
 //# sourceMappingURL=bundle.js.map

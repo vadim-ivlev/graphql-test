@@ -20,7 +20,7 @@ $: try {
     usertypes = scheme.data.__schema.types.filter(t => t.name[0]!='_' && t.kind == 'OBJECT' && t.name != 'Query' && t.name != 'Mutation').sort(compareTypes)
     } catch(e){}
 
-function compareTypes(t1, t2) {
+function compareTypes(t1, t2) {     
      if (t1.name > t2.name ){
           return 1
      } else if (t1.name < t2.name) {
@@ -29,16 +29,22 @@ function compareTypes(t1, t2) {
      return 0
 }
 
-
+function doTests(){
+    for (let o of queries) {
+        o.test()
+    }
+    // console.log(queries)
+}
 
 
 </script>
 
 <div>
+     <input type="button" value="test" on:click={doTests}>
      <h4>Queries</h4>
      {#each queries as e}
           <div>
-          <Func url={url} node={e} operation="query"  scheme={scheme} parentid="query" on:change/>
+          <Func url={url} bind:test={e.test} node={e} operation="query"  scheme={scheme} parentid="query" on:change/>
           </div>
      {/each}
 

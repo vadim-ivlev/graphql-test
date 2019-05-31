@@ -13,14 +13,16 @@ export let parentid = ''
 export let scheme = {}
 export let node = {}
 export let operation = ""
+export let test = submitForm
 
-
-
+let testResult =''
+let evalErrors =''
 let vis = false
 let fieldlist = ''
 let arglist = ''
 let request = ''
 let variables = ''
+let response
 // let returnType = ''
 // let response
 
@@ -37,6 +39,10 @@ function dispatchEvent() {
 }
 
 
+
+function doTest(){
+    testResult = "passed"
+}
 
 
 
@@ -57,15 +63,42 @@ function getArgsList() {
 
 
 function submitForm(event){
-    event.preventDefault()
+    if (event) event.preventDefault()
     console.log("submitForm")
     window.$(form).ajaxSubmit({
         url: url, 
         type: 'POST',
-        //success: function(response) {$('#result').text(JSON.stringify(response, null,'  '));}
-        success: function(response) {window.$(responseArea).jsonViewer(response, {collapsed: true, rootCollapsable: false});}
+        //success: function(res) {$('#result').text(JSON.stringify(res, null,'  '));}
+        success: function(res) {
+            response = res
+            window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false});
+            // testResult = "passed" +JSON.stringify(res, null,'  ').length
+            evaluate()
+            }
     })
     return false
+}
+
+function evaluate(){
+    testResult = ""
+    evalErrors = ""
+    let code = evalTextarea.value
+    code = code.trimStart()
+    code = code.trimEnd()
+    if (code == "") {
+        evalErrors = `<br>// Write some code to evaluate server response.<br>// For example:<br>response.errors == null`
+        return
+    }
+
+    try {
+        let result = eval(code)
+        testResult = result        
+    } catch (error) {
+        console.log(error)
+        evalErrors = error
+    }
+
+
 }
 
 
@@ -74,6 +107,7 @@ let rootArea
 let formArea
 let requestArea
 let responseArea
+let evalTextarea
 
 onMount(async () => {
     getArgsList()
@@ -91,7 +125,7 @@ onMount(async () => {
         font-size: 90%;
         letter-spacing: 0.1em;
         /* color: gray; */
-        margin-top:1em;
+        padding-top:1em;
         /* border-top: 1px dashed slategray; */
 
     }
@@ -145,7 +179,7 @@ onMount(async () => {
         text-align: right;
     }
 
-    input[type="submit"] {
+    input[type="submit"]{
         font-family: 'Roboto Condensed';
         /* font-variant: small-caps; */
         font-weight: bold;
@@ -170,8 +204,9 @@ onMount(async () => {
 
     .response {
         overflow:auto;
-        border: 1px solid silver;
-        border-left-width: 0;
+        /* border: 1px solid silver; */
+        background-color: white;
+        /* border-left-width: 0; */
     }
 
     .query {
@@ -189,11 +224,59 @@ onMount(async () => {
         resize: vertical;
     }
 
+    .test-result {
+        min-width: 60px;
+        display: inline-block;
+    }
+
+    .result-panel {
+        border: 1px solid silver;
+        border-left-width: 0;
+    }
+
+    .response-area {
+        background-color: whitesmoke;
+        padding: 10px;
+    }
+
+    .eval-area {
+        background-color: whitesmoke;
+        padding: 10px;
+    }
+
+    .eval-text {
+        width: calc(100% - 6px);
+    }
+
+    .eval-result {
+        font-weight: normal;
+    }
+
+    .eval-errors {
+        color: red;
+        font-size: 90%
+    }
+
+    .try-button {
+        font-family: 'Roboto Condensed';
+        /* font-variant: small-caps; */
+        font-weight: bold;
+        /* font-size: 90%; */
+        letter-spacing: 0.1em;
+        padding: 0px 5px 0px 5px;
+        border: 1px solid rgba(70,130,180,0.5);
+        border-radius: 2px;
+        background-color: transparent;
+        color: steelblue;
+
+    }
+
  
 </style>
 
-<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)  </a> 
-<span class="description">{node.description}</span><br>
+<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
+<span class="test-result">{testResult}</span> 
+<span class="description">{node.description}</span>
 <!-- {#if vis} -->
 <div class="root" style="display:{vis?'grid':'none'}"  bind:this={rootArea}>
     <div class="form-area" bind:this={formArea}>
@@ -232,6 +315,18 @@ onMount(async () => {
             </form> 
     </div>
     <pre class="request " bind:this={requestArea}>{request}</pre>
-    <div class="response " bind:this={responseArea}></div>
+    <div class="result-panel">
+        <div class="response-area">
+            <div class="header">RESPONSE</div>
+            <div class="response " bind:this={responseArea}></div>
+        </div>
+        <div class="eval-area">
+            <span class="header">TEST</span>
+            <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response != null</textarea> 
+            <input type="button" class="try-button" value="TRY THE CODE" on:click={evaluate}>
+            <span class="eval-result">{testResult}</span>
+            <span class="eval-errors">{@html evalErrors}</span>
+        </div>
+    </div>
 </div>
 <!-- {/if} -->
