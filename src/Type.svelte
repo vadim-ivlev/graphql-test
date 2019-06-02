@@ -13,6 +13,39 @@ export let typeName = ''
 export let tree = {}
 export let fieldList = ''
 
+export let getText = function () {
+    console.log("Type getText parentid=", parentid)
+    let a =[]
+    let p = '  '
+
+    // if (!node || !node.fields) return ''
+    // for (let f of node.fields) {
+    //     // let v = f.component.getText()
+    //     if (!f.getText) continue
+    //     let v = f.getText()
+        
+    //     if (v){
+    //         a.push( p + v )
+    //     }
+    // }
+
+    for (let key in fieldFunctions) {
+        console.log(key)
+        let v = fieldFunctions[key]()
+        if (v){
+            a.push( p + v )
+        }
+    }
+
+    if (a.length > 0) {
+        return '{\n' +a.join('\n') + '\n'+p+'}'
+    }
+    return ''
+}
+
+let fieldFunctions = {}
+
+
 
 let nodes 
 let node 
@@ -31,7 +64,8 @@ function recalculate(){
     if (scheme && scheme.data && scheme.data.__schema){
         nodes = scheme.data.__schema.types.filter(t =>  t.name == typeName )
         if (nodes.length > 0) {
-            node = nodes[0]
+            // node = nodes[0]
+            node = JSON.parse(JSON.stringify(nodes[0]))
         }
     } 
 }
@@ -145,8 +179,9 @@ onMount(async () => {
                 <span class="description">{node.description}</span>
                 {#if node.fields}
                     <div class="fieldlist">
-                    {#each node.fields as f}
-                        <TypeField scheme={scheme} node={f} tree={tree} parentid="{parentid}-{typeName}" on:change={onFieldStateChange} />
+                    {#each node.fields as f,ind}
+                        <TypeField  bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} tree={tree} parentid="{parentid}-{typeName}" on:change={onFieldStateChange} />
+                    <!-- bind:getText={f.getTypeText}   -->
                     {/each}
                     </div>
                 {/if}

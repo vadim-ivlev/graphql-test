@@ -331,7 +331,9 @@ onMount(async () => {
         
             
             <div>
-                <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}</div>
+                <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}
+                <input type="button" value="getText" on:click={()=> console.log(getTypeText())}>
+                </div>
                 <Type typeName={node.graphqlType = node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} bind:fieldList={fieldlist}/>
                 <!-- on:change={typeChangeHandler} -->
                 <!-- bind:fieldList={fieldlist} -->

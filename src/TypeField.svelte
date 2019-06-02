@@ -9,11 +9,12 @@ export let scheme
 export let node
 export let tree = {}
 export let getText = function(e){
+    // console.log("TypeField getText() parentid = ", parentid, checkboxElement.checked)
     if (checkboxElement.checked == false) return ''
     
     // let value = fieldName + typeComponent.getText()
-    // let value = fieldName + getTypeText()
-    let value = fieldName + typeFieldList
+    let value = fieldName + getTypeText()
+    // let value = fieldName + typeFieldList
     return value
 }
 
@@ -31,7 +32,10 @@ let fieldName = node.name
 let typeName = node.type.kind == "LIST" ? node.type.ofType.name : node.type.name
 let treeNode 
 let typeFieldList
+let getTypeText
 
+let checkboxElement
+let typeElement
 
 
 $: {
@@ -74,8 +78,8 @@ $: {
 
 
 <div class="field" bind:this={root}>  
-    <input type="checkbox" id="{parentid}-{fieldName}" bind:checked={checked}  on:change>
+    <input type="checkbox" id="{parentid}-{fieldName}" bind:checked={checked} bind:this={checkboxElement}  on:change>
     <span class="field-name">{fieldName}</span>
-    <Type scheme={scheme} typeName={typeName} tree={tree[fieldName]} parentid="{parentid}-{fieldName}-type" bind:fieldList={typeFieldList} on:change/> 
+    <Type scheme={scheme} typeName={typeName} bind:getText={getTypeText} tree={tree[fieldName]} parentid="{parentid}-{fieldName}-type" bind:fieldList={typeFieldList} on:change/> 
     <br><span class="field-description">{node.description}</span> 
 </div>
