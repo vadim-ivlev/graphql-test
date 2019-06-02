@@ -7,16 +7,14 @@ import Type from './Type.svelte'
 export let parentid = ''
 export let scheme
 export let node
-export let tree = {}
+// export let tree = {}
 export let getText = function(e){
     if (checkboxElement.checked == false) return ''
     
     // let value = fieldName + typeComponent.getText()
-    // let value = fieldName + getTypeText()
-    let value = fieldName + typeFieldList
+    let value = fieldName + getTypeText()
     return value
 }
-
 
 // const dispatch = createEventDispatcher()
 // function dispatchEvent(e) {
@@ -24,25 +22,23 @@ export let getText = function(e){
 // }
 
 
-
-let root
+let checkboxElement
+let typeComponent
+let getTypeText
+// let root
 let checked = true
 let fieldName = node.name
 let typeName = node.type.kind == "LIST" ? node.type.ofType.name : node.type.name
-let treeNode 
-let typeFieldList
+// let treeNode 
 
-
-
-$: {
-    if (node) {
-        if (!tree[fieldName]) tree[fieldName]={}
-        treeNode=tree[fieldName]
-        treeNode.checked = checked
-        treeNode.typeName = typeName
-        treeNode.getText = getText
-    }
-}
+// $: {
+//     if (node) {
+//         if (!tree[fieldName]) tree[fieldName]={}
+//         tree[fieldName].checked = checked
+//         tree[fieldName].typeName = typeName
+//         treeNode=tree[fieldName]
+//     }
+// }
 
 
 </script>
@@ -73,9 +69,9 @@ $: {
 </style>
 
 
-<div class="field" bind:this={root}>  
-    <input type="checkbox" id="{parentid}-{fieldName}" bind:checked={checked}  on:change>
+<div class="field">  
+    <input id="{parentid}-{fieldName}-checkbox" type="checkbox" bind:this={checkboxElement} bind:checked={checked} on:change>
     <span class="field-name">{fieldName}</span>
-    <Type scheme={scheme} typeName={typeName} tree={tree[fieldName]} parentid="{parentid}-{fieldName}-type" bind:fieldList={typeFieldList} on:change/> 
+    <Type scheme={scheme} bind:getText={getTypeText} typeName={typeName}  parentid="{parentid}-{fieldName}-type" on:change/> 
     <br><span class="field-description">{node.description}</span> 
 </div>

@@ -20,9 +20,9 @@ let evalErrors =''
 let vis = false
 let fieldlist = ''
 let arglist = ''
-let request = ''
+let request //= ''
 let variables = ''
-let response
+let response = null
 // let returnType = ''
 // let response
 
@@ -47,17 +47,29 @@ function doTest(){
 
 
 function getArgsText() {
-    let checked = node.args.filter( n => n.checked && n.value != null )
-    let args = checked.map( n => {
-        let val = n.graphqlType == 'String'?`"${n.value.replace(/"/g,'\\"')}"`: n.value
-        return `  ${n.name}:${val}`
-    })
+    // let checked = node.args.filter( n => n.checked && n.value != null )
+    // let args = checked.map( n => {
+    //     let val = n.graphqlType == 'String'?`"${n.value.replace(/"/g,'\\"')}"`: n.value
+    //     return `  ${n.name}:${val}`
+    // })
+
+    let args = []
+    for (let arg of node.args) {
+        let text = arg.getText()
+        if (text) args.push(text)
+    }
+
     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
     return argsText
 }
 
 function getArgsList() {
     arglist = getArgsText() 
+    // if (queryArea) {
+    //     queryArea.style.height = '10px'
+    //     queryArea.style.height = queryArea.scrollHeight +'px'
+    // }
+
 }
 
 
@@ -102,46 +114,54 @@ function evaluate(){
 }
 
 
+let getTypeText
+function typeChangeHandler(params) {
+    console.log("typeChangeHandler")
+    // request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
+    fieldlist = getTypeText()
+    console.log(fieldlist)
+}
+
+
 let form
 let rootArea
 let formArea
-let requestArea
+let queryArea
 let responseArea
 let evalTextarea
 
 onMount(async () => {
     getArgsList()
-    // window.$(requestArea).resizable();
     window.$(formArea).resizable({ handles: "e" });
+    window.$(form).resizable({ handles: "e" });
 })
 
 </script>
 
 <style>
     .header {
-        /* font-variant: small-caps; */
-        font-family: 'Roboto Condensed';
+        font-family: 'Roboto','Roboto Condensed';
         font-weight: bold;
         font-size: 90%;
         letter-spacing: 0.1em;
-        /* color: gray; */
-        padding-top:1em;
-        /* border-top: 1px dashed slategray; */
+        padding: 1em 0 0 10px;
 
     }
 
     .root {
-        margin: 10px 0 10px 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         display: grid;
         grid-template-columns: 1fr max-content 4fr;
-        /* grid-template-rows: 400px; */
+        border-top: 1px solid silver;
+        border-bottom: 1px solid silver;
     }
 
     .form-area { 
-        border: 1px solid silver;
-        padding: 10px;
+        border-right: 1px solid silver;
+        /* padding: 10px; */
         min-width:380px;
-        background-color: whitesmoke;
+        /* background-color: whitesmoke; */
     }
 
 
@@ -177,48 +197,46 @@ onMount(async () => {
 
     .buttons {
         text-align: right;
+        padding: 10px;
+    }
+    .buttons2 {
+        text-align: left;
+        padding: 10px;
     }
 
     input[type="submit"]{
-        font-family: 'Roboto Condensed';
+        font-family: 'Roboto','Roboto Condensed';
         /* font-variant: small-caps; */
         font-weight: bold;
-        /* font-size: 90%; */
+        font-size: 14.4px;
         letter-spacing: 0.1em;
-        padding: 3px 15px 3px 15px;
-        border: 1px solid rgba(70,130,180,0.5);
-        border-radius: 2px;
-        background-color: transparent;
-        color: steelblue;
+        padding: 5px 15px 5px 15px;
+        border: 1px solid steelblue;
+        border-radius: 4px;
+        background-color: steelblue;
+        color: white;
     }
 
-    .request {
-        border:1px solid silver;
-        border-left-width:0;
-        margin: 0 0 0 0;
-        padding: 0 10px 0 10px;
-        color:steelblue;
-        /* resize: both; */
-        /* overflow: auto; */
-    }
 
     .response {
         overflow:auto;
         /* border: 1px solid silver; */
         background-color: white;
         /* border-left-width: 0; */
+        font-family: 'Roboto','Roboto Mono', monospace;
+        padding: 0;
     }
 
     .query {
-        width: calc(100% - 6px);
-        height: 8em;
+        /* width: calc(100% - 20px); */
+        height: 20em;
         min-height: 1em;
         resize: vertical;
+        
     }
 
     .variables {
         margin-left:0px;
-        width: calc(100% - 6px);
         height: 3em;
         min-height: 1em;
         resize: vertical;
@@ -230,22 +248,22 @@ onMount(async () => {
     }
 
     .result-panel {
-        border: 1px solid silver;
+        /* border: 1px solid silver; */
         border-left-width: 0;
     }
 
     .response-area {
-        background-color: whitesmoke;
+        /* background-color: whitesmoke; */
         padding: 10px;
     }
 
     .eval-area {
-        background-color: whitesmoke;
-        padding: 10px;
+        /* background-color: whitesmoke; */
+        /* padding: 10px; */
     }
 
     .eval-text {
-        width: calc(100% - 6px);
+        /* width: calc(100% - 6px); */
     }
 
     .eval-result {
@@ -264,13 +282,34 @@ onMount(async () => {
         /* font-size: 90%; */
         letter-spacing: 0.1em;
         padding: 0px 5px 0px 5px;
-        border: 1px solid rgba(70,130,180,0.5);
-        border-radius: 2px;
-        background-color: transparent;
-        color: steelblue;
+        border: 1px solid steelblue;
+        border-radius: 4px;
+        background-color: steelblue;
+        color: white;
 
     }
 
+    form {
+        /* padding: 10px; */
+        border-right: 1px solid silver
+    }
+
+    textarea {
+        padding: 10px;
+        width: calc(100% - 20px);
+        /* font-size: inherit; */
+        font-size: 16px;
+        /* font-size: 100%; */
+        font-family: 'Roboto','Roboto Mono', monospace;
+        border-left-width: 0;
+        border-right-width: 0;
+        border-color: silver;
+
+    }
+
+    .json-toggle {
+        color: darkmagenta !important;
+    }
  
 </style>
 
@@ -285,7 +324,7 @@ onMount(async () => {
             <div class="header" >ARGUMENTS</div>
             <div class="fieldlist" >
                 {#each node.args as arg, index (arg.name)}
-                <Argument node={arg} on:change={getArgsList} parentid="{parentid}-{node.name}-argument"/>
+                <Argument node={arg} bind:getText={arg.getText} on:change={getArgsList} parentid="{parentid}-{node.name}-argument"/>
                 {/each}
             </div>
             {/if}
@@ -293,39 +332,46 @@ onMount(async () => {
             
             <div>
                 <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}</div>
-                <Type typeName={node.graphqlType = node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}" bind:fieldList={fieldlist}/>
+                <Type typeName={node.graphqlType = node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} bind:fieldList={fieldlist}/>
+                <!-- on:change={typeChangeHandler} -->
+                <!-- bind:fieldList={fieldlist} -->
             </div>
 
-            <form bind:this={form} on:submit={submitForm}>
-                <div>
-                    <div class="header" >QUERY</div>
-                    <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change>{request}</textarea>
-                </div>
-                <div>
-                    <div class="header" >VARIABLES</div>
-                    <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables} on:change></textarea>
-                </div>
-                <div>
-                    <div class="header">FILE</div>
-                    <input type="file" name="input-file">
-                </div>
-                <div class="buttons">
-                    <input type="submit"  value="TEST">
-                </div>
-            </form> 
     </div>
-    <pre class="request " bind:this={requestArea}>{request}</pre>
+
+    <form bind:this={form} on:submit={submitForm}>
+        <div>
+            <div class="header" >QUERY</div>
+            <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change bind:this={queryArea}>{request}</textarea>
+        </div>
+        <div>
+            <div class="header" >VARIABLES</div>
+            <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables} on:change></textarea>
+        </div>
+        <div>
+            <div class="header">FILE</div>
+            <input type="file" name="input-file">
+        </div>
+        <div class="buttons">
+            <input type="submit"  value="TEST">
+        </div>
+    </form> 
+
+
     <div class="result-panel">
+        <div class="header">RESPONSE</div>
         <div class="response-area">
-            <div class="header">RESPONSE</div>
-            <div class="response " bind:this={responseArea}></div>
+            <div>response = <span class="json-literal">{response?'':null}</span></div>
+            <div class="response" bind:this={responseArea}></div>
         </div>
         <div class="eval-area">
             <span class="header">TEST</span>
             <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response != null</textarea> 
-            <input type="button" class="try-button" value="TRY THE CODE" on:click={evaluate}>
-            <span class="eval-result">{testResult}</span>
-            <span class="eval-errors">{@html evalErrors}</span>
+            <div class="buttons2">
+                <input type="button" class="try-button" value="TRY THE CODE" on:click={evaluate}>
+                <span class="eval-result">{testResult}</span>
+                <span class="eval-errors">{@html evalErrors}</span>
+            </div>
         </div>
     </div>
 </div>
