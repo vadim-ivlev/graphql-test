@@ -8,6 +8,7 @@ import TypeField from './TypeField.svelte'
 export let parentid = ''
 export let scheme = {}
 export let typeName = ''
+export let showCheckbox = true
 
 export let getText = function () {
     let a =[]
@@ -112,7 +113,7 @@ function getNode(scheme, typeName){
                 {#if node.fields}
                     <div class="fieldlist">
                     {#each node.fields as f,ind}
-                        <TypeField  bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} parentid="{parentid}-{typeName}" on:change />
+                        <TypeField {showCheckbox} bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} parentid="{parentid}-{typeName}" on:change />
                     {/each}
                     </div>
                 {/if}

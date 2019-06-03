@@ -5,10 +5,14 @@ import Schemer from "./schemer/schemer.svelte";
 import JsonView from "./JsonView.svelte"
 import List from "./List.svelte"
 
+export let parentid='tab1'
+
+
 let url
 let scheme = {}
 let controls = []
 let ignoreChanges = true
+
 
 // https://stackoverflow.com/questions/2856513/how-can-i-trigger-an-onchange-event-manually
 function dispatchChangeEvent(element) {
@@ -20,14 +24,6 @@ function dispatchChangeEvent(element) {
     });
 
     element.dispatchEvent(event);
-
-    // if ("createEvent" in document) {
-    //     var evt = document.createEvent("HTMLEvents");
-    //     evt.initEvent("change", false, true);
-    //     element.dispatchEvent(evt);
-    // }
-    // else
-    //     element.fireEvent("onchange");
 }
 
 function getControls() {
@@ -36,7 +32,7 @@ function getControls() {
     for (let inp of inps) {
         let id = inp.getAttribute("id")
         if (!id) continue
-        // if (id[0]=='-') console.log(id)
+        if (id[0]=='-') console.log(id)
 
         let type = inp.getAttribute("type")
         let value = inp.value
@@ -48,7 +44,7 @@ function getControls() {
     for (let inp of inps) {
         let id = inp.getAttribute("id")
         if (!id) continue
-        // if (id[0]=='-') console.log(id)
+        if (id[0]=='-') console.log(id)
 
         let type = "textarea"
         let value = inp.value
@@ -77,7 +73,8 @@ function restoreFieldsWithEvents( withEvents = false) {
 
 function saveFields() {
     controls = getControls()
-    let key = `${window.location.href}|${url}`
+    // let key = `${window.location.href}|${url}`
+    let key = parentid
     let controlsStr = JSON.stringify(controls)
     localStorage.setItem(key, JSON.stringify(controls));
     console.log("saved: ", key, controlsStr.length )
@@ -85,7 +82,8 @@ function saveFields() {
 
 
 function restoreFields() {
-    let key = `${window.location.href}|${url}`
+    // let key = `${window.location.href}|${url}`
+    let key = parentid
     let controlsStr = localStorage.getItem(key)
     controls = JSON.parse(controlsStr)
 
@@ -139,15 +137,14 @@ input {
 
 
 <div class="root">
-    <Schemer bind:url bind:scheme on:change={changeHandler} />
+    <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
     <div>
         <input type="button" on:click={saveFields} value="save">
         <input type="button" on:click={restoreFields} value="restore">
     </div>
     <div class="main">
-        <List url={url} {scheme} on:change={changeHandler}/>
+        <List parentid="{parentid}-List" url={url} scheme={scheme} on:change={changeHandler}/>
     </div>
 
 </div>
 
-<!-- <JsonView json={scheme}/> -->

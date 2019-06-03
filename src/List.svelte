@@ -4,6 +4,7 @@ import Type from './Type.svelte'
 
 export let scheme 
 export let url 
+export let parentid = ''
 
 let mutations =[]
 let queries =[]
@@ -13,12 +14,22 @@ let usertypes=[]
 
 
 
-$: try {
+$: {
+    mutations =[]
+    queries =[]
+    types=[]
+    usertypes=[]
+    
+    console.log("List scheme changed")
+    
+    try {
     mutations = scheme.data.__schema.mutationType.fields
     queries = scheme.data.__schema.queryType.fields
     types = scheme.data.__schema.types.sort(compareTypes)
     usertypes = scheme.data.__schema.types.filter(t => t.name[0]!='_' && t.kind == 'OBJECT' && t.name != 'Query' && t.name != 'Mutation').sort(compareTypes)
     } catch(e){}
+}
+
 
 function compareTypes(t1, t2) {     
      if (t1.name > t2.name ){
@@ -36,7 +47,6 @@ function doTests(){
     for (let o of mutations) {
         o.test()
     }
-    // console.log(queries)
 }
 
 
@@ -47,23 +57,23 @@ function doTests(){
      <h4>Queries</h4>
      {#each queries as e}
           <div>
-          <Func url={url} bind:test={e.test} node={e} operation="query"  scheme={scheme} parentid="query" on:change/>
+          <Func url={url} bind:test={e.test} node={e} operation="query"  scheme={scheme} parentid="{parentid}-query" on:change/>
           </div>
      {/each}
 
      <h4>Mutations</h4>
      {#each mutations as e}
           <div>
-          <Func url={url} bind:test={e.test} node={e}  operation="mutation" scheme={scheme} parentid="mutation" on:change/>
+          <Func url={url} bind:test={e.test} node={e}  operation="mutation" scheme={scheme} parentid="{parentid}-mutation" on:change/>
           </div>
      {/each}
 
-     <!-- <h4>User types</h4>
+     <h4>User types</h4>
      {#each usertypes as t}
           <div>
-          <Type typeName={t.name} scheme={scheme} parentid="usertypes"/>
+          <Type showCheckbox={false} typeName={t.name} scheme={scheme} parentid="{parentid}-usertypes"/>
           </div>
-     {/each} -->
+     {/each}
 
      <!-- 
      <h4>All types</h4>

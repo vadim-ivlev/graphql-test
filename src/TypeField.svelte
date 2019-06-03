@@ -4,8 +4,10 @@ import Type from './Type.svelte'
 export let parentid = ''
 export let scheme
 export let node
+export let showCheckbox = true
 
 export let getText = function(e){
+    if (! checkboxElement) return ''
     if (checkboxElement.checked == false) return ''
     let value = fieldName + getTypeText()
     return value
@@ -42,7 +44,9 @@ let checkboxElement
 
 
 <div class="field">  
-    <input type="checkbox" checked id="{parentid}-{fieldName}" bind:this={checkboxElement}  on:change>
+    {#if showCheckbox}
+        <input type="checkbox" checked id="{parentid}-{fieldName}" bind:this={checkboxElement}  on:change>
+    {/if}
     <span class="field-name">{fieldName}</span>
     <Type scheme={scheme} typeName={typeName} bind:getText={getTypeText}  parentid="{parentid}-{fieldName}-type"  on:change/> 
     <br><span class="field-description">{node.description}</span> 

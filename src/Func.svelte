@@ -1,8 +1,9 @@
 
 <script>
 import { createEventDispatcher } from 'svelte'
-
 import { onMount } from 'svelte'
+// import { afterUpdate } from 'svelte'
+
 import Js from './JsonView.svelte'
 import Argument from './Argument.svelte'
 import Type from './Type.svelte'
@@ -14,30 +15,21 @@ export let scheme = {}
 export let node = {}
 export let operation = ""
 export let test = submitForm
-export let getArgs = getArgsList
-export let getFields = function(){
-    if (getTypeText) fieldlist = getTypeText()
-}
+
 
 let testResult =''
 let evalErrors =''
 let vis = false
-let fieldlist = ''
-let arglist = ''
+// let fieldlist = ''
+// let arglist = ''
 let request 
 let variables = ''
 let response = null
 
-$: {
-    request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
-    dispatchEvent()
-}
+let responseArea
+let evalTextarea
 
-$: {
-    let dummy = node
-    console.log("Func node changed")
-    if (getTypeText) fieldlist = getTypeText()
-}
+let getTypeText
 
 
 const dispatch = createEventDispatcher()
@@ -45,21 +37,61 @@ function dispatchEvent() {
 	dispatch('change', { text: 'State changed!' })
 }
 
+// $: {
+//     let dummy1 = scheme
+//     console.log("scheme changed")
+//     generateQuery()
+// }
+
+$: {
+    let dummy = node
+    console.log("node changed")
+    generateQuery()
+}
 
 function getArgsText() {
+
     let args = []
     for (let arg of node.args) {
+        // if (node.name == "get_broadcast" && arg.getText){
+        //     console.log("inside ", arg)
+        // }
+
         if (!arg.getText) continue
         let text = arg.getText()
         if (text) args.push(text)
     }
 
     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
+
     return argsText
 }
 
-function getArgsList() {
-    arglist = getArgsText() 
+
+
+function generateQuery(){
+    // console.log("generateQuery")
+
+    let arglist = getArgsText()
+    let fieldlist =getTypeText ? getTypeText() : ''
+    // console.log("args=", arglist, "fieldlist", fieldlist)
+    request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
+    dispatchEvent()
+}
+
+
+
+function argsChangeHandler() {
+    console.log("argsChangeHandler")
+    generateQuery()
+}
+
+
+
+
+function typeChangeHandler(params) {
+    console.log("typeChangeHandler")
+    generateQuery()
 }
 
 
@@ -103,23 +135,14 @@ function evaluate(){
 }
 
 
-let getTypeText
-function typeChangeHandler(params) {
-    console.log("typeChangeHandler")
-   if (getTypeText) fieldlist = getTypeText()
-}
-
-
 let form
 let formArea
-let responseArea
-let evalTextarea
-
 onMount(async () => {
     window.$(formArea).resizable({ handles: "e" });
     window.$(form).resizable({ handles: "e" });
-    console.log(" Func onMount")
+    // console.log(" Func onMount")
 })
+
 
 </script>
 
@@ -143,7 +166,7 @@ onMount(async () => {
     }
 
     .form-area { 
-        border-right: 1px solid silver;
+        border-right: 1px solid steelblue;
         min-width:380px;
     }
 
@@ -202,7 +225,7 @@ onMount(async () => {
     .response {
         overflow:auto;
         background-color: white;
-        font-family: 'Roboto','Roboto Mono', monospace;
+        font-family: 'Roboto', 'Roboto Mono', monospace;
         padding: 0;
     }
 
@@ -259,17 +282,18 @@ onMount(async () => {
     }
 
     form {
-        border-right: 1px solid silver
+        border-right: 1px solid steelblue
     }
 
     textarea {
         padding: 10px;
         width: calc(100% - 20px);
-        font-size: 16px;
-        font-family: 'Roboto','Roboto Mono', monospace;
+        font-size: 14px;
+        font-family: 'Roboto Mono','Roboto', monospace;
         border-left-width: 0;
         border-right-width: 0;
         border-color: silver;
+        color: darkmagenta;
     }
 
     .json-toggle {
@@ -278,63 +302,68 @@ onMount(async () => {
  
 </style>
 
-<a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
-<span class="test-result">{testResult}</span> 
-<span class="description">{node.description}</span>
-<div class="root" style="display:{vis?'grid':'none'}"  >
-    <div class="form-area" bind:this={formArea}>
-
-            {#if node.args}
-            <div class="header" >ARGUMENTS</div>
-            <div class="fieldlist" >
-                {#each node.args as arg, index (arg.name)}
-                <Argument node={arg} bind:getText={arg.getText} on:change={getArgsList} parentid="{parentid}-{node.name}-argument"/>
-                {/each}
-            </div>
-            {/if}
-        
-            
-            <div>
-                <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}
-                <input type="button" value="getText" on:click={()=> console.log(getTypeText())}>
-                </div>
-                <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} on:change={typeChangeHandler}/>
-            </div>
-
+<div>
+    <div>
+    
     </div>
+    <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
+    <span class="test-result">{testResult}</span> 
+    <span class="description">{node.description}</span>
+    <div class="root" style="display:{vis?'grid':'none'}"  >
+        <div class="form-area" bind:this={formArea}>
 
-    <form bind:this={form} on:submit={submitForm}>
-        <div>
-            <div class="header" >QUERY</div>
-            <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change >{request}</textarea>
+                {#if node.args}
+                <div class="header" >ARGUMENTS</div>
+                <div class="fieldlist" >
+                    {#each node.args as arg, index (arg.name)}
+                    <Argument node={arg} bind:getText={arg.getText} on:change={argsChangeHandler} parentid="{parentid}-{node.name}-argument"/>
+                    {/each}
+                </div>
+                {/if}
+            
+                
+                <div>
+                    <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}
+                    <input type="button" value="getText" on:click={()=> console.log(getTypeText())}>
+                    </div>
+                    <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} on:change={typeChangeHandler}/>
+                </div>
+
         </div>
-        <div>
-            <div class="header" >VARIABLES</div>
-            <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables} on:change></textarea>
-        </div>
-        <div>
-            <div class="header">FILE</div>
-            <input type="file" name="input-file">
-        </div>
-        <div class="buttons">
-            <input type="submit"  value="TEST">
-        </div>
-    </form> 
+
+        <form bind:this={form} on:submit={submitForm}>
+            <div>
+                <div class="header" >QUERY</div>
+                <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change >{request}</textarea>
+            </div>
+            <div>
+                <div class="header" >VARIABLES</div>
+                <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables} on:change></textarea>
+            </div>
+            <div>
+                <div class="header">FILE</div>
+                <input type="file" name="input-file">
+            </div>
+            <div class="buttons">
+                <input type="submit"  value="TEST">
+            </div>
+        </form> 
 
 
-    <div class="result-panel">
-        <div class="header">RESPONSE</div>
-        <div class="response-area">
-            <div>response = <span class="json-literal">{response?'':null}</span></div>
-            <div class="response" bind:this={responseArea}></div>
-        </div>
-        <div class="eval-area">
-            <span class="header">TEST</span>
-            <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response && !response.errors</textarea> 
-            <div class="buttons2">
-                <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
-                <span class="eval-result">{testResult}</span>
-                <span class="eval-errors">{@html evalErrors}</span>
+        <div class="result-panel">
+            <div class="header">RESPONSE</div>
+            <div class="response-area">
+                <div>response = <span class="json-literal">{response?'':null}</span></div>
+                <div class="response" bind:this={responseArea}></div>
+            </div>
+            <div class="eval-area">
+                <span class="header">TEST</span>
+                <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response && !response.errors</textarea> 
+                <div class="buttons2">
+                    <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
+                    <span class="eval-result">{testResult}</span>
+                    <span class="eval-errors">{@html evalErrors}</span>
+                </div>
             </div>
         </div>
     </div>
