@@ -299,16 +299,18 @@ onMount(async () => {
     .json-toggle {
         color: darkmagenta !important;
     }
- 
+    
+    .outer {
+        margin: 0 3% 0 3%;
+    }
 </style>
 
 <div>
-    <div>
-    
+    <div class="outer">
+        <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
+        <span class="test-result">{testResult}</span> 
+        <span class="description">{node.description}</span>
     </div>
-    <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
-    <span class="test-result">{testResult}</span> 
-    <span class="description">{node.description}</span>
     <div class="root" style="display:{vis?'grid':'none'}"  >
         <div class="form-area" bind:this={formArea}>
 
