@@ -54,7 +54,7 @@ function doTests(){
      <h4>Mutations</h4>
      {#each mutations as e}
           <div>
-          <Func url={url} node={e}  operation="mutation" scheme={scheme} parentid="mutation" on:change/>
+          <Func url={url} bind:test={e.test} node={e}  operation="mutation" scheme={scheme} parentid="mutation" on:change/>
           </div>
      {/each}
 

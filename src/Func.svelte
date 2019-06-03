@@ -24,26 +24,21 @@ let evalErrors =''
 let vis = false
 let fieldlist = ''
 let arglist = ''
-let request //= ''
+let request 
 let variables = ''
 let response = null
-// let returnType = ''
-// let response
 
 $: {
     request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
     dispatchEvent()
 }
 
-// let dummy
 $: {
     let dummy = node
     console.log("Func node changed")
-    // arglist = getArgsText() 
     if (getTypeText) fieldlist = getTypeText()
 }
 
-// $: returnType = node.graphqlType = node.type.name || node.type.ofType.name
 
 const dispatch = createEventDispatcher()
 function dispatchEvent() {
@@ -51,20 +46,7 @@ function dispatchEvent() {
 }
 
 
-
-// function doTest(){
-//     testResult = "passed"
-// }
-
-
-
 function getArgsText() {
-    // let checked = node.args.filter( n => n.checked && n.value != null )
-    // let args = checked.map( n => {
-    //     let val = n.graphqlType == 'String'?`"${n.value.replace(/"/g,'\\"')}"`: n.value
-    //     return `  ${n.name}:${val}`
-    // })
-
     let args = []
     for (let arg of node.args) {
         if (!arg.getText) continue
@@ -92,7 +74,6 @@ function submitForm(event){
         success: function(res) {
             response = res
             window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false});
-            // testResult = "passed" +JSON.stringify(res, null,'  ').length
             evaluate()
             }
     })
@@ -125,23 +106,16 @@ function evaluate(){
 let getTypeText
 function typeChangeHandler(params) {
     console.log("typeChangeHandler")
-    // request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
-    // fieldlist = getTypeText()
-    if (getTypeText) fieldlist = getTypeText()
-    // console.log(fieldlist)
+   if (getTypeText) fieldlist = getTypeText()
 }
 
 
 let form
-// let rootArea
 let formArea
-// let queryArea
 let responseArea
 let evalTextarea
 
 onMount(async () => {
-    // getArgsList()
-    // if (getTypeText) fieldlist = getTypeText()
     window.$(formArea).resizable({ handles: "e" });
     window.$(form).resizable({ handles: "e" });
     console.log(" Func onMount")
@@ -170,16 +144,14 @@ onMount(async () => {
 
     .form-area { 
         border-right: 1px solid silver;
-        /* padding: 10px; */
         min-width:380px;
-        /* background-color: whitesmoke; */
     }
-
 
     .name { 
         display: inline-block;
         min-width: 200px;
     }
+
     .description {
         display: inline-block;
         color: slategray;
@@ -217,7 +189,6 @@ onMount(async () => {
 
     input[type="submit"]{
         font-family: 'Roboto','Roboto Condensed';
-        /* font-variant: small-caps; */
         font-weight: bold;
         font-size: 14.4px;
         letter-spacing: 0.1em;
@@ -228,22 +199,17 @@ onMount(async () => {
         color: white;
     }
 
-
     .response {
         overflow:auto;
-        /* border: 1px solid silver; */
         background-color: white;
-        /* border-left-width: 0; */
         font-family: 'Roboto','Roboto Mono', monospace;
         padding: 0;
     }
 
     .query {
-        /* width: calc(100% - 20px); */
         height: 20em;
         min-height: 1em;
         resize: vertical;
-        
     }
 
     .variables {
@@ -259,22 +225,17 @@ onMount(async () => {
     }
 
     .result-panel {
-        /* border: 1px solid silver; */
         border-left-width: 0;
     }
 
     .response-area {
-        /* background-color: whitesmoke; */
         padding: 10px;
     }
 
     .eval-area {
-        /* background-color: whitesmoke; */
-        /* padding: 10px; */
     }
 
     .eval-text {
-        /* width: calc(100% - 6px); */
     }
 
     .eval-result {
@@ -288,34 +249,27 @@ onMount(async () => {
 
     .try-button {
         font-family: 'Roboto Condensed';
-        /* font-variant: small-caps; */
         font-weight: bold;
-        /* font-size: 90%; */
         letter-spacing: 0.1em;
         padding: 5px 15px 5px 15px;
         border: 1px solid steelblue;
         border-radius: 4px;
         background-color: transparent;
         color: steelblue;
-
     }
 
     form {
-        /* padding: 10px; */
         border-right: 1px solid silver
     }
 
     textarea {
         padding: 10px;
         width: calc(100% - 20px);
-        /* font-size: inherit; */
         font-size: 16px;
-        /* font-size: 100%; */
         font-family: 'Roboto','Roboto Mono', monospace;
         border-left-width: 0;
         border-right-width: 0;
         border-color: silver;
-
     }
 
     .json-toggle {
@@ -327,9 +281,7 @@ onMount(async () => {
 <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
 <span class="test-result">{testResult}</span> 
 <span class="description">{node.description}</span>
-<!-- {#if vis} -->
 <div class="root" style="display:{vis?'grid':'none'}"  >
-<!-- bind:this={rootArea} -->
     <div class="form-area" bind:this={formArea}>
 
             {#if node.args}
@@ -347,9 +299,6 @@ onMount(async () => {
                 <input type="button" value="getText" on:click={()=> console.log(getTypeText())}>
                 </div>
                 <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} on:change={typeChangeHandler}/>
-                <!-- bind:fieldList={fieldlist} -->
-                <!-- on:change={typeChangeHandler} -->
-                <!-- bind:fieldList={fieldlist} -->
             </div>
 
     </div>
@@ -358,7 +307,6 @@ onMount(async () => {
         <div>
             <div class="header" >QUERY</div>
             <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change >{request}</textarea>
-            <!-- bind:this={queryArea} -->
         </div>
         <div>
             <div class="header" >VARIABLES</div>
@@ -382,7 +330,7 @@ onMount(async () => {
         </div>
         <div class="eval-area">
             <span class="header">TEST</span>
-            <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response != null</textarea> 
+            <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response && !response.errors</textarea> 
             <div class="buttons2">
                 <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
                 <span class="eval-result">{testResult}</span>
@@ -391,4 +339,3 @@ onMount(async () => {
         </div>
     </div>
 </div>
-<!-- {/if} -->

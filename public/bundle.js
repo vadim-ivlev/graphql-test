@@ -1238,22 +1238,19 @@ query IntrospectionQuery {
 				span1 = element("span");
 				t4 = text(t4_value);
 				attr(input, "type", "checkbox");
+				input.checked = true;
 				input.id = input_id_value = "" + ctx.parentid + "-" + ctx.fieldName;
-				input.className = "svelte-x6f70e";
-				add_location(input, file$3, 80, 4, 1592);
-				span0.className = "field-name svelte-x6f70e";
-				add_location(span0, file$3, 81, 4, 1710);
-				br.className = "svelte-x6f70e";
-				add_location(br, file$3, 85, 4, 1965);
-				span1.className = "field-description svelte-x6f70e";
-				add_location(span1, file$3, 85, 8, 1969);
-				div.className = "field svelte-x6f70e";
-				add_location(div, file$3, 79, 0, 1549);
-
-				dispose = [
-					listen(input, "change", ctx.input_change_handler),
-					listen(input, "change", ctx.change_handler)
-				];
+				input.className = "svelte-1y7pqhv";
+				add_location(input, file$3, 44, 4, 751);
+				span0.className = "field-name svelte-1y7pqhv";
+				add_location(span0, file$3, 45, 4, 854);
+				br.className = "svelte-1y7pqhv";
+				add_location(br, file$3, 47, 4, 1029);
+				span1.className = "field-description svelte-1y7pqhv";
+				add_location(span1, file$3, 47, 8, 1033);
+				div.className = "field svelte-1y7pqhv";
+				add_location(div, file$3, 43, 0, 725);
+				dispose = listen(input, "change", ctx.change_handler);
 			},
 
 			l: function claim(nodes) {
@@ -1263,9 +1260,6 @@ query IntrospectionQuery {
 			m: function mount(target, anchor) {
 				insert(target, div, anchor);
 				append(div, input);
-
-				input.checked = ctx.checked;
-
 				add_binding_callback(() => ctx.input_binding(input, null));
 				append(div, t0);
 				append(div, span0);
@@ -1276,12 +1270,10 @@ query IntrospectionQuery {
 				append(div, br);
 				append(div, span1);
 				append(span1, t4);
-				add_binding_callback(() => ctx.div_binding(div, null));
 				current = true;
 			},
 
 			p: function update(changed, ctx) {
-				if (changed.checked) input.checked = ctx.checked;
 				if (changed.items) {
 					ctx.input_binding(null, input);
 					ctx.input_binding(input, null);
@@ -1302,11 +1294,6 @@ query IntrospectionQuery {
 
 				if ((!current || changed.node) && t4_value !== (t4_value = ctx.node.description)) {
 					set_data(t4, t4_value);
-				}
-
-				if (changed.items) {
-					ctx.div_binding(null, div);
-					ctx.div_binding(div, null);
 				}
 			},
 
@@ -1331,52 +1318,23 @@ query IntrospectionQuery {
 
 				type.$destroy();
 
-				ctx.div_binding(null, div);
-				run_all(dispose);
+				dispose();
 			}
 		};
 	}
 
 	function instance$3($$self, $$props, $$invalidate) {
 		let { parentid = '', scheme, node, getText = function(e){
-	    // console.log("TypeField getText() parentid = ", parentid, checkboxElement.checked)
 	    if (checkboxElement.checked == false) return ''
-	    
-	    // let value = fieldName + typeComponent.getText()
 	    let value = fieldName + getTypeText();
-	    // let value = fieldName + typeFieldList
 	    return value
 	} } = $$props;
 
 
-	// const dispatch = createEventDispatcher()
-	// function dispatchEvent(e) {
-	// 	dispatch('statechange', { text: 'State changed!', target: e.target })
-	// }
-
-
-
-	let root;
-	let checked = true;
 	let fieldName = node.name;
 	let typeName = node.type.kind == "LIST" ? node.type.ofType.name : node.type.name;
-	// let treeNode 
-	// let typeFieldList
 	let getTypeText;
-
 	let checkboxElement;
-	// let typeElement
-
-
-	// $: {
-	//     if (node) {
-	//         if (!tree[fieldName]) tree[fieldName]={}
-	//         treeNode=tree[fieldName]
-	//         treeNode.checked = checked
-	//         treeNode.typeName = typeName
-	//         treeNode.getText = getText
-	//     }
-	// }
 
 		function change_handler(event) {
 			bubble($$self, event);
@@ -1384,11 +1342,6 @@ query IntrospectionQuery {
 
 		function change_handler_1(event) {
 			bubble($$self, event);
-		}
-
-		function input_change_handler() {
-			checked = this.checked;
-			$$invalidate('checked', checked);
 		}
 
 		function input_binding($$node, check) {
@@ -1399,11 +1352,6 @@ query IntrospectionQuery {
 		function type_getText_binding(value) {
 			getTypeText = value;
 			$$invalidate('getTypeText', getTypeText);
-		}
-
-		function div_binding($$node, check) {
-			root = $$node;
-			$$invalidate('root', root);
 		}
 
 		$$self.$set = $$props => {
@@ -1418,18 +1366,14 @@ query IntrospectionQuery {
 			scheme,
 			node,
 			getText,
-			root,
-			checked,
 			fieldName,
 			typeName,
 			getTypeText,
 			checkboxElement,
 			change_handler,
 			change_handler_1,
-			input_change_handler,
 			input_binding,
-			type_getText_binding,
-			div_binding
+			type_getText_binding
 		};
 	}
 
@@ -1492,7 +1436,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (188:0) {#if node}
+	// (104:0) {#if node}
 	function create_if_block$1(ctx) {
 		var div, current_block_type_index, if_block, current;
 
@@ -1515,8 +1459,8 @@ query IntrospectionQuery {
 			c: function create() {
 				div = element("div");
 				if_block.c();
-				div.className = "self svelte-1bwk5o0";
-				add_location(div, file$4, 188, 0, 3932);
+				div.className = "self svelte-s94tpu";
+				add_location(div, file$4, 104, 0, 1848);
 			},
 
 			m: function mount(target, anchor) {
@@ -1570,7 +1514,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (192:4) {:else}
+	// (108:4) {:else}
 	function create_else_block(ctx) {
 		var a, t0, a_class_value, t1, div, span, t2_value = ctx.node.description, t2, t3, current, dispose;
 
@@ -1586,14 +1530,14 @@ query IntrospectionQuery {
 				t2 = text(t2_value);
 				t3 = space();
 				if (if_block) if_block.c();
-				a.className = a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-1bwk5o0";
+				a.className = a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-s94tpu";
 				a.href = true;
-				add_location(a, file$4, 192, 8, 4054);
-				span.className = "description svelte-1bwk5o0";
-				add_location(span, file$4, 195, 16, 4263);
-				div.className = "frame svelte-1bwk5o0";
+				add_location(a, file$4, 108, 8, 1970);
+				span.className = "description svelte-s94tpu";
+				add_location(span, file$4, 110, 16, 2152);
+				div.className = "frame svelte-s94tpu";
 				set_style(div, "display", (ctx.vis?'block':'none'));
-				add_location(div, file$4, 194, 12, 4190);
+				add_location(div, file$4, 109, 12, 2079);
 				dispose = listen(a, "click", prevent_default(ctx.click_handler));
 			},
 
@@ -1614,7 +1558,7 @@ query IntrospectionQuery {
 					set_data(t0, ctx.typeName);
 				}
 
-				if ((!current || changed.vis) && a_class_value !== (a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-1bwk5o0")) {
+				if ((!current || changed.vis) && a_class_value !== (a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-s94tpu")) {
 					a.className = a_class_value;
 				}
 
@@ -1668,7 +1612,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (190:4) {#if node.kind=="SCALAR"}
+	// (106:4) {#if node.kind=="SCALAR"}
 	function create_if_block_1(ctx) {
 		var span, t;
 
@@ -1676,8 +1620,8 @@ query IntrospectionQuery {
 			c: function create() {
 				span = element("span");
 				t = text(ctx.typeName);
-				span.className = "scalar-type svelte-1bwk5o0";
-				add_location(span, file$4, 190, 9, 3990);
+				span.className = "scalar-type svelte-s94tpu";
+				add_location(span, file$4, 106, 9, 1906);
 			},
 
 			m: function mount(target, anchor) {
@@ -1702,7 +1646,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (197:16) {#if node.fields}
+	// (112:16) {#if node.fields}
 	function create_if_block_2(ctx) {
 		var div, current;
 
@@ -1734,8 +1678,8 @@ query IntrospectionQuery {
 				for (var i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].c();
 				}
-				div.className = "fieldlist svelte-1bwk5o0";
-				add_location(div, file$4, 197, 20, 4369);
+				div.className = "fieldlist svelte-s94tpu";
+				add_location(div, file$4, 112, 20, 2258);
 			},
 
 			m: function mount(target, anchor) {
@@ -1796,9 +1740,9 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (199:20) {#each node.fields as f,ind}
+	// (114:20) {#each node.fields as f,ind}
 	function create_each_block(ctx) {
-		var updating_getText, t, current;
+		var updating_getText, current;
 
 		function typefield_getText_binding(value) {
 			ctx.typefield_getText_binding.call(null, value, ctx);
@@ -1822,12 +1766,10 @@ query IntrospectionQuery {
 		return {
 			c: function create() {
 				typefield.$$.fragment.c();
-				t = space();
 			},
 
 			m: function mount(target, anchor) {
 				mount_component(typefield, target, anchor);
-				insert(target, t, anchor);
 				current = true;
 			},
 
@@ -1857,10 +1799,6 @@ query IntrospectionQuery {
 
 			d: function destroy(detaching) {
 				typefield.$destroy(detaching);
-
-				if (detaching) {
-					detach(t);
-				}
 			}
 		};
 	}
@@ -1947,77 +1885,23 @@ query IntrospectionQuery {
 
 	// P R O P S
 	let { parentid = '', scheme = {}, typeName = '', getText = function () {
-	    // console.log("Type getText parentid=", parentid)
 	    let a =[];
 	    let p = '  ';
 
-	    // if (!node || !node.fields) return ''
-	    // for (let f of node.fields) {
-	    //     // let v = f.component.getText()
-	    //     if (!f.getText) continue
-	    //     let v = f.getText()
-	        
-	    //     if (v){
-	    //         a.push( p + v )
-	    //     }
-	    // }
-
 	    for (let key in fieldFunctions) {
-	        // console.log(key)
 	        let v = fieldFunctions[key]();
-	        if (v){
-	            a.push( p + v );
-	        }
+	        if (v) a.push( p + v );
 	    }
 
-	    if (a.length > 0) {
+	    if (a.length > 0) 
 	        return '{\n' +a.join('\n') + '\n'+p+'}'
-	    }
+	    
 	    return ''
 	} } = $$props;
 
 	let fieldFunctions = {};
-
-
-
-	// let nodes 
 	let node = getNode(scheme, typeName);
 	let vis = false;
-
-
-
-
-
-	// function getFields(n, level){
-	//     let a =[]
-	//     let p = '  '
-	//     for (let key in n) {
-	//         if (n[key].checked){
-	//             a.push( p.repeat(level+1)+ key + getFields(n[key], level+1) )
-	//         }
-	//     }
-	//     if (a.length > 0) {
-	//         return '{\n' +a.join('\n') + '\n'+p.repeat(level)+ '}'
-	//     }
-	//     return ''
-	// }
-
-	// function showTree(e) {
-	//     console.log(fieldList)
-	// }
-
-	// function onFieldStateChange(e) {
-	// //    fieldList = getFields(tree,0) 
-	// //    fieldList = getText()
-	//    dispatchEvent(e)
-	// //    console.log(e)
-	// //    console.log(fieldList)
-	// }
-
-	// onMount(async () => {
-	//     // fieldList = getFields(tree,0)
-	//     fieldList = getText()    
-	// })
 
 		function change_handler(event) {
 			bubble($$self, event);
@@ -2106,7 +1990,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (335:12) {#if node.args}
+	// (287:12) {#if node.args}
 	function create_if_block$2(ctx) {
 		var div0, t_1, div1, each_blocks = [], each_1_lookup = new Map(), current;
 
@@ -2128,10 +2012,10 @@ query IntrospectionQuery {
 				div1 = element("div");
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
-				div0.className = "header svelte-ncqddm";
-				add_location(div0, file$5, 335, 12, 7393);
-				div1.className = "fieldlist svelte-ncqddm";
-				add_location(div1, file$5, 336, 12, 7442);
+				div0.className = "header svelte-51q1vr";
+				add_location(div0, file$5, 287, 12, 5942);
+				div1.className = "fieldlist svelte-51q1vr";
+				add_location(div1, file$5, 288, 12, 5991);
 			},
 
 			m: function mount(target, anchor) {
@@ -2177,7 +2061,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (338:16) {#each node.args as arg, index (arg.name)}
+	// (290:16) {#each node.args as arg, index (arg.name)}
 	function create_each_block$1(key_1, ctx) {
 		var first, updating_getText, current;
 
@@ -2345,83 +2229,83 @@ query IntrospectionQuery {
 				t33 = text(ctx.testResult);
 				t34 = space();
 				span5 = element("span");
-				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-ncqddm";
+				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-51q1vr";
 				a.href = true;
-				add_location(a, file$5, 326, 0, 6988);
-				span0.className = "test-result svelte-ncqddm";
-				add_location(span0, file$5, 327, 0, 7098);
-				span1.className = "description svelte-ncqddm";
-				add_location(span1, file$5, 328, 0, 7145);
+				add_location(a, file$5, 280, 0, 5586);
+				span0.className = "test-result svelte-51q1vr";
+				add_location(span0, file$5, 281, 0, 5696);
+				span1.className = "description svelte-51q1vr";
+				add_location(span1, file$5, 282, 0, 5743);
 				attr(input0, "type", "button");
 				input0.value = "getText";
-				add_location(input0, file$5, 346, 16, 7862);
-				div0.className = "header svelte-ncqddm";
-				add_location(div0, file$5, 345, 16, 7776);
-				add_location(div1, file$5, 344, 12, 7754);
-				div2.className = "form-area svelte-ncqddm";
-				add_location(div2, file$5, 332, 4, 7307);
-				div3.className = "header svelte-ncqddm";
-				add_location(div3, file$5, 358, 12, 8417);
+				add_location(input0, file$5, 298, 16, 6411);
+				div0.className = "header svelte-51q1vr";
+				add_location(div0, file$5, 297, 16, 6325);
+				add_location(div1, file$5, 296, 12, 6303);
+				div2.className = "form-area svelte-51q1vr";
+				add_location(div2, file$5, 284, 4, 5856);
+				div3.className = "header svelte-51q1vr";
+				add_location(div3, file$5, 307, 12, 6807);
 				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
 				textarea0.name = "query";
-				textarea0.className = "query svelte-ncqddm";
+				textarea0.className = "query svelte-51q1vr";
 				textarea0.value = ctx.request;
-				add_location(textarea0, file$5, 359, 12, 8462);
-				add_location(div4, file$5, 357, 8, 8399);
-				div5.className = "header svelte-ncqddm";
-				add_location(div5, file$5, 363, 12, 8649);
+				add_location(textarea0, file$5, 308, 12, 6852);
+				add_location(div4, file$5, 306, 8, 6789);
+				div5.className = "header svelte-51q1vr";
+				add_location(div5, file$5, 311, 12, 6996);
 				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
 				textarea1.name = "variables";
-				textarea1.className = "variables svelte-ncqddm";
-				add_location(textarea1, file$5, 364, 12, 8698);
-				add_location(div6, file$5, 362, 8, 8631);
-				div7.className = "header svelte-ncqddm";
-				add_location(div7, file$5, 367, 12, 8867);
+				textarea1.className = "variables svelte-51q1vr";
+				add_location(textarea1, file$5, 312, 12, 7045);
+				add_location(div6, file$5, 310, 8, 6978);
+				div7.className = "header svelte-51q1vr";
+				add_location(div7, file$5, 315, 12, 7214);
 				attr(input1, "type", "file");
 				input1.name = "input-file";
-				add_location(input1, file$5, 368, 12, 8910);
-				add_location(div8, file$5, 366, 8, 8849);
+				add_location(input1, file$5, 316, 12, 7257);
+				add_location(div8, file$5, 314, 8, 7196);
 				attr(input2, "type", "submit");
 				input2.value = "TEST";
-				input2.className = "svelte-ncqddm";
-				add_location(input2, file$5, 371, 12, 9005);
-				div9.className = "buttons svelte-ncqddm";
-				add_location(div9, file$5, 370, 8, 8971);
-				form_1.className = "svelte-ncqddm";
-				add_location(form_1, file$5, 356, 4, 8344);
-				div10.className = "header svelte-ncqddm";
-				add_location(div10, file$5, 377, 8, 9110);
+				input2.className = "svelte-51q1vr";
+				add_location(input2, file$5, 319, 12, 7352);
+				div9.className = "buttons svelte-51q1vr";
+				add_location(div9, file$5, 318, 8, 7318);
+				form_1.className = "svelte-51q1vr";
+				add_location(form_1, file$5, 305, 4, 6734);
+				div10.className = "header svelte-51q1vr";
+				add_location(div10, file$5, 325, 8, 7457);
 				span2.className = "json-literal";
-				add_location(span2, file$5, 379, 28, 9209);
-				add_location(div11, file$5, 379, 12, 9193);
-				div12.className = "response svelte-ncqddm";
-				add_location(div12, file$5, 380, 12, 9280);
-				div13.className = "response-area svelte-ncqddm";
-				add_location(div13, file$5, 378, 8, 9153);
-				span3.className = "header svelte-ncqddm";
-				add_location(span3, file$5, 383, 12, 9393);
+				add_location(span2, file$5, 327, 28, 7556);
+				add_location(div11, file$5, 327, 12, 7540);
+				div12.className = "response svelte-51q1vr";
+				add_location(div12, file$5, 328, 12, 7627);
+				div13.className = "response-area svelte-51q1vr";
+				add_location(div13, file$5, 326, 8, 7500);
+				span3.className = "header svelte-51q1vr";
+				add_location(span3, file$5, 331, 12, 7740);
 				textarea2.rows = "3";
 				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
-				textarea2.className = "eval-text svelte-ncqddm";
-				textarea2.value = "response != null";
-				add_location(textarea2, file$5, 384, 12, 9438);
+				textarea2.className = "eval-text svelte-51q1vr";
+				textarea2.value = "response && !response.errors";
+				add_location(textarea2, file$5, 332, 12, 7785);
 				attr(input3, "type", "button");
-				input3.className = "try-button svelte-ncqddm";
+				input3.className = "try-button svelte-51q1vr";
 				input3.value = "TRY TEST";
-				add_location(input3, file$5, 386, 16, 9619);
-				span4.className = "eval-result svelte-ncqddm";
-				add_location(span4, file$5, 387, 16, 9713);
-				span5.className = "eval-errors svelte-ncqddm";
-				add_location(span5, file$5, 388, 16, 9775);
-				div14.className = "buttons2 svelte-ncqddm";
-				add_location(div14, file$5, 385, 12, 9580);
-				div15.className = "eval-area svelte-ncqddm";
-				add_location(div15, file$5, 382, 8, 9357);
-				div16.className = "result-panel svelte-ncqddm";
-				add_location(div16, file$5, 376, 4, 9075);
-				div17.className = "root svelte-ncqddm";
+				add_location(input3, file$5, 334, 16, 7978);
+				span4.className = "eval-result svelte-51q1vr";
+				add_location(span4, file$5, 335, 16, 8072);
+				span5.className = "eval-errors svelte-51q1vr";
+				add_location(span5, file$5, 336, 16, 8134);
+				div14.className = "buttons2 svelte-51q1vr";
+				add_location(div14, file$5, 333, 12, 7939);
+				div15.className = "eval-area svelte-51q1vr";
+				add_location(div15, file$5, 330, 8, 7704);
+				div16.className = "result-panel svelte-51q1vr";
+				add_location(div16, file$5, 324, 4, 7422);
+				div17.className = "root svelte-51q1vr";
 				set_style(div17, "display", (ctx.vis?'grid':'none'));
-				add_location(div17, file$5, 330, 0, 7216);
+				add_location(div17, file$5, 283, 0, 5795);
 
 				dispose = [
 					listen(a, "click", prevent_default(ctx.click_handler)),
@@ -2520,7 +2404,7 @@ query IntrospectionQuery {
 					set_data(t0, t0_value);
 				}
 
-				if ((!current || changed.vis) && a_class_value !== (a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-ncqddm")) {
+				if ((!current || changed.vis) && a_class_value !== (a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-51q1vr")) {
 					a.className = a_class_value;
 				}
 
@@ -2672,11 +2556,10 @@ query IntrospectionQuery {
 	let vis = false;
 	let fieldlist = '';
 	let arglist = '';
-	let request; //= ''
+	let request; 
 	let variables = '';
 	let response = null;
 
-	// $: returnType = node.graphqlType = node.type.name || node.type.ofType.name
 
 	const dispatch = createEventDispatcher();
 	function dispatchEvent() {
@@ -2684,20 +2567,7 @@ query IntrospectionQuery {
 	}
 
 
-
-	// function doTest(){
-	//     testResult = "passed"
-	// }
-
-
-
 	function getArgsText() {
-	    // let checked = node.args.filter( n => n.checked && n.value != null )
-	    // let args = checked.map( n => {
-	    //     let val = n.graphqlType == 'String'?`"${n.value.replace(/"/g,'\\"')}"`: n.value
-	    //     return `  ${n.name}:${val}`
-	    // })
-
 	    let args = [];
 	    for (let arg of node.args) {
 	        if (!arg.getText) continue
@@ -2725,7 +2595,6 @@ query IntrospectionQuery {
 	        success: function(res) {
 	            $$invalidate('response', response = res);
 	            window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false});
-	            // testResult = "passed" +JSON.stringify(res, null,'  ').length
 	            evaluate();
 	            }
 	    });
@@ -2758,23 +2627,16 @@ query IntrospectionQuery {
 	let getTypeText;
 	function typeChangeHandler(params) {
 	    console.log("typeChangeHandler");
-	    // request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
-	    // fieldlist = getTypeText()
-	    if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
-	    // console.log(fieldlist)
+	   if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
 	}
 
 
 	let form;
-	// let rootArea
 	let formArea;
-	// let queryArea
 	let responseArea;
 	let evalTextarea;
 
 	onMount(async () => {
-	    // getArgsList()
-	    // if (getTypeText) fieldlist = getTypeText()
 	    window.$(formArea).resizable({ handles: "e" });
 	    window.$(form).resizable({ handles: "e" });
 	    console.log(" Func onMount");
@@ -2846,14 +2708,13 @@ query IntrospectionQuery {
 
 		$$self.$$.update = ($$dirty = { node: 1, getTypeText: 1, operation: 1, arglist: 1, fieldlist: 1 }) => {
 			if ($$dirty.node || $$dirty.getTypeText) { {
-	            console.log("Func node changed");
-	            // arglist = getArgsText() 
-	            if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
-	        } }
+	          console.log("Func node changed");
+	          if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
+	      } }
 			if ($$dirty.operation || $$dirty.node || $$dirty.arglist || $$dirty.fieldlist) { {
-	            $$invalidate('request', request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`);
-	            dispatchEvent();
-	        } }
+	          $$invalidate('request', request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`);
+	          dispatchEvent();
+	      } }
 		};
 
 		return {
@@ -2979,6 +2840,8 @@ query IntrospectionQuery {
 	function get_each_context$2(ctx, list, i) {
 		const child_ctx = Object.create(ctx);
 		child_ctx.e = list[i];
+		child_ctx.each_value = list;
+		child_ctx.e_index = i;
 		return child_ctx;
 	}
 
@@ -3064,18 +2927,27 @@ query IntrospectionQuery {
 
 	// (55:5) {#each mutations as e}
 	function create_each_block$2(ctx) {
-		var div, t, current;
+		var div, updating_test, t, current;
 
-		var func = new Func({
-			props: {
+		function func_test_binding_1(value) {
+			ctx.func_test_binding_1.call(null, value, ctx);
+			updating_test = true;
+			add_flush_callback(() => updating_test = false);
+		}
+
+		let func_props = {
 			url: ctx.url,
 			node: ctx.e,
 			operation: "mutation",
 			scheme: ctx.scheme,
 			parentid: "mutation"
-		},
-			$$inline: true
-		});
+		};
+		if (ctx.e.test !== void 0) {
+			func_props.test = ctx.e.test;
+		}
+		var func = new Func({ props: func_props, $$inline: true });
+
+		add_binding_callback(() => bind(func, 'test', func_test_binding_1));
 		func.$on("change", ctx.change_handler_1);
 
 		return {
@@ -3093,11 +2965,15 @@ query IntrospectionQuery {
 				current = true;
 			},
 
-			p: function update(changed, ctx) {
+			p: function update(changed, new_ctx) {
+				ctx = new_ctx;
 				var func_changes = {};
 				if (changed.url) func_changes.url = ctx.url;
 				if (changed.mutations) func_changes.node = ctx.e;
 				if (changed.scheme) func_changes.scheme = ctx.scheme;
+				if (!updating_test && changed.mutations) {
+					func_changes.test = ctx.e.test;
+				}
 				func.$set(func_changes);
 			},
 
@@ -3345,6 +3221,11 @@ query IntrospectionQuery {
 			$$invalidate('queries', queries), $$invalidate('scheme', scheme);
 		}
 
+		function func_test_binding_1(value, { e }) {
+			e.test = value;
+			$$invalidate('mutations', mutations), $$invalidate('scheme', scheme);
+		}
+
 		$$self.$set = $$props => {
 			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
 			if ('url' in $$props) $$invalidate('url', url = $$props.url);
@@ -3367,7 +3248,8 @@ query IntrospectionQuery {
 			doTests,
 			change_handler,
 			change_handler_1,
-			func_test_binding
+			func_test_binding,
+			func_test_binding_1
 		};
 	}
 
