@@ -1,61 +1,53 @@
 <script>
-import { onMount } from 'svelte'
+// import { onMount } from 'svelte'
 
 import Schemer from "./schemer/schemer.svelte";
 import JsonView from "./JsonView.svelte"
 import List from "./List.svelte"
 
+
 export let parentid='tab1'
 
 
 let url
-let scheme = {}
-let controls = []
+let scheme = null
 let ignoreChanges = true
+let doTests
 
-
-// https://stackoverflow.com/questions/2856513/how-can-i-trigger-an-onchange-event-manually
-function dispatchChangeEvent(element) {
-    var event = new Event('change',{
-        view: window,
-        bubbles: true,
-        cancelable: true,
-        target: element
-    });
-
-    element.dispatchEvent(event);
+$: {
+    scheme=scheme
+    console.log('App scheme changed', scheme)
+    ignoreChanges= true
 }
 
-function getControls() {
+function doAllTests() {
+    doTests()
+}
+
+
+function getControlValuesByTagName(tag) {
     let a =[]
-    let inps=document.getElementsByTagName("input")  
+    let inps=document.getElementsByTagName(tag)  
     for (let inp of inps) {
         let id = inp.getAttribute("id")
         if (!id) continue
-        if (id[0]=='-') console.log(id)
-
-        let type = inp.getAttribute("type")
+        if (id[0]=='-') console.log(id) // check wrong ids
+        let type =  tag == 'textarea' ? 'textarea' :  inp.getAttribute("type")
         let value = inp.value
         let checked = inp.checked
         a.push({ id: id, type:type, checked:checked, value:value })
     }
-
-    inps=document.getElementsByTagName("textarea")  
-    for (let inp of inps) {
-        let id = inp.getAttribute("id")
-        if (!id) continue
-        if (id[0]=='-') console.log(id)
-
-        let type = "textarea"
-        let value = inp.value
-        let checked = false
-        a.push({ id: id, type:type, checked:checked, value:value })
-    }
-
-    return a
+    return a    
 }
 
-function restoreFieldsWithEvents( withEvents = false) {
+function getControlValues() {
+    let inputs    = getControlValuesByTagName("input")
+    let textareas = getControlValuesByTagName("textarea")
+    return inputs.concat(textareas)
+}
+
+function restoreControlValues(controls) {
+    if (!controls) return
     for (let c of controls) {
         let inp = document.getElementById(c.id)
         if (!inp) continue
@@ -64,74 +56,63 @@ function restoreFieldsWithEvents( withEvents = false) {
         } else {
             inp.value = c.value
         }
-        // inp.checked = c.checked
-        // inp.value = c.value
-        if (withEvents) dispatchChangeEvent(inp)
     }
 }
 
 
-function saveFields() {
-    controls = getControls()
-    // let key = `${window.location.href}|${url}`
+function saveInputs() {
     let key = parentid
+    let controls = getControlValues()
     let controlsStr = JSON.stringify(controls)
-    localStorage.setItem(key, JSON.stringify(controls));
+    localStorage.setItem(key, controlsStr);
     console.log("saved: ", key, controlsStr.length )
 }
 
 
-function restoreFields() {
-    // let key = `${window.location.href}|${url}`
+function restoreInputs() {
     let key = parentid
     let controlsStr = localStorage.getItem(key)
-    controls = JSON.parse(controlsStr)
-
-
-    ignoreChanges = true
-    restoreFieldsWithEvents(false)
-    // restoreFieldsWithEvents(true)
-    // setTimeout(() => {
-    //     ignoreChanges = true
-    //     restoreFieldsWithEvents(false)
-    //     console.log("restored", key, controlsStr.length )
-    //     ignoreChanges = false
-    // }, 100);
+    if (!controlsStr) return
+    let controls = JSON.parse(controlsStr)
+    restoreControlValues(controls)
 }
 
-
+let delayTimeout
+function delay(func, time=300) {
+    clearTimeout(delayTimeout)
+    delayTimeout = setTimeout(func, time)
+}
 
 function changeHandler(){
+    console.log('App changeHandler')
     if (ignoreChanges) return
-    // saveFields()
-    // console.log('changeHandler')
+    delay(()=> console.log("I was delayed"))
 }
 
 
-
-onMount(async () => {
-    // restoreFields()
-})
+// onMount(async () => {
+//     // restoreInputs()
+// })
 
 
 
 </script>
 
 <style>
-.root {
-    display: grid;
-    grid-template-columns: 5fr max-content;
-    grid-template-areas:  
-    "h b" 
-    "m m";
-}
-.main {
-    grid-area: m;
-}
+    .root {
+        display: grid;
+        grid-template-columns: 5fr max-content;
+        grid-template-areas:  
+        "h b" 
+        "m m";
+    }
+    .main {
+        grid-area: m;
+    }
 
-input {
-    font-size: 100%;
-}
+    input {
+        font-size: 100%;
+    }
 
 </style>
 
@@ -139,12 +120,12 @@ input {
 <div class="root">
     <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
     <div>
-        <input type="button" on:click={saveFields} value="save">
-        <input type="button" on:click={restoreFields} value="restore">
+        <input type="button" on:click={doAllTests} value="do tests" >
+        <input type="button" on:click={saveInputs} value="save">
+        <input type="button" on:click={restoreInputs} value="restore">
     </div>
     <div class="main">
-        <List parentid="{parentid}-List" url={url} scheme={scheme} on:change={changeHandler}/>
+        <List parentid="{parentid}-List" url={url} scheme={scheme} bind:doTests={doTests} on:change={changeHandler}/>
     </div>
-
 </div>
 

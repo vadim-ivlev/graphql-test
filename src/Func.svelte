@@ -45,40 +45,28 @@ function dispatchEvent() {
 
 $: {
     let dummy = node
-    console.log("node changed")
+    // console.log("node changed")
     generateQuery()
 }
 
 function getArgsText() {
-
     let args = []
     for (let arg of node.args) {
-        // if (node.name == "get_broadcast" && arg.getText){
-        //     console.log("inside ", arg)
-        // }
-
         if (!arg.getText) continue
         let text = arg.getText()
         if (text) args.push(text)
     }
-
     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
-
     return argsText
 }
 
 
-
 function generateQuery(){
-    // console.log("generateQuery")
-
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
-    // console.log("args=", arglist, "fieldlist", fieldlist)
     request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
     dispatchEvent()
 }
-
 
 
 function argsChangeHandler() {
@@ -87,13 +75,10 @@ function argsChangeHandler() {
 }
 
 
-
-
 function typeChangeHandler(params) {
     console.log("typeChangeHandler")
     generateQuery()
 }
-
 
 
 function submitForm(event){
@@ -130,8 +115,6 @@ function evaluate(){
         console.log(error)
         evalErrors = error
     }
-
-
 }
 
 
@@ -140,7 +123,6 @@ let formArea
 onMount(async () => {
     window.$(formArea).resizable({ handles: "e" });
     window.$(form).resizable({ handles: "e" });
-    // console.log(" Func onMount")
 })
 
 
@@ -360,7 +342,7 @@ onMount(async () => {
             </div>
             <div class="eval-area">
                 <span class="header">TEST</span>
-                <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response && !response.errors</textarea> 
+                <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} on:change>response && !response.errors</textarea> 
                 <div class="buttons2">
                     <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
                     <span class="eval-result">{testResult}</span>

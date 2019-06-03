@@ -686,7 +686,7 @@ query IntrospectionQuery {
 
 	const file$1 = "src/schemer/schemer.svelte";
 
-	// (60:2) {#if visible}
+	// (62:2) {#if visible}
 	function create_if_block(ctx) {
 		var current;
 
@@ -754,31 +754,31 @@ query IntrospectionQuery {
 				t7 = text(" scheme");
 				t8 = space();
 				if (if_block) if_block.c();
-				input0.className = "post svelte-mbsxsj";
+				input0.className = "post svelte-i19gg6";
 				attr(input0, "type", "text");
 				input0.id = input0_id_value = "id-" + ctx.parentid + "-inp-method";
 				input0.value = "POST";
-				add_location(input0, file$1, 52, 4, 1036);
+				add_location(input0, file$1, 54, 4, 1060);
 				label.htmlFor = label_for_value = "id-" + ctx.parentid + "-inp-url";
-				add_location(label, file$1, 53, 4, 1142);
-				input1.className = "text svelte-mbsxsj";
+				add_location(label, file$1, 55, 4, 1166);
+				input1.className = "text svelte-i19gg6";
 				attr(input1, "type", "text");
 				input1.id = input1_id_value = "id-" + ctx.parentid + "-inp-url";
 				input1.name = input1_name_value = "id-" + ctx.parentid + "-inp-url";
-				add_location(input1, file$1, 54, 4, 1201);
+				add_location(input1, file$1, 56, 4, 1225);
 				attr(input2, "type", "button");
 				input2.value = "reset";
-				input2.className = "svelte-mbsxsj";
-				add_location(input2, file$1, 55, 4, 1346);
+				input2.className = "svelte-i19gg6";
+				add_location(input2, file$1, 57, 4, 1370);
 				attr(input3, "type", "button");
 				input3.value = "refresh";
-				input3.className = "svelte-mbsxsj";
-				add_location(input3, file$1, 56, 4, 1411);
+				input3.className = "svelte-i19gg6";
+				add_location(input3, file$1, 58, 4, 1435);
 				a.href = true;
-				add_location(a, file$1, 57, 4, 1476);
-				add_location(form, file$1, 51, 2, 1025);
-				div.className = "self svelte-mbsxsj";
-				add_location(div, file$1, 50, 0, 1004);
+				add_location(a, file$1, 59, 4, 1500);
+				add_location(form, file$1, 53, 2, 1049);
+				div.className = "self svelte-i19gg6";
+				add_location(div, file$1, 52, 0, 1028);
 
 				dispose = [
 					listen(input1, "input", ctx.input1_input_handler),
@@ -2142,7 +2142,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (317:16) {#if node.args}
+	// (299:16) {#if node.args}
 	function create_if_block$3(ctx) {
 		var div0, t_1, div1, each_blocks = [], each_1_lookup = new Map(), current;
 
@@ -2165,9 +2165,9 @@ query IntrospectionQuery {
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
 				div0.className = "header svelte-aqn2fq";
-				add_location(div0, file$5, 317, 16, 6447);
+				add_location(div0, file$5, 299, 16, 6188);
 				div1.className = "fieldlist svelte-aqn2fq";
-				add_location(div1, file$5, 318, 16, 6500);
+				add_location(div1, file$5, 300, 16, 6241);
 			},
 
 			m: function mount(target, anchor) {
@@ -2213,7 +2213,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (320:20) {#each node.args as arg, index (arg.name)}
+	// (302:20) {#each node.args as arg, index (arg.name)}
 	function create_each_block$1(key_1, ctx) {
 		var first, updating_getText, current;
 
@@ -2385,84 +2385,84 @@ query IntrospectionQuery {
 				span5 = element("span");
 				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-aqn2fq";
 				a.href = true;
-				add_location(a, file$5, 309, 8, 6048);
+				add_location(a, file$5, 291, 8, 5789);
 				span0.className = "test-result svelte-aqn2fq";
-				add_location(span0, file$5, 310, 8, 6166);
+				add_location(span0, file$5, 292, 8, 5907);
 				span1.className = "description svelte-aqn2fq";
-				add_location(span1, file$5, 311, 8, 6221);
+				add_location(span1, file$5, 293, 8, 5962);
 				div0.className = "outer svelte-aqn2fq";
-				add_location(div0, file$5, 308, 4, 6020);
+				add_location(div0, file$5, 290, 4, 5761);
 				attr(input0, "type", "button");
 				input0.value = "getText";
-				add_location(input0, file$5, 328, 20, 6966);
+				add_location(input0, file$5, 310, 20, 6707);
 				div1.className = "header svelte-aqn2fq";
-				add_location(div1, file$5, 327, 20, 6876);
-				add_location(div2, file$5, 326, 16, 6850);
+				add_location(div1, file$5, 309, 20, 6617);
+				add_location(div2, file$5, 308, 16, 6591);
 				div3.className = "form-area svelte-aqn2fq";
-				add_location(div3, file$5, 314, 8, 6353);
+				add_location(div3, file$5, 296, 8, 6094);
 				div4.className = "header svelte-aqn2fq";
-				add_location(div4, file$5, 337, 16, 7390);
+				add_location(div4, file$5, 319, 16, 7131);
 				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
 				textarea0.name = "query";
 				textarea0.className = "query svelte-aqn2fq";
 				textarea0.value = ctx.request;
-				add_location(textarea0, file$5, 338, 16, 7439);
-				add_location(div5, file$5, 336, 12, 7368);
+				add_location(textarea0, file$5, 320, 16, 7180);
+				add_location(div5, file$5, 318, 12, 7109);
 				div6.className = "header svelte-aqn2fq";
-				add_location(div6, file$5, 341, 16, 7595);
+				add_location(div6, file$5, 323, 16, 7336);
 				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
 				textarea1.name = "variables";
 				textarea1.className = "variables svelte-aqn2fq";
-				add_location(textarea1, file$5, 342, 16, 7648);
-				add_location(div7, file$5, 340, 12, 7573);
+				add_location(textarea1, file$5, 324, 16, 7389);
+				add_location(div7, file$5, 322, 12, 7314);
 				div8.className = "header svelte-aqn2fq";
-				add_location(div8, file$5, 345, 16, 7829);
+				add_location(div8, file$5, 327, 16, 7570);
 				attr(input1, "type", "file");
 				input1.name = "input-file";
-				add_location(input1, file$5, 346, 16, 7876);
-				add_location(div9, file$5, 344, 12, 7807);
+				add_location(input1, file$5, 328, 16, 7617);
+				add_location(div9, file$5, 326, 12, 7548);
 				attr(input2, "type", "submit");
 				input2.value = "TEST";
 				input2.className = "svelte-aqn2fq";
-				add_location(input2, file$5, 349, 16, 7983);
+				add_location(input2, file$5, 331, 16, 7724);
 				div10.className = "buttons svelte-aqn2fq";
-				add_location(div10, file$5, 348, 12, 7945);
+				add_location(div10, file$5, 330, 12, 7686);
 				form_1.className = "svelte-aqn2fq";
-				add_location(form_1, file$5, 335, 8, 7309);
+				add_location(form_1, file$5, 317, 8, 7050);
 				div11.className = "header svelte-aqn2fq";
-				add_location(div11, file$5, 355, 12, 8104);
+				add_location(div11, file$5, 337, 12, 7845);
 				span2.className = "json-literal";
-				add_location(span2, file$5, 357, 32, 8211);
-				add_location(div12, file$5, 357, 16, 8195);
+				add_location(span2, file$5, 339, 32, 7952);
+				add_location(div12, file$5, 339, 16, 7936);
 				div13.className = "response svelte-aqn2fq";
-				add_location(div13, file$5, 358, 16, 8286);
+				add_location(div13, file$5, 340, 16, 8027);
 				div14.className = "response-area svelte-aqn2fq";
-				add_location(div14, file$5, 356, 12, 8151);
+				add_location(div14, file$5, 338, 12, 7892);
 				span3.className = "header svelte-aqn2fq";
-				add_location(span3, file$5, 361, 16, 8411);
+				add_location(span3, file$5, 343, 16, 8152);
 				textarea2.rows = "3";
 				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
 				textarea2.className = "eval-text svelte-aqn2fq";
 				textarea2.value = "response && !response.errors";
-				add_location(textarea2, file$5, 362, 16, 8460);
+				add_location(textarea2, file$5, 344, 16, 8201);
 				attr(input3, "type", "button");
 				input3.className = "try-button svelte-aqn2fq";
 				input3.value = "TRY TEST";
-				add_location(input3, file$5, 364, 20, 8661);
+				add_location(input3, file$5, 346, 20, 8411);
 				span4.className = "eval-result svelte-aqn2fq";
-				add_location(span4, file$5, 365, 20, 8759);
+				add_location(span4, file$5, 347, 20, 8509);
 				span5.className = "eval-errors svelte-aqn2fq";
-				add_location(span5, file$5, 366, 20, 8825);
+				add_location(span5, file$5, 348, 20, 8575);
 				div15.className = "buttons2 svelte-aqn2fq";
-				add_location(div15, file$5, 363, 16, 8618);
+				add_location(div15, file$5, 345, 16, 8368);
 				div16.className = "eval-area svelte-aqn2fq";
-				add_location(div16, file$5, 360, 12, 8371);
+				add_location(div16, file$5, 342, 12, 8112);
 				div17.className = "result-panel svelte-aqn2fq";
-				add_location(div17, file$5, 354, 8, 8065);
+				add_location(div17, file$5, 336, 8, 7806);
 				div18.className = "root svelte-aqn2fq";
 				set_style(div18, "display", (ctx.vis?'grid':'none'));
-				add_location(div18, file$5, 313, 4, 6288);
-				add_location(div19, file$5, 307, 0, 6010);
+				add_location(div18, file$5, 295, 4, 6029);
+				add_location(div19, file$5, 289, 0, 5751);
 
 				dispose = [
 					listen(a, "click", prevent_default(ctx.click_handler)),
@@ -2471,6 +2471,7 @@ query IntrospectionQuery {
 					listen(textarea1, "input", ctx.textarea1_input_handler),
 					listen(textarea1, "change", ctx.change_handler_1),
 					listen(form_1, "submit", ctx.submitForm),
+					listen(textarea2, "change", ctx.change_handler_2),
 					listen(input3, "click", ctx.evaluate)
 				];
 			},
@@ -2724,35 +2725,23 @@ query IntrospectionQuery {
 	}
 
 	function getArgsText() {
-
 	    let args = [];
 	    for (let arg of node.args) {
-	        // if (node.name == "get_broadcast" && arg.getText){
-	        //     console.log("inside ", arg)
-	        // }
-
 	        if (!arg.getText) continue
 	        let text = arg.getText();
 	        if (text) args.push(text);
 	    }
-
 	    let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`;
-
 	    return argsText
 	}
 
 
-
 	function generateQuery(){
-	    // console.log("generateQuery")
-
 	    let arglist = getArgsText();
 	    let fieldlist =getTypeText ? getTypeText() : '';
-	    // console.log("args=", arglist, "fieldlist", fieldlist)
 	    $$invalidate('request', request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`);
 	    dispatchEvent();
 	}
-
 
 
 	function argsChangeHandler() {
@@ -2761,13 +2750,10 @@ query IntrospectionQuery {
 	}
 
 
-
-
 	function typeChangeHandler(params) {
 	    console.log("typeChangeHandler");
 	    generateQuery();
 	}
-
 
 
 	function submitForm(event){
@@ -2804,8 +2790,6 @@ query IntrospectionQuery {
 	        console.log(error);
 	        $$invalidate('evalErrors', evalErrors = error);
 	    }
-
-
 	}
 
 
@@ -2814,7 +2798,6 @@ query IntrospectionQuery {
 	onMount(async () => {
 	    window.$(formArea).resizable({ handles: "e" });
 	    window.$(form).resizable({ handles: "e" });
-	    // console.log(" Func onMount")
 	});
 
 		function change_handler(event) {
@@ -2822,6 +2805,10 @@ query IntrospectionQuery {
 		}
 
 		function change_handler_1(event) {
+			bubble($$self, event);
+		}
+
+		function change_handler_2(event) {
 			bubble($$self, event);
 		}
 
@@ -2881,7 +2868,7 @@ query IntrospectionQuery {
 
 		$$self.$$.update = ($$dirty = { node: 1 }) => {
 			if ($$dirty.node) { {
-	            console.log("node changed");
+	            // console.log("node changed")
 	            generateQuery();
 	        } }
 		};
@@ -2911,6 +2898,7 @@ query IntrospectionQuery {
 			console,
 			change_handler,
 			change_handler_1,
+			change_handler_2,
 			click_handler,
 			argument_getText_binding,
 			click_handler_1,
@@ -3039,7 +3027,7 @@ query IntrospectionQuery {
 			c: function create() {
 				div = element("div");
 				func.$$.fragment.c();
-				add_location(div, file$6, 58, 10, 1110);
+				add_location(div, file$6, 58, 10, 1128);
 			},
 
 			m: function mount(target, anchor) {
@@ -3112,7 +3100,7 @@ query IntrospectionQuery {
 			c: function create() {
 				div = element("div");
 				func.$$.fragment.c();
-				add_location(div, file$6, 65, 10, 1338);
+				add_location(div, file$6, 65, 10, 1356);
 			},
 
 			m: function mount(target, anchor) {
@@ -3175,7 +3163,7 @@ query IntrospectionQuery {
 				div = element("div");
 				type.$$.fragment.c();
 				t = space();
-				add_location(div, file$6, 72, 10, 1573);
+				add_location(div, file$6, 72, 10, 1591);
 			},
 
 			m: function mount(target, anchor) {
@@ -3216,7 +3204,7 @@ query IntrospectionQuery {
 	}
 
 	function create_fragment$6(ctx) {
-		var div, input, t0, h40, t2, t3, h41, t5, t6, h42, t8, current, dispose;
+		var div, h40, t1, t2, h41, t4, t5, h42, t7, current;
 
 		var each_value_2 = ctx.queries;
 
@@ -3284,41 +3272,35 @@ query IntrospectionQuery {
 		return {
 			c: function create() {
 				div = element("div");
-				input = element("input");
-				t0 = space();
 				h40 = element("h4");
 				h40.textContent = "Queries";
-				t2 = space();
+				t1 = space();
 
 				for (var i = 0; i < each_blocks_2.length; i += 1) {
 					each_blocks_2[i].c();
 				}
 
-				t3 = space();
+				t2 = space();
 				h41 = element("h4");
 				h41.textContent = "Mutations";
-				t5 = space();
+				t4 = space();
 
 				for (var i = 0; i < each_blocks_1.length; i += 1) {
 					each_blocks_1[i].c();
 				}
 
-				t6 = space();
+				t5 = space();
 				h42 = element("h4");
 				h42.textContent = "User types";
-				t8 = space();
+				t7 = space();
 
 				for (var i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].c();
 				}
-				attr(input, "type", "button");
-				input.value = "test";
-				add_location(input, file$6, 55, 5, 998);
-				add_location(h40, file$6, 56, 5, 1057);
-				add_location(h41, file$6, 63, 5, 1281);
-				add_location(h42, file$6, 70, 5, 1515);
-				add_location(div, file$6, 54, 0, 987);
-				dispose = listen(input, "click", ctx.doTests);
+				add_location(h40, file$6, 56, 5, 1075);
+				add_location(h41, file$6, 63, 5, 1299);
+				add_location(h42, file$6, 70, 5, 1533);
+				add_location(div, file$6, 54, 0, 996);
 			},
 
 			l: function claim(nodes) {
@@ -3327,26 +3309,24 @@ query IntrospectionQuery {
 
 			m: function mount(target, anchor) {
 				insert(target, div, anchor);
-				append(div, input);
-				append(div, t0);
 				append(div, h40);
-				append(div, t2);
+				append(div, t1);
 
 				for (var i = 0; i < each_blocks_2.length; i += 1) {
 					each_blocks_2[i].m(div, null);
 				}
 
-				append(div, t3);
+				append(div, t2);
 				append(div, h41);
-				append(div, t5);
+				append(div, t4);
 
 				for (var i = 0; i < each_blocks_1.length; i += 1) {
 					each_blocks_1[i].m(div, null);
 				}
 
-				append(div, t6);
+				append(div, t5);
 				append(div, h42);
-				append(div, t8);
+				append(div, t7);
 
 				for (var i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].m(div, null);
@@ -3369,7 +3349,7 @@ query IntrospectionQuery {
 							each_blocks_2[i] = create_each_block_2(child_ctx);
 							each_blocks_2[i].c();
 							each_blocks_2[i].i(1);
-							each_blocks_2[i].m(div, t3);
+							each_blocks_2[i].m(div, t2);
 						}
 					}
 
@@ -3391,7 +3371,7 @@ query IntrospectionQuery {
 							each_blocks_1[i] = create_each_block_1(child_ctx);
 							each_blocks_1[i].c();
 							each_blocks_1[i].i(1);
-							each_blocks_1[i].m(div, t6);
+							each_blocks_1[i].m(div, t5);
 						}
 					}
 
@@ -3457,8 +3437,6 @@ query IntrospectionQuery {
 				destroy_each(each_blocks_1, detaching);
 
 				destroy_each(each_blocks, detaching);
-
-				dispose();
 			}
 		};
 	}
@@ -3475,21 +3453,20 @@ query IntrospectionQuery {
 	function instance$6($$self, $$props, $$invalidate) {
 		
 
-	let { scheme, url, parentid = '' } = $$props;
-
-	let mutations =[];
-	let queries =[];
-	let types=[];
-	let usertypes=[];
-
-	function doTests(){
+	let { scheme, url, parentid = '', doTests = function (){
 	    for (let o of queries) {
 	        o.test();
 	    }
 	    for (let o of mutations) {
 	        o.test();
 	    }
-	}
+	} } = $$props;
+
+
+	let mutations =[];
+	let queries =[];
+	let types=[];
+	let usertypes=[];
 
 		function change_handler(event) {
 			bubble($$self, event);
@@ -3513,17 +3490,17 @@ query IntrospectionQuery {
 			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
 			if ('url' in $$props) $$invalidate('url', url = $$props.url);
 			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
+			if ('doTests' in $$props) $$invalidate('doTests', doTests = $$props.doTests);
 		};
 
 		$$self.$$.update = ($$dirty = { scheme: 1 }) => {
 			if ($$dirty.scheme) { {
+	            // console.log("List scheme changed")
 	            $$invalidate('mutations', mutations =[]);
 	            $$invalidate('queries', queries =[]);
 	            $$invalidate('types', types=[]);
 	            $$invalidate('usertypes', usertypes=[]);
-	            
-	            console.log("List scheme changed");
-	            
+	        
 	            try {
 	            $$invalidate('mutations', mutations = scheme.data.__schema.mutationType.fields);
 	            $$invalidate('queries', queries = scheme.data.__schema.queryType.fields);
@@ -3537,10 +3514,10 @@ query IntrospectionQuery {
 			scheme,
 			url,
 			parentid,
+			doTests,
 			mutations,
 			queries,
 			usertypes,
-			doTests,
 			change_handler,
 			change_handler_1,
 			func_test_binding,
@@ -3551,7 +3528,7 @@ query IntrospectionQuery {
 	class List extends SvelteComponentDev {
 		constructor(options) {
 			super(options);
-			init(this, options, instance$6, create_fragment$6, safe_not_equal, ["scheme", "url", "parentid"]);
+			init(this, options, instance$6, create_fragment$6, safe_not_equal, ["scheme", "url", "parentid", "doTests"]);
 
 			const { ctx } = this.$$;
 			const props = options.props || {};
@@ -3586,6 +3563,14 @@ query IntrospectionQuery {
 		set parentid(value) {
 			throw new Error("<List>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
 		}
+
+		get doTests() {
+			throw new Error("<List>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set doTests(value) {
+			throw new Error("<List>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
 	}
 
 	/* src/App.svelte generated by Svelte v3.4.0 */
@@ -3593,7 +3578,7 @@ query IntrospectionQuery {
 	const file$7 = "src/App.svelte";
 
 	function create_fragment$7(ctx) {
-		var div2, updating_url, updating_scheme, t0, div0, input0, t1, input1, t2, div1, current, dispose;
+		var div2, updating_url, updating_scheme, t0, div0, input0, t1, input1, t2, input2, t3, div1, updating_doTests, current, dispose;
 
 		function schemer_url_binding(value) {
 			ctx.schemer_url_binding.call(null, value);
@@ -3622,14 +3607,23 @@ query IntrospectionQuery {
 		add_binding_callback(() => bind(schemer, 'scheme', schemer_scheme_binding));
 		schemer.$on("change", ctx.changeHandler);
 
-		var list = new List({
-			props: {
+		function list_doTests_binding(value_2) {
+			ctx.list_doTests_binding.call(null, value_2);
+			updating_doTests = true;
+			add_flush_callback(() => updating_doTests = false);
+		}
+
+		let list_props = {
 			parentid: "" + ctx.parentid + "-List",
 			url: ctx.url,
 			scheme: ctx.scheme
-		},
-			$$inline: true
-		});
+		};
+		if (ctx.doTests !== void 0) {
+			list_props.doTests = ctx.doTests;
+		}
+		var list = new List({ props: list_props, $$inline: true });
+
+		add_binding_callback(() => bind(list, 'doTests', list_doTests_binding));
 		list.$on("change", ctx.changeHandler);
 
 		return {
@@ -3642,25 +3636,32 @@ query IntrospectionQuery {
 				t1 = space();
 				input1 = element("input");
 				t2 = space();
+				input2 = element("input");
+				t3 = space();
 				div1 = element("div");
 				list.$$.fragment.c();
 				attr(input0, "type", "button");
-				input0.value = "save";
-				input0.className = "svelte-o5nj5n";
-				add_location(input0, file$7, 141, 8, 3077);
+				input0.value = "do tests";
+				input0.className = "svelte-c5dk8r";
+				add_location(input0, file$7, 122, 8, 2566);
 				attr(input1, "type", "button");
-				input1.value = "restore";
-				input1.className = "svelte-o5nj5n";
-				add_location(input1, file$7, 142, 8, 3142);
-				add_location(div0, file$7, 140, 4, 3063);
-				div1.className = "main svelte-o5nj5n";
-				add_location(div1, file$7, 144, 4, 3220);
-				div2.className = "root svelte-o5nj5n";
-				add_location(div2, file$7, 138, 0, 2938);
+				input1.value = "save";
+				input1.className = "svelte-c5dk8r";
+				add_location(input1, file$7, 123, 8, 2636);
+				attr(input2, "type", "button");
+				input2.value = "restore";
+				input2.className = "svelte-c5dk8r";
+				add_location(input2, file$7, 124, 8, 2701);
+				add_location(div0, file$7, 121, 4, 2552);
+				div1.className = "main svelte-c5dk8r";
+				add_location(div1, file$7, 126, 4, 2779);
+				div2.className = "root svelte-c5dk8r";
+				add_location(div2, file$7, 119, 0, 2427);
 
 				dispose = [
-					listen(input0, "click", ctx.saveFields),
-					listen(input1, "click", ctx.restoreFields)
+					listen(input0, "click", ctx.doAllTests),
+					listen(input1, "click", ctx.saveInputs),
+					listen(input2, "click", ctx.restoreInputs)
 				];
 			},
 
@@ -3676,7 +3677,9 @@ query IntrospectionQuery {
 				append(div0, input0);
 				append(div0, t1);
 				append(div0, input1);
-				append(div2, t2);
+				append(div0, t2);
+				append(div0, input2);
+				append(div2, t3);
 				append(div2, div1);
 				mount_component(list, div1, null);
 				current = true;
@@ -3697,6 +3700,9 @@ query IntrospectionQuery {
 				if (changed.parentid) list_changes.parentid = "" + ctx.parentid + "-List";
 				if (changed.url) list_changes.url = ctx.url;
 				if (changed.scheme) list_changes.scheme = ctx.scheme;
+				if (!updating_doTests && changed.doTests) {
+					list_changes.doTests = ctx.doTests;
+				}
 				list.$set(list_changes);
 			},
 
@@ -3729,114 +3735,90 @@ query IntrospectionQuery {
 		};
 	}
 
-	function dispatchChangeEvent(element) {
-	var event = new Event('change',{
-	    view: window,
-	    bubbles: true,
-	    cancelable: true,
-	    target: element
-	});
-
-	element.dispatchEvent(event);
-	}
-
-	function getControls() {
+	function getControlValuesByTagName(tag) {
 	let a =[];
-	let inps=document.getElementsByTagName("input");  
+	let inps=document.getElementsByTagName(tag);  
 	for (let inp of inps) {
 	    let id = inp.getAttribute("id");
 	    if (!id) continue
-	    if (id[0]=='-') console.log(id);
-
-	    let type = inp.getAttribute("type");
+	    if (id[0]=='-') console.log(id); // check wrong ids
+	    let type =  tag == 'textarea' ? 'textarea' :  inp.getAttribute("type");
 	    let value = inp.value;
 	    let checked = inp.checked;
 	    a.push({ id: id, type:type, checked:checked, value:value });
 	}
-
-	inps=document.getElementsByTagName("textarea");  
-	for (let inp of inps) {
-	    let id = inp.getAttribute("id");
-	    if (!id) continue
-	    if (id[0]=='-') console.log(id);
-
-	    let type = "textarea";
-	    let value = inp.value;
-	    let checked = false;
-	    a.push({ id: id, type:type, checked:checked, value:value });
+	return a    
 	}
 
-	return a
+	function getControlValues() {
+	let inputs    = getControlValuesByTagName("input");
+	let textareas = getControlValuesByTagName("textarea");
+	return inputs.concat(textareas)
+	}
+
+	function restoreControlValues(controls) {
+	if (!controls) return
+	for (let c of controls) {
+	    let inp = document.getElementById(c.id);
+	    if (!inp) continue
+	    if (c.type == 'checkbox') {
+	        inp.checked = c.checked;
+	    } else {
+	        inp.value = c.value;
+	    }
+	}
 	}
 
 	function instance$7($$self, $$props, $$invalidate) {
 		
 
+
 	let { parentid='tab1' } = $$props;
 
 
 	let url;
-	let scheme = {};
-	let controls = [];
+	let scheme = null;
 	let ignoreChanges = true;
+	let doTests;
 
-	function restoreFieldsWithEvents( withEvents = false) {
-	    for (let c of controls) {
-	        let inp = document.getElementById(c.id);
-	        if (!inp) continue
-	        if (c.type == 'checkbox') {
-	            inp.checked = c.checked;
-	        } else {
-	            inp.value = c.value;
-	        }
-	        // inp.checked = c.checked
-	        // inp.value = c.value
-	        if (withEvents) dispatchChangeEvent(inp);
-	    }
+	function doAllTests() {
+	    doTests();
 	}
 
 
-	function saveFields() {
-	    $$invalidate('controls', controls = getControls());
-	    // let key = `${window.location.href}|${url}`
+	function saveInputs() {
 	    let key = parentid;
+	    let controls = getControlValues();
 	    let controlsStr = JSON.stringify(controls);
-	    localStorage.setItem(key, JSON.stringify(controls));
+	    localStorage.setItem(key, controlsStr);
 	    console.log("saved: ", key, controlsStr.length );
 	}
 
 
-	function restoreFields() {
-	    // let key = `${window.location.href}|${url}`
+	function restoreInputs() {
 	    let key = parentid;
 	    let controlsStr = localStorage.getItem(key);
-	    $$invalidate('controls', controls = JSON.parse(controlsStr));
-
-
-	    $$invalidate('ignoreChanges', ignoreChanges = true);
-	    restoreFieldsWithEvents(false);
-	    // restoreFieldsWithEvents(true)
-	    // setTimeout(() => {
-	    //     ignoreChanges = true
-	    //     restoreFieldsWithEvents(false)
-	    //     console.log("restored", key, controlsStr.length )
-	    //     ignoreChanges = false
-	    // }, 100);
+	    if (!controlsStr) return
+	    let controls = JSON.parse(controlsStr);
+	    restoreControlValues(controls);
 	}
 
-
+	let delayTimeout;
+	function delay(func, time=300) {
+	    clearTimeout(delayTimeout);
+	    $$invalidate('delayTimeout', delayTimeout = setTimeout(func, time));
+	}
 
 	function changeHandler(){
+	    console.log('App changeHandler');
 	    if (ignoreChanges) return
-	    // saveFields()
-	    // console.log('changeHandler')
+	    delay(()=> console.log("I was delayed"));
 	}
 
 
-
-	onMount(async () => {
-	    // restoreFields()
-	});
+	// onMount(async () => {
+	//     // restoreInputs()
+	// })
 
 		function schemer_url_binding(value) {
 			url = value;
@@ -3848,19 +3830,35 @@ query IntrospectionQuery {
 			$$invalidate('scheme', scheme);
 		}
 
+		function list_doTests_binding(value_2) {
+			doTests = value_2;
+			$$invalidate('doTests', doTests);
+		}
+
 		$$self.$set = $$props => {
 			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
+		};
+
+		$$self.$$.update = ($$dirty = { scheme: 1 }) => {
+			if ($$dirty.scheme) { {
+	            $$invalidate('scheme', scheme);
+	            console.log('App scheme changed', scheme);
+	            $$invalidate('ignoreChanges', ignoreChanges= true);
+	        } }
 		};
 
 		return {
 			parentid,
 			url,
 			scheme,
-			saveFields,
-			restoreFields,
+			doTests,
+			doAllTests,
+			saveInputs,
+			restoreInputs,
 			changeHandler,
 			schemer_url_binding,
-			schemer_scheme_binding
+			schemer_scheme_binding,
+			list_doTests_binding
 		};
 	}
 

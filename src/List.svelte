@@ -5,6 +5,15 @@ import Type from './Type.svelte'
 export let scheme 
 export let url 
 export let parentid = ''
+export let doTests = function (){
+    for (let o of queries) {
+        o.test()
+    }
+    for (let o of mutations) {
+        o.test()
+    }
+}
+
 
 let mutations =[]
 let queries =[]
@@ -15,13 +24,12 @@ let usertypes=[]
 
 
 $: {
+    // console.log("List scheme changed")
     mutations =[]
     queries =[]
     types=[]
     usertypes=[]
-    
-    console.log("List scheme changed")
-    
+
     try {
     mutations = scheme.data.__schema.mutationType.fields
     queries = scheme.data.__schema.queryType.fields
@@ -40,20 +48,12 @@ function compareTypes(t1, t2) {
      return 0
 }
 
-function doTests(){
-    for (let o of queries) {
-        o.test()
-    }
-    for (let o of mutations) {
-        o.test()
-    }
-}
 
 
 </script>
 
 <div>
-     <input type="button" value="test" on:click={doTests}>
+     <!-- <input type="button" value="test" on:click={doTests}> -->
      <h4>Queries</h4>
      {#each queries as e}
           <div>

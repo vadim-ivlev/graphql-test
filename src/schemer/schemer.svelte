@@ -35,9 +35,11 @@ onMount(async () => {
     .self {
         /* background-color: whitesmoke; */
     }
+
     .post {
         width: 50px;
         font-size: 100%;
+        display: none;
     }
     .text {
         width: 300px;
