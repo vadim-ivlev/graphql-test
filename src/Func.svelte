@@ -14,6 +14,10 @@ export let scheme = {}
 export let node = {}
 export let operation = ""
 export let test = submitForm
+export let getArgs = getArgsList
+export let getFields = function(){
+    if (getTypeText) fieldlist = getTypeText()
+}
 
 let testResult =''
 let evalErrors =''
@@ -31,6 +35,14 @@ $: {
     dispatchEvent()
 }
 
+// let dummy
+$: {
+    let dummy = node
+    console.log("Func node changed")
+    // arglist = getArgsText() 
+    if (getTypeText) fieldlist = getTypeText()
+}
+
 // $: returnType = node.graphqlType = node.type.name || node.type.ofType.name
 
 const dispatch = createEventDispatcher()
@@ -40,9 +52,9 @@ function dispatchEvent() {
 
 
 
-function doTest(){
-    testResult = "passed"
-}
+// function doTest(){
+//     testResult = "passed"
+// }
 
 
 
@@ -55,6 +67,7 @@ function getArgsText() {
 
     let args = []
     for (let arg of node.args) {
+        if (!arg.getText) continue
         let text = arg.getText()
         if (text) args.push(text)
     }
@@ -65,11 +78,6 @@ function getArgsText() {
 
 function getArgsList() {
     arglist = getArgsText() 
-    // if (queryArea) {
-    //     queryArea.style.height = '10px'
-    //     queryArea.style.height = queryArea.scrollHeight +'px'
-    // }
-
 }
 
 
@@ -118,13 +126,14 @@ let getTypeText
 function typeChangeHandler(params) {
     console.log("typeChangeHandler")
     // request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
-    fieldlist = getTypeText()
-    console.log(fieldlist)
+    // fieldlist = getTypeText()
+    if (getTypeText) fieldlist = getTypeText()
+    // console.log(fieldlist)
 }
 
 
 let form
-let rootArea
+// let rootArea
 let formArea
 let queryArea
 let responseArea
@@ -132,8 +141,10 @@ let evalTextarea
 
 onMount(async () => {
     getArgsList()
+    if (getTypeText) fieldlist = getTypeText()
     window.$(formArea).resizable({ handles: "e" });
     window.$(form).resizable({ handles: "e" });
+    console.log(" Func onMount")
 })
 
 </script>
@@ -317,7 +328,8 @@ onMount(async () => {
 <span class="test-result">{testResult}</span> 
 <span class="description">{node.description}</span>
 <!-- {#if vis} -->
-<div class="root" style="display:{vis?'grid':'none'}"  bind:this={rootArea}>
+<div class="root" style="display:{vis?'grid':'none'}"  >
+<!-- bind:this={rootArea} -->
     <div class="form-area" bind:this={formArea}>
 
             {#if node.args}
@@ -334,7 +346,8 @@ onMount(async () => {
                 <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}
                 <input type="button" value="getText" on:click={()=> console.log(getTypeText())}>
                 </div>
-                <Type typeName={node.graphqlType = node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} bind:fieldList={fieldlist}/>
+                <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} on:change={typeChangeHandler}/>
+                <!-- bind:fieldList={fieldlist} -->
                 <!-- on:change={typeChangeHandler} -->
                 <!-- bind:fieldList={fieldlist} -->
             </div>

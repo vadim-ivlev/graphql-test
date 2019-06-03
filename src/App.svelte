@@ -91,13 +91,14 @@ function restoreFields() {
 
 
     ignoreChanges = true
-    restoreFieldsWithEvents(true)
-    setTimeout(() => {
-        ignoreChanges = true
-        restoreFieldsWithEvents(false)
-        console.log("restored", key, controlsStr.length )
-        ignoreChanges = false
-    }, 100);
+    restoreFieldsWithEvents(false)
+    // restoreFieldsWithEvents(true)
+    // setTimeout(() => {
+    //     ignoreChanges = true
+    //     restoreFieldsWithEvents(false)
+    //     console.log("restored", key, controlsStr.length )
+    //     ignoreChanges = false
+    // }, 100);
 }
 
 

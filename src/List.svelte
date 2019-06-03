@@ -33,6 +33,9 @@ function doTests(){
     for (let o of queries) {
         o.test()
     }
+    for (let o of mutations) {
+        o.test()
+    }
     // console.log(queries)
 }
 

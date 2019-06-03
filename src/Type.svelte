@@ -10,11 +10,11 @@ import TypeField from './TypeField.svelte'
 export let parentid = ''
 export let scheme = {}
 export let typeName = ''
-export let tree = {}
+// export let tree = {}
 export let fieldList = ''
 
 export let getText = function () {
-    console.log("Type getText parentid=", parentid)
+    // console.log("Type getText parentid=", parentid)
     let a =[]
     let p = '  '
 
@@ -30,7 +30,7 @@ export let getText = function () {
     // }
 
     for (let key in fieldFunctions) {
-        console.log(key)
+        // console.log(key)
         let v = fieldFunctions[key]()
         if (v){
             a.push( p + v )
@@ -47,8 +47,8 @@ let fieldFunctions = {}
 
 
 
-let nodes 
-let node 
+// let nodes 
+let node = getNode(scheme, typeName)
 let vis = false
 
 
@@ -60,45 +60,62 @@ function dispatchEvent(e) {
 
 
 
-function recalculate(){
+// function recalculate(){
+//     if (scheme && scheme.data && scheme.data.__schema){
+//         let nodes = scheme.data.__schema.types.filter(t =>  t.name == typeName )
+//         if (nodes.length > 0) {
+//             node = nodes[0]
+//             // node = JSON.parse(JSON.stringify(nodes[0]))
+//         }
+//     } 
+// }
+
+// recalculate()
+
+function getNode(scheme, typeName){
     if (scheme && scheme.data && scheme.data.__schema){
-        nodes = scheme.data.__schema.types.filter(t =>  t.name == typeName )
+        let nodes = scheme.data.__schema.types.filter(t =>  t.name == typeName )
         if (nodes.length > 0) {
-            // node = nodes[0]
-            node = JSON.parse(JSON.stringify(nodes[0]))
+            return nodes[0]
         }
+        return null
     } 
+    return null
 }
 
-recalculate()
 
-function getFields(n, level){
-    let a =[]
-    let p = '  '
-    for (let key in n) {
-        if (n[key].checked){
-            a.push( p.repeat(level+1)+ key + getFields(n[key], level+1) )
-        }
-    }
-    if (a.length > 0) {
-        return '{\n' +a.join('\n') + '\n'+p.repeat(level)+ '}'
-    }
-    return ''
-}
+
+
+
+// function getFields(n, level){
+//     let a =[]
+//     let p = '  '
+//     for (let key in n) {
+//         if (n[key].checked){
+//             a.push( p.repeat(level+1)+ key + getFields(n[key], level+1) )
+//         }
+//     }
+//     if (a.length > 0) {
+//         return '{\n' +a.join('\n') + '\n'+p.repeat(level)+ '}'
+//     }
+//     return ''
+// }
 
 // function showTree(e) {
 //     console.log(fieldList)
 // }
 
 function onFieldStateChange(e) {
-   fieldList = getFields(tree,0) 
+//    fieldList = getFields(tree,0) 
+//    fieldList = getText()
    dispatchEvent(e)
 //    console.log(e)
 //    console.log(fieldList)
 }
 
 onMount(async () => {
-    fieldList = getFields(tree,0)
+    // fieldList = getFields(tree,0)
+    fieldList = getText()    
 })
 
 </script>
@@ -180,7 +197,8 @@ onMount(async () => {
                 {#if node.fields}
                     <div class="fieldlist">
                     {#each node.fields as f,ind}
-                        <TypeField  bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} tree={tree} parentid="{parentid}-{typeName}" on:change={onFieldStateChange} />
+                        <TypeField  bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} parentid="{parentid}-{typeName}" on:change={onFieldStateChange} />
+                    <!-- tree={tree}  -->
                     <!-- bind:getText={f.getTypeText}   -->
                     {/each}
                     </div>

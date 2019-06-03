@@ -7,7 +7,7 @@ import Type from './Type.svelte'
 export let parentid = ''
 export let scheme
 export let node
-export let tree = {}
+// export let tree = {}
 export let getText = function(e){
     // console.log("TypeField getText() parentid = ", parentid, checkboxElement.checked)
     if (checkboxElement.checked == false) return ''
@@ -30,23 +30,23 @@ let root
 let checked = true
 let fieldName = node.name
 let typeName = node.type.kind == "LIST" ? node.type.ofType.name : node.type.name
-let treeNode 
-let typeFieldList
+// let treeNode 
+// let typeFieldList
 let getTypeText
 
 let checkboxElement
-let typeElement
+// let typeElement
 
 
-$: {
-    if (node) {
-        if (!tree[fieldName]) tree[fieldName]={}
-        treeNode=tree[fieldName]
-        treeNode.checked = checked
-        treeNode.typeName = typeName
-        treeNode.getText = getText
-    }
-}
+// $: {
+//     if (node) {
+//         if (!tree[fieldName]) tree[fieldName]={}
+//         treeNode=tree[fieldName]
+//         treeNode.checked = checked
+//         treeNode.typeName = typeName
+//         treeNode.getText = getText
+//     }
+// }
 
 
 </script>
@@ -80,6 +80,8 @@ $: {
 <div class="field" bind:this={root}>  
     <input type="checkbox" id="{parentid}-{fieldName}" bind:checked={checked} bind:this={checkboxElement}  on:change>
     <span class="field-name">{fieldName}</span>
-    <Type scheme={scheme} typeName={typeName} bind:getText={getTypeText} tree={tree[fieldName]} parentid="{parentid}-{fieldName}-type" bind:fieldList={typeFieldList} on:change/> 
+    <Type scheme={scheme} typeName={typeName} bind:getText={getTypeText}  parentid="{parentid}-{fieldName}-type"  on:change/> 
+    <!-- bind:fieldList={typeFieldList} -->
+    <!-- tree={tree[fieldName]} -->
     <br><span class="field-description">{node.description}</span> 
 </div>

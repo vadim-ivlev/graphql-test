@@ -1203,7 +1203,7 @@ query IntrospectionQuery {
 	const file$3 = "src/TypeField.svelte";
 
 	function create_fragment$3(ctx) {
-		var div, input, input_id_value, t0, span0, t1, t2, updating_getText, updating_fieldList, t3, br, span1, t4_value = ctx.node.description, t4, current, dispose;
+		var div, input, input_id_value, t0, span0, t1, t2, updating_getText, t3, br, span1, t4_value = ctx.node.description, t4, current, dispose;
 
 		function type_getText_binding(value) {
 			ctx.type_getText_binding.call(null, value);
@@ -1211,28 +1211,17 @@ query IntrospectionQuery {
 			add_flush_callback(() => updating_getText = false);
 		}
 
-		function type_fieldList_binding(value_1) {
-			ctx.type_fieldList_binding.call(null, value_1);
-			updating_fieldList = true;
-			add_flush_callback(() => updating_fieldList = false);
-		}
-
 		let type_props = {
 			scheme: ctx.scheme,
 			typeName: ctx.typeName,
-			tree: ctx.tree[ctx.fieldName],
 			parentid: "" + ctx.parentid + "-" + ctx.fieldName + "-type"
 		};
 		if (ctx.getTypeText !== void 0) {
 			type_props.getText = ctx.getTypeText;
 		}
-		if (ctx.typeFieldList !== void 0) {
-			type_props.fieldList = ctx.typeFieldList;
-		}
 		var type = new Type({ props: type_props, $$inline: true });
 
 		add_binding_callback(() => bind(type, 'getText', type_getText_binding));
-		add_binding_callback(() => bind(type, 'fieldList', type_fieldList_binding));
 		type.$on("change", ctx.change_handler_1);
 
 		return {
@@ -1251,15 +1240,15 @@ query IntrospectionQuery {
 				attr(input, "type", "checkbox");
 				input.id = input_id_value = "" + ctx.parentid + "-" + ctx.fieldName;
 				input.className = "svelte-x6f70e";
-				add_location(input, file$3, 80, 4, 1553);
+				add_location(input, file$3, 80, 4, 1592);
 				span0.className = "field-name svelte-x6f70e";
-				add_location(span0, file$3, 81, 4, 1671);
+				add_location(span0, file$3, 81, 4, 1710);
 				br.className = "svelte-x6f70e";
-				add_location(br, file$3, 83, 4, 1898);
+				add_location(br, file$3, 85, 4, 1965);
 				span1.className = "field-description svelte-x6f70e";
-				add_location(span1, file$3, 83, 8, 1902);
+				add_location(span1, file$3, 85, 8, 1969);
 				div.className = "field svelte-x6f70e";
-				add_location(div, file$3, 79, 0, 1510);
+				add_location(div, file$3, 79, 0, 1549);
 
 				dispose = [
 					listen(input, "change", ctx.input_change_handler),
@@ -1305,13 +1294,9 @@ query IntrospectionQuery {
 				var type_changes = {};
 				if (changed.scheme) type_changes.scheme = ctx.scheme;
 				if (changed.typeName) type_changes.typeName = ctx.typeName;
-				if (changed.tree || changed.fieldName) type_changes.tree = ctx.tree[ctx.fieldName];
 				if (changed.parentid || changed.fieldName) type_changes.parentid = "" + ctx.parentid + "-" + ctx.fieldName + "-type";
 				if (!updating_getText && changed.getTypeText) {
 					type_changes.getText = ctx.getTypeText;
-				}
-				if (!updating_fieldList && changed.typeFieldList) {
-					type_changes.fieldList = ctx.typeFieldList;
 				}
 				type.$set(type_changes);
 
@@ -1353,7 +1338,7 @@ query IntrospectionQuery {
 	}
 
 	function instance$3($$self, $$props, $$invalidate) {
-		let { parentid = '', scheme, node, tree = {}, getText = function(e){
+		let { parentid = '', scheme, node, getText = function(e){
 	    // console.log("TypeField getText() parentid = ", parentid, checkboxElement.checked)
 	    if (checkboxElement.checked == false) return ''
 	    
@@ -1375,11 +1360,23 @@ query IntrospectionQuery {
 	let checked = true;
 	let fieldName = node.name;
 	let typeName = node.type.kind == "LIST" ? node.type.ofType.name : node.type.name;
-	let treeNode; 
-	let typeFieldList;
+	// let treeNode 
+	// let typeFieldList
 	let getTypeText;
 
 	let checkboxElement;
+	// let typeElement
+
+
+	// $: {
+	//     if (node) {
+	//         if (!tree[fieldName]) tree[fieldName]={}
+	//         treeNode=tree[fieldName]
+	//         treeNode.checked = checked
+	//         treeNode.typeName = typeName
+	//         treeNode.getText = getText
+	//     }
+	// }
 
 		function change_handler(event) {
 			bubble($$self, event);
@@ -1404,11 +1401,6 @@ query IntrospectionQuery {
 			$$invalidate('getTypeText', getTypeText);
 		}
 
-		function type_fieldList_binding(value_1) {
-			typeFieldList = value_1;
-			$$invalidate('typeFieldList', typeFieldList);
-		}
-
 		function div_binding($$node, check) {
 			root = $$node;
 			$$invalidate('root', root);
@@ -1418,33 +1410,18 @@ query IntrospectionQuery {
 			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
 			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
 			if ('node' in $$props) $$invalidate('node', node = $$props.node);
-			if ('tree' in $$props) $$invalidate('tree', tree = $$props.tree);
 			if ('getText' in $$props) $$invalidate('getText', getText = $$props.getText);
-		};
-
-		$$self.$$.update = ($$dirty = { node: 1, tree: 1, fieldName: 1, checked: 1, typeName: 1, getText: 1 }) => {
-			if ($$dirty.node || $$dirty.tree || $$dirty.fieldName || $$dirty.checked || $$dirty.typeName || $$dirty.getText) { {
-	            if (node) {
-	                if (!tree[fieldName]) { tree[fieldName]={}; $$invalidate('tree', tree), $$invalidate('node', node), $$invalidate('fieldName', fieldName), $$invalidate('checked', checked), $$invalidate('typeName', typeName), $$invalidate('getText', getText); }
-	                $$invalidate('treeNode', treeNode=tree[fieldName]);
-	                treeNode.checked = checked; $$invalidate('treeNode', treeNode), $$invalidate('node', node), $$invalidate('tree', tree), $$invalidate('fieldName', fieldName), $$invalidate('checked', checked), $$invalidate('typeName', typeName), $$invalidate('getText', getText);
-	                treeNode.typeName = typeName; $$invalidate('treeNode', treeNode), $$invalidate('node', node), $$invalidate('tree', tree), $$invalidate('fieldName', fieldName), $$invalidate('checked', checked), $$invalidate('typeName', typeName), $$invalidate('getText', getText);
-	                treeNode.getText = getText; $$invalidate('treeNode', treeNode), $$invalidate('node', node), $$invalidate('tree', tree), $$invalidate('fieldName', fieldName), $$invalidate('checked', checked), $$invalidate('typeName', typeName), $$invalidate('getText', getText);
-	            }
-	        } }
 		};
 
 		return {
 			parentid,
 			scheme,
 			node,
-			tree,
 			getText,
 			root,
 			checked,
 			fieldName,
 			typeName,
-			typeFieldList,
 			getTypeText,
 			checkboxElement,
 			change_handler,
@@ -1452,7 +1429,6 @@ query IntrospectionQuery {
 			input_change_handler,
 			input_binding,
 			type_getText_binding,
-			type_fieldList_binding,
 			div_binding
 		};
 	}
@@ -1460,7 +1436,7 @@ query IntrospectionQuery {
 	class TypeField extends SvelteComponentDev {
 		constructor(options) {
 			super(options);
-			init(this, options, instance$3, create_fragment$3, safe_not_equal, ["parentid", "scheme", "node", "tree", "getText"]);
+			init(this, options, instance$3, create_fragment$3, safe_not_equal, ["parentid", "scheme", "node", "getText"]);
 
 			const { ctx } = this.$$;
 			const props = options.props || {};
@@ -1496,14 +1472,6 @@ query IntrospectionQuery {
 			throw new Error("<TypeField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
 		}
 
-		get tree() {
-			throw new Error("<TypeField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-		}
-
-		set tree(value) {
-			throw new Error("<TypeField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-		}
-
 		get getText() {
 			throw new Error("<TypeField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
 		}
@@ -1524,7 +1492,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (171:0) {#if node}
+	// (188:0) {#if node}
 	function create_if_block$1(ctx) {
 		var div, current_block_type_index, if_block, current;
 
@@ -1548,7 +1516,7 @@ query IntrospectionQuery {
 				div = element("div");
 				if_block.c();
 				div.className = "self svelte-1bwk5o0";
-				add_location(div, file$4, 171, 0, 3412);
+				add_location(div, file$4, 188, 0, 3881);
 			},
 
 			m: function mount(target, anchor) {
@@ -1602,7 +1570,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (175:4) {:else}
+	// (192:4) {:else}
 	function create_else_block(ctx) {
 		var a, t0, a_class_value, t1, div, span, t2_value = ctx.node.description, t2, t3, current, dispose;
 
@@ -1620,12 +1588,12 @@ query IntrospectionQuery {
 				if (if_block) if_block.c();
 				a.className = a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-1bwk5o0";
 				a.href = true;
-				add_location(a, file$4, 175, 8, 3534);
+				add_location(a, file$4, 192, 8, 4003);
 				span.className = "description svelte-1bwk5o0";
-				add_location(span, file$4, 178, 16, 3743);
+				add_location(span, file$4, 195, 16, 4212);
 				div.className = "frame svelte-1bwk5o0";
 				set_style(div, "display", (ctx.vis?'block':'none'));
-				add_location(div, file$4, 177, 12, 3670);
+				add_location(div, file$4, 194, 12, 4139);
 				dispose = listen(a, "click", prevent_default(ctx.click_handler));
 			},
 
@@ -1648,10 +1616,6 @@ query IntrospectionQuery {
 
 				if ((!current || changed.vis) && a_class_value !== (a_class_value = "" + (ctx.vis?'opened':'closed') + " svelte-1bwk5o0")) {
 					a.className = a_class_value;
-				}
-
-				if ((!current || changed.node) && t2_value !== (t2_value = ctx.node.description)) {
-					set_data(t2, t2_value);
 				}
 
 				if (ctx.node.fields) {
@@ -1704,7 +1668,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (173:4) {#if node.kind=="SCALAR"}
+	// (190:4) {#if node.kind=="SCALAR"}
 	function create_if_block_1(ctx) {
 		var span, t;
 
@@ -1713,7 +1677,7 @@ query IntrospectionQuery {
 				span = element("span");
 				t = text(ctx.typeName);
 				span.className = "scalar-type svelte-1bwk5o0";
-				add_location(span, file$4, 173, 9, 3470);
+				add_location(span, file$4, 190, 9, 3939);
 			},
 
 			m: function mount(target, anchor) {
@@ -1738,7 +1702,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (180:16) {#if node.fields}
+	// (197:16) {#if node.fields}
 	function create_if_block_2(ctx) {
 		var div, current;
 
@@ -1771,7 +1735,7 @@ query IntrospectionQuery {
 					each_blocks[i].c();
 				}
 				div.className = "fieldlist svelte-1bwk5o0";
-				add_location(div, file$4, 180, 20, 3849);
+				add_location(div, file$4, 197, 20, 4318);
 			},
 
 			m: function mount(target, anchor) {
@@ -1785,7 +1749,7 @@ query IntrospectionQuery {
 			},
 
 			p: function update(changed, ctx) {
-				if (changed.scheme || changed.node || changed.tree || changed.parentid || changed.typeName || changed.fieldFunctions || changed.onFieldStateChange) {
+				if (changed.scheme || changed.node || changed.parentid || changed.typeName || changed.fieldFunctions || changed.onFieldStateChange) {
 					each_value = ctx.node.fields;
 
 					for (var i = 0; i < each_value.length; i += 1) {
@@ -1832,7 +1796,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (182:20) {#each node.fields as f,ind}
+	// (199:20) {#each node.fields as f,ind}
 	function create_each_block(ctx) {
 		var updating_getText, t, current;
 
@@ -1845,7 +1809,6 @@ query IntrospectionQuery {
 		let typefield_props = {
 			scheme: ctx.scheme,
 			node: ctx.f,
-			tree: ctx.tree,
 			parentid: "" + ctx.parentid + "-" + ctx.typeName
 		};
 		if (ctx.fieldFunctions[ctx.f.name] !== void 0) {
@@ -1873,7 +1836,6 @@ query IntrospectionQuery {
 				var typefield_changes = {};
 				if (changed.scheme) typefield_changes.scheme = ctx.scheme;
 				if (changed.node) typefield_changes.node = ctx.f;
-				if (changed.tree) typefield_changes.tree = ctx.tree;
 				if (changed.parentid || changed.typeName) typefield_changes.parentid = "" + ctx.parentid + "-" + ctx.typeName;
 				if (!updating_getText && changed.fieldFunctions || changed.node) {
 					typefield_changes.getText = ctx.fieldFunctions[ctx.f.name];
@@ -1968,18 +1930,15 @@ query IntrospectionQuery {
 		};
 	}
 
-	function getFields(n, level){
-	 let a =[];
-	 let p = '  ';
-	 for (let key in n) {
-	     if (n[key].checked){
-	         a.push( p.repeat(level+1)+ key + getFields(n[key], level+1) );
+	function getNode(scheme, typeName){
+	 if (scheme && scheme.data && scheme.data.__schema){
+	     let nodes = scheme.data.__schema.types.filter(t =>  t.name == typeName );
+	     if (nodes.length > 0) {
+	         return nodes[0]
 	     }
-	 }
-	 if (a.length > 0) {
-	     return '{\n' +a.join('\n') + '\n'+p.repeat(level)+ '}'
-	 }
-	 return ''
+	     return null
+	 } 
+	 return null
 	}
 
 	function instance$4($$self, $$props, $$invalidate) {
@@ -1987,8 +1946,8 @@ query IntrospectionQuery {
 
 
 	// P R O P S
-	let { parentid = '', scheme = {}, typeName = '', tree = {}, fieldList = '', getText = function () {
-	    console.log("Type getText parentid=", parentid);
+	let { parentid = '', scheme = {}, typeName = '', fieldList = '', getText = function () {
+	    // console.log("Type getText parentid=", parentid)
 	    let a =[];
 	    let p = '  ';
 
@@ -2004,7 +1963,7 @@ query IntrospectionQuery {
 	    // }
 
 	    for (let key in fieldFunctions) {
-	        console.log(key);
+	        // console.log(key)
 	        let v = fieldFunctions[key]();
 	        if (v){
 	            a.push( p + v );
@@ -2021,8 +1980,8 @@ query IntrospectionQuery {
 
 
 
-	let nodes; 
-	let node; 
+	// let nodes 
+	let node = getNode(scheme, typeName);
 	let vis = false;
 
 
@@ -2034,31 +1993,36 @@ query IntrospectionQuery {
 
 
 
-	function recalculate(){
-	    if (scheme && scheme.data && scheme.data.__schema){
-	        $$invalidate('nodes', nodes = scheme.data.__schema.types.filter(t =>  t.name == typeName ));
-	        if (nodes.length > 0) {
-	            // node = nodes[0]
-	            $$invalidate('node', node = JSON.parse(JSON.stringify(nodes[0])));
-	        }
-	    } 
-	}
 
-	recalculate();
+	// function getFields(n, level){
+	//     let a =[]
+	//     let p = '  '
+	//     for (let key in n) {
+	//         if (n[key].checked){
+	//             a.push( p.repeat(level+1)+ key + getFields(n[key], level+1) )
+	//         }
+	//     }
+	//     if (a.length > 0) {
+	//         return '{\n' +a.join('\n') + '\n'+p.repeat(level)+ '}'
+	//     }
+	//     return ''
+	// }
 
 	// function showTree(e) {
 	//     console.log(fieldList)
 	// }
 
 	function onFieldStateChange(e) {
-	   $$invalidate('fieldList', fieldList = getFields(tree,0)); 
+	//    fieldList = getFields(tree,0) 
+	//    fieldList = getText()
 	   dispatchEvent(e);
 	//    console.log(e)
 	//    console.log(fieldList)
 	}
 
 	onMount(async () => {
-	    $$invalidate('fieldList', fieldList = getFields(tree,0));
+	    // fieldList = getFields(tree,0)
+	    $$invalidate('fieldList', fieldList = getText());    
 	});
 
 		function click_handler(e) {
@@ -2076,7 +2040,6 @@ query IntrospectionQuery {
 			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
 			if ('scheme' in $$props) $$invalidate('scheme', scheme = $$props.scheme);
 			if ('typeName' in $$props) $$invalidate('typeName', typeName = $$props.typeName);
-			if ('tree' in $$props) $$invalidate('tree', tree = $$props.tree);
 			if ('fieldList' in $$props) $$invalidate('fieldList', fieldList = $$props.fieldList);
 			if ('getText' in $$props) $$invalidate('getText', getText = $$props.getText);
 		};
@@ -2085,7 +2048,6 @@ query IntrospectionQuery {
 			parentid,
 			scheme,
 			typeName,
-			tree,
 			fieldList,
 			getText,
 			fieldFunctions,
@@ -2100,7 +2062,7 @@ query IntrospectionQuery {
 	class Type extends SvelteComponentDev {
 		constructor(options) {
 			super(options);
-			init(this, options, instance$4, create_fragment$4, safe_not_equal, ["parentid", "scheme", "typeName", "tree", "fieldList", "getText"]);
+			init(this, options, instance$4, create_fragment$4, safe_not_equal, ["parentid", "scheme", "typeName", "fieldList", "getText"]);
 		}
 
 		get parentid() {
@@ -2124,14 +2086,6 @@ query IntrospectionQuery {
 		}
 
 		set typeName(value) {
-			throw new Error("<Type>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-		}
-
-		get tree() {
-			throw new Error("<Type>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-		}
-
-		set tree(value) {
 			throw new Error("<Type>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
 		}
 
@@ -2164,7 +2118,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (323:12) {#if node.args}
+	// (335:12) {#if node.args}
 	function create_if_block$2(ctx) {
 		var div0, t_1, div1, each_blocks = [], each_1_lookup = new Map(), current;
 
@@ -2187,9 +2141,9 @@ query IntrospectionQuery {
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
 				div0.className = "header svelte-crq5wd";
-				add_location(div0, file$5, 323, 12, 7053);
+				add_location(div0, file$5, 335, 12, 7376);
 				div1.className = "fieldlist svelte-crq5wd";
-				add_location(div1, file$5, 324, 12, 7102);
+				add_location(div1, file$5, 336, 12, 7425);
 			},
 
 			m: function mount(target, anchor) {
@@ -2235,7 +2189,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (326:16) {#each node.args as arg, index (arg.name)}
+	// (338:16) {#each node.args as arg, index (arg.name)}
 	function create_each_block$1(key_1, ctx) {
 		var first, updating_getText, current;
 
@@ -2308,7 +2262,7 @@ query IntrospectionQuery {
 	}
 
 	function create_fragment$5(ctx) {
-		var a, t0_value = ctx.node.name, t0, t1, a_class_value, t2, span0, t3, t4, span1, t5_value = ctx.node.description, t5, t6, div17, div2, t7, div1, div0, t8, t9_value = ctx.node.type.kind == "LIST" ? '[...]': '', t9, t10, input0, t11, updating_getText, updating_fieldList, t12, form_1, div4, div3, t14, textarea0, textarea0_id_value, t15, div6, div5, t17, textarea1, textarea1_id_value, t18, div8, div7, t20, input1, t21, div9, input2, t22, div16, div10, t24, div13, div11, t25, span2, t26_value = ctx.response?'':null, t26, t27, div12, t28, div15, span3, t30, textarea2, textarea2_id_value, t31, div14, input3, t32, span4, t33, t34, span5, current, dispose;
+		var a, t0_value = ctx.node.name, t0, t1, a_class_value, t2, span0, t3, t4, span1, t5_value = ctx.node.description, t5, t6, div17, div2, t7, div1, div0, t8, t9_value = ctx.node.type.kind == "LIST" ? '[...]': '', t9, t10, input0, t11, updating_getText, t12, form_1, div4, div3, t14, textarea0, textarea0_id_value, t15, div6, div5, t17, textarea1, textarea1_id_value, t18, div8, div7, t20, input1, t21, div9, input2, t22, div16, div10, t24, div13, div11, t25, span2, t26_value = ctx.response?'':null, t26, t27, div12, t28, div15, span3, t30, textarea2, textarea2_id_value, t31, div14, input3, t32, span4, t33, t34, span5, current, dispose;
 
 		var if_block = (ctx.node.args) && create_if_block$2(ctx);
 
@@ -2318,27 +2272,18 @@ query IntrospectionQuery {
 			add_flush_callback(() => updating_getText = false);
 		}
 
-		function type_fieldList_binding(value_1) {
-			ctx.type_fieldList_binding.call(null, value_1);
-			updating_fieldList = true;
-			add_flush_callback(() => updating_fieldList = false);
-		}
-
 		let type_props = {
-			typeName: ctx.node.graphqlType = ctx.node.type.name || ctx.node.type.ofType.name,
+			typeName: ctx.node.type.name || ctx.node.type.ofType.name,
 			scheme: ctx.scheme,
 			parentid: "" + ctx.parentid + "-" + ctx.node.name
 		};
 		if (ctx.getTypeText !== void 0) {
 			type_props.getText = ctx.getTypeText;
 		}
-		if (ctx.fieldlist !== void 0) {
-			type_props.fieldList = ctx.fieldlist;
-		}
 		var type = new Type({ props: type_props, $$inline: true });
 
 		add_binding_callback(() => bind(type, 'getText', type_getText_binding));
-		add_binding_callback(() => bind(type, 'fieldList', type_fieldList_binding));
+		type.$on("change", ctx.typeChangeHandler);
 
 		return {
 			c: function create() {
@@ -2414,81 +2359,81 @@ query IntrospectionQuery {
 				span5 = element("span");
 				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-crq5wd";
 				a.href = true;
-				add_location(a, file$5, 315, 0, 6658);
+				add_location(a, file$5, 326, 0, 6971);
 				span0.className = "test-result svelte-crq5wd";
-				add_location(span0, file$5, 316, 0, 6768);
+				add_location(span0, file$5, 327, 0, 7081);
 				span1.className = "description svelte-crq5wd";
-				add_location(span1, file$5, 317, 0, 6815);
+				add_location(span1, file$5, 328, 0, 7128);
 				attr(input0, "type", "button");
 				input0.value = "getText";
-				add_location(input0, file$5, 334, 16, 7522);
+				add_location(input0, file$5, 346, 16, 7845);
 				div0.className = "header svelte-crq5wd";
-				add_location(div0, file$5, 333, 16, 7436);
-				add_location(div1, file$5, 332, 12, 7414);
+				add_location(div0, file$5, 345, 16, 7759);
+				add_location(div1, file$5, 344, 12, 7737);
 				div2.className = "form-area svelte-crq5wd";
-				add_location(div2, file$5, 320, 4, 6967);
+				add_location(div2, file$5, 332, 4, 7290);
 				div3.className = "header svelte-crq5wd";
-				add_location(div3, file$5, 345, 12, 8041);
+				add_location(div3, file$5, 358, 12, 8400);
 				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
 				textarea0.name = "query";
 				textarea0.className = "query svelte-crq5wd";
 				textarea0.value = ctx.request;
-				add_location(textarea0, file$5, 346, 12, 8086);
-				add_location(div4, file$5, 344, 8, 8023);
+				add_location(textarea0, file$5, 359, 12, 8445);
+				add_location(div4, file$5, 357, 8, 8382);
 				div5.className = "header svelte-crq5wd";
-				add_location(div5, file$5, 349, 12, 8251);
+				add_location(div5, file$5, 362, 12, 8610);
 				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
 				textarea1.name = "variables";
 				textarea1.className = "variables svelte-crq5wd";
-				add_location(textarea1, file$5, 350, 12, 8300);
-				add_location(div6, file$5, 348, 8, 8233);
+				add_location(textarea1, file$5, 363, 12, 8659);
+				add_location(div6, file$5, 361, 8, 8592);
 				div7.className = "header svelte-crq5wd";
-				add_location(div7, file$5, 353, 12, 8469);
+				add_location(div7, file$5, 366, 12, 8828);
 				attr(input1, "type", "file");
 				input1.name = "input-file";
-				add_location(input1, file$5, 354, 12, 8512);
-				add_location(div8, file$5, 352, 8, 8451);
+				add_location(input1, file$5, 367, 12, 8871);
+				add_location(div8, file$5, 365, 8, 8810);
 				attr(input2, "type", "submit");
 				input2.value = "TEST";
 				input2.className = "svelte-crq5wd";
-				add_location(input2, file$5, 357, 12, 8607);
+				add_location(input2, file$5, 370, 12, 8966);
 				div9.className = "buttons svelte-crq5wd";
-				add_location(div9, file$5, 356, 8, 8573);
+				add_location(div9, file$5, 369, 8, 8932);
 				form_1.className = "svelte-crq5wd";
-				add_location(form_1, file$5, 343, 4, 7968);
+				add_location(form_1, file$5, 356, 4, 8327);
 				div10.className = "header svelte-crq5wd";
-				add_location(div10, file$5, 363, 8, 8712);
+				add_location(div10, file$5, 376, 8, 9071);
 				span2.className = "json-literal";
-				add_location(span2, file$5, 365, 28, 8811);
-				add_location(div11, file$5, 365, 12, 8795);
+				add_location(span2, file$5, 378, 28, 9170);
+				add_location(div11, file$5, 378, 12, 9154);
 				div12.className = "response svelte-crq5wd";
-				add_location(div12, file$5, 366, 12, 8882);
+				add_location(div12, file$5, 379, 12, 9241);
 				div13.className = "response-area svelte-crq5wd";
-				add_location(div13, file$5, 364, 8, 8755);
+				add_location(div13, file$5, 377, 8, 9114);
 				span3.className = "header svelte-crq5wd";
-				add_location(span3, file$5, 369, 12, 8995);
+				add_location(span3, file$5, 382, 12, 9354);
 				textarea2.rows = "3";
 				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
 				textarea2.className = "eval-text svelte-crq5wd";
 				textarea2.value = "response != null";
-				add_location(textarea2, file$5, 370, 12, 9040);
+				add_location(textarea2, file$5, 383, 12, 9399);
 				attr(input3, "type", "button");
 				input3.className = "try-button svelte-crq5wd";
 				input3.value = "TRY THE CODE";
-				add_location(input3, file$5, 372, 16, 9221);
+				add_location(input3, file$5, 385, 16, 9580);
 				span4.className = "eval-result svelte-crq5wd";
-				add_location(span4, file$5, 373, 16, 9319);
+				add_location(span4, file$5, 386, 16, 9678);
 				span5.className = "eval-errors svelte-crq5wd";
-				add_location(span5, file$5, 374, 16, 9381);
+				add_location(span5, file$5, 387, 16, 9740);
 				div14.className = "buttons2 svelte-crq5wd";
-				add_location(div14, file$5, 371, 12, 9182);
+				add_location(div14, file$5, 384, 12, 9541);
 				div15.className = "eval-area svelte-crq5wd";
-				add_location(div15, file$5, 368, 8, 8959);
+				add_location(div15, file$5, 381, 8, 9318);
 				div16.className = "result-panel svelte-crq5wd";
-				add_location(div16, file$5, 362, 4, 8677);
+				add_location(div16, file$5, 375, 4, 9036);
 				div17.className = "root svelte-crq5wd";
 				set_style(div17, "display", (ctx.vis?'grid':'none'));
-				add_location(div17, file$5, 319, 0, 6886);
+				add_location(div17, file$5, 330, 0, 7199);
 
 				dispose = [
 					listen(a, "click", prevent_default(ctx.click_handler)),
@@ -2580,7 +2525,6 @@ query IntrospectionQuery {
 				append(div14, t34);
 				append(div14, span5);
 				span5.innerHTML = ctx.evalErrors;
-				add_binding_callback(() => ctx.div17_binding(div17, null));
 				current = true;
 			},
 
@@ -2627,14 +2571,11 @@ query IntrospectionQuery {
 				}
 
 				var type_changes = {};
-				if (changed.node) type_changes.typeName = ctx.node.graphqlType = ctx.node.type.name || ctx.node.type.ofType.name;
+				if (changed.node) type_changes.typeName = ctx.node.type.name || ctx.node.type.ofType.name;
 				if (changed.scheme) type_changes.scheme = ctx.scheme;
 				if (changed.parentid || changed.node) type_changes.parentid = "" + ctx.parentid + "-" + ctx.node.name;
 				if (!updating_getText && changed.getTypeText) {
 					type_changes.getText = ctx.getTypeText;
-				}
-				if (!updating_fieldList && changed.fieldlist) {
-					type_changes.fieldList = ctx.fieldlist;
 				}
 				type.$set(type_changes);
 
@@ -2691,11 +2632,6 @@ query IntrospectionQuery {
 					span5.innerHTML = ctx.evalErrors;
 				}
 
-				if (changed.items) {
-					ctx.div17_binding(null, div17);
-					ctx.div17_binding(div17, null);
-				}
-
 				if (!current || changed.vis) {
 					set_style(div17, "display", (ctx.vis?'grid':'none'));
 				}
@@ -2736,7 +2672,6 @@ query IntrospectionQuery {
 				ctx.form_1_binding(null, form_1);
 				ctx.div12_binding(null, div12);
 				ctx.textarea2_binding(null, textarea2);
-				ctx.div17_binding(null, div17);
 				run_all(dispose);
 			}
 		};
@@ -2746,7 +2681,9 @@ query IntrospectionQuery {
 		
 
 	// P R O P S
-	let { url, parentid = '', scheme = {}, node = {}, operation = "", test = submitForm } = $$props;
+	let { url, parentid = '', scheme = {}, node = {}, operation = "", test = submitForm, getArgs = getArgsList, getFields = function(){
+	    if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
+	} } = $$props;
 
 	let testResult ='';
 	let evalErrors ='';
@@ -2766,6 +2703,12 @@ query IntrospectionQuery {
 
 
 
+	// function doTest(){
+	//     testResult = "passed"
+	// }
+
+
+
 	function getArgsText() {
 	    // let checked = node.args.filter( n => n.checked && n.value != null )
 	    // let args = checked.map( n => {
@@ -2775,6 +2718,7 @@ query IntrospectionQuery {
 
 	    let args = [];
 	    for (let arg of node.args) {
+	        if (!arg.getText) continue
 	        let text = arg.getText();
 	        if (text) args.push(text);
 	    }
@@ -2785,11 +2729,6 @@ query IntrospectionQuery {
 
 	function getArgsList() {
 	    $$invalidate('arglist', arglist = getArgsText()); 
-	    // if (queryArea) {
-	    //     queryArea.style.height = '10px'
-	    //     queryArea.style.height = queryArea.scrollHeight +'px'
-	    // }
-
 	}
 
 
@@ -2835,10 +2774,17 @@ query IntrospectionQuery {
 
 
 	let getTypeText;
+	function typeChangeHandler(params) {
+	    console.log("typeChangeHandler");
+	    // request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
+	    // fieldlist = getTypeText()
+	    if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
+	    // console.log(fieldlist)
+	}
 
 
 	let form;
-	let rootArea;
+	// let rootArea
 	let formArea;
 	let queryArea;
 	let responseArea;
@@ -2846,8 +2792,10 @@ query IntrospectionQuery {
 
 	onMount(async () => {
 	    getArgsList();
+	    if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
 	    window.$(formArea).resizable({ handles: "e" });
 	    window.$(form).resizable({ handles: "e" });
+	    console.log(" Func onMount");
 	});
 
 		function change_handler(event) {
@@ -2876,11 +2824,6 @@ query IntrospectionQuery {
 		function type_getText_binding(value) {
 			getTypeText = value;
 			$$invalidate('getTypeText', getTypeText);
-		}
-
-		function type_fieldList_binding(value_1) {
-			fieldlist = value_1;
-			$$invalidate('fieldlist', fieldlist);
 		}
 
 		function div2_binding($$node, check) {
@@ -2913,11 +2856,6 @@ query IntrospectionQuery {
 			$$invalidate('evalTextarea', evalTextarea);
 		}
 
-		function div17_binding($$node, check) {
-			rootArea = $$node;
-			$$invalidate('rootArea', rootArea);
-		}
-
 		$$self.$set = $$props => {
 			if ('url' in $$props) $$invalidate('url', url = $$props.url);
 			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
@@ -2925,9 +2863,16 @@ query IntrospectionQuery {
 			if ('node' in $$props) $$invalidate('node', node = $$props.node);
 			if ('operation' in $$props) $$invalidate('operation', operation = $$props.operation);
 			if ('test' in $$props) $$invalidate('test', test = $$props.test);
+			if ('getArgs' in $$props) $$invalidate('getArgs', getArgs = $$props.getArgs);
+			if ('getFields' in $$props) $$invalidate('getFields', getFields = $$props.getFields);
 		};
 
-		$$self.$$.update = ($$dirty = { operation: 1, node: 1, arglist: 1, fieldlist: 1 }) => {
+		$$self.$$.update = ($$dirty = { node: 1, getTypeText: 1, operation: 1, arglist: 1, fieldlist: 1 }) => {
+			if ($$dirty.node || $$dirty.getTypeText) { {
+	            console.log("Func node changed");
+	            // arglist = getArgsText() 
+	            if (getTypeText) $$invalidate('fieldlist', fieldlist = getTypeText());
+	        } }
 			if ($$dirty.operation || $$dirty.node || $$dirty.arglist || $$dirty.fieldlist) { {
 	            $$invalidate('request', request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`);
 	            dispatchEvent();
@@ -2941,10 +2886,11 @@ query IntrospectionQuery {
 			node,
 			operation,
 			test,
+			getArgs,
+			getFields,
 			testResult,
 			evalErrors,
 			vis,
-			fieldlist,
 			request,
 			variables,
 			response,
@@ -2952,8 +2898,8 @@ query IntrospectionQuery {
 			submitForm,
 			evaluate,
 			getTypeText,
+			typeChangeHandler,
 			form,
-			rootArea,
 			formArea,
 			queryArea,
 			responseArea,
@@ -2965,21 +2911,19 @@ query IntrospectionQuery {
 			argument_getText_binding,
 			click_handler_1,
 			type_getText_binding,
-			type_fieldList_binding,
 			div2_binding,
 			textarea0_binding,
 			textarea1_input_handler,
 			form_1_binding,
 			div12_binding,
-			textarea2_binding,
-			div17_binding
+			textarea2_binding
 		};
 	}
 
 	class Func extends SvelteComponentDev {
 		constructor(options) {
 			super(options);
-			init(this, options, instance$5, create_fragment$5, safe_not_equal, ["url", "parentid", "scheme", "node", "operation", "test"]);
+			init(this, options, instance$5, create_fragment$5, safe_not_equal, ["url", "parentid", "scheme", "node", "operation", "test", "getArgs", "getFields"]);
 
 			const { ctx } = this.$$;
 			const props = options.props || {};
@@ -3035,6 +2979,22 @@ query IntrospectionQuery {
 		set test(value) {
 			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
 		}
+
+		get getArgs() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set getArgs(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get getFields() {
+			throw new Error("<Func>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set getFields(value) {
+			throw new Error("<Func>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
 	}
 
 	/* src/List.svelte generated by Svelte v3.4.0 */
@@ -3055,7 +3015,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (45:5) {#each queries as e}
+	// (48:5) {#each queries as e}
 	function create_each_block_1(ctx) {
 		var div, updating_test, current;
 
@@ -3084,7 +3044,7 @@ query IntrospectionQuery {
 			c: function create() {
 				div = element("div");
 				func.$$.fragment.c();
-				add_location(div, file$6, 45, 10, 937);
+				add_location(div, file$6, 48, 10, 991);
 			},
 
 			m: function mount(target, anchor) {
@@ -3127,7 +3087,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (52:5) {#each mutations as e}
+	// (55:5) {#each mutations as e}
 	function create_each_block$2(ctx) {
 		var div, t, current;
 
@@ -3148,7 +3108,7 @@ query IntrospectionQuery {
 				div = element("div");
 				func.$$.fragment.c();
 				t = space();
-				add_location(div, file$6, 52, 10, 1154);
+				add_location(div, file$6, 55, 10, 1208);
 			},
 
 			m: function mount(target, anchor) {
@@ -3256,10 +3216,10 @@ query IntrospectionQuery {
 				}
 				attr(input, "type", "button");
 				input.value = "test";
-				add_location(input, file$6, 42, 5, 825);
-				add_location(h40, file$6, 43, 5, 884);
-				add_location(h41, file$6, 50, 5, 1097);
-				add_location(div, file$6, 41, 0, 814);
+				add_location(input, file$6, 45, 5, 879);
+				add_location(h40, file$6, 46, 5, 938);
+				add_location(h41, file$6, 53, 5, 1151);
+				add_location(div, file$6, 44, 0, 868);
 				dispose = listen(input, "click", ctx.doTests);
 			},
 
@@ -3389,6 +3349,9 @@ query IntrospectionQuery {
 
 	function doTests(){
 	    for (let o of queries) {
+	        o.test();
+	    }
+	    for (let o of mutations) {
 	        o.test();
 	    }
 	    // console.log(queries)
@@ -3521,16 +3484,16 @@ query IntrospectionQuery {
 				attr(input0, "type", "button");
 				input0.value = "save";
 				input0.className = "svelte-o5nj5n";
-				add_location(input0, file$7, 142, 8, 3155);
+				add_location(input0, file$7, 143, 8, 3211);
 				attr(input1, "type", "button");
 				input1.value = "restore";
 				input1.className = "svelte-o5nj5n";
-				add_location(input1, file$7, 143, 8, 3220);
-				add_location(div0, file$7, 141, 4, 3141);
+				add_location(input1, file$7, 144, 8, 3276);
+				add_location(div0, file$7, 142, 4, 3197);
 				div1.className = "main svelte-o5nj5n";
-				add_location(div1, file$7, 145, 4, 3298);
+				add_location(div1, file$7, 146, 4, 3354);
 				div2.className = "root svelte-o5nj5n";
-				add_location(div2, file$7, 139, 0, 3055);
+				add_location(div2, file$7, 140, 0, 3111);
 
 				dispose = [
 					listen(input0, "click", ctx.saveFields),
@@ -3689,13 +3652,14 @@ query IntrospectionQuery {
 
 
 	    $$invalidate('ignoreChanges', ignoreChanges = true);
-	    restoreFieldsWithEvents(true);
-	    setTimeout(() => {
-	        $$invalidate('ignoreChanges', ignoreChanges = true);
-	        restoreFieldsWithEvents(false);
-	        console.log("restored", key, controlsStr.length );
-	        $$invalidate('ignoreChanges', ignoreChanges = false);
-	    }, 100);
+	    restoreFieldsWithEvents(false);
+	    // restoreFieldsWithEvents(true)
+	    // setTimeout(() => {
+	    //     ignoreChanges = true
+	    //     restoreFieldsWithEvents(false)
+	    //     console.log("restored", key, controlsStr.length )
+	    //     ignoreChanges = false
+	    // }, 100);
 	}
 
 
