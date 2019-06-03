@@ -17,7 +17,7 @@ scheme = await resp.json()
 
 
 onMount(async () => {
-    getSchema()
+    // getSchema()
 })
 
 </script>

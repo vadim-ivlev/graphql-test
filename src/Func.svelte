@@ -135,13 +135,13 @@ function typeChangeHandler(params) {
 let form
 // let rootArea
 let formArea
-let queryArea
+// let queryArea
 let responseArea
 let evalTextarea
 
 onMount(async () => {
-    getArgsList()
-    if (getTypeText) fieldlist = getTypeText()
+    // getArgsList()
+    // if (getTypeText) fieldlist = getTypeText()
     window.$(formArea).resizable({ handles: "e" });
     window.$(form).resizable({ handles: "e" });
     console.log(" Func onMount")
@@ -292,11 +292,11 @@ onMount(async () => {
         font-weight: bold;
         /* font-size: 90%; */
         letter-spacing: 0.1em;
-        padding: 0px 5px 0px 5px;
+        padding: 5px 15px 5px 15px;
         border: 1px solid steelblue;
         border-radius: 4px;
-        background-color: steelblue;
-        color: white;
+        background-color: transparent;
+        color: steelblue;
 
     }
 
@@ -357,7 +357,8 @@ onMount(async () => {
     <form bind:this={form} on:submit={submitForm}>
         <div>
             <div class="header" >QUERY</div>
-            <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change bind:this={queryArea}>{request}</textarea>
+            <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change >{request}</textarea>
+            <!-- bind:this={queryArea} -->
         </div>
         <div>
             <div class="header" >VARIABLES</div>
@@ -383,7 +384,7 @@ onMount(async () => {
             <span class="header">TEST</span>
             <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} >response != null</textarea> 
             <div class="buttons2">
-                <input type="button" class="try-button" value="TRY THE CODE" on:click={evaluate}>
+                <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
                 <span class="eval-result">{testResult}</span>
                 <span class="eval-errors">{@html evalErrors}</span>
             </div>

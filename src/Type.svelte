@@ -1,5 +1,5 @@
 <script>
-import { createEventDispatcher } from 'svelte'
+// import { createEventDispatcher } from 'svelte'
 
 import { onMount } from 'svelte'
 import Js from './JsonView.svelte'
@@ -11,7 +11,7 @@ export let parentid = ''
 export let scheme = {}
 export let typeName = ''
 // export let tree = {}
-export let fieldList = ''
+// export let fieldList = ''
 
 export let getText = function () {
     // console.log("Type getText parentid=", parentid)
@@ -52,10 +52,10 @@ let node = getNode(scheme, typeName)
 let vis = false
 
 
-const dispatch = createEventDispatcher()
-function dispatchEvent(e) {
-	dispatch('change', { text: 'State changed!', target: e.target })
-}
+// const dispatch = createEventDispatcher()
+// function dispatchEvent(e) {
+// 	dispatch('change', { text: 'State changed!', target: e.target })
+// }
 
 
 
@@ -105,18 +105,18 @@ function getNode(scheme, typeName){
 //     console.log(fieldList)
 // }
 
-function onFieldStateChange(e) {
-//    fieldList = getFields(tree,0) 
-//    fieldList = getText()
-   dispatchEvent(e)
-//    console.log(e)
-//    console.log(fieldList)
-}
+// function onFieldStateChange(e) {
+// //    fieldList = getFields(tree,0) 
+// //    fieldList = getText()
+//    dispatchEvent(e)
+// //    console.log(e)
+// //    console.log(fieldList)
+// }
 
-onMount(async () => {
-    // fieldList = getFields(tree,0)
-    fieldList = getText()    
-})
+// onMount(async () => {
+//     // fieldList = getFields(tree,0)
+//     fieldList = getText()    
+// })
 
 </script>
 
@@ -197,7 +197,8 @@ onMount(async () => {
                 {#if node.fields}
                     <div class="fieldlist">
                     {#each node.fields as f,ind}
-                        <TypeField  bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} parentid="{parentid}-{typeName}" on:change={onFieldStateChange} />
+                        <TypeField  bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} parentid="{parentid}-{typeName}" on:change />
+                    <!-- on:change={onFieldStateChange} -->
                     <!-- tree={tree}  -->
                     <!-- bind:getText={f.getTypeText}   -->
                     {/each}
