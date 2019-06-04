@@ -1,15 +1,33 @@
 <script>
+import {createEventDispatcher,onMount} from 'svelte'
 
-export let tabs = ["tab1","tab2"]
-export let active = "tab1"
+
+export let tabs = []
+export let active = ""
+
+const dispatch = createEventDispatcher()
+
+
+
 
 let n = 3
 function activate(e) {
     active = this.getAttribute("data-tab")
 }
 
+function getKeysFromLocalStorage() {
+    return Object.keys(localStorage)
+}
+
+
+
 function addTab(){
-    let tabName = "tab"+(n++)
+    let tabName = prompt("New tab name","")
+    if (!tabName) return
+    while (tabs.includes(tabName)){
+        tabName = prompt(`"${tabName}" already exists. Please try again.`,tabName)
+        if (!tabName) return
+    }
     tabs = [...tabs, tabName]
     active = tabName
 }
@@ -20,6 +38,22 @@ function deleteTab(){
     active = tabs.length >0 ? tabs[0] : ''
     console.log(active)
 }
+
+
+function renameTab(){
+
+}
+
+
+function saveTab(){
+    dispatch('save', {tab: active} )
+}
+
+onMount(async () => {
+    let storedTabs = getKeysFromLocalStorage()
+    tabs = storedTabs.length ==0 ? ['Test endpont'] : [...tabs, ...storedTabs]
+    active = tabs[0]
+})
 
 
 </script>
@@ -35,7 +69,7 @@ function deleteTab(){
     .tab {
         margin: 0;
         display: inline-block;
-        padding: 5px 20px 5px 20px;
+        padding: 1px 10px 1px 10px;
         cursor: default;
         border-bottom: 2px solid transparent;
         color: gray;
@@ -68,9 +102,31 @@ function deleteTab(){
         border-color: silver;
     }
 
+    .buttons {
+        float: right;
+    }
+    .button {
+        /* font-family: 'Roboto Condensed'; */
+        /* font-weight: bold; */
+        /* letter-spacing: 0.1em; */
+        padding: 0 5px 0 5px;
+        border: 1px solid steelblue;
+        /* border-radius: 4px; */
+        background-color: transparent;
+        color: steelblue;
+    }
+
+
 </style>
 
 <div class="container">
+    {#if tabs && tabs.length > 0}
+    <span class="buttons">
+        <input type="button" class="button" value="rename" on:click={renameTab}>
+        <input type="button" class="button" value="save" on:click={saveTab}>
+    </span>
+    {/if}
+
     {#each tabs as tab (tab)}
         <span class="tab" class:active={tab == active} data-tab={tab} on:click={activate}>{tab} 
             <span class="x" data-tab={tab} on:click={deleteTab}>x</span>

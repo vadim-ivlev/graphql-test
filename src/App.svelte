@@ -1,5 +1,5 @@
 <script>
-// import { onMount } from 'svelte'
+import { afterUpdate, onMount } from 'svelte'
 
 import Schemer from "./schemer/schemer.svelte";
 import JsonView from "./JsonView.svelte"
@@ -18,6 +18,7 @@ $: {
     scheme=scheme
     console.log('App scheme changed', scheme)
     ignoreChanges= true
+    // delay(restoreInputs, 500)
 }
 
 function doAllTests() {
@@ -60,7 +61,7 @@ function restoreControlValues(controls) {
 }
 
 
-function saveInputs() {
+export function saveInputs() {
     let key = parentid
     let controls = getControlValues()
     let controlsStr = JSON.stringify(controls)
@@ -69,12 +70,17 @@ function saveInputs() {
 }
 
 
-function restoreInputs() {
+export function restoreInputs() {
+    // check if scheme is empty
+    if (scheme && Object.entries(scheme).length === 0 && scheme.constructor === Object)
+        return
+
     let key = parentid
     let controlsStr = localStorage.getItem(key)
     if (!controlsStr) return
     let controls = JSON.parse(controlsStr)
     restoreControlValues(controls)
+    console.log("restored key=", key, controlsStr.length )
 }
 
 let delayTimeout
@@ -84,15 +90,22 @@ function delay(func, time=300) {
 }
 
 function changeHandler(){
-    console.log('App changeHandler')
+    console.log('App changeHandler parentid=', parentid, document.readyState)
     if (ignoreChanges) return
-    delay(()=> console.log("I was delayed"))
+    delay(()=> console.log("I was delayed from App changeYandler parentid=", parentid, document.readyState))
 }
 
 
-// onMount(async () => {
-//     // restoreInputs()
-// })
+afterUpdate(() => {
+    console.log("afterUpdate parentid=", parentid)
+    restoreInputs()
+    // delay(restoreInputs, 500)
+});
+
+onMount(async () => {
+    // restoreInputs()
+    console.log("onMount parentid=", parentid)
+})
 
 
 
@@ -104,8 +117,8 @@ function changeHandler(){
         display: grid;
         grid-template-columns:  max-content 5fr max-content;
         grid-template-areas:  
-        "t h b" 
-        "m m m";
+        "t h" 
+        "m m";
     }
     .main {
         grid-area: m;
@@ -124,10 +137,10 @@ function changeHandler(){
         <input type="button" on:click={doAllTests} value="do tests" >
     <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
     <!-- {#if Object.entries(scheme).length != 0 } -->
-    <div>
+    <!-- <div>
         <input type="button" on:click={saveInputs} value="save">
         <input type="button" on:click={restoreInputs} value="restore">
-    </div>
+    </div> -->
     <!-- {/if} -->
     <div class="main">
         <List parentid="{parentid}-List" url={url} scheme={scheme} bind:doTests={doTests} on:change={changeHandler}/>

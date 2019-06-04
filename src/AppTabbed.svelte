@@ -2,8 +2,14 @@
 import App from "./App.svelte"
 import Tabs from "./Tabs.svelte"
 
-let tabs = ["tab1"]
-let active = 'tab1'
+let tabs = []
+let active = ''
+let tabsSaveFunctions = {}
+
+
+function saveTab(params) {
+    tabsSaveFunctions[active]()
+}
 
 </script>
 
@@ -12,9 +18,10 @@ let active = 'tab1'
 </style>
 
 <div>
-    <Tabs bind:tabs bind:active/>
+    <Tabs bind:tabs bind:active on:save={saveTab}/>
     {#each tabs as tab (tab)}
-        <App parentid={tab} visible={tab == active}/>
+    <!-- {@debug tabs} -->
+        <App parentid={tab} visible={tab == active} bind:saveInputs={tabsSaveFunctions[tab]}/>
     {/each}
 
 </div>
