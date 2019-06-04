@@ -20,9 +20,9 @@ async function getScheme() {
     scheme = await resp.json()
 }
 
-function clearScheme() {
-    scheme = {}     
-}
+// function clearScheme() {
+//     scheme = {}     
+// }
 
 
 onMount(async () => {
@@ -55,9 +55,11 @@ onMount(async () => {
     <input class="post" type="text" id="id-{parentid}-inp-method" value="POST" bind:this={methodElement}>
     <label for="id-{parentid}-inp-url">GraphQL url</label>
     <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url"  bind:value={url} bind:this={urlElement} on:change/>
-    <input type="button" value="reset" on:click={clearScheme} />
+    <!-- <input type="button" value="reset" on:click={clearScheme} /> -->
     <input type="button" value="refresh" on:click={getScheme} />
+    {#if Object.entries(scheme).length != 0 }
     <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>
+    {/if}
   </form>
   {#if visible}
         <JsonView json={scheme} />

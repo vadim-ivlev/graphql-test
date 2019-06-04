@@ -7,10 +7,10 @@ import List from "./List.svelte"
 
 
 export let parentid='tab1'
-
+export let visible = true
 
 let url
-let scheme = null
+let scheme = {}
 let ignoreChanges = true
 let doTests
 
@@ -100,11 +100,12 @@ function changeHandler(){
 
 <style>
     .root {
+        padding-top:20px;
         display: grid;
-        grid-template-columns: 5fr max-content;
+        grid-template-columns:  max-content 5fr max-content;
         grid-template-areas:  
-        "h b" 
-        "m m";
+        "t h b" 
+        "m m m";
     }
     .main {
         grid-area: m;
@@ -114,18 +115,23 @@ function changeHandler(){
         font-size: 100%;
     }
 
+    .hidden {display: none;}
+    .visible {display: block;}
 </style>
 
-
-<div class="root">
-    <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
-    <div>
+<div class="hidden" class:visible>
+<div class="root" >
         <input type="button" on:click={doAllTests} value="do tests" >
+    <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
+    <!-- {#if Object.entries(scheme).length != 0 } -->
+    <div>
         <input type="button" on:click={saveInputs} value="save">
         <input type="button" on:click={restoreInputs} value="restore">
     </div>
+    <!-- {/if} -->
     <div class="main">
         <List parentid="{parentid}-List" url={url} scheme={scheme} bind:doTests={doTests} on:change={changeHandler}/>
     </div>
+</div>
 </div>
 

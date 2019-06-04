@@ -95,6 +95,10 @@ var app = (function () {
 		node.style.setProperty(key, value);
 	}
 
+	function toggle_class(element, name, toggle) {
+		element.classList[toggle ? 'add' : 'remove'](name);
+	}
+
 	function custom_event(type, detail) {
 		const e = document.createEvent('CustomEvent');
 		e.initCustomEvent(type, false, false, detail);
@@ -686,7 +690,43 @@ query IntrospectionQuery {
 
 	const file$1 = "src/schemer/schemer.svelte";
 
-	// (62:2) {#if visible}
+	// (60:4) {#if Object.entries(scheme).length != 0 }
+	function create_if_block_1(ctx) {
+		var a, t0_value = ctx.visible?'Hide':'Show', t0, t1, dispose;
+
+		return {
+			c: function create() {
+				a = element("a");
+				t0 = text(t0_value);
+				t1 = text(" scheme");
+				a.href = true;
+				add_location(a, file$1, 60, 4, 1564);
+				dispose = listen(a, "click", prevent_default(ctx.click_handler));
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, a, anchor);
+				append(a, t0);
+				append(a, t1);
+			},
+
+			p: function update(changed, ctx) {
+				if ((changed.visible) && t0_value !== (t0_value = ctx.visible?'Hide':'Show')) {
+					set_data(t0, t0_value);
+				}
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(a);
+				}
+
+				dispose();
+			}
+		};
+	}
+
+	// (64:2) {#if visible}
 	function create_if_block(ctx) {
 		var current;
 
@@ -730,9 +770,11 @@ query IntrospectionQuery {
 	}
 
 	function create_fragment$1(ctx) {
-		var div, form, input0, input0_id_value, t0, label, t1, label_for_value, t2, input1, input1_id_value, input1_name_value, t3, input2, t4, input3, t5, a, t6_value = ctx.visible?'Hide':'Show', t6, t7, t8, current, dispose;
+		var div, form, input0, input0_id_value, t0, label, t1, label_for_value, t2, input1, input1_id_value, input1_name_value, t3, input2, t4, t5, current, dispose;
 
-		var if_block = (ctx.visible) && create_if_block(ctx);
+		var if_block0 = (Object.entries(ctx.scheme).length != 0) && create_if_block_1(ctx);
+
+		var if_block1 = (ctx.visible) && create_if_block(ctx);
 
 		return {
 			c: function create() {
@@ -747,45 +789,33 @@ query IntrospectionQuery {
 				t3 = space();
 				input2 = element("input");
 				t4 = space();
-				input3 = element("input");
+				if (if_block0) if_block0.c();
 				t5 = space();
-				a = element("a");
-				t6 = text(t6_value);
-				t7 = text(" scheme");
-				t8 = space();
-				if (if_block) if_block.c();
+				if (if_block1) if_block1.c();
 				input0.className = "post svelte-i19gg6";
 				attr(input0, "type", "text");
 				input0.id = input0_id_value = "id-" + ctx.parentid + "-inp-method";
 				input0.value = "POST";
-				add_location(input0, file$1, 54, 4, 1060);
+				add_location(input0, file$1, 54, 4, 1069);
 				label.htmlFor = label_for_value = "id-" + ctx.parentid + "-inp-url";
-				add_location(label, file$1, 55, 4, 1166);
+				add_location(label, file$1, 55, 4, 1175);
 				input1.className = "text svelte-i19gg6";
 				attr(input1, "type", "text");
 				input1.id = input1_id_value = "id-" + ctx.parentid + "-inp-url";
 				input1.name = input1_name_value = "id-" + ctx.parentid + "-inp-url";
-				add_location(input1, file$1, 56, 4, 1225);
+				add_location(input1, file$1, 56, 4, 1234);
 				attr(input2, "type", "button");
-				input2.value = "reset";
+				input2.value = "refresh";
 				input2.className = "svelte-i19gg6";
-				add_location(input2, file$1, 57, 4, 1370);
-				attr(input3, "type", "button");
-				input3.value = "refresh";
-				input3.className = "svelte-i19gg6";
-				add_location(input3, file$1, 58, 4, 1435);
-				a.href = true;
-				add_location(a, file$1, 59, 4, 1500);
-				add_location(form, file$1, 53, 2, 1049);
+				add_location(input2, file$1, 58, 4, 1453);
+				add_location(form, file$1, 53, 2, 1058);
 				div.className = "self svelte-i19gg6";
-				add_location(div, file$1, 52, 0, 1028);
+				add_location(div, file$1, 52, 0, 1037);
 
 				dispose = [
 					listen(input1, "input", ctx.input1_input_handler),
 					listen(input1, "change", ctx.change_handler),
-					listen(input2, "click", ctx.clearScheme),
-					listen(input3, "click", ctx.getScheme),
-					listen(a, "click", prevent_default(ctx.click_handler))
+					listen(input2, "click", ctx.getScheme)
 				];
 			},
 
@@ -810,13 +840,9 @@ query IntrospectionQuery {
 				append(form, t3);
 				append(form, input2);
 				append(form, t4);
-				append(form, input3);
-				append(form, t5);
-				append(form, a);
-				append(a, t6);
-				append(a, t7);
-				append(div, t8);
-				if (if_block) if_block.m(div, null);
+				if (if_block0) if_block0.m(form, null);
+				append(div, t5);
+				if (if_block1) if_block1.m(div, null);
 				current = true;
 			},
 
@@ -848,40 +874,49 @@ query IntrospectionQuery {
 					input1.name = input1_name_value;
 				}
 
-				if ((!current || changed.visible) && t6_value !== (t6_value = ctx.visible?'Hide':'Show')) {
-					set_data(t6, t6_value);
+				if (Object.entries(ctx.scheme).length != 0) {
+					if (if_block0) {
+						if_block0.p(changed, ctx);
+					} else {
+						if_block0 = create_if_block_1(ctx);
+						if_block0.c();
+						if_block0.m(form, null);
+					}
+				} else if (if_block0) {
+					if_block0.d(1);
+					if_block0 = null;
 				}
 
 				if (ctx.visible) {
-					if (if_block) {
-						if_block.p(changed, ctx);
-						if_block.i(1);
+					if (if_block1) {
+						if_block1.p(changed, ctx);
+						if_block1.i(1);
 					} else {
-						if_block = create_if_block(ctx);
-						if_block.c();
-						if_block.i(1);
-						if_block.m(div, null);
+						if_block1 = create_if_block(ctx);
+						if_block1.c();
+						if_block1.i(1);
+						if_block1.m(div, null);
 					}
-				} else if (if_block) {
+				} else if (if_block1) {
 					group_outros();
 					on_outro(() => {
-						if_block.d(1);
-						if_block = null;
+						if_block1.d(1);
+						if_block1 = null;
 					});
 
-					if_block.o(1);
+					if_block1.o(1);
 					check_outros();
 				}
 			},
 
 			i: function intro(local) {
 				if (current) return;
-				if (if_block) if_block.i();
+				if (if_block1) if_block1.i();
 				current = true;
 			},
 
 			o: function outro(local) {
-				if (if_block) if_block.o();
+				if (if_block1) if_block1.o();
 				current = false;
 			},
 
@@ -892,7 +927,8 @@ query IntrospectionQuery {
 
 				ctx.input0_binding(null, input0);
 				ctx.input1_binding(null, input1);
-				if (if_block) if_block.d();
+				if (if_block0) if_block0.d();
+				if (if_block1) if_block1.d();
 				run_all(dispose);
 			}
 		};
@@ -914,9 +950,9 @@ query IntrospectionQuery {
 	    $$invalidate('scheme', scheme = await resp.json());
 	}
 
-	function clearScheme() {
-	    $$invalidate('scheme', scheme = {});     
-	}
+	// function clearScheme() {
+	//     scheme = {}     
+	// }
 
 
 	onMount(async () => {
@@ -960,7 +996,6 @@ query IntrospectionQuery {
 			urlElement,
 			methodElement,
 			getScheme,
-			clearScheme,
 			change_handler,
 			input0_binding,
 			input1_input_handler,
@@ -1581,7 +1616,7 @@ query IntrospectionQuery {
 		var div, current_block_type_index, if_block, current;
 
 		var if_block_creators = [
-			create_if_block_1,
+			create_if_block_1$1,
 			create_else_block
 		];
 
@@ -1753,7 +1788,7 @@ query IntrospectionQuery {
 	}
 
 	// (107:4) {#if node.kind=="SCALAR"}
-	function create_if_block_1(ctx) {
+	function create_if_block_1$1(ctx) {
 		var span, t;
 
 		return {
@@ -3578,7 +3613,7 @@ query IntrospectionQuery {
 	const file$7 = "src/App.svelte";
 
 	function create_fragment$7(ctx) {
-		var div2, updating_url, updating_scheme, t0, div0, input0, t1, input1, t2, input2, t3, div1, updating_doTests, current, dispose;
+		var div3, div2, input0, t0, updating_url, updating_scheme, t1, div0, input1, t2, input2, t3, div1, updating_doTests, current, dispose;
 
 		function schemer_url_binding(value) {
 			ctx.schemer_url_binding.call(null, value);
@@ -3628,12 +3663,13 @@ query IntrospectionQuery {
 
 		return {
 			c: function create() {
+				div3 = element("div");
 				div2 = element("div");
-				schemer.$$.fragment.c();
-				t0 = space();
-				div0 = element("div");
 				input0 = element("input");
+				t0 = space();
+				schemer.$$.fragment.c();
 				t1 = space();
+				div0 = element("div");
 				input1 = element("input");
 				t2 = space();
 				input2 = element("input");
@@ -3642,21 +3678,24 @@ query IntrospectionQuery {
 				list.$$.fragment.c();
 				attr(input0, "type", "button");
 				input0.value = "do tests";
-				input0.className = "svelte-c5dk8r";
-				add_location(input0, file$7, 122, 8, 2566);
+				input0.className = "svelte-rteyc5";
+				add_location(input0, file$7, 123, 8, 2615);
 				attr(input1, "type", "button");
 				input1.value = "save";
-				input1.className = "svelte-c5dk8r";
-				add_location(input1, file$7, 123, 8, 2636);
+				input1.className = "svelte-rteyc5";
+				add_location(input1, file$7, 127, 8, 2852);
 				attr(input2, "type", "button");
 				input2.value = "restore";
-				input2.className = "svelte-c5dk8r";
-				add_location(input2, file$7, 124, 8, 2701);
-				add_location(div0, file$7, 121, 4, 2552);
-				div1.className = "main svelte-c5dk8r";
-				add_location(div1, file$7, 126, 4, 2779);
-				div2.className = "root svelte-c5dk8r";
-				add_location(div2, file$7, 119, 0, 2427);
+				input2.className = "svelte-rteyc5";
+				add_location(input2, file$7, 128, 8, 2917);
+				add_location(div0, file$7, 126, 4, 2838);
+				div1.className = "main svelte-rteyc5";
+				add_location(div1, file$7, 131, 4, 3014);
+				div2.className = "root svelte-rteyc5";
+				add_location(div2, file$7, 122, 0, 2587);
+				div3.className = "hidden svelte-rteyc5";
+				toggle_class(div3, "visible", ctx.visible);
+				add_location(div3, file$7, 121, 0, 2552);
 
 				dispose = [
 					listen(input0, "click", ctx.doAllTests),
@@ -3670,12 +3709,13 @@ query IntrospectionQuery {
 			},
 
 			m: function mount(target, anchor) {
-				insert(target, div2, anchor);
-				mount_component(schemer, div2, null);
+				insert(target, div3, anchor);
+				append(div3, div2);
+				append(div2, input0);
 				append(div2, t0);
+				mount_component(schemer, div2, null);
+				append(div2, t1);
 				append(div2, div0);
-				append(div0, input0);
-				append(div0, t1);
 				append(div0, input1);
 				append(div0, t2);
 				append(div0, input2);
@@ -3704,6 +3744,10 @@ query IntrospectionQuery {
 					list_changes.doTests = ctx.doTests;
 				}
 				list.$set(list_changes);
+
+				if (changed.visible) {
+					toggle_class(div3, "visible", ctx.visible);
+				}
 			},
 
 			i: function intro(local) {
@@ -3723,7 +3767,7 @@ query IntrospectionQuery {
 
 			d: function destroy(detaching) {
 				if (detaching) {
-					detach(div2);
+					detach(div3);
 				}
 
 				schemer.$destroy();
@@ -3773,11 +3817,10 @@ query IntrospectionQuery {
 		
 
 
-	let { parentid='tab1' } = $$props;
-
+	let { parentid='tab1', visible = true } = $$props;
 
 	let url;
-	let scheme = null;
+	let scheme = {};
 	let ignoreChanges = true;
 	let doTests;
 
@@ -3837,6 +3880,7 @@ query IntrospectionQuery {
 
 		$$self.$set = $$props => {
 			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
+			if ('visible' in $$props) $$invalidate('visible', visible = $$props.visible);
 		};
 
 		$$self.$$.update = ($$dirty = { scheme: 1 }) => {
@@ -3849,6 +3893,7 @@ query IntrospectionQuery {
 
 		return {
 			parentid,
+			visible,
 			url,
 			scheme,
 			doTests,
@@ -3865,7 +3910,7 @@ query IntrospectionQuery {
 	class App extends SvelteComponentDev {
 		constructor(options) {
 			super(options);
-			init(this, options, instance$7, create_fragment$7, safe_not_equal, ["parentid"]);
+			init(this, options, instance$7, create_fragment$7, safe_not_equal, ["parentid", "visible"]);
 		}
 
 		get parentid() {
@@ -3875,32 +3920,120 @@ query IntrospectionQuery {
 		set parentid(value) {
 			throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
 		}
+
+		get visible() {
+			throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set visible(value) {
+			throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
 	}
 
-	/* src/AppTabbed.svelte generated by Svelte v3.4.0 */
+	/* src/Tabs.svelte generated by Svelte v3.4.0 */
 
-	const file$8 = "src/AppTabbed.svelte";
+	const file$8 = "src/Tabs.svelte";
+
+	function get_each_context$3(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.tab = list[i];
+		return child_ctx;
+	}
+
+	// (74:4) {#each tabs as tab (tab)}
+	function create_each_block$3(key_1, ctx) {
+		var span1, t0_value = ctx.tab, t0, t1, span0, t2, span0_data_tab_value, span1_data_tab_value, dispose;
+
+		return {
+			key: key_1,
+
+			first: null,
+
+			c: function create() {
+				span1 = element("span");
+				t0 = text(t0_value);
+				t1 = space();
+				span0 = element("span");
+				t2 = text("x");
+				span0.className = "x svelte-x2k87l";
+				span0.dataset.tab = span0_data_tab_value = ctx.tab;
+				add_location(span0, file$8, 75, 12, 1580);
+				span1.className = "tab svelte-x2k87l";
+				span1.dataset.tab = span1_data_tab_value = ctx.tab;
+				toggle_class(span1, "active", ctx.tab == ctx.active);
+				add_location(span1, file$8, 74, 8, 1479);
+
+				dispose = [
+					listen(span0, "click", ctx.deleteTab),
+					listen(span1, "click", ctx.activate)
+				];
+
+				this.first = span1;
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, span1, anchor);
+				append(span1, t0);
+				append(span1, t1);
+				append(span1, span0);
+				append(span0, t2);
+			},
+
+			p: function update(changed, ctx) {
+				if ((changed.tabs) && t0_value !== (t0_value = ctx.tab)) {
+					set_data(t0, t0_value);
+				}
+
+				if ((changed.tabs) && span0_data_tab_value !== (span0_data_tab_value = ctx.tab)) {
+					span0.dataset.tab = span0_data_tab_value;
+				}
+
+				if ((changed.tabs) && span1_data_tab_value !== (span1_data_tab_value = ctx.tab)) {
+					span1.dataset.tab = span1_data_tab_value;
+				}
+
+				if ((changed.tabs || changed.active)) {
+					toggle_class(span1, "active", ctx.tab == ctx.active);
+				}
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(span1);
+				}
+
+				run_all(dispose);
+			}
+		};
+	}
 
 	function create_fragment$8(ctx) {
-		var div1, div0, t1, hr, t2, current;
+		var div, each_blocks = [], each_1_lookup = new Map(), t, span, dispose;
 
-		var app = new App({
-			props: { parentid: "tab1" },
-			$$inline: true
-		});
+		var each_value = ctx.tabs;
+
+		const get_key = ctx => ctx.tab;
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			let child_ctx = get_each_context$3(ctx, each_value, i);
+			let key = get_key(child_ctx);
+			each_1_lookup.set(key, each_blocks[i] = create_each_block$3(key, child_ctx));
+		}
 
 		return {
 			c: function create() {
-				div1 = element("div");
-				div0 = element("div");
-				div0.textContent = "tab1";
-				t1 = space();
-				hr = element("hr");
-				t2 = space();
-				app.$$.fragment.c();
-				add_location(div0, file$8, 9, 4, 80);
-				add_location(hr, file$8, 12, 4, 110);
-				add_location(div1, file$8, 8, 0, 70);
+				div = element("div");
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
+
+				t = space();
+				span = element("span");
+				span.textContent = "+";
+				span.className = "tab plus svelte-x2k87l";
+				add_location(span, file$8, 78, 4, 1673);
+				div.className = "container svelte-x2k87l";
+				add_location(div, file$8, 72, 0, 1417);
+				dispose = listen(span, "click", ctx.addTab);
 			},
 
 			l: function claim(nodes) {
@@ -3908,16 +4041,137 @@ query IntrospectionQuery {
 			},
 
 			m: function mount(target, anchor) {
-				insert(target, div1, anchor);
-				append(div1, div0);
-				append(div1, t1);
-				append(div1, hr);
-				append(div1, t2);
-				mount_component(app, div1, null);
+				insert(target, div, anchor);
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].m(div, null);
+
+				append(div, t);
+				append(div, span);
+			},
+
+			p: function update(changed, ctx) {
+				const each_value = ctx.tabs;
+				each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div, destroy_block, create_each_block$3, t, get_each_context$3);
+			},
+
+			i: noop,
+			o: noop,
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].d();
+
+				dispose();
+			}
+		};
+	}
+
+	function instance$8($$self, $$props, $$invalidate) {
+		let { tabs = ["tab1","tab2"], active = "tab1" } = $$props;
+
+	let n = 3;
+	function activate(e) {
+	    $$invalidate('active', active = this.getAttribute("data-tab"));
+	}
+
+	function addTab(){
+	    let tabName = "tab"+(n++);
+	    $$invalidate('tabs', tabs = [...tabs, tabName]); $$invalidate('n', n);
+	    $$invalidate('active', active = tabName);
+	}
+
+	function deleteTab(){
+	    let tab = this.getAttribute("data-tab");
+	    $$invalidate('tabs', tabs = tabs.filter( e => e != tab));
+	    $$invalidate('active', active = tabs.length >0 ? tabs[0] : '');
+	    console.log(active);
+	}
+
+		$$self.$set = $$props => {
+			if ('tabs' in $$props) $$invalidate('tabs', tabs = $$props.tabs);
+			if ('active' in $$props) $$invalidate('active', active = $$props.active);
+		};
+
+		return {
+			tabs,
+			active,
+			activate,
+			addTab,
+			deleteTab
+		};
+	}
+
+	class Tabs extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$8, create_fragment$8, safe_not_equal, ["tabs", "active"]);
+		}
+
+		get tabs() {
+			throw new Error("<Tabs>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set tabs(value) {
+			throw new Error("<Tabs>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get active() {
+			throw new Error("<Tabs>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set active(value) {
+			throw new Error("<Tabs>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/AppTabbed.svelte generated by Svelte v3.4.0 */
+
+	const file$9 = "src/AppTabbed.svelte";
+
+	function get_each_context$4(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.tab = list[i];
+		return child_ctx;
+	}
+
+	// (16:4) {#each tabs as tab (tab)}
+	function create_each_block$4(key_1, ctx) {
+		var first, current;
+
+		var app = new App({
+			props: {
+			parentid: ctx.tab,
+			visible: ctx.tab == ctx.active
+		},
+			$$inline: true
+		});
+
+		return {
+			key: key_1,
+
+			first: null,
+
+			c: function create() {
+				first = empty();
+				app.$$.fragment.c();
+				this.first = first;
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, first, anchor);
+				mount_component(app, target, anchor);
 				current = true;
 			},
 
-			p: noop,
+			p: function update(changed, ctx) {
+				var app_changes = {};
+				if (changed.tabs) app_changes.parentid = ctx.tab;
+				if (changed.tabs || changed.active) app_changes.visible = ctx.tab == ctx.active;
+				app.$set(app_changes);
+			},
 
 			i: function intro(local) {
 				if (current) return;
@@ -3933,18 +4187,149 @@ query IntrospectionQuery {
 
 			d: function destroy(detaching) {
 				if (detaching) {
-					detach(div1);
+					detach(first);
 				}
 
-				app.$destroy();
+				app.$destroy(detaching);
 			}
+		};
+	}
+
+	function create_fragment$9(ctx) {
+		var div, updating_tabs, updating_active, t, each_blocks = [], each_1_lookup = new Map(), current;
+
+		function tabs_1_tabs_binding(value) {
+			ctx.tabs_1_tabs_binding.call(null, value);
+			updating_tabs = true;
+			add_flush_callback(() => updating_tabs = false);
+		}
+
+		function tabs_1_active_binding(value_1) {
+			ctx.tabs_1_active_binding.call(null, value_1);
+			updating_active = true;
+			add_flush_callback(() => updating_active = false);
+		}
+
+		let tabs_1_props = {};
+		if (ctx.tabs !== void 0) {
+			tabs_1_props.tabs = ctx.tabs;
+		}
+		if (ctx.active !== void 0) {
+			tabs_1_props.active = ctx.active;
+		}
+		var tabs_1 = new Tabs({ props: tabs_1_props, $$inline: true });
+
+		add_binding_callback(() => bind(tabs_1, 'tabs', tabs_1_tabs_binding));
+		add_binding_callback(() => bind(tabs_1, 'active', tabs_1_active_binding));
+
+		var each_value = ctx.tabs;
+
+		const get_key = ctx => ctx.tab;
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			let child_ctx = get_each_context$4(ctx, each_value, i);
+			let key = get_key(child_ctx);
+			each_1_lookup.set(key, each_blocks[i] = create_each_block$4(key, child_ctx));
+		}
+
+		return {
+			c: function create() {
+				div = element("div");
+				tabs_1.$$.fragment.c();
+				t = space();
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
+				add_location(div, file$9, 13, 0, 145);
+			},
+
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				mount_component(tabs_1, div, null);
+				append(div, t);
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].m(div, null);
+
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var tabs_1_changes = {};
+				if (!updating_tabs && changed.tabs) {
+					tabs_1_changes.tabs = ctx.tabs;
+				}
+				if (!updating_active && changed.active) {
+					tabs_1_changes.active = ctx.active;
+				}
+				tabs_1.$set(tabs_1_changes);
+
+				const each_value = ctx.tabs;
+
+				group_outros();
+				each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div, outro_and_destroy_block, create_each_block$4, null, get_each_context$4);
+				check_outros();
+			},
+
+			i: function intro(local) {
+				if (current) return;
+				tabs_1.$$.fragment.i(local);
+
+				for (var i = 0; i < each_value.length; i += 1) each_blocks[i].i();
+
+				current = true;
+			},
+
+			o: function outro(local) {
+				tabs_1.$$.fragment.o(local);
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].o();
+
+				current = false;
+			},
+
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach(div);
+				}
+
+				tabs_1.$destroy();
+
+				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].d();
+			}
+		};
+	}
+
+	function instance$9($$self, $$props, $$invalidate) {
+		
+
+	let tabs = ["tab1"];
+	let active = 'tab1';
+
+		function tabs_1_tabs_binding(value) {
+			tabs = value;
+			$$invalidate('tabs', tabs);
+		}
+
+		function tabs_1_active_binding(value_1) {
+			active = value_1;
+			$$invalidate('active', active);
+		}
+
+		return {
+			tabs,
+			active,
+			tabs_1_tabs_binding,
+			tabs_1_active_binding
 		};
 	}
 
 	class AppTabbed extends SvelteComponentDev {
 		constructor(options) {
 			super(options);
-			init(this, options, null, create_fragment$8, safe_not_equal, []);
+			init(this, options, instance$9, create_fragment$9, safe_not_equal, []);
 		}
 	}
 
