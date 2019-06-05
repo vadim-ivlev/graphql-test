@@ -48,6 +48,6 @@ let checkboxElement
         <input type="checkbox" checked id="{parentid}-{fieldName}" bind:this={checkboxElement}  on:change>
     {/if}
     <span class="field-name">{fieldName}</span>
-    <Type scheme={scheme} typeName={typeName} bind:getText={getTypeText}  parentid="{parentid}-{fieldName}-type"  on:change/> 
+    <Type scheme={scheme} typeName={typeName} {showCheckbox} bind:getText={getTypeText}  parentid="{parentid}-{fieldName}-type"  on:change/> 
     <br><span class="field-description">{node.description}</span> 
 </div>

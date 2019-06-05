@@ -136,6 +136,8 @@ onMount(async () => {
         letter-spacing: 0.1em;
         padding: 1em 0 0 10px;
         background-color: whitesmoke;
+        /* font-variant: small-caps; */
+        /* text-transform: lowercase; */
     }
 
     .root {
@@ -164,8 +166,8 @@ onMount(async () => {
     }
 
     .fieldlist {
-        border-top:1px dashed slategray;
-        border-bottom:1px dashed slategray;
+        /* border-top:1px dashed slategray; */
+        border-bottom:1px solid silver;
         padding-bottom: 10px;
     }
 
@@ -268,7 +270,8 @@ onMount(async () => {
     }
 
     form {
-        border-right: 1px solid steelblue
+        border-right: 1px solid steelblue;
+        background-color: whitesmoke;
     }
 
     textarea {
@@ -289,15 +292,24 @@ onMount(async () => {
     .outer {
         margin: 0 3% 0 3%;
     }
+
+    .shadow {
+
+        -webkit-box-shadow: 0px 12px 16px 0px rgba(0,0,0,0.10);
+        -moz-box-shadow: 0px 12px 16px 0px rgba(0,0,0,0.10);
+        box-shadow: 0px 12px 16px 0px rgba(0,0,0,0.10);    
+
+    }
+
 </style>
 
-<div>
+<div >
     <div class="outer">
         <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
         <span class="test-result">{testResult}</span> 
         <span class="description">{node.description}</span>
     </div>
-    <div class="root" style="display:{vis?'grid':'none'}"  >
+    <div class="root shadow" style="display:{vis?'grid':'none'}"  >
         <div class="form-area" bind:this={formArea}>
 
                 {#if node.args}
@@ -345,7 +357,7 @@ onMount(async () => {
                 <div class="response" bind:this={responseArea}></div>
             </div>
             <div class="eval-area">
-                <span class="header">DEFINE TEST</span>
+                <div class="header">DEFINE TEST</div>
                 <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} on:change>response && !response.errors</textarea> 
                 <div class="buttons2">
                     <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>

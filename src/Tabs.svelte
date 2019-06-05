@@ -145,14 +145,14 @@ onMount(async () => {
         vertical-align:middle;
         margin-left:3px;
         background-color: transparent;
-        color: silver;
+        color: steelblue;
         overflow:hidden;
         position: relative;
         /* top: 10px; */
         /* font-weight: bold; */
     }
     .x:hover {
-        border-color: silver;
+        border-color: steelblue;
     }
     .xx {
         position: relative;

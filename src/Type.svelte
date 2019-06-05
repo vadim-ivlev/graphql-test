@@ -50,6 +50,7 @@ function getNode(scheme, typeName){
     .self{ 
         display: inline;
         vertical-align: top;
+        margin-left:10px;
     }
     .description {
         color: slategray;
@@ -94,9 +95,14 @@ function getNode(scheme, typeName){
     }
 
     .frame {
-        border-left: 1px dotted slategray;
+        /* border-left: 1px dotted slategray; */
+        /* border-bottom: 1px dotted slategray; */
+        border: 1px dotted slategray;
         padding:5px;
+        padding-left:2px;
+        margin-left: 8px;
         padding-top:0.5em;
+        max-width: max-content;
     }
 
 </style>

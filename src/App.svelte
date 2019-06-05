@@ -154,7 +154,7 @@ onMount(async () => {
     <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
     <!-- {#if Object.entries(scheme).length != 0 } -->
     <div class:noscheme>
-        <input type="button" class="button" on:click={doAllTests} value="do tests" >
+        <input type="button" class="button" on:click={doAllTests} value="test all" >
         <!-- <input type="button" on:click={saveInputs} value="save"> -->
         <!-- <input type="button" on:click={restoreInputs} value="restore"> -->
     </div>
