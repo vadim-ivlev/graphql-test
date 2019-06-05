@@ -694,34 +694,41 @@ query IntrospectionQuery {
 
 	const file$1 = "src/schemer/schemer.svelte";
 
-	// (60:4) {#if Object.entries(scheme).length != 0 }
+	// (74:4) {#if Object.entries(scheme).length != 0 }
 	function create_if_block_1(ctx) {
-		var a, t0_value = ctx.visible?'Hide':'Show', t0, t1, dispose;
+		var br, t0, a, t1_value = ctx.visible?'Hide':'Show', t1, t2, dispose;
 
 		return {
 			c: function create() {
+				br = element("br");
+				t0 = space();
 				a = element("a");
-				t0 = text(t0_value);
-				t1 = text(" scheme");
+				t1 = text(t1_value);
+				t2 = text(" scheme");
+				add_location(br, file$1, 74, 4, 1936);
 				a.href = true;
-				add_location(a, file$1, 60, 4, 1564);
+				add_location(a, file$1, 75, 4, 1945);
 				dispose = listen(a, "click", prevent_default(ctx.click_handler));
 			},
 
 			m: function mount(target, anchor) {
+				insert(target, br, anchor);
+				insert(target, t0, anchor);
 				insert(target, a, anchor);
-				append(a, t0);
 				append(a, t1);
+				append(a, t2);
 			},
 
 			p: function update(changed, ctx) {
-				if ((changed.visible) && t0_value !== (t0_value = ctx.visible?'Hide':'Show')) {
-					set_data(t0, t0_value);
+				if ((changed.visible) && t1_value !== (t1_value = ctx.visible?'Hide':'Show')) {
+					set_data(t1, t1_value);
 				}
 			},
 
 			d: function destroy(detaching) {
 				if (detaching) {
+					detach(br);
+					detach(t0);
 					detach(a);
 				}
 
@@ -730,7 +737,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (64:2) {#if visible}
+	// (79:2) {#if visible}
 	function create_if_block(ctx) {
 		var current;
 
@@ -787,7 +794,7 @@ query IntrospectionQuery {
 				input0 = element("input");
 				t0 = space();
 				label = element("label");
-				t1 = text("GraphQL url");
+				t1 = text("GraphQL endpoint");
 				t2 = space();
 				input1 = element("input");
 				t3 = space();
@@ -796,25 +803,26 @@ query IntrospectionQuery {
 				if (if_block0) if_block0.c();
 				t5 = space();
 				if (if_block1) if_block1.c();
-				input0.className = "post svelte-i19gg6";
+				input0.className = "post svelte-281mk6";
 				attr(input0, "type", "text");
 				input0.id = input0_id_value = "id-" + ctx.parentid + "-inp-method";
 				input0.value = "POST";
-				add_location(input0, file$1, 54, 4, 1069);
+				add_location(input0, file$1, 68, 4, 1414);
 				label.htmlFor = label_for_value = "id-" + ctx.parentid + "-inp-url";
-				add_location(label, file$1, 55, 4, 1175);
-				input1.className = "text svelte-i19gg6";
+				label.className = "svelte-281mk6";
+				add_location(label, file$1, 69, 4, 1520);
+				input1.className = "text svelte-281mk6";
 				attr(input1, "type", "text");
 				input1.id = input1_id_value = "id-" + ctx.parentid + "-inp-url";
 				input1.name = input1_name_value = "id-" + ctx.parentid + "-inp-url";
-				add_location(input1, file$1, 56, 4, 1234);
+				add_location(input1, file$1, 70, 4, 1585);
 				attr(input2, "type", "button");
-				input2.value = "refresh";
-				input2.className = "svelte-i19gg6";
-				add_location(input2, file$1, 58, 4, 1453);
-				add_location(form, file$1, 53, 2, 1058);
-				div.className = "self svelte-i19gg6";
-				add_location(div, file$1, 52, 0, 1037);
+				input2.className = "button svelte-281mk6";
+				input2.value = "reload scheme";
+				add_location(input2, file$1, 72, 4, 1804);
+				add_location(form, file$1, 67, 2, 1403);
+				div.className = "self svelte-281mk6";
+				add_location(div, file$1, 66, 0, 1382);
 
 				dispose = [
 					listen(input1, "input", ctx.input1_input_handler),
@@ -2181,7 +2189,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (299:16) {#if node.args}
+	// (303:16) {#if node.args}
 	function create_if_block$3(ctx) {
 		var div0, t_1, div1, each_blocks = [], each_1_lookup = new Map(), current;
 
@@ -2203,10 +2211,10 @@ query IntrospectionQuery {
 				div1 = element("div");
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
-				div0.className = "header svelte-aqn2fq";
-				add_location(div0, file$5, 299, 16, 6188);
-				div1.className = "fieldlist svelte-aqn2fq";
-				add_location(div1, file$5, 300, 16, 6241);
+				div0.className = "header svelte-cq83n5";
+				add_location(div0, file$5, 303, 16, 6282);
+				div1.className = "fieldlist svelte-cq83n5";
+				add_location(div1, file$5, 304, 16, 6335);
 			},
 
 			m: function mount(target, anchor) {
@@ -2252,7 +2260,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (302:20) {#each node.args as arg, index (arg.name)}
+	// (306:20) {#each node.args as arg, index (arg.name)}
 	function create_each_block$1(key_1, ctx) {
 		var first, updating_getText, current;
 
@@ -2325,7 +2333,7 @@ query IntrospectionQuery {
 	}
 
 	function create_fragment$5(ctx) {
-		var div19, div0, a, t0_value = ctx.node.name, t0, t1, a_class_value, t2, span0, t3, t4, span1, t5_value = ctx.node.description, t5, t6, div18, div3, t7, div2, div1, t8, t9_value = ctx.node.type.kind == "LIST" ? '[...]': '', t9, t10, input0, t11, updating_getText, t12, form_1, div5, div4, t14, textarea0, textarea0_id_value, t15, div7, div6, t17, textarea1, textarea1_id_value, t18, div9, div8, t20, input1, t21, div10, input2, t22, div17, div11, t24, div14, div12, t25, span2, t26_value = ctx.response?'':null, t26, t27, div13, t28, div16, span3, t30, textarea2, textarea2_id_value, t31, div15, input3, t32, span4, t33, t34, span5, current, dispose;
+		var div19, div0, a, t0_value = ctx.node.name, t0, t1, a_class_value, t2, span0, t3, t4, span1, t5_value = ctx.node.description, t5, t6, div18, div3, t7, div2, div1, t8, t9_value = ctx.node.type.kind == "LIST" ? '[...]': '', t9, t10, updating_getText, t11, form_1, div5, div4, t13, textarea0, textarea0_id_value, t14, div7, div6, t16, textarea1, textarea1_id_value, t17, div9, div8, t19, input0, t20, div10, input1, t21, div17, div11, t23, div14, div12, t24, span2, t25_value = ctx.response?'':null, t25, t26, div13, t27, div16, span3, t29, textarea2, textarea2_id_value, t30, div15, input2, t31, span4, t32, t33, span5, current, dispose;
 
 		var if_block = (ctx.node.args) && create_if_block$3(ctx);
 
@@ -2371,147 +2379,142 @@ query IntrospectionQuery {
 				t8 = text("RETURNS ");
 				t9 = text(t9_value);
 				t10 = space();
-				input0 = element("input");
-				t11 = space();
 				type.$$.fragment.c();
-				t12 = space();
+				t11 = space();
 				form_1 = element("form");
 				div5 = element("div");
 				div4 = element("div");
 				div4.textContent = "QUERY";
-				t14 = space();
+				t13 = space();
 				textarea0 = element("textarea");
-				t15 = space();
+				t14 = space();
 				div7 = element("div");
 				div6 = element("div");
 				div6.textContent = "VARIABLES";
-				t17 = space();
+				t16 = space();
 				textarea1 = element("textarea");
-				t18 = space();
+				t17 = space();
 				div9 = element("div");
 				div8 = element("div");
 				div8.textContent = "FILE";
+				t19 = space();
+				input0 = element("input");
 				t20 = space();
+				div10 = element("div");
 				input1 = element("input");
 				t21 = space();
-				div10 = element("div");
-				input2 = element("input");
-				t22 = space();
 				div17 = element("div");
 				div11 = element("div");
 				div11.textContent = "RESPONSE";
-				t24 = space();
+				t23 = space();
 				div14 = element("div");
 				div12 = element("div");
-				t25 = text("response = ");
+				t24 = text("response = ");
 				span2 = element("span");
-				t26 = text(t26_value);
-				t27 = space();
+				t25 = text(t25_value);
+				t26 = space();
 				div13 = element("div");
-				t28 = space();
+				t27 = space();
 				div16 = element("div");
 				span3 = element("span");
-				span3.textContent = "TEST";
-				t30 = space();
+				span3.textContent = "DEFINE TEST";
+				t29 = space();
 				textarea2 = element("textarea");
-				t31 = space();
+				t30 = space();
 				div15 = element("div");
-				input3 = element("input");
-				t32 = space();
+				input2 = element("input");
+				t31 = space();
 				span4 = element("span");
-				t33 = text(ctx.testResult);
-				t34 = space();
+				t32 = text(ctx.testResult);
+				t33 = space();
 				span5 = element("span");
-				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-aqn2fq";
+				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-cq83n5";
 				a.href = true;
-				add_location(a, file$5, 291, 8, 5789);
-				span0.className = "test-result svelte-aqn2fq";
-				add_location(span0, file$5, 292, 8, 5907);
-				span1.className = "description svelte-aqn2fq";
-				add_location(span1, file$5, 293, 8, 5962);
-				div0.className = "outer svelte-aqn2fq";
-				add_location(div0, file$5, 290, 4, 5761);
-				attr(input0, "type", "button");
-				input0.value = "getText";
-				add_location(input0, file$5, 310, 20, 6707);
-				div1.className = "header svelte-aqn2fq";
-				add_location(div1, file$5, 309, 20, 6617);
-				add_location(div2, file$5, 308, 16, 6591);
-				div3.className = "form-area svelte-aqn2fq";
-				add_location(div3, file$5, 296, 8, 6094);
-				div4.className = "header svelte-aqn2fq";
-				add_location(div4, file$5, 319, 16, 7131);
+				add_location(a, file$5, 295, 8, 5883);
+				span0.className = "test-result svelte-cq83n5";
+				add_location(span0, file$5, 296, 8, 6001);
+				span1.className = "description svelte-cq83n5";
+				add_location(span1, file$5, 297, 8, 6056);
+				div0.className = "outer svelte-cq83n5";
+				add_location(div0, file$5, 294, 4, 5855);
+				div1.className = "header svelte-cq83n5";
+				add_location(div1, file$5, 313, 20, 6711);
+				add_location(div2, file$5, 312, 16, 6685);
+				div3.className = "form-area svelte-cq83n5";
+				add_location(div3, file$5, 300, 8, 6188);
+				div4.className = "header svelte-cq83n5";
+				add_location(div4, file$5, 323, 16, 7234);
 				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
 				textarea0.name = "query";
-				textarea0.className = "query svelte-aqn2fq";
+				textarea0.className = "query svelte-cq83n5";
 				textarea0.value = ctx.request;
-				add_location(textarea0, file$5, 320, 16, 7180);
-				add_location(div5, file$5, 318, 12, 7109);
-				div6.className = "header svelte-aqn2fq";
-				add_location(div6, file$5, 323, 16, 7336);
+				add_location(textarea0, file$5, 324, 16, 7283);
+				add_location(div5, file$5, 322, 12, 7212);
+				div6.className = "header svelte-cq83n5";
+				add_location(div6, file$5, 327, 16, 7439);
 				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
 				textarea1.name = "variables";
-				textarea1.className = "variables svelte-aqn2fq";
-				add_location(textarea1, file$5, 324, 16, 7389);
-				add_location(div7, file$5, 322, 12, 7314);
-				div8.className = "header svelte-aqn2fq";
-				add_location(div8, file$5, 327, 16, 7570);
-				attr(input1, "type", "file");
-				input1.name = "input-file";
-				add_location(input1, file$5, 328, 16, 7617);
-				add_location(div9, file$5, 326, 12, 7548);
-				attr(input2, "type", "submit");
-				input2.value = "TEST";
-				input2.className = "svelte-aqn2fq";
-				add_location(input2, file$5, 331, 16, 7724);
-				div10.className = "buttons svelte-aqn2fq";
-				add_location(div10, file$5, 330, 12, 7686);
-				form_1.className = "svelte-aqn2fq";
-				add_location(form_1, file$5, 317, 8, 7050);
-				div11.className = "header svelte-aqn2fq";
-				add_location(div11, file$5, 337, 12, 7845);
+				textarea1.className = "variables svelte-cq83n5";
+				add_location(textarea1, file$5, 328, 16, 7492);
+				add_location(div7, file$5, 326, 12, 7417);
+				div8.className = "header svelte-cq83n5";
+				add_location(div8, file$5, 331, 16, 7673);
+				attr(input0, "type", "file");
+				input0.name = "input-file";
+				input0.className = "svelte-cq83n5";
+				add_location(input0, file$5, 332, 16, 7720);
+				add_location(div9, file$5, 330, 12, 7651);
+				attr(input1, "type", "submit");
+				input1.value = "TEST";
+				input1.className = "svelte-cq83n5";
+				add_location(input1, file$5, 335, 16, 7827);
+				div10.className = "buttons svelte-cq83n5";
+				add_location(div10, file$5, 334, 12, 7789);
+				form_1.className = "svelte-cq83n5";
+				add_location(form_1, file$5, 321, 8, 7153);
+				div11.className = "header svelte-cq83n5";
+				add_location(div11, file$5, 341, 12, 7948);
 				span2.className = "json-literal";
-				add_location(span2, file$5, 339, 32, 7952);
-				add_location(div12, file$5, 339, 16, 7936);
-				div13.className = "response svelte-aqn2fq";
-				add_location(div13, file$5, 340, 16, 8027);
-				div14.className = "response-area svelte-aqn2fq";
-				add_location(div14, file$5, 338, 12, 7892);
-				span3.className = "header svelte-aqn2fq";
-				add_location(span3, file$5, 343, 16, 8152);
+				add_location(span2, file$5, 343, 32, 8055);
+				add_location(div12, file$5, 343, 16, 8039);
+				div13.className = "response svelte-cq83n5";
+				add_location(div13, file$5, 344, 16, 8130);
+				div14.className = "response-area svelte-cq83n5";
+				add_location(div14, file$5, 342, 12, 7995);
+				span3.className = "header svelte-cq83n5";
+				add_location(span3, file$5, 347, 16, 8255);
 				textarea2.rows = "3";
 				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
-				textarea2.className = "eval-text svelte-aqn2fq";
+				textarea2.className = "eval-text svelte-cq83n5";
 				textarea2.value = "response && !response.errors";
-				add_location(textarea2, file$5, 344, 16, 8201);
-				attr(input3, "type", "button");
-				input3.className = "try-button svelte-aqn2fq";
-				input3.value = "TRY TEST";
-				add_location(input3, file$5, 346, 20, 8411);
-				span4.className = "eval-result svelte-aqn2fq";
-				add_location(span4, file$5, 347, 20, 8509);
-				span5.className = "eval-errors svelte-aqn2fq";
-				add_location(span5, file$5, 348, 20, 8575);
-				div15.className = "buttons2 svelte-aqn2fq";
-				add_location(div15, file$5, 345, 16, 8368);
-				div16.className = "eval-area svelte-aqn2fq";
-				add_location(div16, file$5, 342, 12, 8112);
-				div17.className = "result-panel svelte-aqn2fq";
-				add_location(div17, file$5, 336, 8, 7806);
-				div18.className = "root svelte-aqn2fq";
+				add_location(textarea2, file$5, 348, 16, 8311);
+				attr(input2, "type", "button");
+				input2.className = "try-button svelte-cq83n5";
+				input2.value = "TRY TEST";
+				add_location(input2, file$5, 350, 20, 8521);
+				span4.className = "eval-result svelte-cq83n5";
+				add_location(span4, file$5, 351, 20, 8619);
+				span5.className = "eval-errors svelte-cq83n5";
+				add_location(span5, file$5, 352, 20, 8685);
+				div15.className = "buttons2 svelte-cq83n5";
+				add_location(div15, file$5, 349, 16, 8478);
+				div16.className = "eval-area svelte-cq83n5";
+				add_location(div16, file$5, 346, 12, 8215);
+				div17.className = "result-panel svelte-cq83n5";
+				add_location(div17, file$5, 340, 8, 7909);
+				div18.className = "root svelte-cq83n5";
 				set_style(div18, "display", (ctx.vis?'grid':'none'));
-				add_location(div18, file$5, 295, 4, 6029);
-				add_location(div19, file$5, 289, 0, 5751);
+				add_location(div18, file$5, 299, 4, 6123);
+				add_location(div19, file$5, 293, 0, 5845);
 
 				dispose = [
 					listen(a, "click", prevent_default(ctx.click_handler)),
-					listen(input0, "click", ctx.click_handler_1),
 					listen(textarea0, "change", ctx.change_handler),
 					listen(textarea1, "input", ctx.textarea1_input_handler),
 					listen(textarea1, "change", ctx.change_handler_1),
 					listen(form_1, "submit", ctx.submitForm),
 					listen(textarea2, "change", ctx.change_handler_2),
-					listen(input3, "click", ctx.evaluate)
+					listen(input2, "click", ctx.evaluate)
 				];
 			},
 
@@ -2540,59 +2543,57 @@ query IntrospectionQuery {
 				append(div2, div1);
 				append(div1, t8);
 				append(div1, t9);
-				append(div1, t10);
-				append(div1, input0);
-				append(div2, t11);
+				append(div2, t10);
 				mount_component(type, div2, null);
 				add_binding_callback(() => ctx.div3_binding(div3, null));
-				append(div18, t12);
+				append(div18, t11);
 				append(div18, form_1);
 				append(form_1, div5);
 				append(div5, div4);
-				append(div5, t14);
+				append(div5, t13);
 				append(div5, textarea0);
-				append(form_1, t15);
+				append(form_1, t14);
 				append(form_1, div7);
 				append(div7, div6);
-				append(div7, t17);
+				append(div7, t16);
 				append(div7, textarea1);
 
 				textarea1.value = ctx.variables;
 
-				append(form_1, t18);
+				append(form_1, t17);
 				append(form_1, div9);
 				append(div9, div8);
-				append(div9, t20);
-				append(div9, input1);
-				append(form_1, t21);
+				append(div9, t19);
+				append(div9, input0);
+				append(form_1, t20);
 				append(form_1, div10);
-				append(div10, input2);
+				append(div10, input1);
 				add_binding_callback(() => ctx.form_1_binding(form_1, null));
-				append(div18, t22);
+				append(div18, t21);
 				append(div18, div17);
 				append(div17, div11);
-				append(div17, t24);
+				append(div17, t23);
 				append(div17, div14);
 				append(div14, div12);
-				append(div12, t25);
+				append(div12, t24);
 				append(div12, span2);
-				append(span2, t26);
-				append(div14, t27);
+				append(span2, t25);
+				append(div14, t26);
 				append(div14, div13);
 				add_binding_callback(() => ctx.div13_binding(div13, null));
-				append(div17, t28);
+				append(div17, t27);
 				append(div17, div16);
 				append(div16, span3);
-				append(div16, t30);
+				append(div16, t29);
 				append(div16, textarea2);
 				add_binding_callback(() => ctx.textarea2_binding(textarea2, null));
-				append(div16, t31);
+				append(div16, t30);
 				append(div16, div15);
-				append(div15, input3);
-				append(div15, t32);
+				append(div15, input2);
+				append(div15, t31);
 				append(div15, span4);
-				append(span4, t33);
-				append(div15, t34);
+				append(span4, t32);
+				append(div15, t33);
 				append(div15, span5);
 				span5.innerHTML = ctx.evalErrors;
 				current = true;
@@ -2603,7 +2604,7 @@ query IntrospectionQuery {
 					set_data(t0, t0_value);
 				}
 
-				if ((!current || changed.vis) && a_class_value !== (a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-aqn2fq")) {
+				if ((!current || changed.vis) && a_class_value !== (a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-cq83n5")) {
 					a.className = a_class_value;
 				}
 
@@ -2673,8 +2674,8 @@ query IntrospectionQuery {
 					ctx.form_1_binding(form_1, null);
 				}
 
-				if ((!current || changed.response) && t26_value !== (t26_value = ctx.response?'':null)) {
-					set_data(t26, t26_value);
+				if ((!current || changed.response) && t25_value !== (t25_value = ctx.response?'':null)) {
+					set_data(t25, t25_value);
 				}
 
 				if (changed.items) {
@@ -2691,7 +2692,7 @@ query IntrospectionQuery {
 				}
 
 				if (!current || changed.testResult) {
-					set_data(t33, ctx.testResult);
+					set_data(t32, ctx.testResult);
 				}
 
 				if (!current || changed.evalErrors) {
@@ -2862,10 +2863,6 @@ query IntrospectionQuery {
 			$$invalidate('node', node);
 		}
 
-		function click_handler_1() {
-			return console.log(getTypeText());
-		}
-
 		function type_getText_binding(value) {
 			getTypeText = value;
 			$$invalidate('getTypeText', getTypeText);
@@ -2934,13 +2931,11 @@ query IntrospectionQuery {
 			evaluate,
 			form,
 			formArea,
-			console,
 			change_handler,
 			change_handler_1,
 			change_handler_2,
 			click_handler,
 			argument_getText_binding,
-			click_handler_1,
 			type_getText_binding,
 			div3_binding,
 			textarea1_input_handler,
@@ -3037,7 +3032,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (58:5) {#each queries as e}
+	// (63:5) {#each queries as e}
 	function create_each_block_2(ctx) {
 		var div, updating_test, current;
 
@@ -3066,7 +3061,7 @@ query IntrospectionQuery {
 			c: function create() {
 				div = element("div");
 				func.$$.fragment.c();
-				add_location(div, file$6, 58, 10, 1128);
+				add_location(div, file$6, 63, 10, 1261);
 			},
 
 			m: function mount(target, anchor) {
@@ -3110,7 +3105,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (65:5) {#each mutations as e}
+	// (70:5) {#each mutations as e}
 	function create_each_block_1(ctx) {
 		var div, updating_test, current;
 
@@ -3139,7 +3134,7 @@ query IntrospectionQuery {
 			c: function create() {
 				div = element("div");
 				func.$$.fragment.c();
-				add_location(div, file$6, 65, 10, 1356);
+				add_location(div, file$6, 70, 10, 1489);
 			},
 
 			m: function mount(target, anchor) {
@@ -3183,7 +3178,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (72:5) {#each usertypes as t}
+	// (77:5) {#each usertypes as t}
 	function create_each_block$2(ctx) {
 		var div, t, current;
 
@@ -3202,7 +3197,7 @@ query IntrospectionQuery {
 				div = element("div");
 				type.$$.fragment.c();
 				t = space();
-				add_location(div, file$6, 72, 10, 1591);
+				add_location(div, file$6, 77, 10, 1724);
 			},
 
 			m: function mount(target, anchor) {
@@ -3336,10 +3331,12 @@ query IntrospectionQuery {
 				for (var i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].c();
 				}
-				add_location(h40, file$6, 56, 5, 1075);
-				add_location(h41, file$6, 63, 5, 1299);
-				add_location(h42, file$6, 70, 5, 1533);
-				add_location(div, file$6, 54, 0, 996);
+				add_location(h40, file$6, 61, 5, 1208);
+				add_location(h41, file$6, 68, 5, 1432);
+				add_location(h42, file$6, 75, 5, 1666);
+				div.className = "svelte-12z8bpo";
+				toggle_class(div, "noscheme", ctx.noscheme);
+				add_location(div, file$6, 59, 0, 1114);
 			},
 
 			l: function claim(nodes) {
@@ -3440,6 +3437,10 @@ query IntrospectionQuery {
 					for (; i < each_blocks.length; i += 1) outro_block_2(i, 1, 1);
 					check_outros();
 				}
+
+				if (changed.noscheme) {
+					toggle_class(div, "noscheme", ctx.noscheme);
+				}
 			},
 
 			i: function intro(local) {
@@ -3506,6 +3507,7 @@ query IntrospectionQuery {
 	let queries =[];
 	let types=[];
 	let usertypes=[];
+	let noscheme = true;
 
 		function change_handler(event) {
 			bubble($$self, event);
@@ -3539,6 +3541,7 @@ query IntrospectionQuery {
 	            $$invalidate('queries', queries =[]);
 	            $$invalidate('types', types=[]);
 	            $$invalidate('usertypes', usertypes=[]);
+	            $$invalidate('noscheme', noscheme = Object.entries(scheme).length == 0);
 	        
 	            try {
 	            $$invalidate('mutations', mutations = scheme.data.__schema.mutationType.fields);
@@ -3557,6 +3560,7 @@ query IntrospectionQuery {
 			mutations,
 			queries,
 			usertypes,
+			noscheme,
 			change_handler,
 			change_handler_1,
 			func_test_binding,
@@ -3617,7 +3621,7 @@ query IntrospectionQuery {
 	const file$7 = "src/App.svelte";
 
 	function create_fragment$7(ctx) {
-		var div2, div1, input, t0, updating_url, updating_scheme, t1, div0, updating_doTests, current, dispose;
+		var div3, div2, updating_url, updating_scheme, t0, div0, input, t1, div1, updating_doTests, current, dispose;
 
 		function schemer_url_binding(value) {
 			ctx.schemer_url_binding.call(null, value);
@@ -3667,25 +3671,29 @@ query IntrospectionQuery {
 
 		return {
 			c: function create() {
+				div3 = element("div");
 				div2 = element("div");
-				div1 = element("div");
-				input = element("input");
-				t0 = space();
 				schemer.$$.fragment.c();
-				t1 = space();
+				t0 = space();
 				div0 = element("div");
+				input = element("input");
+				t1 = space();
+				div1 = element("div");
 				list.$$.fragment.c();
 				attr(input, "type", "button");
+				input.className = "button svelte-1suc6kz";
 				input.value = "do tests";
-				input.className = "svelte-1nykjm2";
-				add_location(input, file$7, 136, 8, 3135);
-				div0.className = "main svelte-1nykjm2";
-				add_location(div0, file$7, 144, 4, 3543);
-				div1.className = "root svelte-1nykjm2";
-				add_location(div1, file$7, 135, 0, 3107);
-				div2.className = "hidden svelte-1nykjm2";
-				toggle_class(div2, "visible", ctx.visible);
-				add_location(div2, file$7, 134, 0, 3072);
+				add_location(input, file$7, 156, 8, 3757);
+				div0.className = "svelte-1suc6kz";
+				toggle_class(div0, "noscheme", ctx.noscheme);
+				add_location(div0, file$7, 155, 4, 3728);
+				div1.className = "main svelte-1suc6kz";
+				add_location(div1, file$7, 161, 4, 4022);
+				div2.className = "root svelte-1suc6kz";
+				add_location(div2, file$7, 152, 0, 3547);
+				div3.className = "hidden svelte-1suc6kz";
+				toggle_class(div3, "visible", ctx.visible);
+				add_location(div3, file$7, 151, 0, 3512);
 				dispose = listen(input, "click", ctx.doAllTests);
 			},
 
@@ -3694,14 +3702,15 @@ query IntrospectionQuery {
 			},
 
 			m: function mount(target, anchor) {
-				insert(target, div2, anchor);
+				insert(target, div3, anchor);
+				append(div3, div2);
+				mount_component(schemer, div2, null);
+				append(div2, t0);
+				append(div2, div0);
+				append(div0, input);
+				append(div2, t1);
 				append(div2, div1);
-				append(div1, input);
-				append(div1, t0);
-				mount_component(schemer, div1, null);
-				append(div1, t1);
-				append(div1, div0);
-				mount_component(list, div0, null);
+				mount_component(list, div1, null);
 				current = true;
 			},
 
@@ -3716,6 +3725,10 @@ query IntrospectionQuery {
 				}
 				schemer.$set(schemer_changes);
 
+				if (changed.noscheme) {
+					toggle_class(div0, "noscheme", ctx.noscheme);
+				}
+
 				var list_changes = {};
 				if (changed.parentid) list_changes.parentid = "" + ctx.parentid + "-List";
 				if (changed.url) list_changes.url = ctx.url;
@@ -3726,7 +3739,7 @@ query IntrospectionQuery {
 				list.$set(list_changes);
 
 				if (changed.visible) {
-					toggle_class(div2, "visible", ctx.visible);
+					toggle_class(div3, "visible", ctx.visible);
 				}
 			},
 
@@ -3747,7 +3760,7 @@ query IntrospectionQuery {
 
 			d: function destroy(detaching) {
 				if (detaching) {
-					detach(div2);
+					detach(div3);
 				}
 
 				schemer.$destroy();
@@ -3803,6 +3816,7 @@ query IntrospectionQuery {
 	let scheme = {};
 	let ignoreChanges = true;
 	let doTests;
+	let noscheme = true;
 
 	function doAllTests() {
 	    doTests();
@@ -3878,6 +3892,7 @@ query IntrospectionQuery {
 		$$self.$$.update = ($$dirty = { scheme: 1 }) => {
 			if ($$dirty.scheme) { {
 	            $$invalidate('scheme', scheme);
+	            $$invalidate('noscheme', noscheme = Object.entries(scheme).length == 0);
 	            console.log('App scheme changed', scheme);
 	            $$invalidate('ignoreChanges', ignoreChanges= true);
 	            // delay(restoreInputs, 500)
@@ -3890,6 +3905,7 @@ query IntrospectionQuery {
 			url,
 			scheme,
 			doTests,
+			noscheme,
 			doAllTests,
 			saveInputs,
 			restoreInputs,
@@ -3958,7 +3974,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (123:4) {#if tabs && tabs.length > 0}
+	// (180:4) {#if tabs && tabs.length > 0}
 	function create_if_block$4(ctx) {
 		var span, input0, t, input1, dispose;
 
@@ -3969,18 +3985,20 @@ query IntrospectionQuery {
 				t = space();
 				input1 = element("input");
 				attr(input0, "type", "button");
-				input0.className = "button svelte-1kku5aw";
+				input0.className = "button svelte-19rfr8u";
+				input0.title = "rename active tab";
 				input0.value = "rename";
-				add_location(input0, file$8, 124, 8, 2473);
+				add_location(input0, file$8, 181, 8, 4013);
 				attr(input1, "type", "button");
-				input1.className = "button svelte-1kku5aw";
-				input1.value = "save";
-				add_location(input1, file$8, 125, 8, 2554);
-				span.className = "buttons svelte-1kku5aw";
-				add_location(span, file$8, 123, 4, 2442);
+				input1.className = "button svelte-19rfr8u";
+				input1.title = "save active tab";
+				input1.value = "save tab";
+				add_location(input1, file$8, 182, 8, 4120);
+				span.className = "buttons svelte-19rfr8u";
+				add_location(span, file$8, 180, 4, 3982);
 
 				dispose = [
-					listen(input0, "click", renameTab),
+					listen(input0, "click", ctx.renameTab),
 					listen(input1, "click", ctx.saveTab)
 				];
 			},
@@ -4004,9 +4022,9 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (130:4) {#each tabs as tab (tab)}
+	// (187:4) {#each tabs as tab (tab)}
 	function create_each_block$3(key_1, ctx) {
-		var span1, t0_value = ctx.tab, t0, t1, span0, t2, span0_data_tab_value, span1_data_tab_value, dispose;
+		var span2, t0_value = ctx.tab, t0, t1, span1, span0, span1_data_tab_value, span2_data_tab_value, dispose;
 
 		return {
 			key: key_1,
@@ -4014,33 +4032,36 @@ query IntrospectionQuery {
 			first: null,
 
 			c: function create() {
-				span1 = element("span");
+				span2 = element("span");
 				t0 = text(t0_value);
 				t1 = space();
+				span1 = element("span");
 				span0 = element("span");
-				t2 = text("x");
-				span0.className = "x svelte-1kku5aw";
-				span0.dataset.tab = span0_data_tab_value = ctx.tab;
-				add_location(span0, file$8, 131, 12, 2785);
-				span1.className = "tab svelte-1kku5aw";
+				span0.textContent = "✖";
+				span0.className = "xx svelte-19rfr8u";
+				add_location(span0, file$8, 188, 64, 4432);
+				span1.className = "x svelte-19rfr8u";
 				span1.dataset.tab = span1_data_tab_value = ctx.tab;
-				toggle_class(span1, "active", ctx.tab == ctx.active);
-				add_location(span1, file$8, 130, 8, 2684);
+				add_location(span1, file$8, 188, 12, 4380);
+				span2.className = "tab svelte-19rfr8u";
+				span2.dataset.tab = span2_data_tab_value = ctx.tab;
+				toggle_class(span2, "active", ctx.tab == ctx.active);
+				add_location(span2, file$8, 187, 8, 4279);
 
 				dispose = [
-					listen(span0, "click", ctx.deleteTab),
-					listen(span1, "click", ctx.activate)
+					listen(span1, "click", ctx.deleteTab),
+					listen(span2, "click", ctx.activate)
 				];
 
-				this.first = span1;
+				this.first = span2;
 			},
 
 			m: function mount(target, anchor) {
-				insert(target, span1, anchor);
-				append(span1, t0);
-				append(span1, t1);
+				insert(target, span2, anchor);
+				append(span2, t0);
+				append(span2, t1);
+				append(span2, span1);
 				append(span1, span0);
-				append(span0, t2);
 			},
 
 			p: function update(changed, ctx) {
@@ -4048,22 +4069,22 @@ query IntrospectionQuery {
 					set_data(t0, t0_value);
 				}
 
-				if ((changed.tabs) && span0_data_tab_value !== (span0_data_tab_value = ctx.tab)) {
-					span0.dataset.tab = span0_data_tab_value;
-				}
-
 				if ((changed.tabs) && span1_data_tab_value !== (span1_data_tab_value = ctx.tab)) {
 					span1.dataset.tab = span1_data_tab_value;
 				}
 
+				if ((changed.tabs) && span2_data_tab_value !== (span2_data_tab_value = ctx.tab)) {
+					span2.dataset.tab = span2_data_tab_value;
+				}
+
 				if ((changed.tabs || changed.active)) {
-					toggle_class(span1, "active", ctx.tab == ctx.active);
+					toggle_class(span2, "active", ctx.tab == ctx.active);
 				}
 			},
 
 			d: function destroy(detaching) {
 				if (detaching) {
-					detach(span1);
+					detach(span2);
 				}
 
 				run_all(dispose);
@@ -4097,10 +4118,11 @@ query IntrospectionQuery {
 				t1 = space();
 				span = element("span");
 				span.textContent = "+";
-				span.className = "tab plus svelte-1kku5aw";
-				add_location(span, file$8, 134, 4, 2878);
-				div.className = "container svelte-1kku5aw";
-				add_location(div, file$8, 121, 0, 2380);
+				span.title = "add new tab";
+				span.className = "tab plus svelte-19rfr8u";
+				add_location(span, file$8, 191, 4, 4504);
+				div.className = "container svelte-19rfr8u";
+				add_location(div, file$8, 178, 0, 3920);
 				dispose = listen(span, "click", ctx.addTab);
 			},
 
@@ -4155,11 +4177,20 @@ query IntrospectionQuery {
 	}
 
 	function getKeysFromLocalStorage() {
-	return Object.keys(localStorage)
+	 return Object.keys(localStorage)
 	}
 
-	function renameTab(){
+	function fixLocalStorageData(controlsStr, tabName, newTabName) {
+	 if (!controlsStr) return controlsStr
+	 let controls = JSON.parse(controlsStr);
+	 if (!controls) return controlsStr
 
+	 for (let c of controls) {
+	     c.id = c.id.replace(tabName, newTabName);
+	 }
+	 console.log(controls);
+
+	 return JSON.stringify(controls)
 	}
 
 	function instance$8($$self, $$props, $$invalidate) {
@@ -4183,11 +4214,44 @@ query IntrospectionQuery {
 	    $$invalidate('active', active = tabName);
 	}
 
-	function deleteTab(){
-	    let tab = this.getAttribute("data-tab");
+
+	function deleteTabByName(tab) {
+	    let tabData = localStorage.getItem(tab);
+	    localStorage.removeItem(tab);
 	    $$invalidate('tabs', tabs = tabs.filter( e => e != tab));
 	    $$invalidate('active', active = tabs.length >0 ? tabs[0] : '');
-	    console.log(active);
+	    return tabData
+	}
+
+	function deleteTab(){
+	    let tab = this.getAttribute("data-tab");
+	    deleteTabByName(tab);
+	}
+
+	function renameTab(){
+	    // create a new tab
+	    let tabName = active;
+	    let newTabName = tabName;
+	    while (tabs.includes(newTabName)){
+	        newTabName = prompt(`Rename "${newTabName}"`,newTabName);
+	        if (!newTabName) return
+	    }
+
+	    // delete old tab
+	    let data = deleteTabByName(tabName);
+
+	   // add the new tab to UI, and activate it
+	    if (!newTabName) return
+	    $$invalidate('tabs', tabs = [...tabs, newTabName]);
+	    $$invalidate('active', active = newTabName);
+
+	    // move data 
+	    if (data){
+	        // it's not enough to save the old data by the new key,
+	        // We need to fix all ids.
+	        let fixedData = fixLocalStorageData(data, tabName, newTabName);
+	        localStorage.setItem(newTabName,fixedData);
+	    }
 	}
 
 
@@ -4197,7 +4261,7 @@ query IntrospectionQuery {
 
 	onMount(async () => {
 	    let storedTabs = getKeysFromLocalStorage();
-	    $$invalidate('tabs', tabs = storedTabs.length ==0 ? ['Test endpont'] : [...tabs, ...storedTabs]);
+	    $$invalidate('tabs', tabs = storedTabs.length ==0 ? ['onlinebc'] : [...tabs, ...storedTabs]);
 	    $$invalidate('active', active = tabs[0]);
 	});
 
@@ -4212,6 +4276,7 @@ query IntrospectionQuery {
 			activate,
 			addTab,
 			deleteTab,
+			renameTab,
 			saveTab
 		};
 	}

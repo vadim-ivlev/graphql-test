@@ -45,19 +45,34 @@ onMount(async () => {
         width: 300px;
         font-size: 100%;
     }
+    .button {
+        /* font-family: 'Roboto Condensed'; */
+        /* font-weight: bold; */
+        /* letter-spacing: 0.1em; */
+        padding: 2px 10px 2px 10px;
+        border: 1px solid steelblue;
+        border-radius: 2px;
+        background-color: transparent;
+        color: steelblue;
+        font-size: 100%;
+    }
 
-    input {font-size: 100%;}
+    label {
+        margin-left:0;
+    }
+    
 </style>
 
 
 <div class="self">
   <form>
     <input class="post" type="text" id="id-{parentid}-inp-method" value="POST" bind:this={methodElement}>
-    <label for="id-{parentid}-inp-url">GraphQL url</label>
+    <label for="id-{parentid}-inp-url" >GraphQL endpoint</label>
     <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url"  bind:value={url} bind:this={urlElement} on:change/>
     <!-- <input type="button" value="reset" on:click={clearScheme} /> -->
-    <input type="button" value="refresh" on:click={getScheme} />
+    <input type="button" class="button" value="reload scheme" on:click={getScheme} />
     {#if Object.entries(scheme).length != 0 }
+    <br>
     <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>
     {/if}
   </form>

@@ -19,7 +19,7 @@ let mutations =[]
 let queries =[]
 let types=[]
 let usertypes=[]
-
+let noscheme = true
 
 
 
@@ -29,6 +29,7 @@ $: {
     queries =[]
     types=[]
     usertypes=[]
+    noscheme = Object.entries(scheme).length == 0
 
     try {
     mutations = scheme.data.__schema.mutationType.fields
@@ -52,7 +53,11 @@ function compareTypes(t1, t2) {
 
 </script>
 
-<div>
+<style>
+    .noscheme {display: none;}
+</style>
+
+<div class:noscheme>
      <!-- <input type="button" value="test" on:click={doTests}> -->
      <h4>Queries</h4>
      {#each queries as e}

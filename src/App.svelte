@@ -13,9 +13,11 @@ let url
 let scheme = {}
 let ignoreChanges = true
 let doTests
+let noscheme = true
 
 $: {
-    scheme=scheme
+    scheme = scheme
+    noscheme = Object.entries(scheme).length == 0
     console.log('App scheme changed', scheme)
     ignoreChanges= true
     // delay(restoreInputs, 500)
@@ -113,34 +115,49 @@ onMount(async () => {
 
 <style>
     .root {
-        padding-top:20px;
+        padding-top:60px;
         display: grid;
-        grid-template-columns:  max-content 5fr max-content;
+        grid-template-columns:  max-content 5fr;
         grid-template-areas:  
-        "t h" 
-        "m m";
+        "schemer buttons" 
+        "main    main";
     }
     .main {
-        grid-area: m;
+        grid-area: main;
     }
 
     input {
         font-size: 100%;
     }
 
+    .button {
+        /* font-family: 'Roboto Condensed'; */
+        /* font-weight: bold; */
+        /* letter-spacing: 0.1em; */
+        padding: 2px 10px 2px 10px;
+        border: 1px solid steelblue;
+        border-radius: 2px;
+        background-color: steelblue;
+        color: white;
+        font-size: 100%;
+    }
+
+
+
     .hidden {display: none;}
+    .noscheme {display: none;}
     .visible {display: block;}
 </style>
 
 <div class="hidden" class:visible>
 <div class="root" >
-        <input type="button" on:click={doAllTests} value="do tests" >
     <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
     <!-- {#if Object.entries(scheme).length != 0 } -->
-    <!-- <div>
-        <input type="button" on:click={saveInputs} value="save">
-        <input type="button" on:click={restoreInputs} value="restore">
-    </div> -->
+    <div class:noscheme>
+        <input type="button" class="button" on:click={doAllTests} value="do tests" >
+        <!-- <input type="button" on:click={saveInputs} value="save"> -->
+        <!-- <input type="button" on:click={restoreInputs} value="restore"> -->
+    </div>
     <!-- {/if} -->
     <div class="main">
         <List parentid="{parentid}-List" url={url} scheme={scheme} bind:doTests={doTests} on:change={changeHandler}/>

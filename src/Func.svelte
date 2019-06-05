@@ -135,7 +135,7 @@ onMount(async () => {
         font-size: 90%;
         letter-spacing: 0.1em;
         padding: 1em 0 0 10px;
-
+        background-color: whitesmoke;
     }
 
     .root {
@@ -202,6 +202,10 @@ onMount(async () => {
         border-radius: 4px;
         background-color: steelblue;
         color: white;
+    }
+
+    input[type="file"] {
+        margin-left:10px
     }
 
     .response {
@@ -308,7 +312,7 @@ onMount(async () => {
                 
                 <div>
                     <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}
-                    <input type="button" value="getText" on:click={()=> console.log(getTypeText())}>
+                    <!-- <input type="button" value="getText" on:click={()=> console.log(getTypeText())}> -->
                     </div>
                     <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} on:change={typeChangeHandler}/>
                 </div>
@@ -341,7 +345,7 @@ onMount(async () => {
                 <div class="response" bind:this={responseArea}></div>
             </div>
             <div class="eval-area">
-                <span class="header">TEST</span>
+                <span class="header">DEFINE TEST</span>
                 <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} on:change>response && !response.errors</textarea> 
                 <div class="buttons2">
                     <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>

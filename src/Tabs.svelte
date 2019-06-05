@@ -32,16 +32,58 @@ function addTab(){
     active = tabName
 }
 
-function deleteTab(){
-    let tab = this.getAttribute("data-tab")
+
+function deleteTabByName(tab) {
+    let tabData = localStorage.getItem(tab)
+    localStorage.removeItem(tab)
     tabs = tabs.filter( e => e != tab)
     active = tabs.length >0 ? tabs[0] : ''
-    console.log(active)
+    return tabData
 }
 
+function deleteTab(){
+    let tab = this.getAttribute("data-tab")
+    deleteTabByName(tab)
+}
+
+// fixLocalStorageData renames ids by chnaging tabName to newTabName
+function fixLocalStorageData(controlsStr, tabName, newTabName) {
+    if (!controlsStr) return controlsStr
+    let controls = JSON.parse(controlsStr)
+    if (!controls) return controlsStr
+
+    for (let c of controls) {
+        c.id = c.id.replace(tabName, newTabName)
+    }
+    console.log(controls)
+
+    return JSON.stringify(controls)
+}
 
 function renameTab(){
+    // create a new tab
+    let tabName = active
+    let newTabName = tabName
+    while (tabs.includes(newTabName)){
+        newTabName = prompt(`Rename "${newTabName}"`,newTabName)
+        if (!newTabName) return
+    }
 
+    // delete old tab
+    let data = deleteTabByName(tabName)
+
+   // add the new tab to UI, and activate it
+    if (!newTabName) return
+    tabs = [...tabs, newTabName]
+    active = newTabName
+
+    // move data 
+    if (data){
+        // it's not enough to save the old data by the new key,
+        // We need to fix all ids.
+        let fixedData = fixLocalStorageData(data, tabName, newTabName)
+        localStorage.setItem(newTabName,fixedData)
+    }
 }
 
 
@@ -51,7 +93,7 @@ function saveTab(){
 
 onMount(async () => {
     let storedTabs = getKeysFromLocalStorage()
-    tabs = storedTabs.length ==0 ? ['Test endpont'] : [...tabs, ...storedTabs]
+    tabs = storedTabs.length ==0 ? ['onlinebc'] : [...tabs, ...storedTabs]
     active = tabs[0]
 })
 
@@ -63,16 +105,23 @@ onMount(async () => {
         padding: 10px 0 0 0;
         /* background-color: whitesmoke; */
     }
+
     .plus {
+        font-weight: bold;
+        color:steelblue;
+        cursor: pointer;
+        position: relative;
+        top:2px;
      }
 
     .tab {
         margin: 0;
+        /* margin-right:10px; */
         display: inline-block;
-        padding: 1px 10px 1px 10px;
+        padding: 1px 1px 1px 10px;
         cursor: default;
         border-bottom: 2px solid transparent;
-        color: gray;
+        color: steelblue;
         /* background-color: transparent; */
     }
 
@@ -89,17 +138,25 @@ onMount(async () => {
         border-radius: 20px;
         border: 1px solid transparent;
         display: inline-block;
-        font-size: 70%;
+        font-size: 75%;
         width:14px;
         height: 14px;
         text-align: center;
-        vertical-align: bottom;
-        margin-left:5px;
+        vertical-align:middle;
+        margin-left:3px;
         background-color: transparent;
-        font-weight: bold;
+        color: silver;
+        overflow:hidden;
+        position: relative;
+        /* top: 10px; */
+        /* font-weight: bold; */
     }
     .x:hover {
         border-color: silver;
+    }
+    .xx {
+        position: relative;
+        top: -1px; 
     }
 
     .buttons {
@@ -122,15 +179,15 @@ onMount(async () => {
 <div class="container">
     {#if tabs && tabs.length > 0}
     <span class="buttons">
-        <input type="button" class="button" value="rename" on:click={renameTab}>
-        <input type="button" class="button" value="save" on:click={saveTab}>
+        <input type="button" class="button" title="rename active tab" value="rename" on:click={renameTab}>
+        <input type="button" class="button" title="save active tab" value="save tab" on:click={saveTab}> 
     </span>
     {/if}
 
     {#each tabs as tab (tab)}
         <span class="tab" class:active={tab == active} data-tab={tab} on:click={activate}>{tab} 
-            <span class="x" data-tab={tab} on:click={deleteTab}>x</span>
+            <span class="x" data-tab={tab} on:click={deleteTab}><span class="xx">&#x2716;</span></span>
         </span>
     {/each}
-    <span class="tab plus" on:click={addTab}>+</span>
-</div>
+    <span title="add new tab" class="tab plus" on:click={addTab}>+</span>
+</div> 
