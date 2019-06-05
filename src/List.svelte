@@ -3,7 +3,9 @@ import Func from './Func.svelte'
 import Type from './Type.svelte'
 
 export let scheme 
-export let url 
+// export let url 
+export let urlElement
+
 export let parentid = ''
 export let doTests = function (){
     for (let o of queries) {
@@ -62,14 +64,16 @@ function compareTypes(t1, t2) {
      <h4>Queries</h4>
      {#each queries as e}
           <div>
-          <Func url={url} bind:test={e.test} node={e} operation="query"  scheme={scheme} parentid="{parentid}-query" on:change/>
+          <Func urlElement={urlElement} bind:test={e.test} node={e} operation="query"  scheme={scheme} parentid="{parentid}-query" on:change/>
+          <!-- url={url} -->
           </div>
      {/each}
 
      <h4>Mutations</h4>
      {#each mutations as e}
           <div>
-          <Func url={url} bind:test={e.test} node={e}  operation="mutation" scheme={scheme} parentid="{parentid}-mutation" on:change/>
+          <Func urlElement={urlElement} bind:test={e.test} node={e}  operation="mutation" scheme={scheme} parentid="{parentid}-mutation" on:change/>
+          <!-- url={url} -->
           </div>
      {/each}
 

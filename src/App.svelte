@@ -9,17 +9,19 @@ import List from "./List.svelte"
 export let parentid='tab1'
 export let visible = true
 
-let url
+// let url
+let urlElement
 let scheme = {}
-let ignoreChanges = true
+// let ignoreChanges = true
 let doTests
 let noscheme = true
+
 
 $: {
     scheme = scheme
     noscheme = Object.entries(scheme).length == 0
     console.log('App scheme changed', scheme)
-    ignoreChanges= true
+    // ignoreChanges= true
     // delay(restoreInputs, 500)
 }
 
@@ -92,9 +94,9 @@ function delay(func, time=300) {
 }
 
 function changeHandler(){
-    console.log('App changeHandler parentid=', parentid, document.readyState)
-    if (ignoreChanges) return
-    delay(()=> console.log("I was delayed from App changeYandler parentid=", parentid, document.readyState))
+    console.log('App changeHandler parentid=', parentid)
+    // if (ignoreChanges) return
+    // delay(()=> console.log("I was delayed from App changeYandler parentid=", parentid, document.readyState))
 }
 
 
@@ -151,7 +153,8 @@ onMount(async () => {
 
 <div class="hidden" class:visible>
 <div class="root" >
-    <Schemer parentid="{parentid}-Schemer" bind:url bind:scheme={scheme} on:change={changeHandler} />
+    <Schemer parentid="{parentid}-Schemer" bind:urlElement={urlElement} bind:scheme={scheme} on:change={changeHandler} />
+    <!-- bind:url -->
     <!-- {#if Object.entries(scheme).length != 0 } -->
     <div class:noscheme>
         <input type="button" class="button" on:click={doAllTests} value="test all" >
@@ -160,7 +163,8 @@ onMount(async () => {
     </div>
     <!-- {/if} -->
     <div class="main">
-        <List parentid="{parentid}-List" url={url} scheme={scheme} bind:doTests={doTests} on:change={changeHandler}/>
+        <List parentid="{parentid}-List" urlElement={urlElement} scheme={scheme} bind:doTests={doTests} on:change={changeHandler}/>
+        <!-- url={url} -->
     </div>
 </div>
 </div>

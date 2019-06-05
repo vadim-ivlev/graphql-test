@@ -9,7 +9,9 @@ import Argument from './Argument.svelte'
 import Type from './Type.svelte'
 
 // P R O P S
-export let url
+// export let url
+export let urlElement
+
 export let parentid = ''
 export let scheme = {}
 export let node = {}
@@ -83,9 +85,10 @@ function typeChangeHandler(params) {
 
 function submitForm(event){
     if (event) event.preventDefault()
-    console.log("submitForm")
+    console.log("submitForm urlElement.value=", urlElement.value)
     window.$(form).ajaxSubmit({
-        url: url, 
+        // url: url, 
+        url: urlElement.value, 
         type: 'POST',
         //success: function(res) {$('#result').text(JSON.stringify(res, null,'  '));}
         success: function(res) {

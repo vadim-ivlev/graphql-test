@@ -10,7 +10,7 @@ export let parentid =''
 export let refreshScheme = getScheme
 
 let visible = false
-let urlElement 
+export let urlElement 
 let methodElement 
 
 async function getScheme() {
@@ -24,6 +24,11 @@ async function getScheme() {
 //     scheme = {}     
 // }
 
+// function onChange(params) {
+//     url = this.value
+//     console.log("schemer onChange parentid=", parentid)
+//     console.log("url=", url)
+// }
 
 onMount(async () => {
     // getScheme()
@@ -68,7 +73,8 @@ onMount(async () => {
   <form>
     <input class="post" type="text" id="id-{parentid}-inp-method" value="POST" bind:this={methodElement}>
     <label for="id-{parentid}-inp-url" >GraphQL endpoint</label>
-    <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url"  bind:value={url} bind:this={urlElement} on:change/>
+    <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} on:change/>
+    <!-- bind:value={url} -->
     <!-- <input type="button" value="reset" on:click={clearScheme} /> -->
     <input type="button" class="button" value="reload scheme" on:click={getScheme} />
     {#if Object.entries(scheme).length != 0 }
