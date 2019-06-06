@@ -15,7 +15,7 @@ let scheme = {}
 // let ignoreChanges = true
 let doTests
 let noscheme = true
-
+let mainArea
 
 $: {
     scheme = scheme
@@ -32,7 +32,7 @@ function doAllTests() {
 
 function getControlValuesByTagName(tag) {
     let a =[]
-    let inps=document.getElementsByTagName(tag)  
+    let inps=mainArea.getElementsByTagName(tag)  
     for (let inp of inps) {
         let id = inp.getAttribute("id")
         if (!id) continue
@@ -68,23 +68,32 @@ function restoreControlValues(controls) {
 export function saveInputs() {
     let key = parentid
     let controls = getControlValues()
-    let controlsStr = JSON.stringify(controls)
+    let value = { 
+        url:urlElement.value, 
+        controls:controls
+        }
+    let controlsStr = JSON.stringify(value)
     localStorage.setItem(key, controlsStr);
     console.log("saved: ", key, controlsStr.length )
 }
 
 
 export function restoreInputs() {
-    // check if scheme is empty
-    if (scheme && Object.entries(scheme).length === 0 && scheme.constructor === Object)
-        return
 
     let key = parentid
     let controlsStr = localStorage.getItem(key)
     if (!controlsStr) return
-    let controls = JSON.parse(controlsStr)
+    let value = JSON.parse(controlsStr)
+    urlElement.value = value.url
+    console.log("restored tab=", key, controlsStr.length )
+
+    // check if scheme is empty
+    if (!scheme) return
+    if (scheme && Object.entries(scheme).length === 0 && scheme.constructor === Object) return
+
+    let controls = value.controls
     restoreControlValues(controls)
-    console.log("restored key=", key, controlsStr.length )
+    console.log("restored controls=", key, controlsStr.length )
 }
 
 let delayTimeout
@@ -162,7 +171,7 @@ onMount(async () => {
         <!-- <input type="button" on:click={restoreInputs} value="restore"> -->
     </div>
     <!-- {/if} -->
-    <div class="main">
+    <div class="main" bind:this={mainArea}>
         <List parentid="{parentid}-List" urlElement={urlElement} scheme={scheme} bind:doTests={doTests} on:change={changeHandler}/>
         <!-- url={url} -->
     </div>

@@ -8,15 +8,16 @@ export let url = "http://localhost:7700/graphql"
 export let scheme = {}
 export let parentid =''
 export let refreshScheme = getScheme
-
-let visible = false
 export let urlElement 
-let methodElement 
+
+
+// let methodElement 
+let visible = false
 
 async function getScheme() {
     scheme = {}    
     // scheme =  await $.ajax({ url: inputUrl.value, type: "POST", data: { query:queryString, variables: '{}'},});
-    let resp = await fetch(urlElement.value, { method: methodElement.value, body: JSON.stringify({ query: queryString, variables: "{}" }) })
+    let resp = await fetch(urlElement.value, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) })
     scheme = await resp.json()
 }
 
@@ -71,7 +72,7 @@ onMount(async () => {
 
 <div class="self">
   <form>
-    <input class="post" type="text" id="id-{parentid}-inp-method" value="POST" bind:this={methodElement}>
+    <!-- <input class="post" type="text" id="id-{parentid}-inp-method" value="POST" bind:this={methodElement}> -->
     <label for="id-{parentid}-inp-url" >GraphQL endpoint</label>
     <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} on:change/>
     <!-- bind:value={url} -->

@@ -3,12 +3,12 @@ import App from "./App.svelte"
 import Tabs from "./Tabs.svelte"
 
 let tabs = []
-let active = ''
+let active 
 let tabsSaveFunctions = {}
 
 
 function saveTab(params) {
-    tabsSaveFunctions[active]()
+    tabsSaveFunctions[active.tabName]()
 }
 
 </script>
@@ -19,9 +19,9 @@ function saveTab(params) {
 
 <div>
     <Tabs bind:tabs bind:active on:save={saveTab}/>
-    {#each tabs as tab (tab)}
+    {#each tabs as tab (tab.tabName)}
     <!-- {@debug tabs} -->
-        <App parentid={tab} visible={tab == active} bind:saveInputs={tabsSaveFunctions[tab]}/>
+        <App parentid={tab.tabName} visible={tab.tabName == active.tabName} bind:saveInputs={tabsSaveFunctions[tab.tabName]}/>
     {/each}
 
 </div>

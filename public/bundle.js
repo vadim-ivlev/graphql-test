@@ -694,7 +694,7 @@ query IntrospectionQuery {
 
 	const file$1 = "src/schemer/schemer.svelte";
 
-	// (80:4) {#if Object.entries(scheme).length != 0 }
+	// (81:4) {#if Object.entries(scheme).length != 0 }
 	function create_if_block_1(ctx) {
 		var br, t0, a, t1_value = ctx.visible?'Hide':'Show', t1, t2, dispose;
 
@@ -705,9 +705,9 @@ query IntrospectionQuery {
 				a = element("a");
 				t1 = text(t1_value);
 				t2 = text(" scheme");
-				add_location(br, file$1, 80, 4, 2118);
+				add_location(br, file$1, 81, 4, 2118);
 				a.href = true;
-				add_location(a, file$1, 81, 4, 2127);
+				add_location(a, file$1, 82, 4, 2127);
 				dispose = listen(a, "click", prevent_default(ctx.click_handler));
 			},
 
@@ -737,7 +737,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (85:2) {#if visible}
+	// (86:2) {#if visible}
 	function create_if_block(ctx) {
 		var current;
 
@@ -781,7 +781,7 @@ query IntrospectionQuery {
 	}
 
 	function create_fragment$1(ctx) {
-		var div, form, input0, input0_id_value, t0, label, t1, label_for_value, t2, input1, input1_id_value, input1_name_value, t3, input2, t4, t5, current, dispose;
+		var div, form, label, t0, label_for_value, t1, input0, input0_id_value, input0_name_value, t2, input1, t3, t4, current, dispose;
 
 		var if_block0 = (Object.entries(ctx.scheme).length != 0) && create_if_block_1(ctx);
 
@@ -791,43 +791,36 @@ query IntrospectionQuery {
 			c: function create() {
 				div = element("div");
 				form = element("form");
-				input0 = element("input");
-				t0 = space();
 				label = element("label");
-				t1 = text("GraphQL endpoint");
+				t0 = text("GraphQL endpoint");
+				t1 = space();
+				input0 = element("input");
 				t2 = space();
 				input1 = element("input");
 				t3 = space();
-				input2 = element("input");
-				t4 = space();
 				if (if_block0) if_block0.c();
-				t5 = space();
+				t4 = space();
 				if (if_block1) if_block1.c();
-				input0.className = "post svelte-281mk6";
-				attr(input0, "type", "text");
-				input0.id = input0_id_value = "id-" + ctx.parentid + "-inp-method";
-				input0.value = "POST";
-				add_location(input0, file$1, 73, 4, 1572);
 				label.htmlFor = label_for_value = "id-" + ctx.parentid + "-inp-url";
 				label.className = "svelte-281mk6";
-				add_location(label, file$1, 74, 4, 1678);
-				input1.className = "text svelte-281mk6";
-				attr(input1, "type", "text");
-				input1.id = input1_id_value = "id-" + ctx.parentid + "-inp-url";
-				input1.name = input1_name_value = "id-" + ctx.parentid + "-inp-url";
-				input1.value = ctx.url;
-				add_location(input1, file$1, 75, 4, 1743);
-				attr(input2, "type", "button");
-				input2.className = "button svelte-281mk6";
-				input2.value = "reload scheme";
-				add_location(input2, file$1, 78, 4, 1986);
-				add_location(form, file$1, 72, 2, 1561);
+				add_location(label, file$1, 75, 4, 1678);
+				input0.className = "text svelte-281mk6";
+				attr(input0, "type", "text");
+				input0.id = input0_id_value = "id-" + ctx.parentid + "-inp-url";
+				input0.name = input0_name_value = "id-" + ctx.parentid + "-inp-url";
+				input0.value = ctx.url;
+				add_location(input0, file$1, 76, 4, 1743);
+				attr(input1, "type", "button");
+				input1.className = "button svelte-281mk6";
+				input1.value = "reload scheme";
+				add_location(input1, file$1, 79, 4, 1986);
+				add_location(form, file$1, 73, 2, 1552);
 				div.className = "self svelte-281mk6";
-				add_location(div, file$1, 71, 0, 1540);
+				add_location(div, file$1, 72, 0, 1531);
 
 				dispose = [
-					listen(input1, "change", ctx.change_handler),
-					listen(input2, "click", ctx.getScheme)
+					listen(input0, "change", ctx.change_handler),
+					listen(input1, "click", ctx.getScheme)
 				];
 			},
 
@@ -838,52 +831,40 @@ query IntrospectionQuery {
 			m: function mount(target, anchor) {
 				insert(target, div, anchor);
 				append(div, form);
+				append(form, label);
+				append(label, t0);
+				append(form, t1);
 				append(form, input0);
 				add_binding_callback(() => ctx.input0_binding(input0, null));
-				append(form, t0);
-				append(form, label);
-				append(label, t1);
 				append(form, t2);
 				append(form, input1);
-				add_binding_callback(() => ctx.input1_binding(input1, null));
 				append(form, t3);
-				append(form, input2);
-				append(form, t4);
 				if (if_block0) if_block0.m(form, null);
-				append(div, t5);
+				append(div, t4);
 				if (if_block1) if_block1.m(div, null);
 				current = true;
 			},
 
 			p: function update(changed, ctx) {
-				if (changed.items) {
-					ctx.input0_binding(null, input0);
-					ctx.input0_binding(input0, null);
-				}
-
-				if ((!current || changed.parentid) && input0_id_value !== (input0_id_value = "id-" + ctx.parentid + "-inp-method")) {
-					input0.id = input0_id_value;
-				}
-
 				if ((!current || changed.parentid) && label_for_value !== (label_for_value = "id-" + ctx.parentid + "-inp-url")) {
 					label.htmlFor = label_for_value;
 				}
 
 				if (changed.items) {
-					ctx.input1_binding(null, input1);
-					ctx.input1_binding(input1, null);
+					ctx.input0_binding(null, input0);
+					ctx.input0_binding(input0, null);
 				}
 
-				if ((!current || changed.parentid) && input1_id_value !== (input1_id_value = "id-" + ctx.parentid + "-inp-url")) {
-					input1.id = input1_id_value;
+				if ((!current || changed.parentid) && input0_id_value !== (input0_id_value = "id-" + ctx.parentid + "-inp-url")) {
+					input0.id = input0_id_value;
 				}
 
-				if ((!current || changed.parentid) && input1_name_value !== (input1_name_value = "id-" + ctx.parentid + "-inp-url")) {
-					input1.name = input1_name_value;
+				if ((!current || changed.parentid) && input0_name_value !== (input0_name_value = "id-" + ctx.parentid + "-inp-url")) {
+					input0.name = input0_name_value;
 				}
 
 				if (!current || changed.url) {
-					input1.value = ctx.url;
+					input0.value = ctx.url;
 				}
 
 				if (Object.entries(ctx.scheme).length != 0) {
@@ -938,7 +919,6 @@ query IntrospectionQuery {
 				}
 
 				ctx.input0_binding(null, input0);
-				ctx.input1_binding(null, input1);
 				if (if_block0) if_block0.d();
 				if (if_block1) if_block1.d();
 				run_all(dispose);
@@ -949,16 +929,16 @@ query IntrospectionQuery {
 	function instance$1($$self, $$props, $$invalidate) {
 		
 
-	let { url = "http://localhost:7700/graphql", scheme = {}, parentid ='', refreshScheme = getScheme } = $$props;
+	let { url = "http://localhost:7700/graphql", scheme = {}, parentid ='', refreshScheme = getScheme, urlElement } = $$props; 
 
+
+	// let methodElement 
 	let visible = false;
-	let { urlElement } = $$props; 
-	let methodElement; 
 
 	async function getScheme() {
 	    $$invalidate('scheme', scheme = {});    
 	    // scheme =  await $.ajax({ url: inputUrl.value, type: "POST", data: { query:queryString, variables: '{}'},});
-	    let resp = await fetch(urlElement.value, { method: methodElement.value, body: JSON.stringify({ query: queryString, variables: "{}" }) });
+	    let resp = await fetch(urlElement.value, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) });
 	    $$invalidate('scheme', scheme = await resp.json());
 	}
 
@@ -981,11 +961,6 @@ query IntrospectionQuery {
 		}
 
 		function input0_binding($$node, check) {
-			methodElement = $$node;
-			$$invalidate('methodElement', methodElement);
-		}
-
-		function input1_binding($$node, check) {
 			urlElement = $$node;
 			$$invalidate('urlElement', urlElement);
 		}
@@ -1005,13 +980,11 @@ query IntrospectionQuery {
 			scheme,
 			parentid,
 			refreshScheme,
-			visible,
 			urlElement,
-			methodElement,
+			visible,
 			getScheme,
 			change_handler,
 			input0_binding,
-			input1_binding,
 			click_handler
 		};
 	}
@@ -2205,7 +2178,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (318:16) {#if node.args}
+	// (352:16) {#if node.args}
 	function create_if_block$3(ctx) {
 		var div0, t_1, div1, each_blocks = [], each_1_lookup = new Map(), current;
 
@@ -2227,10 +2200,10 @@ query IntrospectionQuery {
 				div1 = element("div");
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
-				div0.className = "header svelte-1q0qcx0";
-				add_location(div0, file$5, 318, 16, 6718);
-				div1.className = "fieldlist svelte-1q0qcx0";
-				add_location(div1, file$5, 319, 16, 6771);
+				div0.className = "header svelte-o2q2t6";
+				add_location(div0, file$5, 352, 16, 7616);
+				div1.className = "fieldlist svelte-o2q2t6";
+				add_location(div1, file$5, 353, 16, 7669);
 			},
 
 			m: function mount(target, anchor) {
@@ -2276,7 +2249,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (321:20) {#each node.args as arg, index (arg.name)}
+	// (355:20) {#each node.args as arg, index (arg.name)}
 	function create_each_block$1(key_1, ctx) {
 		var first, updating_getText, current;
 
@@ -2349,7 +2322,7 @@ query IntrospectionQuery {
 	}
 
 	function create_fragment$5(ctx) {
-		var div20, div0, a, t0_value = ctx.node.name, t0, t1, a_class_value, t2, span0, t3, t4, span1, t5_value = ctx.node.description, t5, t6, div19, div3, t7, div2, div1, t8, t9_value = ctx.node.type.kind == "LIST" ? '[...]': '', t9, t10, updating_getText, t11, form_1, div5, div4, t13, textarea0, textarea0_id_value, t14, div7, div6, t16, textarea1, textarea1_id_value, t17, div9, div8, t19, input0, t20, div10, input1, t21, div18, div11, t23, div14, div12, t24, span2, t25_value = ctx.response?'':null, t25, t26, div13, t27, div17, div15, t29, textarea2, textarea2_id_value, t30, div16, input2, t31, span3, t32, t33, span4, current, dispose;
+		var div23, div0, a, t0_value = ctx.node.name, t0, t1, a_class_value, t2, span0, t3, t4, span1, t5_value = ctx.node.description, t5, t6, div22, div3, t7, div2, div1, t8, t9_value = ctx.node.type.kind == "LIST" ? '[...]': '', t9, t10, updating_getText, t11, form_1, div6, div4, t13, div5, textarea0, textarea0_id_value, t14, div9, div7, t16, div8, textarea1, textarea1_id_value, t17, div11, div10, t19, input0, t20, div12, input1, t21, div21, div13, t23, div16, div14, t24, span2, t25_value = ctx.response?'':null, t25, t26, div15, t27, div20, div17, t29, div18, textarea2, textarea2_id_value, t30, div19, input2, t31, span3, t32, t33, span4, current, dispose;
 
 		var if_block = (ctx.node.args) && create_if_block$3(ctx);
 
@@ -2374,7 +2347,7 @@ query IntrospectionQuery {
 
 		return {
 			c: function create() {
-				div20 = element("div");
+				div23 = element("div");
 				div0 = element("div");
 				a = element("a");
 				t0 = text(t0_value);
@@ -2386,7 +2359,7 @@ query IntrospectionQuery {
 				span1 = element("span");
 				t5 = text(t5_value);
 				t6 = space();
-				div19 = element("div");
+				div22 = element("div");
 				div3 = element("div");
 				if (if_block) if_block.c();
 				t7 = space();
@@ -2398,135 +2371,141 @@ query IntrospectionQuery {
 				type.$$.fragment.c();
 				t11 = space();
 				form_1 = element("form");
-				div5 = element("div");
+				div6 = element("div");
 				div4 = element("div");
 				div4.textContent = "QUERY";
 				t13 = space();
+				div5 = element("div");
 				textarea0 = element("textarea");
 				t14 = space();
+				div9 = element("div");
 				div7 = element("div");
-				div6 = element("div");
-				div6.textContent = "VARIABLES";
+				div7.textContent = "VARIABLES";
 				t16 = space();
+				div8 = element("div");
 				textarea1 = element("textarea");
 				t17 = space();
-				div9 = element("div");
-				div8 = element("div");
-				div8.textContent = "FILE";
+				div11 = element("div");
+				div10 = element("div");
+				div10.textContent = "FILE";
 				t19 = space();
 				input0 = element("input");
 				t20 = space();
-				div10 = element("div");
+				div12 = element("div");
 				input1 = element("input");
 				t21 = space();
-				div18 = element("div");
-				div11 = element("div");
-				div11.textContent = "RESPONSE";
+				div21 = element("div");
+				div13 = element("div");
+				div13.textContent = "RESPONSE";
 				t23 = space();
+				div16 = element("div");
 				div14 = element("div");
-				div12 = element("div");
 				t24 = text("response = ");
 				span2 = element("span");
 				t25 = text(t25_value);
 				t26 = space();
-				div13 = element("div");
-				t27 = space();
-				div17 = element("div");
 				div15 = element("div");
-				div15.textContent = "DEFINE TEST";
+				t27 = space();
+				div20 = element("div");
+				div17 = element("div");
+				div17.textContent = "DEFINE TEST";
 				t29 = space();
+				div18 = element("div");
 				textarea2 = element("textarea");
 				t30 = space();
-				div16 = element("div");
+				div19 = element("div");
 				input2 = element("input");
 				t31 = space();
 				span3 = element("span");
 				t32 = text(ctx.testResult);
 				t33 = space();
 				span4 = element("span");
-				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-1q0qcx0";
+				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-o2q2t6";
 				a.href = true;
-				add_location(a, file$5, 310, 8, 6312);
-				span0.className = "test-result svelte-1q0qcx0";
-				add_location(span0, file$5, 311, 8, 6430);
-				span1.className = "description svelte-1q0qcx0";
-				add_location(span1, file$5, 312, 8, 6485);
-				div0.className = "outer svelte-1q0qcx0";
-				add_location(div0, file$5, 309, 4, 6284);
-				div1.className = "header svelte-1q0qcx0";
-				add_location(div1, file$5, 328, 20, 7147);
-				add_location(div2, file$5, 327, 16, 7121);
-				div3.className = "form-area svelte-1q0qcx0";
-				add_location(div3, file$5, 315, 8, 6624);
-				div4.className = "header svelte-1q0qcx0";
-				add_location(div4, file$5, 338, 16, 7670);
+				add_location(a, file$5, 344, 8, 7210);
+				span0.className = "test-result svelte-o2q2t6";
+				add_location(span0, file$5, 345, 8, 7328);
+				span1.className = "description svelte-o2q2t6";
+				add_location(span1, file$5, 346, 8, 7383);
+				div0.className = "outer svelte-o2q2t6";
+				add_location(div0, file$5, 343, 4, 7182);
+				div1.className = "header svelte-o2q2t6";
+				add_location(div1, file$5, 362, 20, 8045);
+				add_location(div2, file$5, 361, 16, 8019);
+				div3.className = "form-area svelte-o2q2t6";
+				add_location(div3, file$5, 349, 8, 7522);
+				div4.className = "header svelte-o2q2t6";
+				add_location(div4, file$5, 372, 16, 8568);
 				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
 				textarea0.name = "query";
-				textarea0.className = "query svelte-1q0qcx0";
 				textarea0.value = ctx.request;
-				add_location(textarea0, file$5, 339, 16, 7719);
-				add_location(div5, file$5, 337, 12, 7648);
-				div6.className = "header svelte-1q0qcx0";
-				add_location(div6, file$5, 342, 16, 7875);
+				textarea0.className = "svelte-o2q2t6";
+				add_location(textarea0, file$5, 374, 20, 8685);
+				div5.className = "queryFrame svelte-o2q2t6";
+				add_location(div5, file$5, 373, 16, 8617);
+				add_location(div6, file$5, 371, 12, 8546);
+				div7.className = "header svelte-o2q2t6";
+				add_location(div7, file$5, 378, 16, 8850);
 				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
 				textarea1.name = "variables";
-				textarea1.className = "variables svelte-1q0qcx0";
-				add_location(textarea1, file$5, 343, 16, 7928);
-				add_location(div7, file$5, 341, 12, 7853);
-				div8.className = "header svelte-1q0qcx0";
-				add_location(div8, file$5, 346, 16, 8109);
+				textarea1.className = "svelte-o2q2t6";
+				add_location(textarea1, file$5, 380, 20, 8979);
+				div8.className = "variablesFrame svelte-o2q2t6";
+				add_location(div8, file$5, 379, 16, 8903);
+				add_location(div9, file$5, 377, 12, 8828);
+				div10.className = "header svelte-o2q2t6";
+				add_location(div10, file$5, 384, 16, 9142);
 				attr(input0, "type", "file");
 				input0.name = "input-file";
-				input0.className = "svelte-1q0qcx0";
-				add_location(input0, file$5, 347, 16, 8156);
-				add_location(div9, file$5, 345, 12, 8087);
+				input0.className = "svelte-o2q2t6";
+				add_location(input0, file$5, 385, 16, 9189);
+				add_location(div11, file$5, 383, 12, 9120);
 				attr(input1, "type", "submit");
 				input1.value = "TEST";
-				input1.className = "svelte-1q0qcx0";
-				add_location(input1, file$5, 350, 16, 8263);
-				div10.className = "buttons svelte-1q0qcx0";
-				add_location(div10, file$5, 349, 12, 8225);
-				form_1.className = "svelte-1q0qcx0";
-				add_location(form_1, file$5, 336, 8, 7589);
-				div11.className = "header svelte-1q0qcx0";
-				add_location(div11, file$5, 356, 12, 8384);
+				input1.className = "svelte-o2q2t6";
+				add_location(input1, file$5, 388, 16, 9296);
+				div12.className = "buttons svelte-o2q2t6";
+				add_location(div12, file$5, 387, 12, 9258);
+				form_1.className = "svelte-o2q2t6";
+				add_location(form_1, file$5, 370, 8, 8487);
+				div13.className = "header svelte-o2q2t6";
+				add_location(div13, file$5, 394, 12, 9417);
 				span2.className = "json-literal";
-				add_location(span2, file$5, 358, 32, 8491);
-				add_location(div12, file$5, 358, 16, 8475);
-				div13.className = "response svelte-1q0qcx0";
-				add_location(div13, file$5, 359, 16, 8566);
-				div14.className = "response-area svelte-1q0qcx0";
-				add_location(div14, file$5, 357, 12, 8431);
-				div15.className = "header svelte-1q0qcx0";
-				add_location(div15, file$5, 362, 16, 8691);
-				textarea2.rows = "3";
+				add_location(span2, file$5, 396, 32, 9524);
+				add_location(div14, file$5, 396, 16, 9508);
+				div15.className = "response svelte-o2q2t6";
+				add_location(div15, file$5, 397, 16, 9599);
+				div16.className = "response-area svelte-o2q2t6";
+				add_location(div16, file$5, 395, 12, 9464);
+				div17.className = "header svelte-o2q2t6";
+				add_location(div17, file$5, 400, 16, 9706);
 				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
-				textarea2.className = "eval-text svelte-1q0qcx0";
 				textarea2.value = "response && !response.errors";
-				add_location(textarea2, file$5, 363, 16, 8745);
+				textarea2.className = "svelte-o2q2t6";
+				add_location(textarea2, file$5, 402, 20, 9826);
+				div18.className = "evalFrame svelte-o2q2t6";
+				add_location(div18, file$5, 401, 16, 9760);
 				attr(input2, "type", "button");
-				input2.className = "try-button svelte-1q0qcx0";
+				input2.className = "try-button svelte-o2q2t6";
 				input2.value = "TRY TEST";
-				add_location(input2, file$5, 365, 20, 8955);
-				span3.className = "eval-result svelte-1q0qcx0";
-				add_location(span3, file$5, 366, 20, 9053);
-				span4.className = "eval-errors svelte-1q0qcx0";
-				add_location(span4, file$5, 367, 20, 9119);
-				div16.className = "buttons2 svelte-1q0qcx0";
-				add_location(div16, file$5, 364, 16, 8912);
-				div17.className = "eval-area svelte-1q0qcx0";
-				add_location(div17, file$5, 361, 12, 8651);
-				div18.className = "result-panel svelte-1q0qcx0";
-				add_location(div18, file$5, 355, 8, 8345);
-				div19.className = "root shadow svelte-1q0qcx0";
-				set_style(div19, "display", (ctx.vis?'grid':'none'));
-				add_location(div19, file$5, 314, 4, 6552);
-				add_location(div20, file$5, 308, 0, 6273);
+				add_location(input2, file$5, 405, 20, 10032);
+				span3.className = "eval-result svelte-o2q2t6";
+				add_location(span3, file$5, 406, 20, 10130);
+				span4.className = "eval-errors svelte-o2q2t6";
+				add_location(span4, file$5, 407, 20, 10196);
+				div19.className = "buttons2 svelte-o2q2t6";
+				add_location(div19, file$5, 404, 16, 9989);
+				add_location(div20, file$5, 399, 12, 9684);
+				div21.className = "result-panel svelte-o2q2t6";
+				add_location(div21, file$5, 393, 8, 9378);
+				div22.className = "root shadow svelte-o2q2t6";
+				set_style(div22, "display", (ctx.vis?'grid':'none'));
+				add_location(div22, file$5, 348, 4, 7450);
+				add_location(div23, file$5, 342, 0, 7171);
 
 				dispose = [
 					listen(a, "click", prevent_default(ctx.click_handler)),
 					listen(textarea0, "change", ctx.change_handler),
-					listen(textarea1, "input", ctx.textarea1_input_handler),
 					listen(textarea1, "change", ctx.change_handler_1),
 					listen(form_1, "submit", ctx.submitForm),
 					listen(textarea2, "change", ctx.change_handler_2),
@@ -2539,8 +2518,8 @@ query IntrospectionQuery {
 			},
 
 			m: function mount(target, anchor) {
-				insert(target, div20, anchor);
-				append(div20, div0);
+				insert(target, div23, anchor);
+				append(div23, div0);
 				append(div0, a);
 				append(a, t0);
 				append(a, t1);
@@ -2550,9 +2529,9 @@ query IntrospectionQuery {
 				append(div0, t4);
 				append(div0, span1);
 				append(span1, t5);
-				append(div20, t6);
-				append(div20, div19);
-				append(div19, div3);
+				append(div23, t6);
+				append(div23, div22);
+				append(div22, div3);
 				if (if_block) if_block.m(div3, null);
 				append(div3, t7);
 				append(div3, div2);
@@ -2562,55 +2541,58 @@ query IntrospectionQuery {
 				append(div2, t10);
 				mount_component(type, div2, null);
 				add_binding_callback(() => ctx.div3_binding(div3, null));
-				append(div19, t11);
-				append(div19, form_1);
-				append(form_1, div5);
-				append(div5, div4);
-				append(div5, t13);
+				append(div22, t11);
+				append(div22, form_1);
+				append(form_1, div6);
+				append(div6, div4);
+				append(div6, t13);
+				append(div6, div5);
 				append(div5, textarea0);
+				add_binding_callback(() => ctx.div5_binding(div5, null));
 				append(form_1, t14);
-				append(form_1, div7);
-				append(div7, div6);
-				append(div7, t16);
-				append(div7, textarea1);
-
-				textarea1.value = ctx.variables;
-
-				append(form_1, t17);
 				append(form_1, div9);
+				append(div9, div7);
+				append(div9, t16);
 				append(div9, div8);
-				append(div9, t19);
-				append(div9, input0);
+				append(div8, textarea1);
+				add_binding_callback(() => ctx.div8_binding(div8, null));
+				append(form_1, t17);
+				append(form_1, div11);
+				append(div11, div10);
+				append(div11, t19);
+				append(div11, input0);
 				append(form_1, t20);
-				append(form_1, div10);
-				append(div10, input1);
+				append(form_1, div12);
+				append(div12, input1);
 				add_binding_callback(() => ctx.form_1_binding(form_1, null));
-				append(div19, t21);
-				append(div19, div18);
-				append(div18, div11);
-				append(div18, t23);
-				append(div18, div14);
-				append(div14, div12);
-				append(div12, t24);
-				append(div12, span2);
+				append(div22, t21);
+				append(div22, div21);
+				append(div21, div13);
+				append(div21, t23);
+				append(div21, div16);
+				append(div16, div14);
+				append(div14, t24);
+				append(div14, span2);
 				append(span2, t25);
-				append(div14, t26);
-				append(div14, div13);
-				add_binding_callback(() => ctx.div13_binding(div13, null));
-				append(div18, t27);
-				append(div18, div17);
-				append(div17, div15);
-				append(div17, t29);
-				append(div17, textarea2);
+				append(div16, t26);
+				append(div16, div15);
+				add_binding_callback(() => ctx.div15_binding(div15, null));
+				append(div21, t27);
+				append(div21, div20);
+				append(div20, div17);
+				append(div20, t29);
+				append(div20, div18);
+				append(div18, textarea2);
 				add_binding_callback(() => ctx.textarea2_binding(textarea2, null));
-				append(div17, t30);
-				append(div17, div16);
-				append(div16, input2);
-				append(div16, t31);
-				append(div16, span3);
+				add_binding_callback(() => ctx.div18_binding(div18, null));
+				append(div20, t30);
+				append(div20, div19);
+				append(div19, input2);
+				append(div19, t31);
+				append(div19, span3);
 				append(span3, t32);
-				append(div16, t33);
-				append(div16, span4);
+				append(div19, t33);
+				append(div19, span4);
 				span4.innerHTML = ctx.evalErrors;
 				current = true;
 			},
@@ -2620,7 +2602,7 @@ query IntrospectionQuery {
 					set_data(t0, t0_value);
 				}
 
-				if ((!current || changed.vis) && a_class_value !== (a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-1q0qcx0")) {
+				if ((!current || changed.vis) && a_class_value !== (a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-o2q2t6")) {
 					a.className = a_class_value;
 				}
 
@@ -2679,12 +2661,19 @@ query IntrospectionQuery {
 					textarea0.value = ctx.request;
 				}
 
-				if (changed.variables) textarea1.value = ctx.variables;
+				if (changed.items) {
+					ctx.div5_binding(null, div5);
+					ctx.div5_binding(div5, null);
+				}
 
 				if ((!current || changed.parentid || changed.node) && textarea1_id_value !== (textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables")) {
 					textarea1.id = textarea1_id_value;
 				}
 
+				if (changed.items) {
+					ctx.div8_binding(null, div8);
+					ctx.div8_binding(div8, null);
+				}
 				if (changed.items) {
 					ctx.form_1_binding(null, form_1);
 					ctx.form_1_binding(form_1, null);
@@ -2695,8 +2684,8 @@ query IntrospectionQuery {
 				}
 
 				if (changed.items) {
-					ctx.div13_binding(null, div13);
-					ctx.div13_binding(div13, null);
+					ctx.div15_binding(null, div15);
+					ctx.div15_binding(div15, null);
 				}
 				if (changed.items) {
 					ctx.textarea2_binding(null, textarea2);
@@ -2705,6 +2694,11 @@ query IntrospectionQuery {
 
 				if ((!current || changed.parentid || changed.node) && textarea2_id_value !== (textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text")) {
 					textarea2.id = textarea2_id_value;
+				}
+
+				if (changed.items) {
+					ctx.div18_binding(null, div18);
+					ctx.div18_binding(div18, null);
 				}
 
 				if (!current || changed.testResult) {
@@ -2716,7 +2710,7 @@ query IntrospectionQuery {
 				}
 
 				if (!current || changed.vis) {
-					set_style(div19, "display", (ctx.vis?'grid':'none'));
+					set_style(div22, "display", (ctx.vis?'grid':'none'));
 				}
 			},
 
@@ -2737,7 +2731,7 @@ query IntrospectionQuery {
 
 			d: function destroy(detaching) {
 				if (detaching) {
-					detach(div20);
+					detach(div23);
 				}
 
 				if (if_block) if_block.d();
@@ -2745,9 +2739,12 @@ query IntrospectionQuery {
 				type.$destroy();
 
 				ctx.div3_binding(null, div3);
+				ctx.div5_binding(null, div5);
+				ctx.div8_binding(null, div8);
 				ctx.form_1_binding(null, form_1);
-				ctx.div13_binding(null, div13);
+				ctx.div15_binding(null, div15);
 				ctx.textarea2_binding(null, textarea2);
+				ctx.div18_binding(null, div18);
 				run_all(dispose);
 			}
 		};
@@ -2767,11 +2764,14 @@ query IntrospectionQuery {
 	// let fieldlist = ''
 	// let arglist = ''
 	let request; 
-	let variables = '';
+	// let variables = ''
 	let response = null;
 
 	let responseArea;
 	let evalTextarea;
+	let queryFrame;
+	let variablesFrame;
+	let evalFrame;
 
 	let getTypeText;
 
@@ -2856,6 +2856,9 @@ query IntrospectionQuery {
 	onMount(async () => {
 	    window.$(formArea).resizable({ handles: "e" });
 	    window.$(form).resizable({ handles: "e" });
+	    window.$(queryFrame).resizable({ handles: "s" });
+	    window.$(variablesFrame).resizable({ handles: "s" });
+	    window.$(evalFrame).resizable({ handles: "s" });
 	});
 
 		function change_handler(event) {
@@ -2891,9 +2894,14 @@ query IntrospectionQuery {
 			$$invalidate('formArea', formArea);
 		}
 
-		function textarea1_input_handler() {
-			variables = this.value;
-			$$invalidate('variables', variables);
+		function div5_binding($$node, check) {
+			queryFrame = $$node;
+			$$invalidate('queryFrame', queryFrame);
+		}
+
+		function div8_binding($$node, check) {
+			variablesFrame = $$node;
+			$$invalidate('variablesFrame', variablesFrame);
 		}
 
 		function form_1_binding($$node, check) {
@@ -2901,7 +2909,7 @@ query IntrospectionQuery {
 			$$invalidate('form', form);
 		}
 
-		function div13_binding($$node, check) {
+		function div15_binding($$node, check) {
 			responseArea = $$node;
 			$$invalidate('responseArea', responseArea);
 		}
@@ -2909,6 +2917,11 @@ query IntrospectionQuery {
 		function textarea2_binding($$node, check) {
 			evalTextarea = $$node;
 			$$invalidate('evalTextarea', evalTextarea);
+		}
+
+		function div18_binding($$node, check) {
+			evalFrame = $$node;
+			$$invalidate('evalFrame', evalFrame);
 		}
 
 		$$self.$set = $$props => {
@@ -2938,10 +2951,12 @@ query IntrospectionQuery {
 			evalErrors,
 			vis,
 			request,
-			variables,
 			response,
 			responseArea,
 			evalTextarea,
+			queryFrame,
+			variablesFrame,
+			evalFrame,
 			getTypeText,
 			argsChangeHandler,
 			typeChangeHandler,
@@ -2956,10 +2971,12 @@ query IntrospectionQuery {
 			argument_getText_binding,
 			type_getText_binding,
 			div3_binding,
-			textarea1_input_handler,
+			div5_binding,
+			div8_binding,
 			form_1_binding,
-			div13_binding,
-			textarea2_binding
+			div15_binding,
+			textarea2_binding,
+			div18_binding
 		};
 	}
 
@@ -3701,17 +3718,17 @@ query IntrospectionQuery {
 				attr(input, "type", "button");
 				input.className = "button svelte-1suc6kz";
 				input.value = "test all";
-				add_location(input, file$7, 159, 8, 3809);
+				add_location(input, file$7, 168, 8, 4050);
 				div0.className = "svelte-1suc6kz";
 				toggle_class(div0, "noscheme", ctx.noscheme);
-				add_location(div0, file$7, 158, 4, 3780);
+				add_location(div0, file$7, 167, 4, 4021);
 				div1.className = "main svelte-1suc6kz";
-				add_location(div1, file$7, 164, 4, 4074);
+				add_location(div1, file$7, 173, 4, 4315);
 				div2.className = "root svelte-1suc6kz";
-				add_location(div2, file$7, 154, 0, 3557);
+				add_location(div2, file$7, 163, 0, 3798);
 				div3.className = "hidden svelte-1suc6kz";
 				toggle_class(div3, "visible", ctx.visible);
-				add_location(div3, file$7, 153, 0, 3522);
+				add_location(div3, file$7, 162, 0, 3763);
 				dispose = listen(input, "click", ctx.doAllTests);
 			},
 
@@ -3729,6 +3746,7 @@ query IntrospectionQuery {
 				append(div2, t1);
 				append(div2, div1);
 				mount_component(list, div1, null);
+				add_binding_callback(() => ctx.div1_binding(div1, null));
 				current = true;
 			},
 
@@ -3755,6 +3773,11 @@ query IntrospectionQuery {
 					list_changes.doTests = ctx.doTests;
 				}
 				list.$set(list_changes);
+
+				if (changed.items) {
+					ctx.div1_binding(null, div1);
+					ctx.div1_binding(div1, null);
+				}
 
 				if (changed.visible) {
 					toggle_class(div3, "visible", ctx.visible);
@@ -3785,30 +3808,10 @@ query IntrospectionQuery {
 
 				list.$destroy();
 
+				ctx.div1_binding(null, div1);
 				dispose();
 			}
 		};
-	}
-
-	function getControlValuesByTagName(tag) {
-	let a =[];
-	let inps=document.getElementsByTagName(tag);  
-	for (let inp of inps) {
-	    let id = inp.getAttribute("id");
-	    if (!id) continue
-	    if (id[0]=='-') console.log(id); // check wrong ids
-	    let type =  tag == 'textarea' ? 'textarea' :  inp.getAttribute("type");
-	    let value = inp.value;
-	    let checked = inp.checked;
-	    a.push({ id: id, type:type, checked:checked, value:value });
-	}
-	return a    
-	}
-
-	function getControlValues() {
-	let inputs    = getControlValuesByTagName("input");
-	let textareas = getControlValuesByTagName("textarea");
-	return inputs.concat(textareas)
 	}
 
 	function restoreControlValues(controls) {
@@ -3836,32 +3839,64 @@ query IntrospectionQuery {
 	// let ignoreChanges = true
 	let doTests;
 	let noscheme = true;
+	let mainArea;
 
 	function doAllTests() {
 	    doTests();
 	}
 
 
+	function getControlValuesByTagName(tag) {
+	    let a =[];
+	    let inps=mainArea.getElementsByTagName(tag);  
+	    for (let inp of inps) {
+	        let id = inp.getAttribute("id");
+	        if (!id) continue
+	        if (id[0]=='-') console.log(id); // check wrong ids
+	        let type =  tag == 'textarea' ? 'textarea' :  inp.getAttribute("type");
+	        let value = inp.value;
+	        let checked = inp.checked;
+	        a.push({ id: id, type:type, checked:checked, value:value });
+	    }
+	    return a    
+	}
+
+	function getControlValues() {
+	    let inputs    = getControlValuesByTagName("input");
+	    let textareas = getControlValuesByTagName("textarea");
+	    return inputs.concat(textareas)
+	}
+
+
 	function saveInputs() {
 	    let key = parentid;
 	    let controls = getControlValues();
-	    let controlsStr = JSON.stringify(controls);
+	    let value = { 
+	        url:urlElement.value, 
+	        controls:controls
+	        };
+	    let controlsStr = JSON.stringify(value);
 	    localStorage.setItem(key, controlsStr);
 	    console.log("saved: ", key, controlsStr.length );
 	}
 
 
 	function restoreInputs() {
-	    // check if scheme is empty
-	    if (scheme && Object.entries(scheme).length === 0 && scheme.constructor === Object)
-	        return
 
 	    let key = parentid;
 	    let controlsStr = localStorage.getItem(key);
 	    if (!controlsStr) return
-	    let controls = JSON.parse(controlsStr);
+	    let value = JSON.parse(controlsStr);
+	    urlElement.value = value.url; $$invalidate('urlElement', urlElement);
+	    console.log("restored tab=", key, controlsStr.length );
+
+	    // check if scheme is empty
+	    if (!scheme) return
+	    if (scheme && Object.entries(scheme).length === 0 && scheme.constructor === Object) return
+
+	    let controls = value.controls;
 	    restoreControlValues(controls);
-	    console.log("restored key=", key, controlsStr.length );
+	    console.log("restored controls=", key, controlsStr.length );
 	}
 
 	function changeHandler(){
@@ -3897,6 +3932,11 @@ query IntrospectionQuery {
 			$$invalidate('doTests', doTests);
 		}
 
+		function div1_binding($$node, check) {
+			mainArea = $$node;
+			$$invalidate('mainArea', mainArea);
+		}
+
 		$$self.$set = $$props => {
 			if ('parentid' in $$props) $$invalidate('parentid', parentid = $$props.parentid);
 			if ('visible' in $$props) $$invalidate('visible', visible = $$props.visible);
@@ -3919,13 +3959,15 @@ query IntrospectionQuery {
 			scheme,
 			doTests,
 			noscheme,
+			mainArea,
 			doAllTests,
 			saveInputs,
 			restoreInputs,
 			changeHandler,
 			schemer_urlElement_binding,
 			schemer_scheme_binding,
-			list_doTests_binding
+			list_doTests_binding,
+			div1_binding
 		};
 	}
 
@@ -3987,7 +4029,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (180:4) {#if tabs && tabs.length > 0}
+	// (206:4) {#if tabs && tabs.length > 0}
 	function create_if_block$4(ctx) {
 		var span, input0, t, input1, dispose;
 
@@ -4001,14 +4043,14 @@ query IntrospectionQuery {
 				input0.className = "button svelte-nyavk6";
 				input0.title = "rename active tab";
 				input0.value = "rename";
-				add_location(input0, file$8, 181, 8, 4019);
+				add_location(input0, file$8, 207, 8, 4818);
 				attr(input1, "type", "button");
 				input1.className = "button svelte-nyavk6";
 				input1.title = "save active tab";
 				input1.value = "save tab";
-				add_location(input1, file$8, 182, 8, 4126);
+				add_location(input1, file$8, 208, 8, 4925);
 				span.className = "buttons svelte-nyavk6";
-				add_location(span, file$8, 180, 4, 3988);
+				add_location(span, file$8, 206, 4, 4787);
 
 				dispose = [
 					listen(input0, "click", ctx.renameTab),
@@ -4035,9 +4077,9 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (187:4) {#each tabs as tab (tab)}
+	// (213:4) {#each tabs as tab (tab.tabName)}
 	function create_each_block$3(key_1, ctx) {
-		var span2, t0_value = ctx.tab, t0, t1, span1, span0, span1_data_tab_value, span2_data_tab_value, dispose;
+		var span2, t0_value = ctx.tab.tabName, t0, t1, span1, span0, span1_data_tabname_value, span2_data_tabname_value, dispose;
 
 		return {
 			key: key_1,
@@ -4052,14 +4094,14 @@ query IntrospectionQuery {
 				span0 = element("span");
 				span0.textContent = "✖";
 				span0.className = "xx svelte-nyavk6";
-				add_location(span0, file$8, 188, 64, 4438);
+				add_location(span0, file$8, 215, 16, 5310);
 				span1.className = "x svelte-nyavk6";
-				span1.dataset.tab = span1_data_tab_value = ctx.tab;
-				add_location(span1, file$8, 188, 12, 4386);
+				span1.dataset.tabname = span1_data_tabname_value = ctx.tab.tabName;
+				add_location(span1, file$8, 214, 12, 5229);
 				span2.className = "tab svelte-nyavk6";
-				span2.dataset.tab = span2_data_tab_value = ctx.tab;
-				toggle_class(span2, "active", ctx.tab == ctx.active);
-				add_location(span2, file$8, 187, 8, 4285);
+				span2.dataset.tabname = span2_data_tabname_value = ctx.tab.tabName;
+				toggle_class(span2, "active", ctx.tab.tabName == ctx.active.tabName);
+				add_location(span2, file$8, 213, 8, 5092);
 
 				dispose = [
 					listen(span1, "click", ctx.deleteTab),
@@ -4078,20 +4120,20 @@ query IntrospectionQuery {
 			},
 
 			p: function update(changed, ctx) {
-				if ((changed.tabs) && t0_value !== (t0_value = ctx.tab)) {
+				if ((changed.tabs) && t0_value !== (t0_value = ctx.tab.tabName)) {
 					set_data(t0, t0_value);
 				}
 
-				if ((changed.tabs) && span1_data_tab_value !== (span1_data_tab_value = ctx.tab)) {
-					span1.dataset.tab = span1_data_tab_value;
+				if ((changed.tabs) && span1_data_tabname_value !== (span1_data_tabname_value = ctx.tab.tabName)) {
+					span1.dataset.tabname = span1_data_tabname_value;
 				}
 
-				if ((changed.tabs) && span2_data_tab_value !== (span2_data_tab_value = ctx.tab)) {
-					span2.dataset.tab = span2_data_tab_value;
+				if ((changed.tabs) && span2_data_tabname_value !== (span2_data_tabname_value = ctx.tab.tabName)) {
+					span2.dataset.tabname = span2_data_tabname_value;
 				}
 
 				if ((changed.tabs || changed.active)) {
-					toggle_class(span2, "active", ctx.tab == ctx.active);
+					toggle_class(span2, "active", ctx.tab.tabName == ctx.active.tabName);
 				}
 			},
 
@@ -4112,7 +4154,7 @@ query IntrospectionQuery {
 
 		var each_value = ctx.tabs;
 
-		const get_key = ctx => ctx.tab;
+		const get_key = ctx => ctx.tab.tabName;
 
 		for (var i = 0; i < each_value.length; i += 1) {
 			let child_ctx = get_each_context$3(ctx, each_value, i);
@@ -4133,9 +4175,9 @@ query IntrospectionQuery {
 				span.textContent = "+";
 				span.title = "add new tab";
 				span.className = "tab plus svelte-nyavk6";
-				add_location(span, file$8, 191, 4, 4510);
+				add_location(span, file$8, 219, 4, 5395);
 				div.className = "container svelte-nyavk6";
-				add_location(div, file$8, 178, 0, 3926);
+				add_location(div, file$8, 204, 0, 4725);
 				dispose = listen(span, "click", ctx.addTab);
 			},
 
@@ -4189,29 +4231,51 @@ query IntrospectionQuery {
 		};
 	}
 
-	function getKeysFromLocalStorage() {
-	 return Object.keys(localStorage)
+	function getTabsFromLocalStorage() {
+	 let tabs =[];
+	 let keys = Object.keys(localStorage);
+	 for (let key of keys) {
+	     let str = localStorage.getItem(key);
+	     if (!str) continue
+	     let value = JSON.parse(str);
+	     // make a copy of string
+	     tabs.push( 
+	         {
+	             tabName:key,
+	             url:(' ' + value.url).slice(1)
+	         });
+	 }
+	 return tabs
 	}
 
 	function fixLocalStorageData(controlsStr, tabName, newTabName) {
 	 if (!controlsStr) return controlsStr
-	 let controls = JSON.parse(controlsStr);
-	 if (!controls) return controlsStr
+	 let val = JSON.parse(controlsStr);
+	 if (!val) return controlsStr
+	 if (!val.controls) return controlsStr
 
-	 for (let c of controls) {
+	 for (let c of val.controls) {
 	     c.id = c.id.replace(tabName, newTabName);
 	 }
-	 console.log(controls);
+	 // console.log(controls)
 
-	 return JSON.stringify(controls)
+	 return JSON.stringify(val)
 	}
 
 	function instance$8($$self, $$props, $$invalidate) {
-		let { tabs = [], active = "" } = $$props;
+		let { tabs = [], active } = $$props; 
 
 	const dispatch = createEventDispatcher();
+
+	let defaultTab = {
+	    tabName: "onlinebc",
+	    url:"http://localhost:5000/"
+	};
+
+
 	function activate(e) {
-	    $$invalidate('active', active = this.getAttribute("data-tab"));
+	    let tabName = this.getAttribute("data-tabName");
+	    $$invalidate('active', active = tabs.find( t => t.tabName == tabName ));
 	}
 
 
@@ -4219,33 +4283,38 @@ query IntrospectionQuery {
 	function addTab(){
 	    let tabName = prompt("New tab name","");
 	    if (!tabName) return
-	    while (tabs.includes(tabName)){
+	    // while (tabs.includes(tabName)){
+	    while (tabs.some( tab =>  tabName == tab.tabName )){
 	        tabName = prompt(`"${tabName}" already exists. Please try again.`,tabName);
 	        if (!tabName) return
 	    }
-	    $$invalidate('tabs', tabs = [...tabs, tabName]);
-	    $$invalidate('active', active = tabName);
+	    let newTab = {tabName: tabName, url:''};
+	    $$invalidate('tabs', tabs = [...tabs, newTab]);
+	    $$invalidate('active', active = newTab);
 	}
 
 
-	function deleteTabByName(tab) {
-	    let tabData = localStorage.getItem(tab);
-	    localStorage.removeItem(tab);
-	    $$invalidate('tabs', tabs = tabs.filter( e => e != tab));
-	    $$invalidate('active', active = tabs.length >0 ? tabs[0] : '');
+	function deleteTabByName(tabName) {
+	    let tabData = localStorage.getItem(tabName);
+	    localStorage.removeItem(tabName);
+	    $$invalidate('tabs', tabs = tabs.filter( t => t.tabName != tabName));
+	    $$invalidate('active', active = tabs.length >0 ? tabs[0] : null);
 	    return tabData
 	}
 
 	function deleteTab(){
-	    let tab = this.getAttribute("data-tab");
-	    deleteTabByName(tab);
+	    let tabName = this.getAttribute("data-tabName");
+	    deleteTabByName(tabName);
 	}
 
 	function renameTab(){
 	    // create a new tab
-	    let tabName = active;
+	    let tabName = active.tabName;
+	    let tabUrl = active.url;
+
 	    let newTabName = tabName;
-	    while (tabs.includes(newTabName)){
+	    // while (tabs.includes(newTabName)){
+	    while (tabs.some( tab =>  newTabName == tab.tabName )){
 	        newTabName = prompt(`Rename "${newTabName}"`,newTabName);
 	        if (!newTabName) return
 	    }
@@ -4255,8 +4324,12 @@ query IntrospectionQuery {
 
 	   // add the new tab to UI, and activate it
 	    if (!newTabName) return
-	    $$invalidate('tabs', tabs = [...tabs, newTabName]);
-	    $$invalidate('active', active = newTabName);
+	    let newTab = {
+	        tabName:newTabName,
+	        url:tabUrl
+	    };
+	    $$invalidate('tabs', tabs = [...tabs, newTab]);
+	    $$invalidate('active', active = newTab);
 
 	    // move data 
 	    if (data){
@@ -4273,8 +4346,8 @@ query IntrospectionQuery {
 	}
 
 	onMount(async () => {
-	    let storedTabs = getKeysFromLocalStorage();
-	    $$invalidate('tabs', tabs = storedTabs.length ==0 ? ['onlinebc'] : [...tabs, ...storedTabs]);
+	    let storedTabs = getTabsFromLocalStorage();
+	    $$invalidate('tabs', tabs = storedTabs.length ==0 ? [defaultTab] : [...tabs, ...storedTabs]);
 	    $$invalidate('active', active = tabs[0]);
 	});
 
@@ -4298,6 +4371,12 @@ query IntrospectionQuery {
 		constructor(options) {
 			super(options);
 			init(this, options, instance$8, create_fragment$8, safe_not_equal, ["tabs", "active"]);
+
+			const { ctx } = this.$$;
+			const props = options.props || {};
+			if (ctx.active === undefined && !('active' in props)) {
+				console.warn("<Tabs> was created without expected prop 'active'");
+			}
 		}
 
 		get tabs() {
@@ -4327,7 +4406,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (22:4) {#each tabs as tab (tab)}
+	// (22:4) {#each tabs as tab (tab.tabName)}
 	function create_each_block$4(key_1, ctx) {
 		var first, updating_saveInputs, current;
 
@@ -4338,11 +4417,11 @@ query IntrospectionQuery {
 		}
 
 		let app_props = {
-			parentid: ctx.tab,
-			visible: ctx.tab == ctx.active
+			parentid: ctx.tab.tabName,
+			visible: ctx.tab.tabName == ctx.active.tabName
 		};
-		if (ctx.tabsSaveFunctions[ctx.tab] !== void 0) {
-			app_props.saveInputs = ctx.tabsSaveFunctions[ctx.tab];
+		if (ctx.tabsSaveFunctions[ctx.tab.tabName] !== void 0) {
+			app_props.saveInputs = ctx.tabsSaveFunctions[ctx.tab.tabName];
 		}
 		var app = new App({ props: app_props, $$inline: true });
 
@@ -4368,10 +4447,10 @@ query IntrospectionQuery {
 			p: function update(changed, new_ctx) {
 				ctx = new_ctx;
 				var app_changes = {};
-				if (changed.tabs) app_changes.parentid = ctx.tab;
-				if (changed.tabs || changed.active) app_changes.visible = ctx.tab == ctx.active;
+				if (changed.tabs) app_changes.parentid = ctx.tab.tabName;
+				if (changed.tabs || changed.active) app_changes.visible = ctx.tab.tabName == ctx.active.tabName;
 				if (!updating_saveInputs && changed.tabsSaveFunctions || changed.tabs) {
-					app_changes.saveInputs = ctx.tabsSaveFunctions[ctx.tab];
+					app_changes.saveInputs = ctx.tabsSaveFunctions[ctx.tab.tabName];
 				}
 				app.$set(app_changes);
 			},
@@ -4428,7 +4507,7 @@ query IntrospectionQuery {
 
 		var each_value = ctx.tabs;
 
-		const get_key = ctx => ctx.tab;
+		const get_key = ctx => ctx.tab.tabName;
 
 		for (var i = 0; i < each_value.length; i += 1) {
 			let child_ctx = get_each_context$4(ctx, each_value, i);
@@ -4443,7 +4522,7 @@ query IntrospectionQuery {
 				t = space();
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
-				add_location(div, file$9, 19, 0, 225);
+				add_location(div, file$9, 19, 0, 229);
 			},
 
 			l: function claim(nodes) {
@@ -4510,12 +4589,12 @@ query IntrospectionQuery {
 		
 
 	let tabs = [];
-	let active = '';
+	let active; 
 	let tabsSaveFunctions = {};
 
 
 	function saveTab(params) {
-	    tabsSaveFunctions[active]();
+	    tabsSaveFunctions[active.tabName]();
 	}
 
 		function tabs_1_tabs_binding(value) {
@@ -4529,7 +4608,7 @@ query IntrospectionQuery {
 		}
 
 		function app_saveInputs_binding(value, { tab }) {
-			tabsSaveFunctions[tab] = value;
+			tabsSaveFunctions[tab.tabName] = value;
 			$$invalidate('tabsSaveFunctions', tabsSaveFunctions);
 		}
 

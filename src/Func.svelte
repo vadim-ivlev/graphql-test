@@ -25,11 +25,14 @@ let vis = false
 // let fieldlist = ''
 // let arglist = ''
 let request 
-let variables = ''
+// let variables = ''
 let response = null
 
 let responseArea
 let evalTextarea
+let queryFrame
+let variablesFrame
+let evalFrame
 
 let getTypeText
 
@@ -126,6 +129,9 @@ let formArea
 onMount(async () => {
     window.$(formArea).resizable({ handles: "e" });
     window.$(form).resizable({ handles: "e" });
+    window.$(queryFrame).resizable({ handles: "s" });
+    window.$(variablesFrame).resizable({ handles: "s" });
+    window.$(evalFrame).resizable({ handles: "s" });
 })
 
 
@@ -220,18 +226,55 @@ onMount(async () => {
         padding: 0;
     }
 
-    .query {
+    .queryFrame {
         height: 20em;
         min-height: 1em;
-        resize: vertical;
+        border-top:1px solid silver;
+        border-bottom:1px solid steelblue;
     }
 
-    .variables {
+    .queryFrame>textarea {
+        /* resize: vertical; */
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        border-width: 0;
+    }
+
+    .variablesFrame {
+        height: 3em;
+        min-height: 1em;
+        border-top:1px solid silver;
+        border-bottom:1px solid steelblue;
+    }
+
+    .variablesFrame>textarea {
+        /* resize: vertical; */
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        border-width: 0;
+    }
+
+    .evalFrame {
+        height: 3em;
+        min-height: 1em;
+        border-top:1px solid silver;
+        border-bottom:1px solid steelblue;
+    }
+
+    .evalFrame>textarea {
+        /* resize: vertical; */
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        border-width: 0;
+    }
+
+
+    /* .variables {
         margin-left:0px;
         height: 3em;
         min-height: 1em;
         resize: vertical;
-    }
+    } */
 
     .test-result {
         min-width: 60px;
@@ -246,11 +289,6 @@ onMount(async () => {
         padding: 10px;
     }
 
-    .eval-area {
-    }
-
-    .eval-text {
-    }
 
     .eval-result {
         font-weight: normal;
@@ -279,12 +317,8 @@ onMount(async () => {
 
     textarea {
         padding: 10px;
-        width: calc(100% - 20px);
         font-size: 14px;
         font-family: 'Roboto Mono','Roboto', monospace;
-        border-left-width: 0;
-        border-right-width: 0;
-        border-color: silver;
         color: darkmagenta;
     }
 
@@ -337,11 +371,15 @@ onMount(async () => {
         <form bind:this={form} on:submit={submitForm}>
             <div>
                 <div class="header" >QUERY</div>
-                <textarea id="{parentid}-{node.name}-query" name="query" class="query" on:change >{request}</textarea>
+                <div class="queryFrame" bind:this={queryFrame}>
+                    <textarea id="{parentid}-{node.name}-query" name="query" on:change >{request}</textarea>
+                </div>
             </div>
             <div>
                 <div class="header" >VARIABLES</div>
-                <textarea id="{parentid}-{node.name}-variables" name="variables" class="variables" bind:value={variables} on:change></textarea>
+                <div class="variablesFrame" bind:this={variablesFrame}>
+                    <textarea id="{parentid}-{node.name}-variables" name="variables" on:change></textarea>
+                </div>
             </div>
             <div>
                 <div class="header">FILE</div>
@@ -359,9 +397,11 @@ onMount(async () => {
                 <div>response = <span class="json-literal">{response?'':null}</span></div>
                 <div class="response" bind:this={responseArea}></div>
             </div>
-            <div class="eval-area">
+            <div>
                 <div class="header">DEFINE TEST</div>
-                <textarea rows="3" id="{parentid}-{node.name}-eval-text" class="eval-text" bind:this={evalTextarea} on:change>response && !response.errors</textarea> 
+                <div class="evalFrame" bind:this={evalFrame}>
+                    <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change>response && !response.errors</textarea> 
+                </div>
                 <div class="buttons2">
                     <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
                     <span class="eval-result">{testResult}</span>

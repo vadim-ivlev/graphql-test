@@ -3,20 +3,36 @@ import {createEventDispatcher,onMount} from 'svelte'
 
 
 export let tabs = []
-export let active = ""
+export let active 
 
 const dispatch = createEventDispatcher()
 
-
-
-
-let n = 3
-function activate(e) {
-    active = this.getAttribute("data-tab")
+let defaultTab = {
+    tabName: "onlinebc",
+    url:"http://localhost:5000/"
 }
 
-function getKeysFromLocalStorage() {
-    return Object.keys(localStorage)
+
+function activate(e) {
+    let tabName = this.getAttribute("data-tabName")
+    active = tabs.find( t => t.tabName == tabName )
+}
+
+function getTabsFromLocalStorage() {
+    let tabs =[]
+    let keys = Object.keys(localStorage)
+    for (let key of keys) {
+        let str = localStorage.getItem(key)
+        if (!str) continue
+        let value = JSON.parse(str)
+        // make a copy of string
+        tabs.push( 
+            {
+                tabName:key,
+                url:(' ' + value.url).slice(1)
+            })
+    }
+    return tabs
 }
 
 
@@ -24,47 +40,53 @@ function getKeysFromLocalStorage() {
 function addTab(){
     let tabName = prompt("New tab name","")
     if (!tabName) return
-    while (tabs.includes(tabName)){
+    // while (tabs.includes(tabName)){
+    while (tabs.some( tab =>  tabName == tab.tabName )){
         tabName = prompt(`"${tabName}" already exists. Please try again.`,tabName)
         if (!tabName) return
     }
-    tabs = [...tabs, tabName]
-    active = tabName
+    let newTab = {tabName: tabName, url:''}
+    tabs = [...tabs, newTab]
+    active = newTab
 }
 
 
-function deleteTabByName(tab) {
-    let tabData = localStorage.getItem(tab)
-    localStorage.removeItem(tab)
-    tabs = tabs.filter( e => e != tab)
-    active = tabs.length >0 ? tabs[0] : ''
+function deleteTabByName(tabName) {
+    let tabData = localStorage.getItem(tabName)
+    localStorage.removeItem(tabName)
+    tabs = tabs.filter( t => t.tabName != tabName)
+    active = tabs.length >0 ? tabs[0] : null
     return tabData
 }
 
 function deleteTab(){
-    let tab = this.getAttribute("data-tab")
-    deleteTabByName(tab)
+    let tabName = this.getAttribute("data-tabName")
+    deleteTabByName(tabName)
 }
 
 // fixLocalStorageData renames ids by chnaging tabName to newTabName
 function fixLocalStorageData(controlsStr, tabName, newTabName) {
     if (!controlsStr) return controlsStr
-    let controls = JSON.parse(controlsStr)
-    if (!controls) return controlsStr
+    let val = JSON.parse(controlsStr)
+    if (!val) return controlsStr
+    if (!val.controls) return controlsStr
 
-    for (let c of controls) {
+    for (let c of val.controls) {
         c.id = c.id.replace(tabName, newTabName)
     }
-    console.log(controls)
+    // console.log(controls)
 
-    return JSON.stringify(controls)
+    return JSON.stringify(val)
 }
 
 function renameTab(){
     // create a new tab
-    let tabName = active
+    let tabName = active.tabName
+    let tabUrl = active.url
+
     let newTabName = tabName
-    while (tabs.includes(newTabName)){
+    // while (tabs.includes(newTabName)){
+    while (tabs.some( tab =>  newTabName == tab.tabName )){
         newTabName = prompt(`Rename "${newTabName}"`,newTabName)
         if (!newTabName) return
     }
@@ -74,8 +96,12 @@ function renameTab(){
 
    // add the new tab to UI, and activate it
     if (!newTabName) return
-    tabs = [...tabs, newTabName]
-    active = newTabName
+    let newTab = {
+        tabName:newTabName,
+        url:tabUrl
+    }
+    tabs = [...tabs, newTab]
+    active = newTab
 
     // move data 
     if (data){
@@ -92,8 +118,8 @@ function saveTab(){
 }
 
 onMount(async () => {
-    let storedTabs = getKeysFromLocalStorage()
-    tabs = storedTabs.length ==0 ? ['onlinebc'] : [...tabs, ...storedTabs]
+    let storedTabs = getTabsFromLocalStorage()
+    tabs = storedTabs.length ==0 ? [defaultTab] : [...tabs, ...storedTabs]
     active = tabs[0]
 })
 
@@ -184,9 +210,11 @@ onMount(async () => {
     </span>
     {/if}
 
-    {#each tabs as tab (tab)}
-        <span class="tab" class:active={tab == active} data-tab={tab} on:click={activate}>{tab} 
-            <span class="x" data-tab={tab} on:click={deleteTab}><span class="xx">&#x2716;</span></span>
+    {#each tabs as tab (tab.tabName)}
+        <span class="tab" class:active={tab.tabName == active.tabName} data-tabName={tab.tabName} on:click={activate}>{tab.tabName} 
+            <span class="x" data-tabName={tab.tabName} on:click={deleteTab}>
+                <span class="xx">&#x2716;</span>
+            </span>
         </span>
     {/each}
     <span title="add new tab" class="tab plus" on:click={addTab}>+</span>
