@@ -130,25 +130,35 @@ onMount(async () => {
     .container {
         padding: 10px 0 0 0;
         /* background-color: whitesmoke; */
+        border-bottom:1px solid silver;
     }
 
     .plus {
-        font-weight: bold;
+        /* font-weight: bold; */
         color:steelblue;
         cursor: pointer;
-        position: relative;
-        top:2px;
+        margin-left:10px;
+        padding-left: 10px;
+        padding-right: 10px;
      }
 
     .tab {
         margin: 0;
-        /* margin-right:10px; */
         display: inline-block;
-        padding: 1px 1px 1px 10px;
+        padding: 1px 4px 1px 20px;
         cursor: default;
-        border-bottom: 2px solid transparent;
+    
         color: steelblue;
-        /* background-color: transparent; */
+        /* border-radius: 8px 8px 0 0; */
+        border:1px solid transparent;
+        border-top-width: 2px;
+
+        top: 1px;
+        position: relative;
+    }
+
+    .tab:hover {
+        background-color: rgba(0,0,0,0.05)
     }
 
     .active {
@@ -157,65 +167,63 @@ onMount(async () => {
         cursor: pointer; */
 
         background-color: white;
-        border-bottom-color: steelblue;
+
+        border:1px solid silver;
+        border-top-width: 2px;
+        border-bottom: 1px solid white;        
+        border-top-color: steelblue;
+
         color: black;
         }
-    .x {
-        border-radius: 20px;
-        border: 1px solid transparent;
-        display: inline-block;
-        font-size: 75%;
-        width:14px;
-        height: 14px;
-        text-align: center;
-        vertical-align:middle;
-        margin-left:3px;
+
+    .active:hover {
         background-color: transparent;
+    }
+
+
+
+    .x {
+        padding:0 3px 0 3px;
+        font-size: 90%;
+        margin-left:3px;
         color: steelblue;
-        overflow:hidden;
-        position: relative;
-        /* top: 10px; */
-        /* font-weight: bold; */
     }
     .x:hover {
-        border-color: steelblue;
-    }
-    .xx {
-        position: relative;
-        top: -1px; 
+        color: red;
     }
 
     .buttons {
-        float: right;
+        /* float: right; */
+        margin-left:20px;
     }
     .button {
         /* font-family: 'Roboto Condensed'; */
         /* font-weight: bold; */
         /* letter-spacing: 0.1em; */
         padding: 0 5px 0 5px;
-        border: 1px solid steelblue;
+        border: 0px solid steelblue;
         /* border-radius: 4px; */
         background-color: transparent;
         color: steelblue;
+        font-size: 100%;
     }
 
 
 </style>
 
 <div class="container">
-    {#if tabs && tabs.length > 0}
-    <span class="buttons">
-        <input type="button" class="button" title="rename active tab" value="rename" on:click={renameTab}>
-        <input type="button" class="button" title="save active tab" value="save tab" on:click={saveTab}> 
-    </span>
-    {/if}
 
     {#each tabs as tab (tab.tabName)}
         <span class="tab" class:active={tab.tabName == active.tabName} data-tabName={tab.tabName} on:click={activate}>{tab.tabName} 
-            <span class="x" data-tabName={tab.tabName} on:click={deleteTab}>
-                <span class="xx">&#x2716;</span>
-            </span>
+            <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
+            <!-- &#x2297; -->
         </span>
     {/each}
-    <span title="add new tab" class="tab plus" on:click={addTab}>+</span>
+    {#if tabs && tabs.length > 0}
+    <span class="buttons">
+        <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
+        <input type="button" class="button" title="save {active.tabName} tab" value="save tab" on:click={saveTab}> 
+    </span>
+    {/if}
+    <span title="add new tab" class="plus" on:click={addTab}>+</span>
 </div> 

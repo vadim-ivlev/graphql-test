@@ -69,7 +69,7 @@ function getArgsText() {
 function generateQuery(){
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
-    request = `${operation} {\n${node.name}${arglist}\n${fieldlist}\n}`
+    request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`
     dispatchEvent()
 }
 
@@ -154,8 +154,10 @@ onMount(async () => {
         margin-bottom: 10px;
         display: grid;
         grid-template-columns: 1fr max-content 4fr;
-        border-top: 1px solid silver;
-        border-bottom: 1px solid silver;
+
+        border: 1px solid steelblue;
+        /* border-top: 1px solid steelblue;
+        border-bottom: 1px solid steelblue; */
     }
 
     .form-area { 
@@ -236,7 +238,7 @@ onMount(async () => {
     .queryFrame>textarea {
         /* resize: vertical; */
         width: calc(100% - 20px);
-        height: calc(100% - 20px);
+        height: calc(100% - 21px);
         border-width: 0;
     }
 
@@ -250,7 +252,7 @@ onMount(async () => {
     .variablesFrame>textarea {
         /* resize: vertical; */
         width: calc(100% - 20px);
-        height: calc(100% - 20px);
+        height: calc(100% - 21px);
         border-width: 0;
     }
 
@@ -264,7 +266,7 @@ onMount(async () => {
     .evalFrame>textarea {
         /* resize: vertical; */
         width: calc(100% - 20px);
-        height: calc(100% - 20px);
+        height: calc(100% - 21px);
         border-width: 0;
     }
 
@@ -363,7 +365,7 @@ onMount(async () => {
                     <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}
                     <!-- <input type="button" value="getText" on:click={()=> console.log(getTypeText())}> -->
                     </div>
-                    <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}"  bind:getText={getTypeText} on:change={typeChangeHandler}/>
+                    <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}" level={1}  bind:getText={getTypeText} on:change={typeChangeHandler}/>
                 </div>
 
         </div>

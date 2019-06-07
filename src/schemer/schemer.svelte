@@ -17,8 +17,12 @@ let visible = false
 async function getScheme() {
     scheme = {}    
     // scheme =  await $.ajax({ url: inputUrl.value, type: "POST", data: { query:queryString, variables: '{}'},});
-    let resp = await fetch(urlElement.value, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) })
-    scheme = await resp.json()
+    try {
+        let resp = await fetch(urlElement.value, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) })
+        scheme = await resp.json()
+    } catch (error) {
+        alert(error)
+    }
 }
 
 // function clearScheme() {
@@ -77,7 +81,7 @@ onMount(async () => {
     <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} on:change/>
     <!-- bind:value={url} -->
     <!-- <input type="button" value="reset" on:click={clearScheme} /> -->
-    <input type="button" class="button" value="reload scheme" on:click={getScheme} />
+    <input type="button" class="button" value="&#x21bb; reload scheme" on:click={getScheme} />
     {#if Object.entries(scheme).length != 0 }
     <br>
     <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>

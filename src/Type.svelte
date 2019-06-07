@@ -10,17 +10,21 @@ export let scheme = {}
 export let typeName = ''
 export let showCheckbox = true
 
+export let level = 0
+export let padding = '  '
+
 export let getText = function () {
     let a =[]
-    let p = '  '
+    // let p = '  '
 
     for (let key in fieldFunctions) {
         let v = fieldFunctions[key]()
-        if (v) a.push( p + v )
+        if (v) a.push( padding.repeat(level+1) + v )
     }
 
     if (a.length > 0) 
-        return '{\n' +a.join('\n') + '\n'+p+'}'
+        // return '\n'+ padding.repeat(level)+'{\n' +a.join('\n') + '\n'+ padding.repeat(level) +'}'
+        return ' {\n' +a.join('\n') + '\n'+ padding.repeat(level) +'}'
     
     return ''
 }
@@ -119,7 +123,7 @@ function getNode(scheme, typeName){
                 {#if node.fields}
                     <div class="fieldlist">
                     {#each node.fields as f,ind}
-                        <TypeField {showCheckbox} bind:getText={fieldFunctions[f.name]} scheme={scheme} node={f} parentid="{parentid}-{typeName}" on:change />
+                        <TypeField {showCheckbox} {scheme}  level={level+1}  {padding}  node={f} parentid="{parentid}-{typeName}" bind:getText={fieldFunctions[f.name]}  on:change />
                     {/each}
                     </div>
                 {/if}
