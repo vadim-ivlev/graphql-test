@@ -35,6 +35,7 @@ let variablesFrame
 let evalFrame
 
 let getTypeText
+// let inputFileElement 
 
 
 const dispatch = createEventDispatcher()
@@ -123,6 +124,10 @@ function evaluate(){
     }
 }
 
+
+// function onInputFileNameChange(event) {
+//     inputFileElement.name = event.target.value
+// }
 
 let form
 let formArea
@@ -217,7 +222,11 @@ onMount(async () => {
         color: white;
     }
 
-    input[type="file"] {
+    /* input[type="file"] {
+        margin-left:10px
+    } */
+
+    .margined {
         margin-left:10px
     }
 
@@ -345,7 +354,7 @@ onMount(async () => {
 <div >
     <div class="outer">
         <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
-        <span class="test-result">{testResult}</span> 
+        <span class="test-result">{@html testResult}</span> 
         <span class="description">{node.description}</span>
     </div>
     <div class="root shadow" style="display:{vis?'grid':'none'}"  >
@@ -385,7 +394,11 @@ onMount(async () => {
             </div>
             <div>
                 <div class="header">FILE</div>
-                <input type="file" name="input-file">
+                <div class="margined">
+                <!-- <input id="{parentid}-{node.name}-input-file-namer" type="text" on:change={onInputFileNameChange} style="width:70px;" value="input-file"> -->
+                    <span>name = "input-file"</span><br>
+                    <input type="file" name="input-file">
+                </div>
             </div>
             <div class="buttons">
                 <input type="submit"  value="TEST">
@@ -406,7 +419,7 @@ onMount(async () => {
                 </div>
                 <div class="buttons2">
                     <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
-                    <span class="eval-result">{testResult}</span>
+                    <span class="eval-result">{@html testResult}</span>
                     <span class="eval-errors">{@html evalErrors}</span>
                 </div>
             </div>
