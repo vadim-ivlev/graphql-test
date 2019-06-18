@@ -7,13 +7,9 @@ export let scheme
 export let urlElement
 
 export let parentid = ''
+
 export let doTests = function (){
-    for (let o of queries) {
-        o.test()
-    }
-    for (let o of mutations) {
-        o.test()
-    }
+    for (let [key,f] of Object.entries(testFunctions) )  f()
 }
 
 
@@ -22,7 +18,7 @@ let queries =[]
 let types=[]
 let usertypes=[]
 let noscheme = true
-
+let testFunctions = {}
 
 
 $: {
@@ -62,17 +58,21 @@ function compareTypes(t1, t2) {
 <div class:noscheme>
      <!-- <input type="button" value="test" on:click={doTests}> -->
      <h4>Queries</h4>
-     {#each queries as e}
+     {#each queries as e (e.name)}
           <div>
-          <Func urlElement={urlElement} bind:test={e.test} node={e} operation="query"  scheme={scheme} parentid="{parentid}-query" on:change/>
+          <Func urlElement={urlElement} bind:test={testFunctions[e.name]} node={e} operation="query"  scheme={scheme} parentid="{parentid}-query" />
+          <!-- bind:test={e.test} -->
+          <!-- on:change -->
           <!-- url={url} -->
           </div>
      {/each}
 
      <h4>Mutations</h4>
-     {#each mutations as e}
+     {#each mutations as e (e.name)}
           <div>
-          <Func urlElement={urlElement} bind:test={e.test} node={e}  operation="mutation" scheme={scheme} parentid="{parentid}-mutation" on:change/>
+          <Func urlElement={urlElement} bind:test={testFunctions[e.name]} node={e}  operation="mutation" scheme={scheme} parentid="{parentid}-mutation" />
+          <!-- bind:test={e.test} -->
+          <!-- on:change -->
           <!-- url={url} -->
           </div>
      {/each}

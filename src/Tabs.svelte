@@ -9,7 +9,8 @@ const dispatch = createEventDispatcher()
 
 let defaultTab = {
     tabName: "onlinebc",
-    url:"http://localhost:5000/"
+    url:"http://localhost:5000/",
+    scheme: null
 }
 
 
@@ -29,7 +30,8 @@ function getTabsFromLocalStorage() {
         tabs.push( 
             {
                 tabName:key,
-                url:(' ' + value.url).slice(1)
+                url:(' ' + value.url).slice(1),
+                scheme:value.scheme
             })
     }
     return tabs
@@ -83,6 +85,7 @@ function renameTab(){
     // create a new tab
     let tabName = active.tabName
     let tabUrl = active.url
+    let tabScheme = active.scheme
 
     let newTabName = tabName
     // while (tabs.includes(newTabName)){
@@ -98,7 +101,8 @@ function renameTab(){
     if (!newTabName) return
     let newTab = {
         tabName:newTabName,
-        url:tabUrl
+        url:tabUrl,
+        scheme: tabScheme
     }
     tabs = [...tabs, newTab]
     active = newTab

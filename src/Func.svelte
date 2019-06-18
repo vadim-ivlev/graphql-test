@@ -35,6 +35,7 @@ let variablesFrame
 let evalFrame
 
 let getTypeText
+let getArgFunctions ={}
 // let inputFileElement 
 
 
@@ -55,16 +56,29 @@ $: {
     generateQuery()
 }
 
+// function getArgsText() {
+//     let args = []
+//     for (let arg of node.args) {
+//         if (!arg.getText) continue
+//         let text = arg.getText()
+//         if (text) args.push(text)
+//     }
+//     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
+//     return argsText
+// }
+
 function getArgsText() {
     let args = []
-    for (let arg of node.args) {
-        if (!arg.getText) continue
-        let text = arg.getText()
+    for (let [key,f] of Object.entries(getArgFunctions)) {
+        // if (!arg.getText) continue
+        let text = f()
+        // console.log("----",key, text)
         if (text) args.push(text)
     }
     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
     return argsText
 }
+
 
 
 function generateQuery(){
@@ -363,8 +377,9 @@ onMount(async () => {
                 {#if node.args}
                 <div class="header" >ARGUMENTS</div>
                 <div class="fieldlist" >
-                    {#each node.args as arg, index (arg.name)}
-                    <Argument node={arg} bind:getText={arg.getText} on:change={argsChangeHandler} parentid="{parentid}-{node.name}-argument"/>
+                    {#each node.args as arg (arg.name)}
+                    <!-- <Argument node={arg} bind:getText={arg.getText} on:change={argsChangeHandler} parentid="{parentid}-{node.name}-argument"/> -->
+                    <Argument node={arg} bind:getText={getArgFunctions[arg.name]} on:change={argsChangeHandler} parentid="{parentid}-{node.name}-argument"/>
                     {/each}
                 </div>
                 {/if}
