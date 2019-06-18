@@ -27,9 +27,9 @@ $: {
     queries =[]
     types=[]
     usertypes=[]
-    noscheme = Object.entries(scheme).length == 0
 
     try {
+    noscheme = Object.entries(scheme).length == 0
     mutations = scheme.data.__schema.mutationType.fields
     queries = scheme.data.__schema.queryType.fields
     types = scheme.data.__schema.types.sort(compareTypes)

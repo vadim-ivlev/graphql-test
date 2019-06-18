@@ -2,7 +2,7 @@
 <script>
 import { createEventDispatcher } from 'svelte'
 import { onMount } from 'svelte'
-// import { afterUpdate } from 'svelte'
+import { afterUpdate } from 'svelte'
 
 import Js from './JsonView.svelte'
 import Argument from './Argument.svelte'
@@ -50,9 +50,10 @@ function dispatchEvent() {
 //     generateQuery()
 // }
 
+
 $: {
     let dummy = node
-    // console.log("node changed")
+    console.log("node changed")
     generateQuery()
 }
 
@@ -152,6 +153,13 @@ onMount(async () => {
     window.$(variablesFrame).resizable({ handles: "s" });
     window.$(evalFrame).resizable({ handles: "s" });
 })
+
+afterUpdate(() => {
+    console.log("FUNC afterUpdate parentid=", parentid)
+    // setTimeout(restoreControlValues, 0)
+    generateQuery()
+});
+
 
 
 </script>
