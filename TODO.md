@@ -1,7 +1,4 @@
-- (done) save/restore controls (url, store)
-- multitab user interface
-- save test results to var testResults['FullBroadcast']
-- make async function runTest('FullBroadcast')
-
+- reload scheme when user hits 'reload' button. Destroy old scheme and (save controls) before requesting a new one.
+- move buttons rename, save to tabs.
 
 

@@ -1,6 +1,7 @@
 <script>
 
 // import { onMount } from 'svelte'
+import { createEventDispatcher } from 'svelte'
 import { queryString } from "./schemer.js"
 import JsonView from '../JsonView.svelte'
 
@@ -14,7 +15,12 @@ export let urlElement
 // let methodElement 
 let visible = false
 
+
+const dispatch = createEventDispatcher()
+
+
 async function getScheme() {
+    clearScheme()
     scheme = {}    
     // scheme =  await $.ajax({ url: inputUrl.value, type: "POST", data: { query:queryString, variables: '{}'},});
     try {
@@ -25,9 +31,11 @@ async function getScheme() {
     }
 }
 
-// function clearScheme() {
-//     scheme = {}     
-// }
+function clearScheme() {
+    //scheme = {}     
+    dispatch('clear', { text: 'clear storage' })
+    console.log('clearScheme:', parentid)
+}
 
 // function onChange(params) {
 //     url = this.value
@@ -46,11 +54,11 @@ async function getScheme() {
         /* background-color: whitesmoke; */
     }
 
-    .post {
+    /* .post {
         width: 50px;
         font-size: 100%;
         display: none;
-    }
+    } */
     .text {
         width: 300px;
         font-size: 100%;
@@ -81,7 +89,7 @@ async function getScheme() {
     <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} />
     <!-- on:change -->
     <!-- bind:value={url} -->
-    <!-- <input type="button" value="reset" on:click={clearScheme} /> -->
+    <input type="button" class="button" value="clear" on:click={clearScheme} />
     <input type="button" class="button" value="&#x21bb; reload scheme" on:click={getScheme} />
     {#if Object.entries(scheme).length != 0 }
     <br>

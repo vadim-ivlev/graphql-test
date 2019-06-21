@@ -20,13 +20,13 @@ let mainArea
 
 let controls
 
-// $: {
-//     scheme = scheme
-//     noscheme = Object.entries(scheme).length == 0
-//     console.log('App scheme changed', scheme)
-//     // ignoreChanges= true
-//     // delay(restoreInputs, 500)
-// }
+$: {
+    scheme = scheme
+    // noscheme = Object.entries(scheme).length == 0
+    console.log('App scheme changed', scheme)
+    // ignoreChanges= true
+    // delay(restoreInputs, 500)
+}
 
 function doAllTests() {
     doTests()
@@ -35,6 +35,9 @@ function doAllTests() {
 
 function getControlValuesByTagName(tag) {
     let a =[]
+    if (!mainArea){
+        return a
+    }
     let inps=mainArea.getElementsByTagName(tag)  
     for (let inp of inps) {
         let id = inp.getAttribute("id")
@@ -77,11 +80,35 @@ function restoreControlValues() {
 }
 
 
+function clearStorageItemScheme(){
+    localStorage.removeItem(parentid)
+    console.log('clearStorageItemScheme')
+    // let key = parentid
+    // let controls = getControlValues()
+    // if (!controls || controls.length==0){
+    //     console.log("No controls")
+    //     return
+    // }
+    // let value = { 
+    //     url: urlElement.value, 
+    //     controls:controls,
+    //     scheme:{}
+    //     }
+    // let controlsStr = JSON.stringify(value)
+    // localStorage.setItem(key, controlsStr);
+    // console.log('clearStorageItemScheme:', key, controlsStr.length)
+}
+
+
 export function saveInputs() {
     let key = parentid
     let controls = getControlValues()
+    if (!controls || controls.length==0){
+        console.log("No controls")
+        return
+    }
     let value = { 
-        url:urlElement.value, 
+        url: urlElement.value,
         controls:controls,
         scheme:scheme
         }
@@ -180,7 +207,7 @@ afterUpdate(() => {
 
 <div class="hidden" class:visible>
 <div class="root" >
-    <Schemer parentid="{parentid}-Schemer" bind:urlElement={urlElement}  bind:scheme={scheme}  />
+    <Schemer parentid="{parentid}-Schemer" bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
     <!-- bind:scheme={scheme}  -->
     <!-- on:change={changeHandler}  -->
     <!-- bind:url -->
