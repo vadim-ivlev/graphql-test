@@ -209,17 +209,27 @@ onMount(async () => {
         /* border-radius: 4px; */
         background-color: transparent;
         color: steelblue;
-        font-size: 100%;
+        font-size: 90%;
+        cursor: pointer;
+        /* border-radius: 20px; */
     }
 
     .tabmenu {
-        border: 1px solid black;
+        /* border: 1px solid black; */
         position: absolute;
-        top: 30px;
-        font-size: 70%;
+        top: 25px;
+        /* font-size: 70%; */
         width: 100%;
         left:0;
-        text-align: center;
+        text-align: left;
+        display:none;
+        word-wrap: none;
+        white-space: nowrap;
+        
+
+    }
+    .active .tabmenu {
+        display: block;
     }
 
 </style>
@@ -229,15 +239,18 @@ onMount(async () => {
     {#each tabs as tab (tab.tabName)}
         <span class="tab" class:active={tab.tabName == active.tabName} data-tabName={tab.tabName} on:click={activate}>{tab.tabName} 
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
-            <div class="tabmenu">rename delete</div>
+            <div class="tabmenu">
+                <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
+                <input type="button" class="button" title="save {active.tabName} tab" value="save" on:click={saveTab}> 
+            </div>
             <!-- &#x2297; -->
         </span>
     {/each}
-    {#if tabs && tabs.length > 0}
+    <!-- {#if tabs && tabs.length > 0}
     <span class="buttons">
         <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
         <input type="button" class="button" title="save {active.tabName} tab" value="save tab" on:click={saveTab}> 
     </span>
-    {/if}
+    {/if} -->
     <span title="add new tab" class="plus" on:click={addTab}>+</span>
 </div> 

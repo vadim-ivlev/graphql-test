@@ -705,9 +705,9 @@ query IntrospectionQuery {
 				a = element("a");
 				t1 = text(t1_value);
 				t2 = text(" scheme");
-				add_location(br, file$1, 94, 4, 2425);
+				add_location(br, file$1, 94, 4, 2434);
 				a.href = true;
-				add_location(a, file$1, 95, 4, 2434);
+				add_location(a, file$1, 95, 4, 2443);
 				dispose = listen(a, "click", prevent_default(ctx.click_handler));
 			},
 
@@ -781,7 +781,7 @@ query IntrospectionQuery {
 	}
 
 	function create_fragment$1(ctx) {
-		var div, form, label, t0, label_for_value, t1, input0, input0_id_value, input0_name_value, t2, input1, t3, input2, t4, t5, current, dispose;
+		var div, form, label, t0, label_for_value, t1, input0, input0_id_value, input0_name_value, t2, input1, t3, t4, current, dispose;
 
 		var if_block0 = (Object.entries(ctx.scheme).length != 0) && create_if_block_1(ctx);
 
@@ -798,10 +798,8 @@ query IntrospectionQuery {
 				t2 = space();
 				input1 = element("input");
 				t3 = space();
-				input2 = element("input");
-				t4 = space();
 				if (if_block0) if_block0.c();
-				t5 = space();
+				t4 = space();
 				if (if_block1) if_block1.c();
 				label.htmlFor = label_for_value = "id-" + ctx.parentid + "-inp-url";
 				label.className = "svelte-jkzg7y";
@@ -814,20 +812,12 @@ query IntrospectionQuery {
 				add_location(input0, file$1, 88, 4, 2021);
 				attr(input1, "type", "button");
 				input1.className = "button svelte-jkzg7y";
-				input1.value = "clear";
-				add_location(input1, file$1, 91, 4, 2204);
-				attr(input2, "type", "button");
-				input2.className = "button svelte-jkzg7y";
-				input2.value = "↻ reload scheme";
-				add_location(input2, file$1, 92, 4, 2284);
+				input1.value = "↻ reload scheme";
+				add_location(input1, file$1, 92, 4, 2293);
 				add_location(form, file$1, 85, 2, 1830);
 				div.className = "self svelte-jkzg7y";
 				add_location(div, file$1, 84, 0, 1809);
-
-				dispose = [
-					listen(input1, "click", ctx.clearScheme),
-					listen(input2, "click", ctx.getScheme)
-				];
+				dispose = listen(input1, "click", ctx.getScheme);
 			},
 
 			l: function claim(nodes) {
@@ -845,10 +835,8 @@ query IntrospectionQuery {
 				append(form, t2);
 				append(form, input1);
 				append(form, t3);
-				append(form, input2);
-				append(form, t4);
 				if (if_block0) if_block0.m(form, null);
-				append(div, t5);
+				append(div, t4);
 				if (if_block1) if_block1.m(div, null);
 				current = true;
 			},
@@ -929,7 +917,7 @@ query IntrospectionQuery {
 				ctx.input0_binding(null, input0);
 				if (if_block0) if_block0.d();
 				if (if_block1) if_block1.d();
-				run_all(dispose);
+				dispose();
 			}
 		};
 	}
@@ -998,7 +986,6 @@ query IntrospectionQuery {
 			urlElement,
 			visible,
 			getScheme,
-			clearScheme,
 			input0_binding,
 			click_handler
 		};
@@ -4097,9 +4084,9 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (229:4) {#each tabs as tab (tab.tabName)}
+	// (239:4) {#each tabs as tab (tab.tabName)}
 	function create_each_block$3(key_1, ctx) {
-		var span1, t0_value = ctx.tab.tabName, t0, t1, span0, t2, span0_title_value, span0_data_tabname_value, t3, div, span1_data_tabname_value, dispose;
+		var span1, t0_value = ctx.tab.tabName, t0, t1, span0, t2, span0_title_value, span0_data_tabname_value, t3, div, input0, input0_title_value, t4, input1, input1_title_value, span1_data_tabname_value, dispose;
 
 		return {
 			key: key_1,
@@ -4114,20 +4101,34 @@ query IntrospectionQuery {
 				t2 = text("×");
 				t3 = space();
 				div = element("div");
-				div.textContent = "rename delete";
-				span0.className = "x svelte-10f2bzd";
+				input0 = element("input");
+				t4 = space();
+				input1 = element("input");
+				span0.className = "x svelte-1uy2b90";
 				span0.title = span0_title_value = "delete " + ctx.tab.tabName + " tab";
 				span0.dataset.tabname = span0_data_tabname_value = ctx.tab.tabName;
-				add_location(span0, file$8, 230, 12, 5268);
-				div.className = "tabmenu svelte-10f2bzd";
-				add_location(div, file$8, 231, 12, 5391);
-				span1.className = "tab svelte-10f2bzd";
+				add_location(span0, file$8, 240, 12, 5476);
+				attr(input0, "type", "button");
+				input0.className = "button svelte-1uy2b90";
+				input0.title = input0_title_value = "rename " + ctx.active.tabName + " tab";
+				input0.value = "rename";
+				add_location(input0, file$8, 242, 16, 5637);
+				attr(input1, "type", "button");
+				input1.className = "button svelte-1uy2b90";
+				input1.title = input1_title_value = "save " + ctx.active.tabName + " tab";
+				input1.value = "save";
+				add_location(input1, file$8, 243, 16, 5762);
+				div.className = "tabmenu svelte-1uy2b90";
+				add_location(div, file$8, 241, 12, 5599);
+				span1.className = "tab svelte-1uy2b90";
 				span1.dataset.tabname = span1_data_tabname_value = ctx.tab.tabName;
 				toggle_class(span1, "active", ctx.tab.tabName == ctx.active.tabName);
-				add_location(span1, file$8, 229, 8, 5131);
+				add_location(span1, file$8, 239, 8, 5339);
 
 				dispose = [
 					listen(span0, "click", ctx.deleteTab),
+					listen(input0, "click", ctx.renameTab),
+					listen(input1, "click", ctx.saveTab),
 					listen(span1, "click", ctx.activate)
 				];
 
@@ -4142,6 +4143,9 @@ query IntrospectionQuery {
 				append(span0, t2);
 				append(span1, t3);
 				append(span1, div);
+				append(div, input0);
+				append(div, t4);
+				append(div, input1);
 			},
 
 			p: function update(changed, ctx) {
@@ -4155,6 +4159,14 @@ query IntrospectionQuery {
 
 				if ((changed.tabs) && span0_data_tabname_value !== (span0_data_tabname_value = ctx.tab.tabName)) {
 					span0.dataset.tabname = span0_data_tabname_value;
+				}
+
+				if ((changed.active) && input0_title_value !== (input0_title_value = "rename " + ctx.active.tabName + " tab")) {
+					input0.title = input0_title_value;
+				}
+
+				if ((changed.active) && input1_title_value !== (input1_title_value = "save " + ctx.active.tabName + " tab")) {
+					input1.title = input1_title_value;
 				}
 
 				if ((changed.tabs) && span1_data_tabname_value !== (span1_data_tabname_value = ctx.tab.tabName)) {
@@ -4176,64 +4188,8 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (236:4) {#if tabs && tabs.length > 0}
-	function create_if_block$4(ctx) {
-		var span, input0, input0_title_value, t, input1, input1_title_value, dispose;
-
-		return {
-			c: function create() {
-				span = element("span");
-				input0 = element("input");
-				t = space();
-				input1 = element("input");
-				attr(input0, "type", "button");
-				input0.className = "button svelte-10f2bzd";
-				input0.title = input0_title_value = "rename " + ctx.active.tabName + " tab";
-				input0.value = "rename";
-				add_location(input0, file$8, 237, 8, 5559);
-				attr(input1, "type", "button");
-				input1.className = "button svelte-10f2bzd";
-				input1.title = input1_title_value = "save " + ctx.active.tabName + " tab";
-				input1.value = "save tab";
-				add_location(input1, file$8, 238, 8, 5676);
-				span.className = "buttons svelte-10f2bzd";
-				add_location(span, file$8, 236, 4, 5528);
-
-				dispose = [
-					listen(input0, "click", ctx.renameTab),
-					listen(input1, "click", ctx.saveTab)
-				];
-			},
-
-			m: function mount(target, anchor) {
-				insert(target, span, anchor);
-				append(span, input0);
-				append(span, t);
-				append(span, input1);
-			},
-
-			p: function update(changed, ctx) {
-				if ((changed.active) && input0_title_value !== (input0_title_value = "rename " + ctx.active.tabName + " tab")) {
-					input0.title = input0_title_value;
-				}
-
-				if ((changed.active) && input1_title_value !== (input1_title_value = "save " + ctx.active.tabName + " tab")) {
-					input1.title = input1_title_value;
-				}
-			},
-
-			d: function destroy(detaching) {
-				if (detaching) {
-					detach(span);
-				}
-
-				run_all(dispose);
-			}
-		};
-	}
-
 	function create_fragment$8(ctx) {
-		var div, each_blocks = [], each_1_lookup = new Map(), t0, t1, span, dispose;
+		var div, each_blocks = [], each_1_lookup = new Map(), t, span, dispose;
 
 		var each_value = ctx.tabs;
 
@@ -4245,24 +4201,20 @@ query IntrospectionQuery {
 			each_1_lookup.set(key, each_blocks[i] = create_each_block$3(key, child_ctx));
 		}
 
-		var if_block = (ctx.tabs && ctx.tabs.length > 0) && create_if_block$4(ctx);
-
 		return {
 			c: function create() {
 				div = element("div");
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
 
-				t0 = space();
-				if (if_block) if_block.c();
-				t1 = space();
+				t = space();
 				span = element("span");
 				span.textContent = "+";
 				span.title = "add new tab";
-				span.className = "plus svelte-10f2bzd";
-				add_location(span, file$8, 241, 4, 5810);
-				div.className = "container svelte-10f2bzd";
-				add_location(div, file$8, 226, 0, 5060);
+				span.className = "plus svelte-1uy2b90";
+				add_location(span, file$8, 254, 4, 6272);
+				div.className = "container svelte-1uy2b90";
+				add_location(div, file$8, 236, 0, 5268);
 				dispose = listen(span, "click", ctx.addTab);
 			},
 
@@ -4275,28 +4227,13 @@ query IntrospectionQuery {
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].m(div, null);
 
-				append(div, t0);
-				if (if_block) if_block.m(div, null);
-				append(div, t1);
+				append(div, t);
 				append(div, span);
 			},
 
 			p: function update(changed, ctx) {
 				const each_value = ctx.tabs;
-				each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div, destroy_block, create_each_block$3, t0, get_each_context$3);
-
-				if (ctx.tabs && ctx.tabs.length > 0) {
-					if (if_block) {
-						if_block.p(changed, ctx);
-					} else {
-						if_block = create_if_block$4(ctx);
-						if_block.c();
-						if_block.m(div, t1);
-					}
-				} else if (if_block) {
-					if_block.d(1);
-					if_block = null;
-				}
+				each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div, destroy_block, create_each_block$3, t, get_each_context$3);
 			},
 
 			i: noop,
@@ -4309,7 +4246,6 @@ query IntrospectionQuery {
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].d();
 
-				if (if_block) if_block.d();
 				dispose();
 			}
 		};

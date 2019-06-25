@@ -89,7 +89,7 @@ function clearScheme() {
     <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} />
     <!-- on:change -->
     <!-- bind:value={url} -->
-    <input type="button" class="button" value="clear" on:click={clearScheme} />
+    <!-- <input type="button" class="button" value="clear" on:click={clearScheme} /> -->
     <input type="button" class="button" value="&#x21bb; reload scheme" on:click={getScheme} />
     {#if Object.entries(scheme).length != 0 }
     <br>
