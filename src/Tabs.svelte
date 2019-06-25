@@ -212,6 +212,15 @@ onMount(async () => {
         font-size: 100%;
     }
 
+    .tabmenu {
+        border: 1px solid black;
+        position: absolute;
+        top: 30px;
+        font-size: 70%;
+        width: 100%;
+        left:0;
+        text-align: center;
+    }
 
 </style>
 
@@ -220,6 +229,7 @@ onMount(async () => {
     {#each tabs as tab (tab.tabName)}
         <span class="tab" class:active={tab.tabName == active.tabName} data-tabName={tab.tabName} on:click={activate}>{tab.tabName} 
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
+            <div class="tabmenu">rename delete</div>
             <!-- &#x2297; -->
         </span>
     {/each}
