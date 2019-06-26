@@ -140,7 +140,7 @@ onMount(async () => {
 
     .plus {
         /* font-weight: bold; */
-        color:steelblue;
+        /* color:steelblue; */
         cursor: pointer;
         margin-left:10px;
         padding-left: 10px;
@@ -154,7 +154,7 @@ onMount(async () => {
         cursor: default;
     
         color: steelblue;
-        /* border-radius: 8px 8px 0 0; */
+        border-radius: 3px 3px 0 0;
         border:1px solid transparent;
         border-top-width: 2px;
 
@@ -222,7 +222,7 @@ onMount(async () => {
         /* font-size: 70%; */
         width: 100%;
         left:0;
-        text-align: left;
+        text-align: center;
         display:none;
         word-wrap: none;
         white-space: nowrap;
@@ -242,7 +242,7 @@ onMount(async () => {
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
             <div class="tabmenu">
                 <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
-                <input type="button" class="button" title="save {active.tabName} tab" value="save" on:click={saveTab}> 
+                <!-- <input type="button" class="button" title="save {active.tabName} tab" value="save" on:click={saveTab}>  -->
             </div>
             <!-- &#x2297; -->
         </span>

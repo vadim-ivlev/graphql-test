@@ -1,15 +1,29 @@
 <script>
 import App from "./App.svelte"
 import Tabs from "./Tabs.svelte"
+import { changeCount } from './stores.js'
 
 let tabs = []
 let active 
 let tabsSaveFunctions = {}
 
+const unsubscribe = changeCount.subscribe(value => {
+    delayAndSave()
+    // console.log("From AppTabbed changeCount=", value)
+});
 
-function saveTab(params) {
+
+function saveTab() {
     tabsSaveFunctions[active.tabName]()
+    console.log("SAVED")
 }
+
+var saveTimeout
+function delayAndSave(){
+    clearTimeout(saveTimeout)
+    saveTimeout = setTimeout(saveTab, 1000)
+}
+
 
 </script>
 

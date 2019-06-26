@@ -20,13 +20,13 @@ let mainArea
 
 let controls
 
-$: {
-    scheme = scheme
-    // noscheme = Object.entries(scheme).length == 0
-    console.log('App scheme changed', scheme)
-    // ignoreChanges= true
-    // delay(restoreInputs, 500)
-}
+// $: {
+//     scheme = scheme
+//     // noscheme = Object.entries(scheme).length == 0
+//     console.log('App scheme changed', scheme)
+//     // ignoreChanges= true
+//     // delay(restoreInputs, 500)
+// }
 
 function doAllTests() {
     doTests()

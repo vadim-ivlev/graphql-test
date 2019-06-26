@@ -1,12 +1,13 @@
 
 <script>
-import { createEventDispatcher } from 'svelte'
+// import { createEventDispatcher } from 'svelte'
 import { onMount } from 'svelte'
 import { afterUpdate } from 'svelte'
 
 import Js from './JsonView.svelte'
 import Argument from './Argument.svelte'
 import Type from './Type.svelte'
+import { changeCount } from './stores.js'
 
 // P R O P S
 // export let url
@@ -39,10 +40,10 @@ let getArgFunctions ={}
 // let inputFileElement 
 
 
-const dispatch = createEventDispatcher()
-function dispatchEvent() {
-	dispatch('change', { text: 'State changed!' })
-}
+// const dispatch = createEventDispatcher()
+// function dispatchEvent() {
+// 	dispatch('change', { text: 'State changed!' })
+// }
 
 // $: {
 //     let dummy1 = scheme
@@ -53,7 +54,7 @@ function dispatchEvent() {
 
 $: {
     let dummy = node
-    console.log("node changed")
+    // console.log("node changed")
     generateQuery()
 }
 
@@ -86,7 +87,9 @@ function generateQuery(){
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
     request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`
-    dispatchEvent()
+    // dispatchEvent()
+    // dispatch('change', { text: 'Query changed!' })
+    $changeCount +=1
 }
 
 
@@ -155,7 +158,7 @@ onMount(async () => {
 })
 
 afterUpdate(() => {
-    console.log("FUNC afterUpdate parentid=", parentid)
+    // console.log("FUNC afterUpdate parentid=", parentid)
     // setTimeout(restoreControlValues, 0)
     generateQuery()
 });
@@ -406,13 +409,13 @@ afterUpdate(() => {
             <div>
                 <div class="header" >QUERY</div>
                 <div class="queryFrame" bind:this={queryFrame}>
-                    <textarea id="{parentid}-{node.name}-query" name="query" on:change >{request}</textarea>
+                    <textarea id="{parentid}-{node.name}-query" name="query" on:change={() => $changeCount +=1} >{request}</textarea>
                 </div>
             </div>
             <div>
                 <div class="header" >VARIABLES</div>
                 <div class="variablesFrame" bind:this={variablesFrame}>
-                    <textarea id="{parentid}-{node.name}-variables" name="variables" on:change></textarea>
+                    <textarea id="{parentid}-{node.name}-variables" name="variables" on:change={() => $changeCount +=1}></textarea>
                 </div>
             </div>
             <div>
@@ -438,7 +441,7 @@ afterUpdate(() => {
             <div>
                 <div class="header">DEFINE TEST</div>
                 <div class="evalFrame" bind:this={evalFrame}>
-                    <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change>response && !response.errors</textarea> 
+                    <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change={() => $changeCount +=1}>response && !response.errors</textarea> 
                 </div>
                 <div class="buttons2">
                     <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
