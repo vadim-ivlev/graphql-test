@@ -22,6 +22,7 @@ function activate(e) {
 function getTabsFromLocalStorage() {
     let tabs =[]
     let keys = Object.keys(localStorage)
+    keys.sort()
     for (let key of keys) {
         let str = localStorage.getItem(key)
         if (!str) continue
