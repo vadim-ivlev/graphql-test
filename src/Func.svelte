@@ -397,7 +397,7 @@ afterUpdate(() => {
             
                 
                 <div>
-                    <div class="header" >RETURNS {node.type.kind == "LIST" ? '[...]': ''}
+                    <div class="header" >RETURN {node.type.kind == "LIST" ? '[...]': ''}
                     <!-- <input type="button" value="getText" on:click={()=> console.log(getTypeText())}> -->
                     </div>
                     <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}" level={1}  bind:getText={getTypeText} on:change={typeChangeHandler}/>
