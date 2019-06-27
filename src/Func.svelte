@@ -1,6 +1,5 @@
 
 <script>
-// import { createEventDispatcher } from 'svelte'
 import { onMount } from 'svelte'
 import { afterUpdate } from 'svelte'
 
@@ -10,7 +9,6 @@ import Type from './Type.svelte'
 import { changeCount } from './stores.js'
 
 // P R O P S
-// export let url
 export let urlElement
 
 export let parentid = ''
@@ -23,10 +21,7 @@ export let test = submitForm
 let testResult =''
 let evalErrors =''
 let vis = false
-// let fieldlist = ''
-// let arglist = ''
 let request 
-// let variables = ''
 let response = null
 
 let responseArea
@@ -37,19 +32,6 @@ let evalFrame
 
 let getTypeText
 let getArgFunctions ={}
-// let inputFileElement 
-
-
-// const dispatch = createEventDispatcher()
-// function dispatchEvent() {
-// 	dispatch('change', { text: 'State changed!' })
-// }
-
-// $: {
-//     let dummy1 = scheme
-//     console.log("scheme changed")
-//     generateQuery()
-// }
 
 
 $: {
@@ -58,23 +40,11 @@ $: {
     generateQuery()
 }
 
-// function getArgsText() {
-//     let args = []
-//     for (let arg of node.args) {
-//         if (!arg.getText) continue
-//         let text = arg.getText()
-//         if (text) args.push(text)
-//     }
-//     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
-//     return argsText
-// }
 
 function getArgsText() {
     let args = []
     for (let [key,f] of Object.entries(getArgFunctions)) {
-        // if (!arg.getText) continue
         let text = f()
-        // console.log("----",key, text)
         if (text) args.push(text)
     }
     let argsText = args.length == 0? '' : `(\n${ args.join(',\n') }\n)`
@@ -87,8 +57,6 @@ function generateQuery(){
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
     request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`
-    // dispatchEvent()
-    // dispatch('change', { text: 'Query changed!' })
     $changeCount +=1
 }
 
@@ -109,10 +77,8 @@ function submitForm(event){
     if (event) event.preventDefault()
     console.log("submitForm urlElement.value=", urlElement.value)
     window.$(form).ajaxSubmit({
-        // url: url, 
         url: urlElement.value, 
         type: 'POST',
-        //success: function(res) {$('#result').text(JSON.stringify(res, null,'  '));}
         success: function(res) {
             response = res
             window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false});
@@ -143,9 +109,6 @@ function evaluate(){
 }
 
 
-// function onInputFileNameChange(event) {
-//     inputFileElement.name = event.target.value
-// }
 
 let form
 let formArea
@@ -158,8 +121,6 @@ onMount(async () => {
 })
 
 afterUpdate(() => {
-    // console.log("FUNC afterUpdate parentid=", parentid)
-    // setTimeout(restoreControlValues, 0)
     generateQuery()
 });
 
@@ -175,8 +136,6 @@ afterUpdate(() => {
         letter-spacing: 0.1em;
         padding: 1em 0 0 10px;
         background-color: whitesmoke;
-        /* font-variant: small-caps; */
-        /* text-transform: lowercase; */
     }
 
     .root {
@@ -186,8 +145,6 @@ afterUpdate(() => {
         grid-template-columns: 1fr max-content 4fr;
 
         border: 1px solid steelblue;
-        /* border-top: 1px solid steelblue;
-        border-bottom: 1px solid steelblue; */
     }
 
     .form-area { 
@@ -201,8 +158,6 @@ afterUpdate(() => {
         padding:10px 0 0 10px;
         color: silver;
         font-size:1.5em;
-        /* font-weight: normal; */
-        /* font-family: 'Roboto Condensed' */
     }
 
     .name { 
@@ -217,7 +172,6 @@ afterUpdate(() => {
     }
 
     .fieldlist {
-        /* border-top:1px dashed slategray; */
         border-bottom:1px solid silver;
         padding-bottom: 10px;
     }
@@ -257,9 +211,6 @@ afterUpdate(() => {
         color: white;
     }
 
-    /* input[type="file"] {
-        margin-left:10px
-    } */
 
     .margined {
         margin-left:10px
@@ -314,13 +265,6 @@ afterUpdate(() => {
         border-width: 0;
     }
 
-
-    /* .variables {
-        margin-left:0px;
-        height: 3em;
-        min-height: 1em;
-        resize: vertical;
-    } */
 
     .test-result {
         min-width: 60px;
@@ -403,7 +347,6 @@ afterUpdate(() => {
                 <div class="header" >ARGUMENTS</div>
                 <div class="fieldlist" >
                     {#each node.args as arg (arg.name)}
-                    <!-- <Argument node={arg} bind:getText={arg.getText} on:change={argsChangeHandler} parentid="{parentid}-{node.name}-argument"/> -->
                     <Argument node={arg} bind:getText={getArgFunctions[arg.name]} on:change={argsChangeHandler} parentid="{parentid}-{node.name}-argument"/>
                     {/each}
                 </div>
@@ -412,7 +355,6 @@ afterUpdate(() => {
                 
                 <div>
                     <div class="header" >RETURN {node.type.kind == "LIST" ? '[...]': ''}
-                    <!-- <input type="button" value="getText" on:click={()=> console.log(getTypeText())}> -->
                     </div>
                     <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}" level={1}  bind:getText={getTypeText} on:change={typeChangeHandler}/>
                 </div>

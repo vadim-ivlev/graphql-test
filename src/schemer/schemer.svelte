@@ -1,6 +1,5 @@
 <script>
 
-// import { onMount } from 'svelte'
 import { createEventDispatcher } from 'svelte'
 import { queryString } from "./schemer.js"
 import JsonView from '../JsonView.svelte'
@@ -12,7 +11,6 @@ export let refreshScheme = getScheme
 export let urlElement 
 
 
-// let methodElement 
 let visible = false
 
 
@@ -37,36 +35,19 @@ function clearScheme() {
     console.log('clearScheme:', parentid)
 }
 
-// function onChange(params) {
-//     url = this.value
-//     console.log("schemer onChange parentid=", parentid)
-//     console.log("url=", url)
+// function onChange() {
 // }
 
-// onMount(async () => {
-//     // getScheme()
-// })
 
 </script>
 
 <style>
-    .self {
-        /* background-color: whitesmoke; */
-    }
 
-    /* .post {
-        width: 50px;
-        font-size: 100%;
-        display: none;
-    } */
     .text {
-        width: 300px;
+        width: 400px;
         font-size: 100%;
     }
     .button {
-        /* font-family: 'Roboto Condensed'; */
-        /* font-weight: bold; */
-        /* letter-spacing: 0.1em; */
         padding: 2px 10px 2px 10px;
         border: 1px solid steelblue;
         border-radius: 2px;
@@ -78,25 +59,23 @@ function clearScheme() {
     label {
         margin-left:0;
     }
-    
+
 </style>
 
 
-<div class="self">
+<div>
+
   <form>
-    <!-- <input class="post" type="text" id="id-{parentid}-inp-method" value="POST" bind:this={methodElement}> -->
-    <label for="id-{parentid}-inp-url" >GraphQL endpoint</label>
-    <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} />
-    <!-- on:change -->
-    <!-- bind:value={url} -->
-    <!-- <input type="button" class="button" value="clear" on:click={clearScheme} /> -->
-    <input type="button" class="button" value="&#x21bb; reload scheme" on:click={getScheme} />
-    {#if Object.entries(scheme).length != 0 }
-    <br>
-    <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>
-    {/if}
+        <label for="id-{parentid}-inp-url" >GraphQL endpoint</label>
+        <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} />
+        <input type="button" class="button" value="&#x21bb; reload scheme" on:click={getScheme} />
+        {#if Object.entries(scheme).length != 0 }
+        <br>
+        <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>
+        {/if}
   </form>
   {#if visible}
         <JsonView json={scheme} />
   {/if}
+
 </div>
