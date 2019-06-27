@@ -195,6 +195,16 @@ afterUpdate(() => {
         min-width:380px;
     }
 
+    .form-area h3 {
+        background-color: whitesmoke;
+        margin: 0;
+        padding:10px 0 0 10px;
+        color: silver;
+        font-size:1.5em;
+        /* font-weight: normal; */
+        /* font-family: 'Roboto Condensed' */
+    }
+
     .name { 
         display: inline-block;
         min-width: 200px;
@@ -382,10 +392,14 @@ afterUpdate(() => {
         <span class="test-result">{@html testResult}</span> 
         <span class="description">{node.description}</span>
     </div>
-    <div class="root shadow" style="display:{vis?'grid':'none'}"  >
+    <div class="root shadow" style="display:{vis?'grid':'none'}">
+        <!-- <h3>{node.name}(...)</h3> -->
+        <!-- <div></div> -->
+        <!-- <div></div> -->
         <div class="form-area" bind:this={formArea}>
 
                 {#if node.args}
+                <h3>{node.name}(...)</h3>
                 <div class="header" >ARGUMENTS</div>
                 <div class="fieldlist" >
                     {#each node.args as arg (arg.name)}

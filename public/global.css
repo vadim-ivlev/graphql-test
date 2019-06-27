@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-	color: #333;
+	/* color: #333; */
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
@@ -26,34 +26,24 @@ a:hover {
 a:visited {
 	color: rgb(0,80,160);
 }
-
+/* 
 label {
-    /* display: block; */
     margin: 0.5em;
-}
-
-/* input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-    margin: 0.1em;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
 } */
-
+/* 
 input:disabled {
 	color: #ccc;
-}
-
+} */
+/* 
 input[type="range"] {
 	height: 0;
-}
+} */
 
-button {
+/* button {
 	background-color: #f4f4f4;
 	outline: none;
-}
-
+} */
+/* 
 button:active {
 	background-color: #ddd;
 }
@@ -61,4 +51,4 @@ button:active {
 button:focus {
 	border-color: #666;
 }
-
+ */

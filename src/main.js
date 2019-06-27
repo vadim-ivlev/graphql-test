@@ -11,7 +11,7 @@ import AppTabbed from './AppTabbed.svelte';
 
 
 var app = new AppTabbed({
-	target: document.body
+	target: document.getElementById('graphql-test') ? document.getElementById('graphql-test') : document.body
 });
 
 export default app;

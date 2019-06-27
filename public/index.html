@@ -1,32 +1,85 @@
 <!doctype html>
 <html>
 <head>
-	<meta charset='utf8'>
+    <meta charset='utf8'>
+    <meta name="description" content="A GraphQL Client for testing and inspection of APIs">
+    <meta name="keywords" content="GraphQL, test, schema">
+    <meta name="author" content="Vadim Ivlev">    
 	<meta name='viewport' content='width=device-width'>
 	<title>GraphQL test</title>
 	<link rel='icon' type='image/png' href='favicon.png'>
-	
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!-- <script src="jquery.json-viewer.js"></script> -->
-    <!-- <link rel="stylesheet" href="jquery.json-viewer.css">  -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer@1.2.0/json-viewer/jquery.json-viewer.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.json-viewer@1.2.0/json-viewer/jquery.json-viewer.css">
+    <style>
+    .center {
+        text-align:center;
+    }
+    h1,h2,h3,h4 {
+        color:slategray;
+    }
+    h1 {
+        color:#E10098;
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+    .w {
+        max-width: 700px;
+        margin: auto;
+        font-size: 90%;
+        color: gray;
+    }
 
-    
-    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"> -->
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-	<link rel='stylesheet' href='global.css'>
-	<link rel='stylesheet' href='bundle.css'>
+    .nav-logo {
+        vertical-align: middle;
+        width: 40px;
+        height:40px;
+        margin-right: 10px;
+    }
+    </style>
 </head>
 
 <body>
+    <h1  class="center"> <img class="nav-logo" src="logo.svg" width="40" height="40">GraphQL - test</h1>
+    <h4 class="center">A client to test and inspect GraphQL APIs</h4>
+    <p class=" center w">
+            A beautiful feature-rich GraphQL Client IDE for all platforms. 
+            Available for MacOS, Windows, Linux, Chrome, Firefox. 
+            Enables you interact with any GraphQL server you are authorized to access 
+            from any platform you are on. Much like Postman for GraphQL, 
+            you can easily test and optimize your GraphQL implementations. 
+            You also have several features to make your GraphQL development process much easier
 
+    </p>
+    <h4 class="center">Enter a GraphQL url and start exploring functions and types</h4>
+    
+    <div id="graphql-test" style="border-bottom: 1px solid silver;">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer@1.2.0/json-viewer/jquery.json-viewer.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.json-viewer@1.2.0/json-viewer/jquery.json-viewer.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel='stylesheet' href='global.css'>
+        <link rel='stylesheet' href='bundle.css'>
+        <script src='bundle.js'></script>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <p class=" center w">
+            If your API does not alow cross domain requests, paste the following code on your HTML page.
+    </p>
+
+<textarea readonly style="height: 11rem; width: 100%; color: slategray;"><div id="graphql-test"">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer@1.2.0/json-viewer/jquery.json-viewer.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.json-viewer@1.2.0/json-viewer/jquery.json-viewer.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel='stylesheet' href='global.css'>
+    <link rel='stylesheet' href='bundle.css'>
     <script src='bundle.js'></script>
+</div ></textarea>
+        
+
+        
+
 </body>
 </html>
