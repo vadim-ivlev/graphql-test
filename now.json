@@ -1,6 +1,6 @@
 {
     "version": 2,
     "name": "graphql-test",
-    "alias": "https://graphql-test.now.sh"
+    "alias": "graphql-test.now.sh"
 
 }
