@@ -22,7 +22,7 @@ async function getScheme() {
     scheme = {}    
     // scheme =  await $.ajax({ url: inputUrl.value, type: "POST", data: { query:queryString, variables: '{}'},});
     try {
-        let resp = await fetch(urlElement.value, { method: "POST", body: JSON.stringify({ query: queryString, variables: "{}" }) })
+        let resp = await fetch(urlElement.value, { method: "POST",  credentials: 'include', body: JSON.stringify({ query: queryString, variables: "{}" }) })
         scheme = await resp.json()
     } catch (error) {
         alert(error)

@@ -1,4 +1,13 @@
 - add export/import of tabs
+- добавить параметры в URL через # имя таба и эндпойнт
+- сообщения на ошибки /graphql
+- добавить codemirror
+
+
+
+
+
+
 - add meta
 - Add little Help
 
@@ -6,5 +15,5 @@
 - add schemer on:change save
 - add jquery UI as modules
 - get rid of jQuery?
-- clear code
+- clean code
 
