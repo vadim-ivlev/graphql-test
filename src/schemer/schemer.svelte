@@ -4,7 +4,7 @@ import { createEventDispatcher } from 'svelte'
 import { queryString } from "./schemer.js"
 import JsonView from '../JsonView.svelte'
 
-export let url = "http://localhost:7700/graphql"
+export let url = "https://auth-proxy.rg.ru/graphql"
 export let scheme = {}
 export let parentid =''
 export let refreshScheme = getScheme
@@ -65,6 +65,8 @@ function clearScheme() {
         
         letter-spacing: 0.1em;
         text-transform: uppercase;
+        position: relative;
+        top: -1.5px;
     }
     label {
         margin-left:0;

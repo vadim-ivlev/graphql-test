@@ -8,8 +8,8 @@ export let active
 const dispatch = createEventDispatcher()
 
 let defaultTab = {
-    tabName: "onlinebc",
-    url:"http://localhost:5000/",
+    tabName: "auth-proxy",
+    url:"https://auth-proxy.rg.ru/schema",
     scheme: null
 }
 
@@ -41,7 +41,7 @@ function getTabsFromLocalStorage() {
 
 
 function addTab(){
-    let tabName = prompt("New tab name","")
+    let tabName = prompt("Enter a new tab name","")
     if (!tabName) return
     // while (tabs.includes(tabName)){
     while (tabs.some( tab =>  tabName == tab.tabName )){
@@ -51,6 +51,7 @@ function addTab(){
     let newTab = {tabName: tabName, url:''}
     tabs = [...tabs, newTab]
     active = newTab
+    saveTab()
 }
 
 
@@ -81,6 +82,71 @@ function fixLocalStorageData(controlsStr, tabName, newTabName) {
 
     return JSON.stringify(val)
 }
+
+function exportTab() {
+    let tabName = this.parentElement.parentElement.getAttribute("data-tabName")
+    let fileContent = localStorage.getItem(tabName)
+
+    // save tab name into data
+    let data = JSON.parse(fileContent)
+    data.tabName = tabName
+    let modifiedFileContent = JSON.stringify(data)
+
+
+    // var fileContent = JSON.stringify(active);
+    var bb = new Blob([modifiedFileContent], { type: 'text/plain' });
+    var a = document.createElement('a');
+    a.download = active.tabName+'.json';
+    a.href = window.URL.createObjectURL(bb);
+    a.click();    
+}
+
+function importTab(){
+    document.getElementById('fileChooser').click()
+}
+
+
+function openFile(event) {
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function(){
+        importTabFromData(reader.result)
+    }
+    reader.readAsText(input.files[0])
+}
+
+// importTabFromData creates a tab from erlier exported data
+function importTabFromData(text) {
+    if (!text) 
+        return
+    var newTab = JSON.parse(text)
+    if (!newTab)
+        return
+    var tabName = newTab.tabName
+    if (!tabName) 
+        return
+
+
+    // delete old tab with the same name
+    // deleteTabByName(tabName)
+
+    
+    // attach imported tab and activate it
+    // tabs = [...tabs, newTab]
+    // active = newTab
+
+    // delete newTab["tabName"]
+    // save imported tab
+    localStorage.setItem(tabName,text)
+    
+    // restore tabs from local storage
+    let storedTabs = getTabsFromLocalStorage()
+    tabs = storedTabs.length ==0 ? [defaultTab] : storedTabs
+    active = newTab
+
+
+}
+
 
 function renameTab(){
     // create a new tab
@@ -124,7 +190,8 @@ function saveTab(){
 
 onMount(async () => {
     let storedTabs = getTabsFromLocalStorage()
-    tabs = storedTabs.length ==0 ? [defaultTab] : [...tabs, ...storedTabs]
+    // tabs = storedTabs.length ==0 ? [defaultTab] : [...tabs, ...storedTabs]
+    tabs = storedTabs.length ==0 ? [] : storedTabs
     active = tabs[0]
 })
 
@@ -140,12 +207,30 @@ onMount(async () => {
 
     .plus {
         /* font-weight: bold; */
-        /* color:steelblue; */
+        color:steelblue;
+        font-size: 90%;
         cursor: pointer;
-        margin-left:10px;
+        /* margin-left:5px; */
         padding-left: 10px;
         padding-right: 10px;
+
+        /* background-color: white; */
+
+        border-radius: 3px 3px 0 0;
+        border:1px solid rgba(192, 192, 192, 0.685);
+        border-bottom: 1px solid white;        
+        border-top-width: 2px;
+        border-top-color: rgba(192, 192, 192, 0.682);
+
+        opacity: 0.5;
+
+
      }
+    .plus:hover {
+        background-color: rgba(0,0,0,0.05);
+        opacity: 1.0;
+    }
+
 
     .tab {
         margin: 0;
@@ -214,6 +299,9 @@ onMount(async () => {
         cursor: pointer;
         /* border-radius: 20px; */
     }
+    .button:hover {
+        background-color: rgba(0,0,0,0.05);
+    }
 
     .tabmenu {
         /* border: 1px solid black; */
@@ -242,11 +330,8 @@ onMount(async () => {
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
             <div class="tabmenu">
                 <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
-                <input type="button" class="button" title="export {active.tabName} tab" value="&#x21ca;" on:click={renameTab}>
-                <input type="button" class="button" title="import {active.tabName} tab" value="&#x21c8;" on:click={renameTab}>
-                <!-- <input type="button" class="button" title="save {active.tabName} tab" value="save" on:click={saveTab}>  -->
+                <input type="button" class="button" title="export {active.tabName} tab" value="export" on:click={exportTab}>
             </div>
-            <!-- &#x2297; -->
         </span>
     {/each}
     <!-- {#if tabs && tabs.length > 0}
@@ -255,5 +340,8 @@ onMount(async () => {
         <input type="button" class="button" title="save {active.tabName} tab" value="save tab" on:click={saveTab}> 
     </span>
     {/if} -->
-    <span title="add new tab" class="plus" on:click={addTab}>+</span>
+    <span title="add new tab" class="plus" on:click={addTab}>+ add new</span>
+    <span title="import new tab" class="plus" on:click={importTab}>import</span>
+    <input id="fileChooser" type='file' style="display:none" on:change={openFile} >
 </div> 
+<!-- &#x21ca; &#x21c8; &#x2297;  -->

@@ -14,6 +14,12 @@ const unsubscribe = changeCount.subscribe(value => {
 
 
 function saveTab() {
+    if (!active)
+        return
+    if (!active.tabName)
+        return    
+    if (!tabsSaveFunctions[active.tabName])   
+        return 
     tabsSaveFunctions[active.tabName]()
     console.log("SAVED")
 }

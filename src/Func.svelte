@@ -397,8 +397,8 @@ afterUpdate(() => {
             </div>
             <div>
                 <div class="header">
-                    <span>DEFINE TEST</span>
-                    <input type="button" class="button" value="run &#x25B7" on:click={evaluate}>
+                    <span>DEFINE TEST & </span>
+                    <input type="button" class="button" value="run &#x25B6" on:click={evaluate}>
                 </div>
                 <div class="evalFrame" bind:this={evalFrame}>
                     <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change={() => $changeCount +=1}>response && !response.errors</textarea> 
