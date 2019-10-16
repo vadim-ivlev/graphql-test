@@ -205,7 +205,7 @@ onMount(async () => {
         /* font-family: 'Roboto Condensed'; */
         /* font-weight: bold; */
         /* letter-spacing: 0.1em; */
-        padding: 0 5px 0 5px;
+        padding: 0 3px 0 3px;
         border: 0px solid steelblue;
         /* border-radius: 4px; */
         background-color: transparent;
@@ -242,6 +242,8 @@ onMount(async () => {
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
             <div class="tabmenu">
                 <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
+                <input type="button" class="button" title="export {active.tabName} tab" value="&#x21ca;" on:click={renameTab}>
+                <input type="button" class="button" title="import {active.tabName} tab" value="&#x21c8;" on:click={renameTab}>
                 <!-- <input type="button" class="button" title="save {active.tabName} tab" value="save" on:click={saveTab}>  -->
             </div>
             <!-- &#x2297; -->
