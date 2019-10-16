@@ -149,13 +149,19 @@ afterUpdate(() => {
     }
 
     .button {
+        color: #E10098; 
+        background-color: transparent;
+        border: 1px solid #E10098;
         padding: 5px 15px 5px 15px;
-        border: 1px solid steelblue;
         border-radius: 4px;
+        height: 32px;
 
-        background-color: steelblue;
-        color: white;
-        font-size: 100%;
+        font-family: 'Roboto Condensed';
+        font-size: 80%;
+        font-weight: bold;
+        
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
     }
 
     .row {
@@ -183,7 +189,7 @@ afterUpdate(() => {
     <div class="smaller">GraphQL endpoint</div>
     <div class="row">
         <Schemer parentid="{parentid}-Schemer" bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
-        <input type="button" class="button" on:click={doAllTests} value="test all" >
+        <input type="button" class="button" on:click={doAllTests} value="run all tests" >
     </div>
     <div class="main" bind:this={mainArea}>
         <List parentid="{parentid}-List" urlElement={urlElement} scheme={scheme} bind:doTests={doTests} />

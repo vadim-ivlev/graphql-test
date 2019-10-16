@@ -46,20 +46,26 @@ function clearScheme() {
     .text {
         width: 294px;
         font-size: 100%;
-        padding:5px;
+        padding:1px 10px;
         border-radius: 4px;
         border: 1px solid silver;
+        height: 28px;
     }
     .button {
-        padding: 5px 15px 5px 15px;
-        border: 1px solid steelblue;
-        border-radius: 4px;
-
+        color: #E10098; 
         background-color: transparent;
-        color: steelblue;
-        font-size: 100%;
-    }
+        border: 1px solid #E10098;
+        padding: 5px 15px 5px 15px;
+        border-radius: 4px;
+        height: 32px;
 
+        font-family: 'Roboto Condensed';
+        font-size: 80%;
+        font-weight: bold;
+        
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
     label {
         margin-left:0;
     }

@@ -136,6 +136,7 @@ afterUpdate(() => {
         letter-spacing: 0.1em;
         padding: 1em 0 0 10px;
         background-color: whitesmoke;
+        padding-bottom: 5px;
     }
 
     .root {
@@ -199,17 +200,6 @@ afterUpdate(() => {
         padding: 10px;
     }
 
-    input[type="submit"]{
-        font-family: 'Roboto','Roboto Condensed';
-        font-weight: bold;
-        font-size: 14.4px;
-        letter-spacing: 0.1em;
-        padding: 5px 15px 5px 15px;
-        border: 1px solid steelblue;
-        border-radius: 4px;
-        background-color: steelblue;
-        color: white;
-    }
 
 
     .margined {
@@ -289,16 +279,27 @@ afterUpdate(() => {
         font-size: 90%
     }
 
-    .try-button {
-        font-family: 'Roboto Condensed';
-        font-weight: bold;
-        letter-spacing: 0.1em;
-        padding: 5px 15px 5px 15px;
-        border: 1px solid steelblue;
-        border-radius: 4px;
+    .button {
+        color: #E10098; 
         background-color: transparent;
-        color: steelblue;
+        border: 1px solid #E10098;
+        padding: 5px 15px 5px 15px;
+        border-radius: 4px;
+        height: 32px;
+
+        font-family: 'Roboto Condensed';
+        font-size: 80%;
+        font-weight: bold;
+        
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
     }
+
+    .button-opaque{
+       background-color: #E10098;
+       color: white;
+    }
+
 
     form {
         border-right: 1px solid steelblue;
@@ -383,7 +384,7 @@ afterUpdate(() => {
                 </div>
             </div>
             <div class="buttons">
-                <input type="submit"  value="TEST">
+                <input type="submit" class="button "  value="query & run test">
             </div>
         </form> 
 
@@ -395,12 +396,15 @@ afterUpdate(() => {
                 <div class="response" bind:this={responseArea}></div>
             </div>
             <div>
-                <div class="header">DEFINE TEST</div>
+                <div class="header">
+                    <span>DEFINE TEST</span>
+                    <input type="button" class="button" value="run &#x25B7" on:click={evaluate}>
+                </div>
                 <div class="evalFrame" bind:this={evalFrame}>
                     <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change={() => $changeCount +=1}>response && !response.errors</textarea> 
                 </div>
                 <div class="buttons2">
-                    <input type="button" class="try-button" value="TRY TEST" on:click={evaluate}>
+                    <!-- <input type="button" class="button" value="try test" on:click={evaluate}> -->
                     <span class="eval-result">{@html testResult}</span>
                     <span class="eval-errors">{@html evalErrors}</span>
                 </div>
