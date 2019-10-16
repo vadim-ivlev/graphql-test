@@ -44,13 +44,17 @@ function clearScheme() {
 <style>
 
     .text {
-        width: 400px;
+        width: 294px;
         font-size: 100%;
+        padding:5px;
+        border-radius: 4px;
+        border: 1px solid silver;
     }
     .button {
-        padding: 2px 10px 2px 10px;
+        padding: 5px 15px 5px 15px;
         border: 1px solid steelblue;
-        border-radius: 2px;
+        border-radius: 4px;
+
         background-color: transparent;
         color: steelblue;
         font-size: 100%;
@@ -66,9 +70,8 @@ function clearScheme() {
 <div>
 
   <form>
-        <label for="id-{parentid}-inp-url" >GraphQL endpoint</label>
-        <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" bind:this={urlElement} value={url} />
-        <input type="button" class="button" value="&#x21bb; reload scheme" on:click={getScheme} />
+        <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
+        <input type="button"  class="button" value="&#x21bb; reload schema" on:click={getScheme} />
         {#if Object.entries(scheme).length != 0 }
         <br>
         <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>

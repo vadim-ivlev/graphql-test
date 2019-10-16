@@ -149,36 +149,42 @@ afterUpdate(() => {
     }
 
     .button {
-        padding: 2px 10px 2px 10px;
+        padding: 5px 15px 5px 15px;
         border: 1px solid steelblue;
-        border-radius: 2px;
+        border-radius: 4px;
+
         background-color: steelblue;
         color: white;
         font-size: 100%;
-        height:24px;
-        width:100px;
     }
 
+    .row {
+        /* border: 1px solid red; */
+        display: grid;
+        grid-template-columns:  max-content max-content;
+        justify-content: left;
+        align-items: flex-start;
+        column-gap: 4px;
+    }
 
+    .smaller {
+        opacity: 0.5;
+        font-size: 80%;
+        letter-spacing: 1px;
+    }
 
     .hidden {display: none;}
     .visible {display: block;}
 
-    .centered {
-        /* border: 1px solid red; */
-        display: grid;
-        grid-template-columns:  max-content max-content;
-        justify-content: center;
-        
-    }
 </style>
 
 <div class="hidden" class:visible>
 <div class="root" >
-    <span class="centered">
+    <div class="smaller">GraphQL endpoint</div>
+    <div class="row">
         <Schemer parentid="{parentid}-Schemer" bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
-            <input type="button" class="button" on:click={doAllTests} value="test all" >
-    </span>
+        <input type="button" class="button" on:click={doAllTests} value="test all" >
+    </div>
     <div class="main" bind:this={mainArea}>
         <List parentid="{parentid}-List" urlElement={urlElement} scheme={scheme} bind:doTests={doTests} />
     </div>
