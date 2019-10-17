@@ -20,7 +20,7 @@ const dispatch = createEventDispatcher()
 async function getScheme() {
     clearScheme()
     scheme = {}    
-    // scheme =  await $.ajax({ url: inputUrl.value, type: "POST", data: { query:queryString, variables: '{}'},});
+    // scheme =  await jQuery.ajax({ url: urlElement.value, type: "POST", data: { query:queryString, variables: '{}'},});
     try {
         let resp = await fetch(urlElement.value, { method: "POST",  credentials: 'include', body: JSON.stringify({ query: queryString, variables: "{}" }) })
         scheme = await resp.json()
@@ -44,7 +44,7 @@ function clearScheme() {
 <style>
 
     .text {
-        width: 294px;
+        width: 360px;
         font-size: 100%;
         padding:1px 10px;
         border-radius: 4px;
@@ -60,14 +60,28 @@ function clearScheme() {
         height: 32px;
 
         font-family: 'Roboto Condensed';
-        font-size: 80%;
+        font-size: 13px;
+        /* line-height: 22px; */
         font-weight: bold;
         
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        position: relative;
-        top: -1.5px;
+        /* position: relative; */
+        /* top: -1.5px; */
     }
+
+    .button:hover {
+        /* border-color: #E10098; */
+        /* color:white; */
+        background-color: rgba(225, 0, 154, 0.103);
+        transition: 0.3s;
+    }
+
+    .noborder {
+        border-color: transparent;
+        /* transition: 0.5s; */
+    }
+
     label {
         margin-left:0;
     }
@@ -79,7 +93,7 @@ function clearScheme() {
 
   <form>
         <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
-        <input type="button"  class="button" value="&#x21bb; reload schema" on:click={getScheme} />
+        <input type="button"  class="button noborder0" value="&#x21bb; reload schema" on:click={getScheme} />
         {#if Object.entries(scheme).length != 0 }
         <br>
         <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>

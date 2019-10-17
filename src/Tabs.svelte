@@ -205,28 +205,21 @@ onMount(async () => {
         border-bottom:1px solid silver;
     }
 
-    .plus {
-        /* font-weight: bold; */
+    .tab-dimmed {
         color:steelblue;
         font-size: 90%;
         cursor: pointer;
-        /* margin-left:5px; */
         padding-left: 10px;
         padding-right: 10px;
-
-        /* background-color: white; */
 
         border-radius: 3px 3px 0 0;
         border:1px solid rgba(192, 192, 192, 0.685);
         border-bottom: 1px solid white;        
         border-top-width: 2px;
         border-top-color: rgba(192, 192, 192, 0.682);
-
         opacity: 0.5;
-
-
      }
-    .plus:hover {
+    .tab-dimmed:hover {
         background-color: rgba(0,0,0,0.05);
         opacity: 1.0;
     }
@@ -286,21 +279,18 @@ onMount(async () => {
         /* float: right; */
         margin-left:20px;
     }
-    .button {
-        /* font-family: 'Roboto Condensed'; */
-        /* font-weight: bold; */
-        /* letter-spacing: 0.1em; */
+    .button-tiny {
         padding: 0 3px 0 3px;
-        border: 0px solid steelblue;
-        /* border-radius: 4px; */
+        border: 1px solid transparent;
+        border-radius: 4px;
         background-color: transparent;
-        color: steelblue;
-        font-size: 90%;
+        color: #E10098;
+        font-size: 14px;
         cursor: pointer;
-        /* border-radius: 20px; */
+        border-radius: 20px;
     }
-    .button:hover {
-        background-color: rgba(0,0,0,0.05);
+    .button-tiny:hover {
+        border: 1px solid #E10098;
     }
 
     .tabmenu {
@@ -329,8 +319,8 @@ onMount(async () => {
         <span class="tab" class:active={tab.tabName == active.tabName} data-tabName={tab.tabName} on:click={activate}>{tab.tabName} 
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
             <div class="tabmenu">
-                <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
-                <input type="button" class="button" title="export {active.tabName} tab" value="export" on:click={exportTab}>
+                <input type="button" class="button-tiny" title="Rename {active.tabName} tab" value="rename" on:click={renameTab}>
+                <input type="button" class="button-tiny" title="Save {active.tabName} to a file" value="export" on:click={exportTab}>
             </div>
         </span>
     {/each}
@@ -340,8 +330,8 @@ onMount(async () => {
         <input type="button" class="button" title="save {active.tabName} tab" value="save tab" on:click={saveTab}> 
     </span>
     {/if} -->
-    <span title="add new tab" class="plus" on:click={addTab}>+ add new</span>
-    <span title="import new tab" class="plus" on:click={importTab}>import</span>
+    <span title="Add a new tab" class="button-tiny" style="font-weight:bold;" on:click={addTab}>&nbsp;&nbsp;&nbsp; &#xFF0B; &nbsp;&nbsp;&nbsp;</span>
+    <span title="Import tab from a file" class="button-tiny" on:click={importTab}>import</span>
     <input id="fileChooser" type='file' style="display:none" on:change={openFile} >
 </div> 
 <!-- &#x21ca; &#x21c8; &#x2297;  -->

@@ -288,7 +288,7 @@ afterUpdate(() => {
         height: 32px;
 
         font-family: 'Roboto Condensed';
-        font-size: 80%;
+        font-size: 13px;
         font-weight: bold;
         
         letter-spacing: 0.1em;

@@ -1,4 +1,4 @@
-- add export/import of tabs
+= can not save cookies
 - добавить параметры в URL через # имя таба и эндпойнт
 - сообщения на ошибки /graphql
 - добавить codemirror
