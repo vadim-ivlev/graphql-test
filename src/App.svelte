@@ -12,6 +12,8 @@ export let visible = true
 
 // let url
 let urlElement
+let credentialsElement
+
 let scheme = {}
 // let ignoreChanges = true
 let doTests
@@ -19,6 +21,7 @@ let doTests
 let mainArea
 
 let controls
+
 
 // $: {
 //     scheme = scheme
@@ -82,20 +85,6 @@ function restoreControlValues() {
 function clearStorageItemScheme(){
     localStorage.removeItem(parentid)
     console.log('clearStorageItemScheme')
-    // let key = parentid
-    // let controls = getControlValues()
-    // if (!controls || controls.length==0){
-    //     console.log("No controls")
-    //     return
-    // }
-    // let value = { 
-    //     url: urlElement.value, 
-    //     controls:controls,
-    //     scheme:{}
-    //     }
-    // let controlsStr = JSON.stringify(value)
-    // localStorage.setItem(key, controlsStr);
-    // console.log('clearStorageItemScheme:', key, controlsStr.length)
 }
 
 
@@ -108,6 +97,7 @@ export function saveInputs() {
     }
     let value = { 
         url: urlElement.value,
+        credentials: credentialsElement.checked,
         controls:controls,
         scheme:scheme
         }
@@ -124,6 +114,7 @@ export function restoreInputs() {
     if (!controlsStr) return
     let value = JSON.parse(controlsStr)
     urlElement.value = value.url
+    credentialsElement.checked = value.credentials
     scheme = value.scheme
     console.log("restored tab=", key, controlsStr.length )
 
@@ -188,11 +179,11 @@ afterUpdate(() => {
 <div class="root" >
     <div class="smaller">GraphQL endpoint</div>
     <div class="row">
-        <Schemer parentid="{parentid}-Schemer" bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
+        <Schemer parentid="{parentid}-Schemer" bind:credentialsElement={credentialsElement} bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
         <input type="button" class="button" on:click={doAllTests} value="run all tests" >
     </div>
     <div class="main" bind:this={mainArea}>
-        <List parentid="{parentid}-List" urlElement={urlElement} scheme={scheme} bind:doTests={doTests} />
+        <List parentid="{parentid}-List" credentialsElement={credentialsElement}  urlElement={urlElement} scheme={scheme} bind:doTests={doTests} />
     </div>
 </div>
 </div>

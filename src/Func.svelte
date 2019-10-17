@@ -10,6 +10,7 @@ import { changeCount } from './stores.js'
 
 // P R O P S
 export let urlElement
+export let credentialsElement
 
 export let parentid = ''
 export let scheme = {}
@@ -75,16 +76,21 @@ function typeChangeHandler(params) {
 
 function submitForm(event){
     if (event) event.preventDefault()
-    console.log("submitForm urlElement.value=", urlElement.value)
-    window.$(form).ajaxSubmit({
+    console.log("submitForm credentialsElement=",credentialsElement.checked," urlElement.value=", urlElement.value)
+
+    var ajaxOptions = {
         url: urlElement.value, 
         type: 'POST',
+        xhrFields : { withCredentials: credentialsElement.checked} ,
         success: function(res) {
             response = res
             window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false});
             evaluate()
-            }
-    })
+        }
+    }
+
+    window.$(form).ajaxSubmit(ajaxOptions)
+
     return false
 }
 

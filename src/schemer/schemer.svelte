@@ -9,6 +9,7 @@ export let scheme = {}
 export let parentid =''
 export let refreshScheme = getScheme
 export let urlElement 
+export let credentialsElement 
 
 
 let visible = false
@@ -20,12 +21,31 @@ const dispatch = createEventDispatcher()
 async function getScheme() {
     clearScheme()
     scheme = {}    
-    // scheme =  await jQuery.ajax({ url: urlElement.value, type: "POST", data: { query:queryString, variables: '{}'},});
     try {
-        let resp = await fetch(urlElement.value, { method: "POST",  credentials: 'include', body: JSON.stringify({ query: queryString, variables: "{}" }) })
+
+        // var ajaxOptions = {
+        //     url: urlElement.value, 
+        //     type: "POST", 
+        //     xhrFields : { withCredentials: credentialsElement.checked} ,
+        //     data: { query:queryString, variables: '{}'},
+        // }
+        // scheme =  await jQuery.ajax(ajaxOptions)
+    
+
+        let fetchOptions = {
+            method: "POST",  
+            body: JSON.stringify({ query: queryString, variables: "{}" }) 
+        }
+        if (credentialsElement.checked){
+            console.log("Sending with credentials included = ", credentialsElement.checked)
+            fetchOptions.credentials = 'include' 
+        }
+        let resp = await fetch( urlElement.value, fetchOptions )
         scheme = await resp.json()
-    } catch (error) {
-        alert(error)
+
+    } catch (err) {
+        console.error("get scheme error:", err)
+        alert("get scheme error:" + err)
     }
 }
 
@@ -34,9 +54,6 @@ function clearScheme() {
     dispatch('clear', { text: 'clear storage' })
     console.log('clearScheme:', parentid)
 }
-
-// function onChange() {
-// }
 
 
 </script>
@@ -92,7 +109,11 @@ function clearScheme() {
 <div>
 
   <form>
-        <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
+        <!-- <input type="checkbox" title="include credentials to requests" checked id="id-{parentid}-chk-credentials" bind:this={credentialsElement}>
+        <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} /> -->
+        
+        <input type="checkbox" title="include credentials to requests" checked bind:this={credentialsElement}>
+        <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
         <input type="button"  class="button noborder0" value="&#x21bb; reload schema" on:click={getScheme} />
         {#if Object.entries(scheme).length != 0 }
         <br>

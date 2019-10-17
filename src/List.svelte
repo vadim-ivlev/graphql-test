@@ -5,6 +5,7 @@ import Type from './Type.svelte'
 export let scheme 
 // export let url 
 export let urlElement
+export let credentialsElement
 
 export let parentid = ''
 
@@ -60,7 +61,7 @@ function compareTypes(t1, t2) {
      <h4>Queries</h4>
      {#each queries as e (e.name)}
           <div>
-          <Func urlElement={urlElement} bind:test={testFunctions[e.name]} node={e} operation="query"  scheme={scheme} parentid="{parentid}-query" />
+          <Func credentialsElement={credentialsElement} urlElement={urlElement} bind:test={testFunctions[e.name]} node={e} operation="query"  scheme={scheme} parentid="{parentid}-query" />
           <!-- bind:test={e.test} -->
           <!-- on:change -->
           <!-- url={url} -->
@@ -70,7 +71,7 @@ function compareTypes(t1, t2) {
      <h4>Mutations</h4>
      {#each mutations as e (e.name)}
           <div>
-          <Func urlElement={urlElement} bind:test={testFunctions[e.name]} node={e}  operation="mutation" scheme={scheme} parentid="{parentid}-mutation" />
+          <Func credentialsElement={credentialsElement} urlElement={urlElement} bind:test={testFunctions[e.name]} node={e}  operation="mutation" scheme={scheme} parentid="{parentid}-mutation" />
           <!-- bind:test={e.test} -->
           <!-- on:change -->
           <!-- url={url} -->
