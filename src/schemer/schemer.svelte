@@ -61,10 +61,10 @@ function clearScheme() {
 <style>
 
     .text {
-        width: 360px;
+        width: 100%;
         font-size: 100%;
         padding:1px 10px;
-        border-radius: 4px;
+        border-radius: 4px 0 0 4px;
         border: 1px solid silver;
         height: 28px;
     }
@@ -73,7 +73,7 @@ function clearScheme() {
         background-color: transparent;
         border: 1px solid #E10098;
         padding: 5px 15px 5px 15px;
-        border-radius: 4px;
+        border-radius: 0 4px 4px 0;
         height: 32px;
 
         font-family: 'Roboto Condensed';
@@ -103,23 +103,43 @@ function clearScheme() {
         margin-left:0;
     }
 
+    .row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        column-gap: 21px;
+        align-items: top;
+        
+    }
+
+    .smaller {
+        opacity: 0.5;
+        font-size: 80%;
+        letter-spacing: 1px;
+    }
+
+
 </style>
 
 
 <div>
 
-  <form>
+  <form class="row">
         <!-- <input type="checkbox" title="include credentials to requests" checked id="id-{parentid}-chk-credentials" bind:this={credentialsElement}>
         <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} /> -->
-        
-        <input type="checkbox" title="include credentials to requests" checked bind:this={credentialsElement}>
-        <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
+        <div>
+            <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
+            <div>
+                <input type="checkbox" id="sss5678" title="include credentials to requests" checked bind:this={credentialsElement}>
+                <label for="sss5678" class="smaller">Include credentials</label>
+            </div>
+        </div>
         <input type="button"  class="button noborder0" value="&#x21bb; reload schema" on:click={getScheme} />
-        {#if Object.entries(scheme).length != 0 }
-        <br>
-        <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a>
-        {/if}
   </form>
+
+  {#if Object.entries(scheme).length != 0 }
+        <a href on:click|preventDefault={ e => {visible = ! visible} } >{visible?'Hide':'Show'} scheme</a><br><br>
+  {/if}
+  
   {#if visible}
         <JsonView json={scheme} />
   {/if}

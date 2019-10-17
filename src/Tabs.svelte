@@ -203,6 +203,7 @@ onMount(async () => {
         padding: 10px 0 0 0;
         /* background-color: whitesmoke; */
         border-bottom:1px solid silver;
+        margin-bottom:30px;
     }
 
     .tab-dimmed {

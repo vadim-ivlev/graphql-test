@@ -133,7 +133,7 @@ afterUpdate(() => {
 
 <style>
     .root {
-        padding-top:60px;
+        padding-top:30px;
     }
     input {
         font-size: 100%;
@@ -158,10 +158,10 @@ afterUpdate(() => {
     .row {
         /* border: 1px solid red; */
         display: grid;
-        grid-template-columns:  max-content max-content;
+        grid-template-columns:  1fr auto;
         justify-content: left;
         align-items: flex-start;
-        column-gap: 4px;
+        column-gap: 10px;
     }
 
     .smaller {
@@ -176,15 +176,15 @@ afterUpdate(() => {
 </style>
 
 <div class="hidden" class:visible>
-<div class="root" >
-    <div class="smaller">GraphQL endpoint</div>
-    <div class="row">
-        <Schemer parentid="{parentid}-Schemer" bind:credentialsElement={credentialsElement} bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
-        <input type="button" class="button" on:click={doAllTests} value="run all tests" >
+    <div class="root" >
+        <div class="smaller">GraphQL endpoint</div>
+        <div class="row">
+            <Schemer parentid="{parentid}-Schemer" bind:credentialsElement={credentialsElement} bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
+            <input type="button" class="button" on:click={doAllTests} value="run all tests" >
+        </div>
+        <div class="main" bind:this={mainArea}>
+            <List parentid="{parentid}-List" credentialsElement={credentialsElement}  urlElement={urlElement} scheme={scheme} bind:doTests={doTests} />
+        </div>
     </div>
-    <div class="main" bind:this={mainArea}>
-        <List parentid="{parentid}-List" credentialsElement={credentialsElement}  urlElement={urlElement} scheme={scheme} bind:doTests={doTests} />
-    </div>
-</div>
 </div>
 

@@ -38,7 +38,7 @@ function delayAndSave(){
 </style>
 
 <div>
-    <Tabs bind:tabs bind:active on:save={saveTab}/>
+    <Tabs bind:tabs bind:active on:save={saveTab} />
     {#each tabs as tab (tab.tabName)}
     <!-- {@debug tabs} -->
         <App parentid={tab.tabName} visible={tab.tabName == active.tabName} bind:saveInputs={tabsSaveFunctions[tab.tabName]}/>
