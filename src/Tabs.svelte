@@ -232,7 +232,8 @@ onMount(async () => {
         padding: 1px 4px 1px 20px;
         cursor: default;
     
-        color: steelblue;
+        /* color: steelblue; */
+        color: gray;
         border-radius: 3px 3px 0 0;
         border:1px solid transparent;
         border-top-width: 2px;
@@ -255,7 +256,8 @@ onMount(async () => {
         border:1px solid silver;
         border-top-width: 2px;
         border-bottom: 1px solid white;        
-        border-top-color: steelblue;
+        /* border-top-color: steelblue; */
+        border-top-color: #E10098;
 
         color: black;
         }
@@ -264,16 +266,18 @@ onMount(async () => {
         background-color: transparent;
     }
 
-
+    .active .x {
+        color: black;
+    }
 
     .x {
         padding:0 3px 0 3px;
         font-size: 90%;
         margin-left:3px;
-        color: steelblue;
+        color: gray;
     }
     .x:hover {
-        color: red;
+        color: #E10098;
     }
 
     .buttons {
@@ -321,7 +325,7 @@ onMount(async () => {
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
             <div class="tabmenu">
                 <input type="button" class="button-tiny" title="Rename {active.tabName} tab" value="rename" on:click={renameTab}>
-                <input type="button" class="button-tiny" title="Save {active.tabName} to a file" value="export" on:click={exportTab}>
+                <input type="button" class="button-tiny" title="Save {active.tabName} to a file" value="export&#8628;" on:click={exportTab}>
             </div>
         </span>
     {/each}
@@ -332,7 +336,7 @@ onMount(async () => {
     </span>
     {/if} -->
     <span title="Add a new tab" class="button-tiny" style="font-weight:bold;" on:click={addTab}>&nbsp;&nbsp;&nbsp; &#xFF0B; &nbsp;&nbsp;&nbsp;</span>
-    <span title="Import tab from a file" class="button-tiny" on:click={importTab}>import</span>
+    <span title="Import tab from a file" class="button-tiny" on:click={importTab}>import&#8624;</span>
     <input id="fileChooser" type='file' style="display:none" on:change={openFile} >
 </div> 
 <!-- &#x21ca; &#x21c8; &#x2297;  -->
