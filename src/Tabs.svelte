@@ -41,7 +41,7 @@ function getTabsFromLocalStorage() {
 
 
 function addTab(){
-    let tabName = prompt("Enter a new tab name","")
+    let tabName = prompt("Enter a new tab name","new one")
     if (!tabName) return
     // while (tabs.includes(tabName)){
     while (tabs.some( tab =>  tabName == tab.tabName )){
