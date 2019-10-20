@@ -26,7 +26,15 @@ let request
 let response = null
 
 let responseArea
+
 let evalTextarea
+let evalCodeMirror
+let variablesTextarea
+let variablesCodeMirror
+let queryTextarea
+let queryCodeMirror
+
+
 let queryFrame
 let variablesFrame
 let evalFrame
@@ -58,7 +66,7 @@ function generateQuery(){
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
     request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`
-    $changeCount +=1
+    incChangeCounter()
 }
 
 
@@ -111,6 +119,100 @@ function evaluate(){
     } catch (error) {
         console.log(error)
         evalErrors = error
+    }
+}
+
+function incChangeCounter() {
+    console.log('incChangeCounter')
+    $changeCount +=1
+}
+
+
+function onCodeMirrorChange(cm) {
+    var txt = cm.getDoc().getValue()
+    var textarea = cm.getTextArea()
+    textarea.value = txt
+}
+
+
+let jsOptions =  {
+    mode:  "javascript",
+    extraKeys: {'Ctrl-Space':'autocomplete'},
+    autoRefresh:true,
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    tabSize:2,
+    theme: "dracula",
+}
+
+let graphqlOptions = {
+    mode: 'graphql',
+    // lint: {
+    //     schema: myGraphQLSchema
+    // },
+    // hintOptions: {
+    //     schema: myGraphQLSchema
+    // }
+}
+
+
+
+function addCodeMirrors() {
+    if (! evalCodeMirror) { 
+        evalCodeMirror = CodeMirror.fromTextArea( evalTextarea, jsOptions )
+        evalCodeMirror.on('blur', incChangeCounter)
+        evalCodeMirror.on('change', onCodeMirrorChange)
+        console.log("evalCodeMirror created")
+    }
+
+    if (! variablesCodeMirror) { 
+        variablesCodeMirror = CodeMirror.fromTextArea( variablesTextarea, jsOptions )
+        variablesCodeMirror.on('blur', incChangeCounter)
+        variablesCodeMirror.on('change', onCodeMirrorChange)
+        console.log("variablesCodeMirror created")
+    }
+
+    if (! queryCodeMirror) { 
+        queryCodeMirror = CodeMirror.fromTextArea( queryTextarea, jsOptions)
+        queryCodeMirror.on('blur', incChangeCounter)
+        queryCodeMirror.on('change', onCodeMirrorChange)
+        console.log("queryCodeMirror created")
+    }
+}
+
+function removeCodeMirrors(params) {
+    if ( evalCodeMirror) {
+        evalCodeMirror.off('blur', incChangeCounter)
+        evalCodeMirror.off('change', onCodeMirrorChange)
+        evalCodeMirror.toTextArea()
+        evalCodeMirror = null
+        console.log("evalCodeMirror removed")
+    }
+
+    if ( variablesCodeMirror) {
+        variablesCodeMirror.off('blur', incChangeCounter)
+        variablesCodeMirror.off('change', onCodeMirrorChange)
+        variablesCodeMirror.toTextArea()
+        variablesCodeMirror = null;
+        console.log("variablesCodeMirror removed")
+    }
+
+    if ( queryCodeMirror) {
+        queryCodeMirror.off('blur', incChangeCounter)
+        queryCodeMirror.off('change', onCodeMirrorChange)
+        queryCodeMirror.toTextArea()
+        queryCodeMirror = null
+        console.log("queryCodeMirror removed")
+    }
+}
+
+function toggleVisibility(event) {
+    if (event) event.preventDefault()
+    vis = !vis
+    if (vis) {
+        addCodeMirrors()
+    } else {
+        removeCodeMirrors()
     }
 }
 
@@ -248,7 +350,7 @@ afterUpdate(() => {
     }
 
     .evalFrame {
-        height: 3em;
+        height: 8em;
         min-height: 1em;
         border-top:1px solid silver;
         border-bottom:1px solid steelblue;
@@ -335,11 +437,12 @@ afterUpdate(() => {
 
     }
 
+    
 </style>
 
 <div >
     <div class="outer">
-        <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ e => vis = !vis }>{node.name}(...)</a>
+        <a class="name {vis?'opened':'closed'}" href on:click|preventDefault={ toggleVisibility }>{node.name}(...)</a>
         <span class="test-result">{@html testResult}</span> 
         <span class="description">{node.description}</span>
     </div>
@@ -372,13 +475,13 @@ afterUpdate(() => {
             <div>
                 <div class="header" >QUERY</div>
                 <div class="queryFrame" bind:this={queryFrame}>
-                    <textarea id="{parentid}-{node.name}-query" name="query" on:change={() => $changeCount +=1} >{request}</textarea>
+                    <textarea id="{parentid}-{node.name}-query" name="query" bind:this={queryTextarea} on:change={incChangeCounter} >{request}</textarea>
                 </div>
             </div>
             <div>
                 <div class="header" >VARIABLES</div>
                 <div class="variablesFrame" bind:this={variablesFrame}>
-                    <textarea id="{parentid}-{node.name}-variables" name="variables" on:change={() => $changeCount +=1}></textarea>
+                    <textarea id="{parentid}-{node.name}-variables" name="variables" bind:this={variablesTextarea} on:change={incChangeCounter}></textarea>
                 </div>
             </div>
             <div>
@@ -407,7 +510,7 @@ afterUpdate(() => {
                     <input type="button" class="button" value="run &#x25B6" on:click={evaluate}>
                 </div>
                 <div class="evalFrame" bind:this={evalFrame}>
-                    <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change={() => $changeCount +=1}>response && !response.errors</textarea> 
+                    <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change={incChangeCounter}>response && !response.errors</textarea> 
                 </div>
                 <div class="buttons2">
                     <!-- <input type="button" class="button" value="try test" on:click={evaluate}> -->
