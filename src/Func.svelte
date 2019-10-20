@@ -66,6 +66,9 @@ function generateQuery(){
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
     request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`
+    if (queryCodeMirror){
+        queryCodeMirror.getDoc().setValue(request)
+    }
     incChangeCounter()
 }
 
@@ -109,7 +112,7 @@ function evaluate(){
     code = code.trimStart()
     code = code.trimEnd()
     if (code == "") {
-        evalErrors = `<br>// Write some code to evaluate server response.<br>// For example:<br>response.errors == null`
+        evalErrors = `<br>// Write code to evaluate server response.<br>// For example:<br>response.errors == null`
         return
     }
 
@@ -142,7 +145,7 @@ let jsOptions =  {
     autoCloseBrackets: true,
     matchBrackets: true,
     tabSize:2,
-    theme: "dracula",
+    theme: "nord",
 }
 
 let graphqlOptions = {
@@ -162,21 +165,21 @@ function addCodeMirrors() {
         evalCodeMirror = CodeMirror.fromTextArea( evalTextarea, jsOptions )
         evalCodeMirror.on('blur', incChangeCounter)
         evalCodeMirror.on('change', onCodeMirrorChange)
-        console.log("evalCodeMirror created")
+        // console.log("evalCodeMirror created")
     }
 
     if (! variablesCodeMirror) { 
         variablesCodeMirror = CodeMirror.fromTextArea( variablesTextarea, jsOptions )
         variablesCodeMirror.on('blur', incChangeCounter)
         variablesCodeMirror.on('change', onCodeMirrorChange)
-        console.log("variablesCodeMirror created")
+        // console.log("variablesCodeMirror created")
     }
 
     if (! queryCodeMirror) { 
         queryCodeMirror = CodeMirror.fromTextArea( queryTextarea, jsOptions)
         queryCodeMirror.on('blur', incChangeCounter)
         queryCodeMirror.on('change', onCodeMirrorChange)
-        console.log("queryCodeMirror created")
+        // console.log("queryCodeMirror created")
     }
 }
 
@@ -186,7 +189,7 @@ function removeCodeMirrors(params) {
         evalCodeMirror.off('change', onCodeMirrorChange)
         evalCodeMirror.toTextArea()
         evalCodeMirror = null
-        console.log("evalCodeMirror removed")
+        // console.log("evalCodeMirror removed")
     }
 
     if ( variablesCodeMirror) {
@@ -194,7 +197,7 @@ function removeCodeMirrors(params) {
         variablesCodeMirror.off('change', onCodeMirrorChange)
         variablesCodeMirror.toTextArea()
         variablesCodeMirror = null;
-        console.log("variablesCodeMirror removed")
+        // console.log("variablesCodeMirror removed")
     }
 
     if ( queryCodeMirror) {
@@ -202,7 +205,7 @@ function removeCodeMirrors(params) {
         queryCodeMirror.off('change', onCodeMirrorChange)
         queryCodeMirror.toTextArea()
         queryCodeMirror = null
-        console.log("queryCodeMirror removed")
+        // console.log("queryCodeMirror removed")
     }
 }
 

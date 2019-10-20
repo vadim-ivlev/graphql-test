@@ -2320,7 +2320,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (455:16) {#if node.args}
+	// (458:16) {#if node.args}
 	function create_if_block$3(ctx) {
 		var h3, t0_value = ctx.node.name, t0, t1, t2, div0, t4, div1, each_blocks = [], each_1_lookup = new Map(), current;
 
@@ -2347,11 +2347,11 @@ query IntrospectionQuery {
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
 				h3.className = "svelte-ko15t2";
-				add_location(h3, file$5, 455, 16, 9874);
+				add_location(h3, file$5, 458, 16, 9967);
 				div0.className = "header svelte-ko15t2";
-				add_location(div0, file$5, 456, 16, 9916);
+				add_location(div0, file$5, 459, 16, 10009);
 				div1.className = "fieldlist svelte-ko15t2";
-				add_location(div1, file$5, 457, 16, 9969);
+				add_location(div1, file$5, 460, 16, 10062);
 			},
 
 			m: function mount(target, anchor) {
@@ -2407,7 +2407,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (459:20) {#each node.args as arg (arg.name)}
+	// (462:20) {#each node.args as arg (arg.name)}
 	function create_each_block$1(key_1, ctx) {
 		var first, updating_getText, current;
 
@@ -2585,90 +2585,90 @@ query IntrospectionQuery {
 				span6 = element("span");
 				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-ko15t2";
 				a.href = true;
-				add_location(a, file$5, 444, 8, 9362);
+				add_location(a, file$5, 447, 8, 9455);
 				span0.className = "test-result svelte-ko15t2";
-				add_location(span0, file$5, 445, 8, 9481);
+				add_location(span0, file$5, 448, 8, 9574);
 				span1.className = "description svelte-ko15t2";
-				add_location(span1, file$5, 446, 8, 9542);
+				add_location(span1, file$5, 449, 8, 9635);
 				div0.className = "outer svelte-ko15t2";
-				add_location(div0, file$5, 443, 4, 9334);
+				add_location(div0, file$5, 446, 4, 9427);
 				div1.className = "header svelte-ko15t2";
-				add_location(div1, file$5, 466, 20, 10352);
-				add_location(div2, file$5, 465, 16, 10326);
+				add_location(div1, file$5, 469, 20, 10445);
+				add_location(div2, file$5, 468, 16, 10419);
 				div3.className = "form-area svelte-ko15t2";
-				add_location(div3, file$5, 452, 8, 9780);
+				add_location(div3, file$5, 455, 8, 9873);
 				div4.className = "header svelte-ko15t2";
-				add_location(div4, file$5, 475, 16, 10774);
+				add_location(div4, file$5, 478, 16, 10867);
 				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
 				textarea0.name = "query";
 				textarea0.value = ctx.request;
 				textarea0.className = "svelte-ko15t2";
-				add_location(textarea0, file$5, 477, 20, 10891);
+				add_location(textarea0, file$5, 480, 20, 10984);
 				div5.className = "queryFrame svelte-ko15t2";
-				add_location(div5, file$5, 476, 16, 10823);
-				add_location(div6, file$5, 474, 12, 10752);
+				add_location(div5, file$5, 479, 16, 10916);
+				add_location(div6, file$5, 477, 12, 10845);
 				div7.className = "header svelte-ko15t2";
-				add_location(div7, file$5, 481, 16, 11101);
+				add_location(div7, file$5, 484, 16, 11194);
 				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
 				textarea1.name = "variables";
 				textarea1.className = "svelte-ko15t2";
-				add_location(textarea1, file$5, 483, 20, 11230);
+				add_location(textarea1, file$5, 486, 20, 11323);
 				div8.className = "variablesFrame svelte-ko15t2";
-				add_location(div8, file$5, 482, 16, 11154);
-				add_location(div9, file$5, 480, 12, 11079);
+				add_location(div8, file$5, 485, 16, 11247);
+				add_location(div9, file$5, 483, 12, 11172);
 				div10.className = "header svelte-ko15t2";
-				add_location(div10, file$5, 487, 16, 11442);
-				add_location(span2, file$5, 490, 20, 11695);
-				add_location(br, file$5, 490, 52, 11727);
+				add_location(div10, file$5, 490, 16, 11535);
+				add_location(span2, file$5, 493, 20, 11788);
+				add_location(br, file$5, 493, 52, 11820);
 				attr(input0, "type", "file");
 				input0.name = "input-file";
-				add_location(input0, file$5, 491, 20, 11752);
+				add_location(input0, file$5, 494, 20, 11845);
 				div11.className = "margined svelte-ko15t2";
-				add_location(div11, file$5, 488, 16, 11489);
-				add_location(div12, file$5, 486, 12, 11420);
+				add_location(div11, file$5, 491, 16, 11582);
+				add_location(div12, file$5, 489, 12, 11513);
 				attr(input1, "type", "submit");
 				input1.className = "button  svelte-ko15t2";
 				input1.value = "query & run test";
-				add_location(input1, file$5, 495, 16, 11882);
+				add_location(input1, file$5, 498, 16, 11975);
 				div13.className = "buttons svelte-ko15t2";
-				add_location(div13, file$5, 494, 12, 11844);
+				add_location(div13, file$5, 497, 12, 11937);
 				form_1.className = "svelte-ko15t2";
-				add_location(form_1, file$5, 473, 8, 10693);
+				add_location(form_1, file$5, 476, 8, 10786);
 				div14.className = "header svelte-ko15t2";
-				add_location(div14, file$5, 501, 12, 12031);
+				add_location(div14, file$5, 504, 12, 12124);
 				span3.className = "json-literal";
-				add_location(span3, file$5, 503, 32, 12138);
-				add_location(div15, file$5, 503, 16, 12122);
+				add_location(span3, file$5, 506, 32, 12231);
+				add_location(div15, file$5, 506, 16, 12215);
 				div16.className = "response svelte-ko15t2";
-				add_location(div16, file$5, 504, 16, 12213);
+				add_location(div16, file$5, 507, 16, 12306);
 				div17.className = "response-area svelte-ko15t2";
-				add_location(div17, file$5, 502, 12, 12078);
-				add_location(span4, file$5, 508, 20, 12361);
+				add_location(div17, file$5, 505, 12, 12171);
+				add_location(span4, file$5, 511, 20, 12454);
 				attr(input2, "type", "button");
 				input2.className = "button svelte-ko15t2";
 				input2.value = "run ▶";
-				add_location(input2, file$5, 509, 20, 12409);
+				add_location(input2, file$5, 512, 20, 12502);
 				div18.className = "header svelte-ko15t2";
-				add_location(div18, file$5, 507, 16, 12320);
+				add_location(div18, file$5, 510, 16, 12413);
 				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
 				textarea2.value = "response && !response.errors";
 				textarea2.className = "svelte-ko15t2";
-				add_location(textarea2, file$5, 512, 20, 12591);
+				add_location(textarea2, file$5, 515, 20, 12684);
 				div19.className = "evalFrame svelte-ko15t2";
-				add_location(div19, file$5, 511, 16, 12525);
+				add_location(div19, file$5, 514, 16, 12618);
 				span5.className = "eval-result svelte-ko15t2";
-				add_location(span5, file$5, 516, 20, 12919);
+				add_location(span5, file$5, 519, 20, 13012);
 				span6.className = "eval-errors svelte-ko15t2";
-				add_location(span6, file$5, 517, 20, 12991);
+				add_location(span6, file$5, 520, 20, 13084);
 				div20.className = "buttons2 svelte-ko15t2";
-				add_location(div20, file$5, 514, 16, 12773);
-				add_location(div21, file$5, 506, 12, 12298);
+				add_location(div20, file$5, 517, 16, 12866);
+				add_location(div21, file$5, 509, 12, 12391);
 				div22.className = "result-panel svelte-ko15t2";
-				add_location(div22, file$5, 500, 8, 11992);
+				add_location(div22, file$5, 503, 8, 12085);
 				div23.className = "root shadow svelte-ko15t2";
 				set_style(div23, "display", (ctx.vis?'grid':'none'));
-				add_location(div23, file$5, 448, 4, 9609);
-				add_location(div24, file$5, 442, 0, 9323);
+				add_location(div23, file$5, 451, 4, 9702);
+				add_location(div24, file$5, 445, 0, 9416);
 
 				dispose = [
 					listen(a, "click", prevent_default(ctx.toggleVisibility)),
@@ -2992,6 +2992,9 @@ query IntrospectionQuery {
 	    let arglist = getArgsText();
 	    let fieldlist =getTypeText ? getTypeText() : '';
 	    $$invalidate('request', request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`);
+	    if (queryCodeMirror){
+	        queryCodeMirror.getDoc().setValue(request);
+	    }
 	    incChangeCounter();
 	}
 
@@ -3035,7 +3038,7 @@ query IntrospectionQuery {
 	    code = code.trimStart();
 	    code = code.trimEnd();
 	    if (code == "") {
-	        $$invalidate('evalErrors', evalErrors = `<br>// Write some code to evaluate server response.<br>// For example:<br>response.errors == null`);
+	        $$invalidate('evalErrors', evalErrors = `<br>// Write code to evaluate server response.<br>// For example:<br>response.errors == null`);
 	        return
 	    }
 
@@ -3061,7 +3064,7 @@ query IntrospectionQuery {
 	    autoCloseBrackets: true,
 	    matchBrackets: true,
 	    tabSize:2,
-	    theme: "dracula",
+	    theme: "nord",
 	};
 
 
@@ -3071,21 +3074,21 @@ query IntrospectionQuery {
 	        $$invalidate('evalCodeMirror', evalCodeMirror = CodeMirror.fromTextArea( evalTextarea, jsOptions ));
 	        evalCodeMirror.on('blur', incChangeCounter);
 	        evalCodeMirror.on('change', onCodeMirrorChange);
-	        console.log("evalCodeMirror created");
+	        // console.log("evalCodeMirror created")
 	    }
 
 	    if (! variablesCodeMirror) { 
 	        $$invalidate('variablesCodeMirror', variablesCodeMirror = CodeMirror.fromTextArea( variablesTextarea, jsOptions ));
 	        variablesCodeMirror.on('blur', incChangeCounter);
 	        variablesCodeMirror.on('change', onCodeMirrorChange);
-	        console.log("variablesCodeMirror created");
+	        // console.log("variablesCodeMirror created")
 	    }
 
 	    if (! queryCodeMirror) { 
 	        $$invalidate('queryCodeMirror', queryCodeMirror = CodeMirror.fromTextArea( queryTextarea, jsOptions));
 	        queryCodeMirror.on('blur', incChangeCounter);
 	        queryCodeMirror.on('change', onCodeMirrorChange);
-	        console.log("queryCodeMirror created");
+	        // console.log("queryCodeMirror created")
 	    }
 	}
 
@@ -3095,7 +3098,7 @@ query IntrospectionQuery {
 	        evalCodeMirror.off('change', onCodeMirrorChange);
 	        evalCodeMirror.toTextArea();
 	        $$invalidate('evalCodeMirror', evalCodeMirror = null);
-	        console.log("evalCodeMirror removed");
+	        // console.log("evalCodeMirror removed")
 	    }
 
 	    if ( variablesCodeMirror) {
@@ -3103,7 +3106,7 @@ query IntrospectionQuery {
 	        variablesCodeMirror.off('change', onCodeMirrorChange);
 	        variablesCodeMirror.toTextArea();
 	        $$invalidate('variablesCodeMirror', variablesCodeMirror = null);
-	        console.log("variablesCodeMirror removed");
+	        // console.log("variablesCodeMirror removed")
 	    }
 
 	    if ( queryCodeMirror) {
@@ -3111,7 +3114,7 @@ query IntrospectionQuery {
 	        queryCodeMirror.off('change', onCodeMirrorChange);
 	        queryCodeMirror.toTextArea();
 	        $$invalidate('queryCodeMirror', queryCodeMirror = null);
-	        console.log("queryCodeMirror removed");
+	        // console.log("queryCodeMirror removed")
 	    }
 	}
 
