@@ -8,6 +8,17 @@ import Argument from './Argument.svelte'
 import Type from './Type.svelte'
 import { changeCount } from './stores.js'
 
+
+// import CodeMirror from 'codemirror';
+// import 'codemirror/addon/hint/show-hint';
+// import 'codemirror/addon/lint/lint';
+// import 'codemirror-graphql/hint';
+// import 'codemirror-graphql/lint';
+// import 'codemirror-graphql/mode';
+
+
+
+
 // P R O P S
 export let urlElement
 export let credentialsElement

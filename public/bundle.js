@@ -2320,7 +2320,7 @@ query IntrospectionQuery {
 		return child_ctx;
 	}
 
-	// (458:16) {#if node.args}
+	// (469:16) {#if node.args}
 	function create_if_block$3(ctx) {
 		var h3, t0_value = ctx.node.name, t0, t1, t2, div0, t4, div1, each_blocks = [], each_1_lookup = new Map(), current;
 
@@ -2347,11 +2347,11 @@ query IntrospectionQuery {
 
 				for (i = 0; i < each_blocks.length; i += 1) each_blocks[i].c();
 				h3.className = "svelte-ko15t2";
-				add_location(h3, file$5, 458, 16, 9967);
+				add_location(h3, file$5, 469, 16, 10208);
 				div0.className = "header svelte-ko15t2";
-				add_location(div0, file$5, 459, 16, 10009);
+				add_location(div0, file$5, 470, 16, 10250);
 				div1.className = "fieldlist svelte-ko15t2";
-				add_location(div1, file$5, 460, 16, 10062);
+				add_location(div1, file$5, 471, 16, 10303);
 			},
 
 			m: function mount(target, anchor) {
@@ -2407,7 +2407,7 @@ query IntrospectionQuery {
 		};
 	}
 
-	// (462:20) {#each node.args as arg (arg.name)}
+	// (473:20) {#each node.args as arg (arg.name)}
 	function create_each_block$1(key_1, ctx) {
 		var first, updating_getText, current;
 
@@ -2585,90 +2585,90 @@ query IntrospectionQuery {
 				span6 = element("span");
 				a.className = a_class_value = "name " + (ctx.vis?'opened':'closed') + " svelte-ko15t2";
 				a.href = true;
-				add_location(a, file$5, 447, 8, 9455);
+				add_location(a, file$5, 458, 8, 9696);
 				span0.className = "test-result svelte-ko15t2";
-				add_location(span0, file$5, 448, 8, 9574);
+				add_location(span0, file$5, 459, 8, 9815);
 				span1.className = "description svelte-ko15t2";
-				add_location(span1, file$5, 449, 8, 9635);
+				add_location(span1, file$5, 460, 8, 9876);
 				div0.className = "outer svelte-ko15t2";
-				add_location(div0, file$5, 446, 4, 9427);
+				add_location(div0, file$5, 457, 4, 9668);
 				div1.className = "header svelte-ko15t2";
-				add_location(div1, file$5, 469, 20, 10445);
-				add_location(div2, file$5, 468, 16, 10419);
+				add_location(div1, file$5, 480, 20, 10686);
+				add_location(div2, file$5, 479, 16, 10660);
 				div3.className = "form-area svelte-ko15t2";
-				add_location(div3, file$5, 455, 8, 9873);
+				add_location(div3, file$5, 466, 8, 10114);
 				div4.className = "header svelte-ko15t2";
-				add_location(div4, file$5, 478, 16, 10867);
+				add_location(div4, file$5, 489, 16, 11108);
 				textarea0.id = textarea0_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-query";
 				textarea0.name = "query";
 				textarea0.value = ctx.request;
 				textarea0.className = "svelte-ko15t2";
-				add_location(textarea0, file$5, 480, 20, 10984);
+				add_location(textarea0, file$5, 491, 20, 11225);
 				div5.className = "queryFrame svelte-ko15t2";
-				add_location(div5, file$5, 479, 16, 10916);
-				add_location(div6, file$5, 477, 12, 10845);
+				add_location(div5, file$5, 490, 16, 11157);
+				add_location(div6, file$5, 488, 12, 11086);
 				div7.className = "header svelte-ko15t2";
-				add_location(div7, file$5, 484, 16, 11194);
+				add_location(div7, file$5, 495, 16, 11435);
 				textarea1.id = textarea1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-variables";
 				textarea1.name = "variables";
 				textarea1.className = "svelte-ko15t2";
-				add_location(textarea1, file$5, 486, 20, 11323);
+				add_location(textarea1, file$5, 497, 20, 11564);
 				div8.className = "variablesFrame svelte-ko15t2";
-				add_location(div8, file$5, 485, 16, 11247);
-				add_location(div9, file$5, 483, 12, 11172);
+				add_location(div8, file$5, 496, 16, 11488);
+				add_location(div9, file$5, 494, 12, 11413);
 				div10.className = "header svelte-ko15t2";
-				add_location(div10, file$5, 490, 16, 11535);
-				add_location(span2, file$5, 493, 20, 11788);
-				add_location(br, file$5, 493, 52, 11820);
+				add_location(div10, file$5, 501, 16, 11776);
+				add_location(span2, file$5, 504, 20, 12029);
+				add_location(br, file$5, 504, 52, 12061);
 				attr(input0, "type", "file");
 				input0.name = "input-file";
-				add_location(input0, file$5, 494, 20, 11845);
+				add_location(input0, file$5, 505, 20, 12086);
 				div11.className = "margined svelte-ko15t2";
-				add_location(div11, file$5, 491, 16, 11582);
-				add_location(div12, file$5, 489, 12, 11513);
+				add_location(div11, file$5, 502, 16, 11823);
+				add_location(div12, file$5, 500, 12, 11754);
 				attr(input1, "type", "submit");
 				input1.className = "button  svelte-ko15t2";
 				input1.value = "query & run test";
-				add_location(input1, file$5, 498, 16, 11975);
+				add_location(input1, file$5, 509, 16, 12216);
 				div13.className = "buttons svelte-ko15t2";
-				add_location(div13, file$5, 497, 12, 11937);
+				add_location(div13, file$5, 508, 12, 12178);
 				form_1.className = "svelte-ko15t2";
-				add_location(form_1, file$5, 476, 8, 10786);
+				add_location(form_1, file$5, 487, 8, 11027);
 				div14.className = "header svelte-ko15t2";
-				add_location(div14, file$5, 504, 12, 12124);
+				add_location(div14, file$5, 515, 12, 12365);
 				span3.className = "json-literal";
-				add_location(span3, file$5, 506, 32, 12231);
-				add_location(div15, file$5, 506, 16, 12215);
+				add_location(span3, file$5, 517, 32, 12472);
+				add_location(div15, file$5, 517, 16, 12456);
 				div16.className = "response svelte-ko15t2";
-				add_location(div16, file$5, 507, 16, 12306);
+				add_location(div16, file$5, 518, 16, 12547);
 				div17.className = "response-area svelte-ko15t2";
-				add_location(div17, file$5, 505, 12, 12171);
-				add_location(span4, file$5, 511, 20, 12454);
+				add_location(div17, file$5, 516, 12, 12412);
+				add_location(span4, file$5, 522, 20, 12695);
 				attr(input2, "type", "button");
 				input2.className = "button svelte-ko15t2";
 				input2.value = "run ▶";
-				add_location(input2, file$5, 512, 20, 12502);
+				add_location(input2, file$5, 523, 20, 12743);
 				div18.className = "header svelte-ko15t2";
-				add_location(div18, file$5, 510, 16, 12413);
+				add_location(div18, file$5, 521, 16, 12654);
 				textarea2.id = textarea2_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-eval-text";
 				textarea2.value = "response && !response.errors";
 				textarea2.className = "svelte-ko15t2";
-				add_location(textarea2, file$5, 515, 20, 12684);
+				add_location(textarea2, file$5, 526, 20, 12925);
 				div19.className = "evalFrame svelte-ko15t2";
-				add_location(div19, file$5, 514, 16, 12618);
+				add_location(div19, file$5, 525, 16, 12859);
 				span5.className = "eval-result svelte-ko15t2";
-				add_location(span5, file$5, 519, 20, 13012);
+				add_location(span5, file$5, 530, 20, 13253);
 				span6.className = "eval-errors svelte-ko15t2";
-				add_location(span6, file$5, 520, 20, 13084);
+				add_location(span6, file$5, 531, 20, 13325);
 				div20.className = "buttons2 svelte-ko15t2";
-				add_location(div20, file$5, 517, 16, 12866);
-				add_location(div21, file$5, 509, 12, 12391);
+				add_location(div20, file$5, 528, 16, 13107);
+				add_location(div21, file$5, 520, 12, 12632);
 				div22.className = "result-panel svelte-ko15t2";
-				add_location(div22, file$5, 503, 8, 12085);
+				add_location(div22, file$5, 514, 8, 12326);
 				div23.className = "root shadow svelte-ko15t2";
 				set_style(div23, "display", (ctx.vis?'grid':'none'));
-				add_location(div23, file$5, 451, 4, 9702);
-				add_location(div24, file$5, 445, 0, 9416);
+				add_location(div23, file$5, 462, 4, 9943);
+				add_location(div24, file$5, 456, 0, 9657);
 
 				dispose = [
 					listen(a, "click", prevent_default(ctx.toggleVisibility)),
@@ -2947,6 +2947,17 @@ query IntrospectionQuery {
 		subscribe($$self, changeCount, $$value => { $changeCount = $$value; $$invalidate('$changeCount', $changeCount); });
 
 		
+
+
+	// import CodeMirror from 'codemirror';
+	// import 'codemirror/addon/hint/show-hint';
+	// import 'codemirror/addon/lint/lint';
+	// import 'codemirror-graphql/hint';
+	// import 'codemirror-graphql/lint';
+	// import 'codemirror-graphql/mode';
+
+
+
 
 	// P R O P S
 	let { urlElement, credentialsElement, parentid = '', scheme = {}, node = {}, operation = "", test = submitForm } = $$props;
