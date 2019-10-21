@@ -33,7 +33,6 @@ export default {
 		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve(),
 		commonjs(),
-		// builtins(),
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production

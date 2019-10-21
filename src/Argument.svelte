@@ -7,7 +7,8 @@ export let node = {}
 export let getText = function() {
     if (!checkboxElement.checked) return ''
     let value = inputElement.value
-    if (inputType == 'text'){
+    // if (inputType == 'text' && graphqlType == 'String'){
+    if (graphqlType == 'String'){
       value = `"${value.replace(/"/g,'\\"')}"` 
     }
    return `${node.name}: ${value}`
@@ -19,7 +20,15 @@ export let getText = function() {
 
 let checked = true
 let graphqlType = node.type.name || node.type.ofType.name
-let value = node.defaultValue ||  (graphqlType=='Int'? 0 : node.name.replace(/_/g,' '))
+let value
+if (node.defaultValue){
+    value = graphqlType == "String" ? node.defaultValue.replace(/"/g,'') : node.defaultValue
+}else {
+    value = (graphqlType=='Int'? 0 :  graphqlType=='Boolean'? false : graphqlType=='String'? node.name.replace(/_/g,' '): null )
+}
+
+
+// let value = node.defaultValue ||  (graphqlType=='Int'? 0 :  graphqlType=='Boolean'? false : graphqlType=='String'? node.name.replace(/_/g,' '): null )
 
 
 

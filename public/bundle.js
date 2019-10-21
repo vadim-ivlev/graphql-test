@@ -720,9 +720,9 @@ query IntrospectionQuery {
 				br0 = element("br");
 				br1 = element("br");
 				a.href = true;
-				add_location(a, file$1, 139, 8, 3629);
-				add_location(br0, file$1, 139, 106, 3727);
-				add_location(br1, file$1, 139, 110, 3731);
+				add_location(a, file$1, 139, 8, 3621);
+				add_location(br0, file$1, 139, 106, 3719);
+				add_location(br1, file$1, 139, 110, 3723);
 				dispose = listen(a, "click", prevent_default(ctx.click_handler));
 			},
 
@@ -828,17 +828,16 @@ query IntrospectionQuery {
 				attr(input1, "type", "checkbox");
 				input1.id = "sss5678";
 				input1.title = "include credentials to requests";
-				input1.checked = true;
 				add_location(input1, file$1, 131, 16, 3225);
 				label.htmlFor = "sss5678";
 				label.className = "smaller svelte-1b0ue2i";
-				add_location(label, file$1, 132, 16, 3357);
+				add_location(label, file$1, 132, 16, 3349);
 				add_location(div0, file$1, 130, 12, 3203);
 				add_location(div1, file$1, 128, 8, 3072);
 				attr(input2, "type", "button");
 				input2.className = "button noborder0 svelte-1b0ue2i";
 				input2.value = "↻ reload schema";
-				add_location(input2, file$1, 135, 8, 3464);
+				add_location(input2, file$1, 135, 8, 3456);
 				form.className = "row svelte-1b0ue2i";
 				add_location(form, file$1, 125, 2, 2725);
 				add_location(div2, file$1, 123, 0, 2716);
@@ -1124,24 +1123,24 @@ query IntrospectionQuery {
 				attr(input0, "type", "checkbox");
 				input0.disabled = input0_disabled_value = ctx.node.type.kind=='NON_NULL';
 				input0.className = "svelte-17mekll";
-				add_location(input0, file$2, 94, 4, 1778);
+				add_location(input0, file$2, 103, 4, 2176);
 				span0.className = span0_class_value = "argname " + (ctx.checked?'':'disabled') + " svelte-17mekll";
-				add_location(span0, file$2, 95, 4, 1944);
+				add_location(span0, file$2, 104, 4, 2342);
 				input1.id = input1_id_value = "" + ctx.parentid + "-" + ctx.node.name + "-input";
 				input1.className = "input svelte-17mekll";
 				input1.name = input1_name_value = ctx.node.name;
 				input1.disabled = input1_disabled_value = !ctx.checked;
 				input1.placeholder = input1_placeholder_value = ctx.value==''?'':null;
-				add_location(input1, file$2, 96, 4, 2013);
+				add_location(input1, file$2, 105, 4, 2411);
 				span1.className = "exclamation svelte-17mekll";
-				add_location(span1, file$2, 98, 4, 2262);
+				add_location(span1, file$2, 107, 4, 2660);
 				span2.className = span2_class_value = "oftype " + (ctx.checked?'':'disabled') + " svelte-17mekll";
-				add_location(span2, file$2, 97, 4, 2199);
-				add_location(br, file$2, 101, 4, 2354);
+				add_location(span2, file$2, 106, 4, 2597);
+				add_location(br, file$2, 110, 4, 2752);
 				span3.className = span3_class_value = "description " + (ctx.checked?'':'disabled') + " svelte-17mekll";
-				add_location(span3, file$2, 101, 8, 2358);
+				add_location(span3, file$2, 110, 8, 2756);
 				div.className = "field svelte-17mekll";
-				add_location(div, file$2, 93, 0, 1751);
+				add_location(div, file$2, 102, 0, 2149);
 
 				dispose = [
 					listen(input0, "change", ctx.input0_change_handler),
@@ -1265,7 +1264,8 @@ query IntrospectionQuery {
 	let { parentid = '', node = {}, getText = function() {
 	    if (!checkboxElement.checked) return ''
 	    let value = inputElement.value;
-	    if (inputType == 'text'){
+	    // if (inputType == 'text' && graphqlType == 'String'){
+	    if (graphqlType == 'String'){
 	      value = `"${value.replace(/"/g,'\\"')}"`; 
 	    }
 	   return `${node.name}: ${value}`
@@ -1277,7 +1277,15 @@ query IntrospectionQuery {
 
 	let checked = true;
 	let graphqlType = node.type.name || node.type.ofType.name;
-	let value = node.defaultValue ||  (graphqlType=='Int'? 0 : node.name.replace(/_/g,' '));
+	let value;
+	if (node.defaultValue){
+	    $$invalidate('value', value = graphqlType == "String" ? node.defaultValue.replace(/"/g,'') : node.defaultValue);
+	}else {
+	    $$invalidate('value', value = (graphqlType=='Int'? 0 :  graphqlType=='Boolean'? false : graphqlType=='String'? node.name.replace(/_/g,' '): null ));
+	}
+
+
+	// let value = node.defaultValue ||  (graphqlType=='Int'? 0 :  graphqlType=='Boolean'? false : graphqlType=='String'? node.name.replace(/_/g,' '): null )
 
 
 

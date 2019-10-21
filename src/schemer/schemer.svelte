@@ -129,7 +129,7 @@ function clearScheme() {
         <div>
             <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
             <div>
-                <input type="checkbox" id="sss5678" title="include credentials to requests" checked bind:this={credentialsElement}>
+                <input type="checkbox" id="sss5678" title="include credentials to requests" bind:this={credentialsElement}>
                 <label for="sss5678" class="smaller">Include credentials</label>
             </div>
         </div>
