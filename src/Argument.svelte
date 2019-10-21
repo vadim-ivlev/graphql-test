@@ -28,10 +28,6 @@ if (node.defaultValue){
 }
 
 
-// let value = node.defaultValue ||  (graphqlType=='Int'? 0 :  graphqlType=='Boolean'? false : graphqlType=='String'? node.name.replace(/_/g,' '): null )
-
-
-
 let checkboxElement
 let inputElement
 let inputType = graphqlType=='Int'?'number':'text'

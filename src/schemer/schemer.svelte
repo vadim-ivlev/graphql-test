@@ -123,7 +123,7 @@ function clearScheme() {
 
 <div>
 
-  <form class="row">
+  <form class="row" on:submit|preventDefault={getScheme}>
         <!-- <input type="checkbox" title="include credentials to requests" checked id="id-{parentid}-chk-credentials" bind:this={credentialsElement}>
         <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} /> -->
         <div>
@@ -133,7 +133,7 @@ function clearScheme() {
                 <label for="sss5678" class="smaller">Include credentials</label>
             </div>
         </div>
-        <input type="button"  class="button noborder0" value="&#x21bb; reload schema" on:click={getScheme} />
+        <input type="submit"  class="button noborder0" value="&#x21bb; reload schema" />
   </form>
 
   {#if Object.entries(scheme).length != 0 }
