@@ -4,7 +4,7 @@ import { createEventDispatcher } from 'svelte'
 import { queryString } from "./schemer.js"
 import JsonView from '../JsonView.svelte'
 
-export let url = "https://auth-proxy.rg.ru/graphql"
+export let url = ""
 export let scheme = {}
 export let parentid =''
 export let refreshScheme = getScheme
@@ -94,10 +94,10 @@ function clearScheme() {
         transition: 0.3s;
     }
 
-    .noborder {
+    /* .noborder {
         border-color: transparent;
-        /* transition: 0.5s; */
-    }
+        transition: 0.5s;
+    } */
 
     label {
         margin-left:0;
@@ -124,8 +124,6 @@ function clearScheme() {
 <div>
 
   <form class="row" on:submit|preventDefault={getScheme}>
-        <!-- <input type="checkbox" title="include credentials to requests" checked id="id-{parentid}-chk-credentials" bind:this={credentialsElement}>
-        <input class="text" type="text" id="id-{parentid}-inp-url" name="id-{parentid}-inp-url" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} /> -->
         <div>
             <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
             <div>

@@ -7,10 +7,11 @@ import JsonView from "./JsonView.svelte"
 import List from "./List.svelte"
 
 
-export let parentid='tab1'
+export let parentid ='tab1'
 export let visible = true
 
-// let url
+export let url =''
+
 let urlElement
 let credentialsElement
 
@@ -22,6 +23,8 @@ let mainArea
 
 let controls
 
+
+$: if (urlElement) urlElement.value = url
 
 // $: {
 //     scheme = scheme
@@ -35,6 +38,9 @@ function doAllTests() {
     doTests()
 }
 
+export function reloadSchema() {
+    alert("reload schema for tab: "+ parentid)
+}
 
 function getControlValuesByTagName(tag) {
     let a =[]

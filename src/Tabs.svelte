@@ -7,11 +7,11 @@ export let active
 
 const dispatch = createEventDispatcher()
 
-let defaultTab = {
-    tabName: "auth-proxy",
-    url:"https://auth-proxy.rg.ru/schema",
-    scheme: null
-}
+// let defaultTab = {
+//     tabName: "auth-proxy",
+//     url:"https://auth-proxy.rg.ru/schema",
+//     scheme: null
+// }
 
 
 function activate(e) {
@@ -38,7 +38,12 @@ function getTabsFromLocalStorage() {
     return tabs
 }
 
-
+export function addNewTab(tabName, url) {
+    let newTab = {tabName: tabName, url:url}
+    tabs = [...tabs, newTab]
+    active = newTab
+    dispatch('save', {tab: active} )
+}
 
 function addTab(){
     let tabName = prompt("Enter a new tab name","new")
@@ -48,10 +53,15 @@ function addTab(){
         tabName = prompt(`"${tabName}" already exists. Please try again.`,tabName)
         if (!tabName) return
     }
-    let newTab = {tabName: tabName, url:''}
-    tabs = [...tabs, newTab]
-    active = newTab
-    saveTab()
+    addNewTab(tabName, 'https://auth-proxy.rg.ru/graphql')
+}
+
+export function setActiveTabByName(name) {
+    let ind = tabs.findIndex( t => t.tabName == name )
+    if (ind == -1) {
+        return
+    }
+    active = tabs[ind]
 }
 
 
@@ -126,25 +136,14 @@ function importTabFromData(text) {
     if (!tabName) 
         return
 
-
-    // delete old tab with the same name
-    // deleteTabByName(tabName)
-
-    
-    // attach imported tab and activate it
-    // tabs = [...tabs, newTab]
-    // active = newTab
-
-    // delete newTab["tabName"]
     // save imported tab
     localStorage.setItem(tabName,text)
     
     // restore tabs from local storage
     let storedTabs = getTabsFromLocalStorage()
-    tabs = storedTabs.length ==0 ? [defaultTab] : storedTabs
+    // tabs = storedTabs.length ==0 ? [defaultTab] : storedTabs
+    tabs = storedTabs
     active = newTab
-
-
 }
 
 
@@ -184,15 +183,11 @@ function renameTab(){
 }
 
 
-function saveTab(){
-    dispatch('save', {tab: active} )
-}
-
 onMount(async () => {
     let storedTabs = getTabsFromLocalStorage()
-    // tabs = storedTabs.length ==0 ? [defaultTab] : [...tabs, ...storedTabs]
     tabs = storedTabs.length ==0 ? [] : storedTabs
     active = tabs[0]
+    dispatch('mounted')
 })
 
 
@@ -206,7 +201,7 @@ onMount(async () => {
         margin-bottom:30px;
     }
 
-    .tab-dimmed {
+    /* .tab-dimmed {
         color:steelblue;
         font-size: 90%;
         cursor: pointer;
@@ -219,11 +214,11 @@ onMount(async () => {
         border-top-width: 2px;
         border-top-color: rgba(192, 192, 192, 0.682);
         opacity: 0.5;
-     }
-    .tab-dimmed:hover {
+     } */
+    /* .tab-dimmed:hover {
         background-color: rgba(0,0,0,0.05);
         opacity: 1.0;
-    }
+    } */
 
 
     .tab {
@@ -280,10 +275,9 @@ onMount(async () => {
         color: #E10098;
     }
 
-    .buttons {
-        /* float: right; */
+    /* .buttons {
         margin-left:20px;
-    }
+    } */
     .button-tiny {
         padding: 0 3px 0 3px;
         border: 1px solid transparent;
@@ -329,12 +323,7 @@ onMount(async () => {
             </div>
         </span>
     {/each}
-    <!-- {#if tabs && tabs.length > 0}
-    <span class="buttons">
-        <input type="button" class="button" title="rename {active.tabName} tab" value="rename" on:click={renameTab}>
-        <input type="button" class="button" title="save {active.tabName} tab" value="save tab" on:click={saveTab}> 
-    </span>
-    {/if} -->
+
     <span title="Add a new tab" class="button-tiny" style="font-weight:bold;" on:click={addTab}>&nbsp;&nbsp;&nbsp; &#xFF0B; &nbsp;&nbsp;&nbsp;</span>
     <span title="Import tab from a file" class="button-tiny" on:click={importTab}>import&#8624;</span>
     <input id="fileChooser" type='file' style="display:none" on:change={openFile} >
