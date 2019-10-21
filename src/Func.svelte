@@ -156,7 +156,7 @@ let jsOptions =  {
     autoCloseBrackets: true,
     matchBrackets: true,
     tabSize:2,
-    theme: "nord",
+    theme: "eclipse",
 }
 
 let graphqlOptions = {
