@@ -7,6 +7,7 @@ let tabsElement
 let tabs = []
 let active 
 let tabsSaveFunctions = {}
+let tabsReloadFunctions = {}
 
 const unsubscribe = changeCount.subscribe(value => {
     delayAndSave()
@@ -24,6 +25,26 @@ function saveTab() {
     tabsSaveFunctions[active.tabName]()
     console.log("SAVED")
 }
+
+function reloadActiveTab() {
+    console.log('reloadActiveTab')
+    if (!active)
+        return
+    if (!active.tabName)
+        return    
+    if (!tabsReloadFunctions[active.tabName])   
+        return 
+    tabsReloadFunctions[active.tabName]()
+    console.log("RELOADED")
+}
+
+var reloadTimeout
+function delayAndReload(){
+    console.log('delayAndReload')
+    clearTimeout(reloadTimeout)
+    reloadTimeout = setTimeout(reloadActiveTab, 1000)    
+}
+
 
 var saveTimeout
 function delayAndSave(){
@@ -57,16 +78,14 @@ function createOrActivateTab(){
     // create a new one, activate it and reload schema
     if (!tab) {
        tabsElement.addNewTab(tabName, endPoint)
-
-       // TODO: reload schema
-       // activeApp.reloadSchema() 
-
+       delayAndReload()
        return
     }
 
     // if tabName and url are the same activate the tab
     if (tab.tabName == tabName && tab.url == endPoint) {
         tabsElement.setActiveTabByName( tabName)
+        delayAndReload()
         return
     }
 
@@ -78,6 +97,7 @@ function createOrActivateTab(){
             newTabName = tabName + i
             if (! getTab(newTabName)){
                 tabsElement.addNewTab(newTabName, endPoint)
+                delayAndReload()
                 return                
             }
         }
@@ -94,19 +114,21 @@ function onTabsMounted(e){
     createOrActivateTab()
 }
 
-
-
 </script>
 
 <style>
-
 </style>
 
-<div>
+<div class="apptabbed">
     <Tabs bind:this={tabsElement} bind:tabs bind:active on:save={saveTab} on:mounted={onTabsMounted} />
     {#each tabs as tab (tab.tabName)}
     <!-- {@debug tabs} -->
-        <App parentid={tab.tabName} url={tab.url} visible={tab.tabName == active.tabName} bind:saveInputs={tabsSaveFunctions[tab.tabName]}/>
+        <App parentid={tab.tabName} 
+            url={tab.url} 
+            visible={tab.tabName == active.tabName} 
+            bind:saveInputs={tabsSaveFunctions[tab.tabName]}
+            bind:reloadSchema={tabsReloadFunctions[tab.tabName]}
+        />
     {/each}
 
 </div>

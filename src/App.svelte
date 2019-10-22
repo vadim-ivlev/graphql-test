@@ -14,6 +14,7 @@ export let url =''
 
 let urlElement
 let credentialsElement
+let schemerElement
 
 let scheme = {}
 // let ignoreChanges = true
@@ -38,9 +39,6 @@ function doAllTests() {
     doTests()
 }
 
-export function reloadSchema() {
-    alert("reload schema for tab: "+ parentid)
-}
 
 function getControlValuesByTagName(tag) {
     let a =[]
@@ -90,9 +88,12 @@ function restoreControlValues() {
 
 function clearStorageItemScheme(){
     localStorage.removeItem(parentid)
-    console.log('clearStorageItemScheme')
+    console.log('App: clearStorageItemScheme: ', parentid)
 }
 
+export function reloadSchema() {
+    schemerElement.getSchema()
+}
 
 export function saveInputs() {
     let key = parentid
@@ -139,7 +140,9 @@ afterUpdate(() => {
 
 <style>
     .root {
-        padding-top:30px;
+        padding-top:20px;
+        margin-left: 20px;
+        margin-right:20px;
     }
     input {
         font-size: 100%;
@@ -173,7 +176,7 @@ afterUpdate(() => {
     .smaller {
         opacity: 0.5;
         font-size: 80%;
-        letter-spacing: 1px;
+        letter-spacing: 0.05em;
     }
 
     .hidden {display: none;}
@@ -185,7 +188,7 @@ afterUpdate(() => {
     <div class="root" >
         <div class="smaller">GraphQL endpoint</div>
         <div class="row">
-            <Schemer parentid="{parentid}-Schemer" bind:credentialsElement={credentialsElement} bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
+            <Schemer parentid="{parentid}-Schemer" bind:this={schemerElement} bind:credentialsElement={credentialsElement} bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
             <input type="button" class="button" on:click={doAllTests} value="run all tests" >
         </div>
         <div class="main" bind:this={mainArea}>

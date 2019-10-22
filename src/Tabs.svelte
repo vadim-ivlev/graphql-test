@@ -195,36 +195,21 @@ onMount(async () => {
 
 <style>
     .container {
-        padding: 10px 0 0 0;
-        /* background-color: whitesmoke; */
+        padding: 25px 0 0 20px;
+        background-color: whitesmoke;
+        /* background-color: black; */
+        /* background-image: linear-gradient(to right, whitesmoke, transparent, transparent); */
         border-bottom:1px solid silver;
+        border-image-source: linear-gradient(to right, silver, transparent);
+        border-image-slice: 1;
         margin-bottom:30px;
     }
-
-    /* .tab-dimmed {
-        color:steelblue;
-        font-size: 90%;
-        cursor: pointer;
-        padding-left: 10px;
-        padding-right: 10px;
-
-        border-radius: 3px 3px 0 0;
-        border:1px solid rgba(192, 192, 192, 0.685);
-        border-bottom: 1px solid white;        
-        border-top-width: 2px;
-        border-top-color: rgba(192, 192, 192, 0.682);
-        opacity: 0.5;
-     } */
-    /* .tab-dimmed:hover {
-        background-color: rgba(0,0,0,0.05);
-        opacity: 1.0;
-    } */
 
 
     .tab {
         margin: 0;
         display: inline-block;
-        padding: 1px 4px 1px 20px;
+        padding: 2px 4px 2px 20px;
         cursor: default;
     
         /* color: steelblue; */
@@ -237,32 +222,29 @@ onMount(async () => {
         position: relative;
     }
 
-    .tab:hover {
-        background-color: rgba(0,0,0,0.05)
+    .tab:hover .x {
+        visibility: visible;
     }
 
+
     .active {
-        /* display: inline-block;
-        padding: 5px 20px 5px 20px;
-        cursor: pointer; */
-
         background-color: white;
-
         border:1px solid silver;
         border-top-width: 2px;
         border-bottom: 1px solid white;        
-        /* border-top-color: steelblue; */
         border-top-color: #E10098;
-
         color: black;
         }
 
-    .active:hover {
-        background-color: transparent;
+
+    .active:hover .tabmenu {
+        opacity: 1.0;
     }
 
+
     .active .x {
-        color: black;
+        color: #E10098;
+        visibility: visible;
     }
 
     .x {
@@ -270,14 +252,12 @@ onMount(async () => {
         font-size: 90%;
         margin-left:3px;
         color: gray;
+        visibility: hidden;
     }
     .x:hover {
         color: #E10098;
     }
 
-    /* .buttons {
-        margin-left:20px;
-    } */
     .button-tiny {
         padding: 0 3px 0 3px;
         border: 1px solid transparent;
@@ -293,17 +273,16 @@ onMount(async () => {
     }
 
     .tabmenu {
-        /* border: 1px solid black; */
         position: absolute;
         top: 25px;
-        /* font-size: 70%; */
         width: 100%;
         left:0;
         text-align: center;
         display:none;
         word-wrap: none;
         white-space: nowrap;
-        
+        opacity: 0.0;
+        transition: 0.3s;
 
     }
     .active .tabmenu {
