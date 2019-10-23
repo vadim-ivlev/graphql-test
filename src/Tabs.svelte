@@ -195,10 +195,11 @@ onMount(async () => {
 
 <style>
     .container {
+        font-size: 14px;
         padding: 25px 0 0 20px;
-        background-color: whitesmoke;
+        /* background-color: whitesmoke; */
         /* background-color: black; */
-        /* background-image: linear-gradient(to right, whitesmoke, transparent, transparent); */
+        background-image: linear-gradient(to right, whitesmoke, transparent, transparent);
         border-bottom:1px solid silver;
         border-image-source: linear-gradient(to right, silver, transparent);
         border-image-slice: 1;
@@ -249,7 +250,7 @@ onMount(async () => {
 
     .x {
         padding:0 3px 0 3px;
-        font-size: 90%;
+        /* font-size: 90%; */
         margin-left:3px;
         color: gray;
         visibility: hidden;
@@ -264,7 +265,6 @@ onMount(async () => {
         border-radius: 4px;
         background-color: transparent;
         color: #E10098;
-        font-size: 14px;
         cursor: pointer;
         border-radius: 20px;
     }
@@ -283,7 +283,7 @@ onMount(async () => {
         white-space: nowrap;
         opacity: 0.0;
         transition: 0.3s;
-
+        padding-top:6px;
     }
     .active .tabmenu {
         display: block;
@@ -298,13 +298,15 @@ onMount(async () => {
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>
             <div class="tabmenu">
                 <input type="button" class="button-tiny" title="Rename {active.tabName} tab" value="rename" on:click={renameTab}>
-                <input type="button" class="button-tiny" title="Save {active.tabName} to a file" value="export&#8628;" on:click={exportTab}>
+                <input type="button" class="button-tiny" title="Save {active.tabName} to a file" value="export" on:click={exportTab}>
+                <!-- &#8628; -->
             </div>
         </span>
     {/each}
 
     <span title="Add a new tab" class="button-tiny" style="font-weight:bold;" on:click={addTab}>&nbsp;&nbsp;&nbsp; &#xFF0B; &nbsp;&nbsp;&nbsp;</span>
-    <span title="Import tab from a file" class="button-tiny" on:click={importTab}>import&#8624;</span>
+    <span title="Import tab from a file" class="button-tiny" on:click={importTab}>import</span>
+    <!-- &#8624; -->
     <input id="fileChooser" type='file' style="display:none" on:change={openFile} >
 </div> 
 <!-- &#x21ca; &#x21c8; &#x2297;  -->

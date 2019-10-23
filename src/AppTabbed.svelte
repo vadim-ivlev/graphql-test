@@ -10,8 +10,8 @@ let tabsSaveFunctions = {}
 let tabsReloadFunctions = {}
 
 const unsubscribe = changeCount.subscribe(value => {
+    console.log("From AppTabbed changeCount=", value)
     delayAndSave()
-    // console.log("From AppTabbed changeCount=", value)
 });
 
 

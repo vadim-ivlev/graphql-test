@@ -54,13 +54,13 @@ a:visited {
     column-gap: 30px;
 
     background-color: rgba(0, 0, 0, 0.794);
-    padding: 10px 10px 15px 10px;
+    /* background-color: rgb(75, 75, 75); */
+    /* background-color:white; */
+    padding: 5px 10px 8px 10px;
 }
 
 #header  *{
     margin:0;
-    color: white;
-    /* color: white !important; */
 }
 
 #footer {
@@ -87,17 +87,15 @@ a:visited {
     margin:0;
     color: white;
 }
-/* 
-#graphql-test {
-    border: 2px solid green;
-} */
 
 
 .title {
     font-size: 20px;
     font-weight: bold;
-    opacity: 0.4;
+    opacity: 0.5;
     font-variant: small-caps;
+    mix-blend-mode: difference;
+    color: white;
     /* text-transform: uppercase; */
     /* letter-spacing: -2px; */
 }

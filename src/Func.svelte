@@ -1,21 +1,11 @@
 
 <script>
 import { onMount } from 'svelte'
-import { afterUpdate } from 'svelte'
 
 import Js from './JsonView.svelte'
 import Argument from './Argument.svelte'
 import Type from './Type.svelte'
 import { changeCount } from './stores.js'
-
-
-// import CodeMirror from 'codemirror';
-// import 'codemirror/addon/hint/show-hint';
-// import 'codemirror/addon/lint/lint';
-// import 'codemirror-graphql/hint';
-// import 'codemirror-graphql/lint';
-// import 'codemirror-graphql/mode';
-
 
 
 
@@ -56,8 +46,7 @@ let getArgFunctions ={}
 
 $: {
     let dummy = node
-    // console.log("node changed")
-    generateQuery()
+    generateQuery(node)
 }
 
 
@@ -73,7 +62,8 @@ function getArgsText() {
 
 
 
-function generateQuery(){
+function generateQuery(el){
+    // console.log("generateQuery:", el)
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
     request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`
@@ -83,17 +73,6 @@ function generateQuery(){
     incChangeCounter()
 }
 
-
-function argsChangeHandler() {
-    console.log("argsChangeHandler")
-    generateQuery()
-}
-
-
-function typeChangeHandler(params) {
-    console.log("typeChangeHandler")
-    generateQuery()
-}
 
 
 function submitForm(event){
@@ -136,8 +115,8 @@ function evaluate(){
     }
 }
 
-function incChangeCounter() {
-    console.log('incChangeCounter')
+function incChangeCounter(a) {
+    console.log('incChangeCounter', $changeCount, a)
     $changeCount +=1
 }
 
@@ -159,15 +138,15 @@ let jsOptions =  {
     theme: "eclipse",
 }
 
-let graphqlOptions = {
-    mode: 'graphql',
-    // lint: {
-    //     schema: myGraphQLSchema
-    // },
-    // hintOptions: {
-    //     schema: myGraphQLSchema
-    // }
-}
+// let graphqlOptions = {
+//     mode: 'graphql',
+//     // lint: {
+//     //     schema: myGraphQLSchema
+//     // },
+//     // hintOptions: {
+//     //     schema: myGraphQLSchema
+//     // }
+// }
 
 
 
@@ -176,21 +155,18 @@ function addCodeMirrors() {
         evalCodeMirror = CodeMirror.fromTextArea( evalTextarea, jsOptions )
         evalCodeMirror.on('blur', incChangeCounter)
         evalCodeMirror.on('change', onCodeMirrorChange)
-        // console.log("evalCodeMirror created")
     }
 
     if (! variablesCodeMirror) { 
         variablesCodeMirror = CodeMirror.fromTextArea( variablesTextarea, jsOptions )
         variablesCodeMirror.on('blur', incChangeCounter)
         variablesCodeMirror.on('change', onCodeMirrorChange)
-        // console.log("variablesCodeMirror created")
     }
 
     if (! queryCodeMirror) { 
         queryCodeMirror = CodeMirror.fromTextArea( queryTextarea, jsOptions)
         queryCodeMirror.on('blur', incChangeCounter)
         queryCodeMirror.on('change', onCodeMirrorChange)
-        // console.log("queryCodeMirror created")
     }
 }
 
@@ -200,7 +176,6 @@ function removeCodeMirrors(params) {
         evalCodeMirror.off('change', onCodeMirrorChange)
         evalCodeMirror.toTextArea()
         evalCodeMirror = null
-        // console.log("evalCodeMirror removed")
     }
 
     if ( variablesCodeMirror) {
@@ -208,7 +183,6 @@ function removeCodeMirrors(params) {
         variablesCodeMirror.off('change', onCodeMirrorChange)
         variablesCodeMirror.toTextArea()
         variablesCodeMirror = null;
-        // console.log("variablesCodeMirror removed")
     }
 
     if ( queryCodeMirror) {
@@ -216,7 +190,6 @@ function removeCodeMirrors(params) {
         queryCodeMirror.off('change', onCodeMirrorChange)
         queryCodeMirror.toTextArea()
         queryCodeMirror = null
-        // console.log("queryCodeMirror removed")
     }
 }
 
@@ -241,11 +214,6 @@ onMount(async () => {
     window.$(variablesFrame).resizable({ handles: "s" });
     window.$(evalFrame).resizable({ handles: "s" });
 })
-
-afterUpdate(() => {
-    generateQuery()
-});
-
 
 
 </script>
@@ -471,7 +439,7 @@ afterUpdate(() => {
                 <div class="header" >ARGUMENTS</div>
                 <div class="fieldlist" >
                     {#each node.args as arg (arg.name)}
-                    <Argument node={arg} bind:getText={getArgFunctions[arg.name]} on:change={argsChangeHandler} parentid="{parentid}-{node.name}-argument"/>
+                    <Argument node={arg} bind:getText={getArgFunctions[arg.name]} on:change={generateQuery} parentid="{parentid}-{node.name}-argument"/>
                     {/each}
                 </div>
                 {/if}
@@ -480,7 +448,7 @@ afterUpdate(() => {
                 <div>
                     <div class="header" >RETURN {node.type.kind == "LIST" ? '[...]': ''}
                     </div>
-                    <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}" level={1}  bind:getText={getTypeText} on:change={typeChangeHandler}/>
+                    <Type typeName={node.type.name || node.type.ofType.name} scheme={scheme} parentid="{parentid}-{node.name}" level={1}  bind:getText={getTypeText} on:change={generateQuery}/>
                 </div>
 
         </div>
