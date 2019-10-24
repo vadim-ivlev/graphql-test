@@ -46,7 +46,9 @@ let getArgFunctions ={}
 
 $: {
     let dummy = node
-    generateQuery(node)
+    console.log("node changed -------------")
+    // generateQuery(node)
+    
 }
 
 
@@ -63,7 +65,7 @@ function getArgsText() {
 
 
 function generateQuery(el){
-    // console.log("generateQuery:", el)
+    console.log("generateQuery:", el)
     let arglist = getArgsText()
     let fieldlist =getTypeText ? getTypeText() : ''
     request = `${operation} {\n${node.name}${arglist}${fieldlist}\n}`
@@ -213,6 +215,8 @@ onMount(async () => {
     window.$(queryFrame).resizable({ handles: "s" });
     window.$(variablesFrame).resizable({ handles: "s" });
     window.$(evalFrame).resizable({ handles: "s" });
+    console.log("on mount ----------------------------------------------")
+    generateQuery(node)
 })
 
 
