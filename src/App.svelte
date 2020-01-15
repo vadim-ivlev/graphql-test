@@ -1,5 +1,4 @@
 <script>
-// import { afterUpdate, onMount } from 'svelte'
 import { afterUpdate } from 'svelte'
 
 import Schemer from "./schemer/schemer.svelte";
@@ -27,13 +26,6 @@ let controls
 
 $: if (urlElement) urlElement.value = url
 
-// $: {
-//     scheme = scheme
-//     // noscheme = Object.entries(scheme).length == 0
-//     console.log('App scheme changed', scheme)
-//     // ignoreChanges= true
-//     // delay(restoreInputs, 500)
-// }
 
 function doAllTests() {
     doTests()
@@ -72,7 +64,7 @@ function restoreControlValues() {
     for (let c of controls) {
         let inp = document.getElementById(c.id)
         if (!inp) {
-            // console.log("No input:")
+            console.log("No input with id:", c.id)
             continue
         }
         restored ++
@@ -80,9 +72,10 @@ function restoreControlValues() {
             inp.checked = c.checked
         } else {
             inp.value = c.value
+            // console.log("Restored value of input with id:", c.id)
         }
     }
-    console.log(restored, "condrols have been restored.")
+    console.log(restored, "condrols have been restored.")//, controls)
 }
 
 
@@ -98,10 +91,10 @@ export function reloadSchema() {
 export function saveInputs() {
     let key = parentid
     let controls = getControlValues()
-    if (!controls || controls.length==0){
-        console.log("No controls")
-        return
-    }
+    // if (!controls || controls.length==0){
+    //     console.log("No controls")
+    //     return
+    // }
     let value = { 
         url: urlElement.value,
         credentials: credentialsElement.checked,
@@ -110,20 +103,19 @@ export function saveInputs() {
         }
     let controlsStr = JSON.stringify(value)
     localStorage.setItem(key, controlsStr);
-    console.log("saved: ", key, controlsStr.length )
+    console.log("saved tab:", key, "controlsStr.length=", controlsStr.length, value )
 }
 
 
-export function restoreInputs() {
-
-    let key = parentid
-    let controlsStr = localStorage.getItem(key)
+export function restoreInputs(tabName) {
+    // let key = parentid
+    let controlsStr = localStorage.getItem(tabName)
     if (!controlsStr) return
     let value = JSON.parse(controlsStr)
     urlElement.value = value.url
     credentialsElement.checked = value.credentials
     scheme = value.scheme
-    console.log("restored tab=", key, controlsStr.length )
+    console.log("restored tab:", tabName, "controlsStr.length=", controlsStr.length, value )
 
     controls = value.controls
 }
@@ -131,7 +123,7 @@ export function restoreInputs() {
 
 afterUpdate(() => {
     console.log("afterUpdate parentid=", parentid)
-    restoreInputs()
+    restoreInputs(parentid)
     setTimeout(restoreControlValues, 0)
 });
 

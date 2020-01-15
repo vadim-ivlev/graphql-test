@@ -7,16 +7,11 @@ export let active
 
 const dispatch = createEventDispatcher()
 
-// let defaultTab = {
-//     tabName: "auth-proxy",
-//     url:"https://auth-proxy.rg.ru/schema",
-//     scheme: null
-// }
-
 
 function activate(e) {
     let tabName = this.getAttribute("data-tabName")
     active = tabs.find( t => t.tabName == tabName )
+    dispatch("activate", tabName)
 }
 
 function getTabsFromLocalStorage() {

@@ -7,6 +7,7 @@ let tabsElement
 let tabs = []
 let active 
 let tabsSaveFunctions = {}
+let tabsRestoreFunctions = {}
 let tabsReloadFunctions = {}
 
 const unsubscribe = changeCount.subscribe(value => {
@@ -15,7 +16,27 @@ const unsubscribe = changeCount.subscribe(value => {
 });
 
 
-function saveTab() {
+// function restoreSchemerValues(event) {
+    // var tabName = event.detail
+    // let controlsStr = localStorage.getItem(tabName)
+    // if (!controlsStr) return
+    // let value = JSON.parse(controlsStr)
+
+    // console.log("restoreSchemerValues", tabName, active)
+
+    // active.url = value.url
+    // active.credentials = value.credentials
+
+    // // urlElement.value = value.url
+    // // credentialsElement.checked = value.credentials
+    // // scheme = value.scheme
+    // // console.log("restored tab:", tabName, "controlsStr.length=", controlsStr.length, value )
+
+    // // controls = value.controls
+// }
+
+
+function saveActiveTab() {
     if (!active)
         return
     if (!active.tabName)
@@ -25,6 +46,21 @@ function saveTab() {
     tabsSaveFunctions[active.tabName]()
     console.log("SAVED")
 }
+
+
+function restoreActiveTab() {
+    if (!active)
+        return
+    if (!active.tabName)
+        return    
+    if (!tabsRestoreFunctions[active.tabName])   
+        return 
+    tabsRestoreFunctions[active.tabName](active.tabName)
+    console.log("RESTORED")
+}
+
+
+
 
 function reloadActiveTab() {
     console.log('reloadActiveTab')
@@ -49,7 +85,7 @@ function delayAndReload(){
 var saveTimeout
 function delayAndSave(){
     clearTimeout(saveTimeout)
-    saveTimeout = setTimeout(saveTab, 1000)
+    saveTimeout = setTimeout(saveActiveTab, 1000)
 }
 
 
@@ -120,7 +156,8 @@ function onTabsMounted(e){
 </style>
 
 <div class="apptabbed">
-    <Tabs bind:this={tabsElement} bind:tabs bind:active on:save={saveTab} on:mounted={onTabsMounted} />
+    <Tabs bind:this={tabsElement} bind:tabs bind:active  on:activate={restoreActiveTab} on:mounted={onTabsMounted} />
+    <!-- on:save={saveActiveTab} -->
     {#each tabs as tab (tab.tabName)}
     <!-- {@debug tabs} -->
         <App parentid={tab.tabName} 
@@ -128,6 +165,7 @@ function onTabsMounted(e){
             visible={tab.tabName == active.tabName} 
             bind:saveInputs={tabsSaveFunctions[tab.tabName]}
             bind:reloadSchema={tabsReloadFunctions[tab.tabName]}
+            bind:restoreInputs={tabsRestoreFunctions[tab.tabName]}
         />
     {/each}
 

@@ -3,6 +3,7 @@
 import { createEventDispatcher } from 'svelte'
 import { queryString } from "./schemer.js"
 import JsonView from '../JsonView.svelte'
+import { changeCount } from '../stores.js'
 
 export let url = ""
 export let scheme = {}
@@ -16,6 +17,13 @@ let visible = false
 
 
 const dispatch = createEventDispatcher()
+
+
+
+function incChangeCounter(a) {
+    console.log('incChangeCounter', $changeCount, a)
+    $changeCount +=1
+}
 
 
 export async function getSchema() {
@@ -121,9 +129,9 @@ function clearSchema() {
 
   <form class="row" on:submit|preventDefault={getSchema}>
         <div>
-            <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
+            <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} on:change={incChangeCounter}/>
             <div>
-                <input type="checkbox" id="sss5678" title="include credentials to requests" bind:this={credentialsElement}>
+                <input type="checkbox" id="sss5678" title="include credentials to requests" bind:this={credentialsElement} on:change={incChangeCounter}>
                 <label for="sss5678" class="smaller">Include credentials</label>
             </div>
             <div class="errors" bind:this={errorsElement}></div>
