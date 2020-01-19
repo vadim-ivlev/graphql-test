@@ -121,11 +121,11 @@ export function restoreInputs(tabName) {
 }
 
 
-afterUpdate(() => {
-    console.log("afterUpdate parentid=", parentid)
-    restoreInputs(parentid)
-    setTimeout(restoreControlValues, 0)
-});
+// afterUpdate(() => {
+    // console.log("afterUpdate parentid=", parentid)
+    // restoreInputs(parentid)
+    // setTimeout(restoreControlValues, 0)
+// });
 
 
 </script>

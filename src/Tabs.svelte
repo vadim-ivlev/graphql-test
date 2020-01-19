@@ -1,5 +1,5 @@
 <script>
-import {createEventDispatcher,onMount} from 'svelte'
+import { createEventDispatcher, onMount} from 'svelte'
 
 
 export let tabs = []
@@ -37,7 +37,7 @@ export function addNewTab(tabName, url) {
     let newTab = {tabName: tabName, url:url}
     tabs = [...tabs, newTab]
     active = newTab
-    dispatch('save', {tab: active} )
+    dispatch('newtab', tabName)
 }
 
 function addTab(){
@@ -48,7 +48,7 @@ function addTab(){
         tabName = prompt(`"${tabName}" already exists. Please try again.`,tabName)
         if (!tabName) return
     }
-    addNewTab(tabName, 'https://auth-proxy.rg.ru/graphql')
+    addNewTab(tabName, '')
 }
 
 export function setActiveTabByName(name) {

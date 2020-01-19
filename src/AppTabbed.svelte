@@ -1,4 +1,5 @@
 <script>
+import { onMount } from 'svelte'
 import App from "./App.svelte"
 import Tabs from "./Tabs.svelte"
 import { changeCount } from './stores.js'
@@ -7,13 +8,14 @@ let tabsElement
 let tabs = []
 let active 
 let tabsSaveFunctions = {}
-let tabsRestoreFunctions = {}
+// let tabsRestoreFunctions = {}
 let tabsReloadFunctions = {}
 
 const unsubscribe = changeCount.subscribe(value => {
     console.log("From AppTabbed changeCount=", value)
-    delayAndSave()
-});
+    if (value > 0)
+        delayAndSave()
+})
 
 
 // function restoreSchemerValues(event) {
@@ -48,16 +50,16 @@ function saveActiveTab() {
 }
 
 
-function restoreActiveTab() {
-    if (!active)
-        return
-    if (!active.tabName)
-        return    
-    if (!tabsRestoreFunctions[active.tabName])   
-        return 
-    tabsRestoreFunctions[active.tabName](active.tabName)
-    console.log("RESTORED")
-}
+// function restoreActiveTab(active) {
+//     if (!active)
+//         return
+//     if (!active.tabName)
+//         return    
+//     if (!tabsRestoreFunctions[active.tabName])   
+//         return 
+//     tabsRestoreFunctions[active.tabName](active.tabName)
+//     console.log("RESTORED")
+// }
 
 
 
@@ -140,15 +142,22 @@ function createOrActivateTab(){
         alert("can not create a new tab: "+ tabName)
         return
     }
-
-
-
 }
 
 
-function onTabsMounted(e){
+// function onTabsMounted(e){
+//     // FIXME: move it to onMounted
+//     createOrActivateTab()
+// }
+
+onMount(async () => {
+    // FIXME: moved it to onMounted
     createOrActivateTab()
-}
+    
+
+})
+
+
 
 </script>
 
@@ -156,7 +165,9 @@ function onTabsMounted(e){
 </style>
 
 <div class="apptabbed">
-    <Tabs bind:this={tabsElement} bind:tabs bind:active  on:activate={restoreActiveTab} on:mounted={onTabsMounted} />
+    <Tabs bind:this={tabsElement} bind:tabs bind:active on:newtab={delayAndSave}/>
+    <!-- on:mounted={onTabsMounted} -->
+    <!-- on:activate={restoreActiveTab} -->
     <!-- on:save={saveActiveTab} -->
     {#each tabs as tab (tab.tabName)}
     <!-- {@debug tabs} -->
@@ -165,8 +176,8 @@ function onTabsMounted(e){
             visible={tab.tabName == active.tabName} 
             bind:saveInputs={tabsSaveFunctions[tab.tabName]}
             bind:reloadSchema={tabsReloadFunctions[tab.tabName]}
-            bind:restoreInputs={tabsRestoreFunctions[tab.tabName]}
         />
+        <!-- bind:restoreInputs={tabsRestoreFunctions[tab.tabName]} -->
     {/each}
 
 </div>
