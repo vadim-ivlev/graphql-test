@@ -474,8 +474,8 @@ onMount(async () => {
                 <div class="header">FILE</div>
                 <div class="margined">
                 <!-- <input id="{parentid}-{node.name}-input-file-namer" type="text" on:change={onInputFileNameChange} style="width:70px;" value="input-file"> -->
-                    <span>name = "input-file"</span><br>
-                    <input type="file" name="input-file">
+                    <span>name="file"</span><br>
+                    <input type="file" name="file">
                 </div>
             </div>
             <div class="buttons">

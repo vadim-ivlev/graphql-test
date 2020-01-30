@@ -36,7 +36,7 @@ export async function getSchema() {
 
         let fetchOptions = {
             method: "POST",  
-            body: JSON.stringify({ query: queryString, variables: "{}" }) 
+            body: JSON.stringify({ query: queryString, variables: {}, operationName: null }) 
         }
         if (credentialsElement.checked){
             console.log("Sending with credentials included = ", credentialsElement.checked)
