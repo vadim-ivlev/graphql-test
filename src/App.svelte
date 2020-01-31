@@ -25,7 +25,10 @@ let mainArea
 let controls
 
 
-$: if (urlElement) urlElement.value = url
+// $: if (urlElement) {
+//     console.log("url=", url)
+//     urlElement.value = url
+// }
 
 // $: {
 //     scheme = scheme
