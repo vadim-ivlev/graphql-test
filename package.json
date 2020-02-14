@@ -1,7 +1,10 @@
 {
-  "name": "svelte-app",
+  "name": "graphql-test",
   "version": "1.0.0",
+  "main": "electron-main.js",
   "devDependencies": {
+    "electron": "^7.1.8",
+    "electron-builder": "^21.2.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.10.1",
     "rollup-plugin-commonjs": "^9.3.4",
@@ -17,7 +20,10 @@
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
-    "start:dev": "sirv public --dev"
+    "start:dev": "sirv public --dev",
+    "e": "electron .",
+    "electron": "run-s build electron",
+    "dist": "electron-builder"
   },
   "dependencies": {}
 }
