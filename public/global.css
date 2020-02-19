@@ -148,3 +148,18 @@ a:visited {
     cursor: ew-resize !important;
 }
 
+.question-mark {
+    /* position: absolute; */
+    /* top:5px; */
+    /* right:4px; */
+    color: silver;
+    margin:0;
+    padding:0;
+    padding-left:7px;
+    padding-right:7px;
+    border:1px solid silver;
+    border-radius: 20px;
+    font-family: Roboto;
+    font-size:14px;
+    font-weight: bold;
+}
