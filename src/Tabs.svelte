@@ -1,9 +1,10 @@
 <script>
 import {createEventDispatcher,onMount} from 'svelte'
-
+import Dialog from './Dialog.svelte'
 
 export let tabs = []
 export let active 
+let dialog
 
 const dispatch = createEventDispatcher()
 
@@ -46,15 +47,19 @@ export function addNewTab(tabName, url) {
 }
 
 function addTab(){
-    let tabName = prompt("Enter a new tab name","new")
+    dialog.showDialog("Enter a new tab name","new", onAddTabOk)
+}
+
+function onAddTabOk(tabName){
     if (!tabName) return
-    // while (tabs.includes(tabName)){
-    while (tabs.some( tab =>  tabName == tab.tabName )){
-        tabName = prompt(`"${tabName}" already exists. Please try again.`,tabName)
-        if (!tabName) return
+    if (tabs.some( tab =>  tabName == tab.tabName )){
+        dialog.showDialog(`"${tabName}" already exists. Please try again.`,tabName, onAddTabOk)
+        return
     }
     addNewTab(tabName, 'https://auth-proxy.rg.ru/graphql')
 }
+
+
 
 export function setActiveTabByName(name) {
     let ind = tabs.findIndex( t => t.tabName == name )
@@ -292,7 +297,7 @@ onMount(async () => {
 </style>
 
 <div class="container">
-
+    <Dialog bind:this={dialog}></Dialog>
     {#each tabs as tab (tab.tabName)}
         <span class="tab" class:active={tab.tabName == active.tabName} data-tabName={tab.tabName} on:click={activate}>{tab.tabName} 
             <span class="x" title="delete {tab.tabName} tab" data-tabName={tab.tabName} on:click={deleteTab}>&#xd7;</span>

@@ -24,7 +24,8 @@ function createWindow () {
     }
   })
 //   mainWindow.maximize()
-  // mainWindow.setFullScreen(true)
+//   mainWindow.setFullScreen(true)
+//   mainWindow.setMenu(null);
 
   // and load the index.html of the app.
   mainWindow.loadFile('public/index.html')

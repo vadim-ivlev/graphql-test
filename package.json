@@ -22,7 +22,7 @@
     "start": "sirv public",
     "start:dev": "sirv public --dev",
     "e": "electron .",
-    "electron": "run-s build electron",
+    "electron": "run-s build e",
     "dist": "electron-builder"
   },
   "dependencies": {}
