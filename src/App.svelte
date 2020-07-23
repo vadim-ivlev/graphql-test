@@ -25,10 +25,10 @@ let mainArea
 let controls
 
 
-// $: if (urlElement) {
-//     console.log("url=", url)
-//     urlElement.value = url
-// }
+$: if (urlElement) {
+    console.log("url=", url)
+    urlElement.value = url
+}
 
 // $: {
 //     scheme = scheme
@@ -189,7 +189,7 @@ afterUpdate(() => {
 
 <div class="hidden" class:visible>
     <div class="root" >
-        <div class="smaller">GraphQL endpoint</div>
+        <div class="smaller">Enter GraphQL endpoint. For example https://yoursite.com/graphql</div>
         <div class="row">
             <Schemer parentid="{parentid}-Schemer" bind:this={schemerElement} bind:credentialsElement={credentialsElement} bind:urlElement={urlElement}  bind:scheme={scheme} on:clear={clearStorageItemScheme} />
             <input type="button" class="button" on:click={doAllTests} value="run all tests" >

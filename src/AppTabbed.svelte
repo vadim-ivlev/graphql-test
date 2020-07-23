@@ -77,9 +77,9 @@ function createOrActivateTab(){
     // if there is no such tab
     // create a new one, activate it and reload schema
     if (!tab) {
-       tabsElement.addNewTab(tabName, endPoint)
-       delayAndReload()
-       return
+        tabsElement.addNewTab(tabName, endPoint)
+        delayAndReload()
+        return
     }
 
     // if tabName and url are the same activate the tab

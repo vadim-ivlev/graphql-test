@@ -121,7 +121,7 @@ function clearSchema() {
 
   <form class="row" on:submit|preventDefault={getSchema}>
         <div>
-            <input class="text" type="text" placeholder="GraphQL endpoint" bind:this={urlElement} value={url} />
+            <input class="text" type="text" placeholder="https://yoursite.com/graphql" bind:this={urlElement} value={url} />
             <div>
                 <input type="checkbox" id="sss5678" title="include credentials to requests" bind:this={credentialsElement}>
                 <label for="sss5678" class="smaller">Include credentials</label>

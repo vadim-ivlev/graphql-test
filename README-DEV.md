@@ -9,9 +9,7 @@ After git clone:
 ----
 Development
 ----
-Starting Neo4J
 
-    docker-compose up -d
 
 Start development
 
