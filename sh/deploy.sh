@@ -1,5 +1,7 @@
 #!/bin/bash
 npm run build
-now public
-now alias graphql-test.vadimivlev.now.sh graphql-test
-# now alias https://public.vadimivlev.now.sh graphql-test
+
+# npx vercel public
+# npx vercel alias graphql-test.vadimivlev.now.sh graphql-test
+
+npx vercel --prod public

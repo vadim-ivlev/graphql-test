@@ -25,5 +25,7 @@
     "electron": "run-s build e",
     "dist": "electron-builder"
   },
-  "dependencies": {}
+  "dependencies": {
+    "vercel": "^21.2.3"
+  }
 }
