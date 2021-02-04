@@ -35,8 +35,12 @@ export async function getSchema() {
     
 
         let fetchOptions = {
+            headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+            },
             method: "POST",  
-            body: JSON.stringify({ query: queryString, variables: {}, operationName: null }) 
+            body: JSON.stringify({ query: queryString, variables: {}, operationName: "IntrospectionQuery" }) 
         }
         if (credentialsElement.checked){
             console.log("Sending with credentials included = ", credentialsElement.checked)
