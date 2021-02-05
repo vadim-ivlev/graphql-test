@@ -40,6 +40,12 @@ let queryFrame
 let variablesFrame
 let evalFrame
 
+let form
+let attachFileCheckbox
+let attachFileCheckboxChecked = false
+let formArea
+
+
 let getTypeText
 let getArgFunctions ={}
 
@@ -76,26 +82,77 @@ function generateQuery(el){
 }
 
 
+function fixEmptyVariablesField() {
+    let str = variablesTextarea.value
+    if (!str || !str.trim()){
+        console.log("Fixing empty variable field")
+        variablesCodeMirror.setValue("{}")
+    }
+
+}
+
 
 function submitForm(event){
     if (event) event.preventDefault()
     console.log("submitForm credentialsElement=",credentialsElement.checked," urlElement.value=", urlElement.value)
+    response = null
+    responseArea.innerHTML = ""
 
-    var ajaxOptions = {
-        url: urlElement.value, 
-        type: 'POST',
-        xhrFields : { withCredentials: credentialsElement.checked} ,
-        success: function(res) {
-            response = res
-            window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false});
-            evaluate()
-        }
+    fixEmptyVariablesField()
+
+    if (attachFileCheckbox.checked) {
+        submitFormMultipart()
+    } else {
+        submitFormInJSON()
     }
-
-    window.$(form).ajaxSubmit(ajaxOptions)
 
     return false
 }
+
+
+function onFormSubmitSuccess(res){
+    response = res
+    window.$(responseArea).jsonViewer(res, {collapsed: true, rootCollapsable: false})
+    evaluate()
+}
+
+
+function submitFormMultipart(){
+    window.$(form).ajaxSubmit({
+        url: urlElement.value, 
+        type: 'POST',
+        xhrFields : { withCredentials: credentialsElement.checked} ,
+        success: onFormSubmitSuccess,
+        error: err => {
+                console.log("-------------------")
+                window.$(responseArea).jsonViewer( JSON.parse(JSON.stringify(err)), {collapsed: true, rootCollapsable: false})
+            }
+    })
+}
+
+
+async function submitFormInJSON() {
+    try {
+        let fetchOptions = {
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",  
+            body: JSON.stringify({ query: queryTextarea.value, variables: variablesTextarea.value, operationName: null }) 
+        }
+        if (credentialsElement.checked){
+            fetchOptions.credentials = 'include' 
+        }
+        let resp = await fetch( urlElement.value, fetchOptions )
+        let res = await resp.json()
+        onFormSubmitSuccess(res)
+    } catch (err) {
+        console.error("Submit form error --------------------------------\n", err)
+        responseArea.innerText = String(err)
+    }
+}
+
 
 function evaluate(){
     testResult = ""
@@ -116,6 +173,7 @@ function evaluate(){
         evalErrors = error
     }
 }
+
 
 function incChangeCounter(a) {
     console.log('incChangeCounter', $changeCount, a)
@@ -140,17 +198,6 @@ let jsOptions =  {
     theme: "eclipse",
 }
 
-// let graphqlOptions = {
-//     mode: 'graphql',
-//     // lint: {
-//     //     schema: myGraphQLSchema
-//     // },
-//     // hintOptions: {
-//     //     schema: myGraphQLSchema
-//     // }
-// }
-
-
 
 function addCodeMirrors() {
     if (! evalCodeMirror) { 
@@ -171,6 +218,7 @@ function addCodeMirrors() {
         queryCodeMirror.on('change', onCodeMirrorChange)
     }
 }
+
 
 function removeCodeMirrors(params) {
     if ( evalCodeMirror) {
@@ -195,6 +243,7 @@ function removeCodeMirrors(params) {
     }
 }
 
+
 function toggleVisibility(event) {
     if (event) event.preventDefault()
     vis = !vis
@@ -206,9 +255,6 @@ function toggleVisibility(event) {
 }
 
 
-
-let form
-let formArea
 onMount(async () => {
     window.$(formArea).resizable({ handles: "e" });
     window.$(form).resizable({ handles: "e" });
@@ -218,7 +264,6 @@ onMount(async () => {
     console.log("on mount ----------------------------------------------")
     generateQuery(node)
 })
-
 
 </script>
 
@@ -263,7 +308,8 @@ onMount(async () => {
     .description {
         display: inline-block;
         color: slategray;
-        vertical-align: bottom;
+        font-weight: normal;
+        /* vertical-align: bottom; */
     }
 
     .fieldlist {
@@ -297,7 +343,7 @@ onMount(async () => {
 
 
     .margined {
-        margin-left:10px
+        margin:10px
     }
 
     .response {
@@ -422,8 +468,7 @@ onMount(async () => {
         box-shadow: 0px 12px 16px 0px rgba(0,0,0,0.10);    
 
     }
-
-    
+     
 </style>
 
 <div >
@@ -467,33 +512,45 @@ onMount(async () => {
             <div>
                 <div class="header" >VARIABLES</div>
                 <div class="variablesFrame" bind:this={variablesFrame}>
-                    <textarea id="{parentid}-{node.name}-variables" name="variables" bind:this={variablesTextarea} on:change={incChangeCounter}></textarea>
-                </div>
-            </div>
-            <div>
-                <div class="header">FILE</div>
-                <div class="margined">
-                <!-- <input id="{parentid}-{node.name}-input-file-namer" type="text" on:change={onInputFileNameChange} style="width:70px;" value="input-file"> -->
-                    <span>name="file"</span><br>
-                    <input type="file" name="file">
+                    <textarea id="{parentid}-{node.name}-variables" name="variables" bind:this={variablesTextarea} on:change={incChangeCounter}>{'{'}{'}'}</textarea>
                 </div>
             </div>
             <div class="buttons">
                 <input type="submit" class="button "  value="query & run test">
             </div>
+            <div>
+                <div class="margined">
+                    <input bind:this={attachFileCheckbox} type="checkbox" style="vertical-align:top"
+                    on:change={e => attachFileCheckboxChecked = attachFileCheckbox && attachFileCheckbox.checked ? true: false}>
+                    <span class="description">
+                        <span style="font-weight:bold; color:black">Attach file.</span>
+                        Sets Content-Type to
+                        <br>application/x-www-form-urlencoded
+                    </span>
+                </div>
+                <div class="margined" >
+                    {#if attachFileCheckboxChecked}
+                    <!-- <input id="{parentid}-{node.name}-input-file-namer" type="text" on:change={onInputFileNameChange} style="width:70px;" value="input-file"> -->
+                    <span>name="file"</span><br>
+                    <input type="file" name="file">
+                    {/if}
+                </div>
+            </div>
         </form> 
 
 
         <div class="result-panel">
-            <div class="header">RESPONSE</div>
+            <div class="header">RESPONSE
+            </div>
             <div class="response-area">
-                <div>response = <span class="json-literal">{response?'':null}</span></div>
+                <span class="json-literal">{response?'':null}</span>
                 <div class="response" bind:this={responseArea}></div>
             </div>
             <div>
                 <div class="header">
-                    <span>DEFINE TEST & </span>
-                    <input type="button" class="button" value="run &#x25B6" on:click={evaluate}>
+                    <span class="description">Response saved in variable 'response'</span>
+                    <br><span>DEFINE TEST & </span>
+                    <input type="button" class="button" value="run test &#x25B6" on:click={evaluate}>
                 </div>
                 <div class="evalFrame" bind:this={evalFrame}>
                     <textarea id="{parentid}-{node.name}-eval-text" bind:this={evalTextarea} on:change={incChangeCounter}>response && !response.errors</textarea> 
