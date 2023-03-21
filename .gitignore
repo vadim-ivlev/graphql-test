@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+data/*
+#public/bundle.*
+
+# distros
+dist/*
+!dist/*.AppImage
+!dist/*.exe
+!dist/*.app
+!dist/*.dmg
